@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 public class BlockFreezingFlower extends BlockFlower {
 
-    public BlockFreezingFlower(int par1, int par2, Material par3Material) {
-        super(par1, Material.plants);
+    public BlockFreezingFlower(int par1, Material par3Material) {
+        super(par1, par3Material);
     }
     
     @Override

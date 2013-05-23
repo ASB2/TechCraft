@@ -10,6 +10,7 @@ public class ItemZycrantianSword extends ItemSword{
     public ItemZycrantianSword(int itemID, EnumToolMaterial toolMaterial) {
         super(itemID, toolMaterial);
         setCreativeTab(TechCraft.tabTechno);
+
     }
 
     @Override

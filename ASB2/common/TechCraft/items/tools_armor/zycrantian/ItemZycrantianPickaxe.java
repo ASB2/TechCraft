@@ -7,13 +7,14 @@ import TechCraft.TechCraft;
 
 public class ItemZycrantianPickaxe extends ItemPickaxe{
 
-	 public ItemZycrantianPickaxe(int itemID, EnumToolMaterial toolMaterial) {
-	  super(itemID, toolMaterial);
-      setCreativeTab(TechCraft.tabTechno);
-	 }
-	 
-	 @Override
-	    public void registerIcons(IconRegister iconRegister){
-	             itemIcon = iconRegister.registerIcon("TechCraft:ItemZycrantianPickaxe");
-	    }
+    public ItemZycrantianPickaxe(int itemID, EnumToolMaterial toolMaterial) {
+        super(itemID, toolMaterial);
+        setCreativeTab(TechCraft.tabTechno);
+
+    }
+
+    @Override
+    public void registerIcons(IconRegister iconRegister){
+        itemIcon = iconRegister.registerIcon("TechCraft:ItemZycrantianPickaxe");
+    }
 }

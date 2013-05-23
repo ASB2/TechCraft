@@ -20,12 +20,12 @@ public class ItemTeleporter extends TechCraftItems{
     public ItemTeleporter(int par1) {
         super(par1);
         setMaxStackSize(1);
-        // TODO Auto-generated constructor stub
+
     }
-    
+
     @Override
     public void registerIcons(IconRegister iconRegister){
-             itemIcon = iconRegister.registerIcon("TechCraft:ItemTeleporter");
+        itemIcon = iconRegister.registerIcon("TechCraft:ItemTeleporter");
     }
 
     public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
@@ -45,7 +45,7 @@ public class ItemTeleporter extends TechCraftItems{
         }
         if(isCoodsSet(par1ItemStack)){
             player.setPositionAndUpdate(this.getXCoord(par1ItemStack),this.getYCoord(par1ItemStack) , this.getZCoord(par1ItemStack));
-            
+
         }
         return par1ItemStack;
     }
@@ -65,7 +65,7 @@ public class ItemTeleporter extends TechCraftItems{
 
 
     public boolean isCoodsSet(ItemStack item) {
-        
+
         NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
         if (nbtTagCompound != null){
             return nbtTagCompound.getBoolean("coodsSet");

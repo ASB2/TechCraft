@@ -8,8 +8,6 @@ import org.lwjgl.opengl.GL11;
 
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.lib.MODELS;
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelEnergySphere extends ModelBase{
 
@@ -35,8 +33,6 @@ public class ModelEnergySphere extends ModelBase{
 
         GL11.glScalef(0.5f, 0.5f, 0.5f);
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
-
         this.render();
 
         GL11.glPopMatrix();
@@ -51,8 +47,6 @@ public class ModelEnergySphere extends ModelBase{
         GL11.glScalef(0.5f, 0.5f, 0.5f);
 
         GL11.glRotatef(rotate(box), rotate(box), rotate(box), rotate(box));
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
         this.render();
 

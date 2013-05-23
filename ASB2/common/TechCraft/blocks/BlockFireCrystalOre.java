@@ -8,8 +8,8 @@ import TechCraft.ItemRegistry;
 
 public class BlockFireCrystalOre extends TechCraftBlocks {
 
-    public BlockFireCrystalOre(int par1, int par2, Material par3Material) {
-        super(par1, Material.rock);
+    public BlockFireCrystalOre(int par1, Material par3Material) {
+        super(par1, par3Material);
     }
 
     public void registerIcons(IconRegister par1IconRegister) {

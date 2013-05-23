@@ -5,12 +5,10 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import TechCraft.ItemRegistry;
+
 public class BlockEarthCrystalOre extends TechCraftBlocks {
 
-
-
-
-    public BlockEarthCrystalOre(int id, int texture, Material material) {
+    public BlockEarthCrystalOre(int id, Material material) {
         super(id, material);
 
     }

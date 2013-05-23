@@ -12,6 +12,7 @@ public class ItemTestItem extends TechCraftItems {
 
     public ItemTestItem(int par1) {
         super(par1);
+        
     }
     int mode = 0;
 
@@ -52,23 +53,24 @@ public class ItemTestItem extends TechCraftItems {
     }
 
     public void addPower(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){
+        
         int power = 10;
-        if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile){
+        
+        if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile) {
+            
 
             TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
 
-            if(!player.isSneaking()){
+            if(!player.isSneaking()) {
 
                 mTile.gainPower(power);
                 player.sendChatToPlayer("Applied "+power+" Power");
 
             }
-            else{
+            else {
                 mTile.usePower(power);
                 player.sendChatToPlayer("Drew "+power+" Power");
             }
-
-
         }
     }
 

@@ -22,7 +22,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     private ItemStack[] tileItemStacks;
 
     boolean isBurning = false;
-    
+
     ItemStack currentItem;
 
     private static final int[] sidedSlotSides = new int[] {0};
@@ -33,18 +33,18 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
         tileItemStacks = new ItemStack[2];
     }
-    
+
     public void updateEntity() {        
         super.managePowerAll(this,getOutputMin(),false);
-        
+
         if(this.getPowerStored() > 0){
             isBurning = true;
         }
-        
+
         if(this.getPowerStored() == 0){
             isBurning = false;
         }
-        
+
         if (this.isBurning && this.canSmelt() && this.getPowerStored() >= this.powerForProcess) {            
             this.smeltItem();    
             this.usePower(powerForProcess);
@@ -261,18 +261,18 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public String getInvName() {
-        // TODO Auto-generated method stub
+
         return this.getName();
     }
     @Override
     public boolean isInvNameLocalized() {
-        // TODO Auto-generated method stub
+
         return true;
     }
     @Override
     public int getInventoryStackLimit() {
-        // TODO Auto-generated method stub
-        return 0;
+
+        return 64;
     }
     @Override
     public void openChest() {

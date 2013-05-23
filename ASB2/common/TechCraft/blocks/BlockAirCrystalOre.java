@@ -8,8 +8,8 @@ import TechCraft.ItemRegistry;
 
 public class BlockAirCrystalOre extends TechCraftBlocks {
 
-    public BlockAirCrystalOre(int par1, int par2, Material par3Material) {
-        super(par1, Material.rock);
+    public BlockAirCrystalOre(int par1, Material par3Material) {
+        super(par1, par3Material);
     }
 
     @Override

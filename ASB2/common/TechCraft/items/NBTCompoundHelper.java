@@ -6,9 +6,13 @@ import net.minecraft.nbt.NBTTagCompound;
 public class NBTCompoundHelper {
 
     public static NBTTagCompound getTAGfromItemstack(ItemStack itemStack) {
+
         if (itemStack != null) {
+
             NBTTagCompound tag = itemStack.getTagCompound();
+
             if (tag == null) {
+
                 tag = new NBTTagCompound();
                 itemStack.setTagCompound(tag);
             }
@@ -16,5 +20,5 @@ public class NBTCompoundHelper {
         }
         return null;
     }
-    
+
 }

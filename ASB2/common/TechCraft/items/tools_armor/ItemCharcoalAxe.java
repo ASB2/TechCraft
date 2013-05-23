@@ -13,7 +13,8 @@ public class ItemCharcoalAxe extends ItemAxe{
     }
     
     @Override
-    public void registerIcons(IconRegister iconRegister){
+    public void registerIcons(IconRegister iconRegister) {
+        
              itemIcon = iconRegister.registerIcon("TechCraft:ItemCharcoalAxe");
     }
 

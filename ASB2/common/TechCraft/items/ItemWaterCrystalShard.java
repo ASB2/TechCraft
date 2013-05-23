@@ -6,6 +6,7 @@ public class ItemWaterCrystalShard extends TechCraftItems {
 
     public ItemWaterCrystalShard(int par1) {
         super(par1);
+        
     }
 
     @Override

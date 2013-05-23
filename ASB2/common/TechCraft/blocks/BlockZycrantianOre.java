@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 
 public class BlockZycrantianOre extends TechCraftBlocks {
 
-    public BlockZycrantianOre(int par1, int par2, Material par3Material) {
+    public BlockZycrantianOre(int par1, Material par3Material) {
         super(par1, par3Material);
     }
     @Override

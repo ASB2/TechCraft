@@ -8,7 +8,7 @@ import TechCraft.ItemRegistry;
 
 public class BlockGarnetOre extends TechCraftBlocks {
 
-	public BlockGarnetOre(int par1, int par2, Material par3Material) {
+	public BlockGarnetOre(int par1, Material par3Material) {
 		super(par1, par3Material);
 	}
 	@Override

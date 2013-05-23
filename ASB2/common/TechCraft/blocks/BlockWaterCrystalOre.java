@@ -9,7 +9,7 @@ import TechCraft.ItemRegistry;
 public class BlockWaterCrystalOre extends TechCraftBlocks {
 
 
-	public BlockWaterCrystalOre(int par1, int par2, Material par3Material) {
+	public BlockWaterCrystalOre(int par1, Material par3Material) {
 		super(par1, par3Material);
 	}
 	@Override

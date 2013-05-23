@@ -11,11 +11,11 @@ import TechCraft.modes.ModeBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-
 public class ItemTechMultiTool extends TechCraftItems{
 
     public ItemTechMultiTool(int par1) {
         super(par1);
+        
     }
 
     

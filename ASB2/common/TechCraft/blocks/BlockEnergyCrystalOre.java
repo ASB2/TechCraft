@@ -8,12 +8,8 @@ import TechCraft.ItemRegistry;
 
 public class BlockEnergyCrystalOre extends TechCraftBlocks {
 
-
-    public BlockEnergyCrystalOre(int par1, int par2, Material par3Material) {
-        super(par1, Material.rock);
-        this.setTickRandomly(true);
-        setHardness(3F);
-        setResistance(1.0F);
+    public BlockEnergyCrystalOre(int par1, Material par3Material) {
+        super(par1, par3Material);
     }
 
     @Override

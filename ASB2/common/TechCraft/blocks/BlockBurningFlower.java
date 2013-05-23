@@ -10,15 +10,14 @@ import net.minecraft.world.World;
 public class BlockBurningFlower extends BlockFlower {
 
 
-	public BlockBurningFlower(int par1, int par2, Material par3Material) {
-		super(par1);
+	public BlockBurningFlower(int par1, Material par3Material) {
+		super(par1, par3Material);
 	}
 
 	@Override
     public void registerIcons(IconRegister par1IconRegister) {
              this.blockIcon = par1IconRegister.registerIcon("TechCraft:BlockBurningFlower");
-    }
-	
+    }	
 
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 	    

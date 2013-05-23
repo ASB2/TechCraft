@@ -10,10 +10,11 @@ public class ItemZycrantianHoe extends ItemHoe {
     public ItemZycrantianHoe(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, par2EnumToolMaterial);
         setCreativeTab(TechCraft.tabTechno);
+        
     }
 
     @Override
     public void registerIcons(IconRegister iconRegister){
-             itemIcon = iconRegister.registerIcon("TechCraft:ItemZycrantianHoe");
+        itemIcon = iconRegister.registerIcon("TechCraft:ItemZycrantianHoe");
     }
 }

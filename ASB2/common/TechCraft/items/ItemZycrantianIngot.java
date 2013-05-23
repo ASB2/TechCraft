@@ -3,9 +3,11 @@ package TechCraft.items;
 import net.minecraft.client.renderer.texture.IconRegister;
 
 
-public class ItemZycrantianIngot extends TechCraftItems{
+public class ItemZycrantianIngot extends TechCraftItems {
+    
     public ItemZycrantianIngot(int par1) {
         super(par1);
+        
     }
 
     @Override

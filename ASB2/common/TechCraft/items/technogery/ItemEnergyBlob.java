@@ -25,18 +25,19 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     public ItemEnergyBlob(int par1) {
         super(par1);
         setMaxStackSize(1);
+        
     }
 
     @Override
     public void registerIcons(IconRegister iconRegister) {
+        
         itemIcon = iconRegister.registerIcon("TechCraft:ItemEnergyBlob");
-
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if(!world.isRemote){
+        if(!world.isRemote) {
             player.sendChatToPlayer("Power stored: " + this.getPowerStored(itemStack) +" / " + this.getPowerMax(itemStack));
         }
         return itemStack;

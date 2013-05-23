@@ -10,6 +10,7 @@ public class ItemGarnetPickaxe extends ItemPickaxe{
     public ItemGarnetPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, par2EnumToolMaterial);
         setCreativeTab(TechCraft.tabTechno);
+        
     }
 
     @Override
