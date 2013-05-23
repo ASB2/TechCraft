@@ -2,7 +2,6 @@ package TechCraft.blocks.technogery.farms.BasicFarm;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;

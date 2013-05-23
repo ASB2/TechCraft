@@ -40,6 +40,7 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.items.runes.*;
 
 public class ItemRegistry {
 
@@ -79,6 +80,7 @@ public class ItemRegistry {
     public static ItemHoe ItemGarnetHoe;
     
     public static TechCraftItems ItemEnergyBlob;
+    public static TechCraftItems ItemRuneTest;
     
     public static void init() {
 
@@ -210,6 +212,12 @@ public class ItemRegistry {
         ItemEnergyBlob = new ItemEnergyBlob(5030);
         ItemEnergyBlob.setUnlocalizedName("ItemEnergyBlob");
         LanguageRegistry.addName(ItemEnergyBlob, "TC Energy Blob");
+        
+        ItemRuneTest = new ItemRuneTest(5031);
+        ItemRuneTest.setUnlocalizedName("ItemRuneTest");
+        LanguageRegistry.addName(ItemRuneTest, "Test Rune");
+        
+        
     }
 
 }

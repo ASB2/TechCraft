@@ -9,6 +9,8 @@ import net.minecraft.world.World;
 
 public class BlockBasicRune extends BlockRuneBase {
 
+    TileBasicRune tile;
+    
     public BlockBasicRune(int par1, Material par2Material) {
         super(par1, par2Material);
     }
@@ -25,12 +27,13 @@ public class BlockBasicRune extends BlockRuneBase {
     
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) 
     {
-        
+        tile.onEntityEnterBlock(par1World, par2, par3, par4, par5Entity);
     }
     
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileBasicRune();
+        tile = new TileBasicRune();
+        return tile;
     }
 
 }
