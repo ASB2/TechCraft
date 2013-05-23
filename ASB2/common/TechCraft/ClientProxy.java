@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import TechCraft.blocks.tcRunes.GuiRune;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitExporting;
 import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
@@ -29,6 +30,7 @@ import TechCraft.renders.TileEntityRendererMagicConduitMoving;
 import TechCraft.renders.TileEntityRendererMagicEnergySphere;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import TechCraft.blocks.tcRunes.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -72,7 +74,7 @@ public class ClientProxy extends CommonProxy {
             case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
             case 2: return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
             case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
-            
+            case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
             //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
              
             //case 4: return new GuiMagicGauntlet(player);

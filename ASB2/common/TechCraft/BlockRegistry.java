@@ -1,5 +1,6 @@
 package TechCraft;
 
+import TechCraft.blocks.tcRunes.*;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
@@ -61,6 +62,8 @@ public class BlockRegistry {
     public static TechCraftContainers BlockMultiBlockCore;
     public static TechCraftContainers BlockTCFurnace;
     public static TechCraftContainers BlockTCChargeBench;
+    
+    public static BlockRuneBase BlockBasicRune;
     
     public static void init() {
 
@@ -202,6 +205,11 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockTCChargeBench, "TC Charge Bench");
         MinecraftForge.setBlockHarvestLevel(BlockTCChargeBench, "pickaxe", 2);
         
+        BlockBasicRune = new BlockBasicRune(523,Material.rock);
+        BlockBasicRune.setUnlocalizedName("BlockBasicRune");
+        GameRegistry.registerBlock(BlockBasicRune, "ASB2_BlockBasicRune");
+        LanguageRegistry.addName(BlockBasicRune, "TC Basic Rune");
+        MinecraftForge.setBlockHarvestLevel(BlockBasicRune, "pickaxe", 2);
     }
 
 }

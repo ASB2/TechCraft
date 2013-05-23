@@ -7,8 +7,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerSink;
-import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInventory,ISidedInventory {    
 

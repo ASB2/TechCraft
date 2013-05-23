@@ -6,7 +6,7 @@ import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
-import TechCraft.interfaces.power.TechCraftTile;
+import TechCraft.blocks.TechCraftTile;
 
 public class TileTank extends TechCraftTile implements ITankContainer {
 

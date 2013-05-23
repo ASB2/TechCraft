@@ -5,9 +5,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerItems;
 import TechCraft.interfaces.power.IPowerSink;
-import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
 

@@ -1,7 +1,7 @@
 package TechCraft.blocks.technogery;
 
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerMisc;
-import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileTestBlock extends TechCraftTile implements IPowerMisc{
 

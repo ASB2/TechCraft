@@ -3,6 +3,8 @@ package TechCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import TechCraft.blocks.tcRunes.ContainerRune;
+import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.farms.BasicFarm.ContainerBasicFarm;
 import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.ContainerTCChargeBench;
@@ -39,7 +41,7 @@ public class CommonProxy implements IGuiHandler{
             case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
             case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
             case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
-            
+            case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity);            
         }
 
         return null;

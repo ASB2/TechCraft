@@ -1,8 +1,8 @@
 package TechCraft.blocks.technogery;
 
 import net.minecraft.nbt.NBTTagCompound;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerSink;
-import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 

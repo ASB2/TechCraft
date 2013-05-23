@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerMisc;
-import TechCraft.interfaces.power.TechCraftTile;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 

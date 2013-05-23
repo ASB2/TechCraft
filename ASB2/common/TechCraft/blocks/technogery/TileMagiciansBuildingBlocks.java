@@ -1,7 +1,7 @@
 package TechCraft.blocks.technogery;
 
 import net.minecraft.nbt.NBTTagCompound;
-import TechCraft.interfaces.power.TechCraftTile;
+import TechCraft.blocks.TechCraftTile;
 
 public class TileMagiciansBuildingBlocks extends TechCraftTile {
 

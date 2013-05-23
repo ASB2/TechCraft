@@ -9,8 +9,8 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerSink;
-import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
 

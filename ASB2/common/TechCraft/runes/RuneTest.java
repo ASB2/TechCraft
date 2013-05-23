@@ -1,5 +1,5 @@
 package TechCraft.runes;
 
-public class RuneTest extends RuneBase{
+public class RuneTest extends RuneBase {
 
 }
