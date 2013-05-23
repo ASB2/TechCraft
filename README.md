@@ -16,7 +16,7 @@ Textures to be done
 	-(Item)Teleporter
 	-(Item)Zycrantian Ingot
 	-(Block, MultiSided)Charge Bench
-	-(Item)harcoal(Axe, Shovel, Sword)
+	-(Item)Charcoal(Axe, Shovel, Sword)
 	-(Armor)Zycrantian(Pants,Chestplate,Boots,Helmet)
 	-(Model)TC Energy Focus
 	-(Model)Rune Block
