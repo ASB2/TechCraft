@@ -9,5 +9,9 @@ public class TEXTURES {
     public static final String CONDUIT_MOVING = "/mods/TechCraft/textures/blocks/ModelMagicConduitExportingv2.png";
     
     public static final String BASIC_RUNE = "/mods/TechCraft/textures/gui/RuneGui.png";
+    public static final String BASIC_FARM = "/mods/TechCraft/textures/gui/TechCraftFarms.png";
+    public static final String CHARGE_BENCH = "/mods/TechCraft/textures/gui/TCChargeBench.png";
+    public static final String TC_FURNACE = "/mods/TechCraft/textures/gui/MagicFurnace.png";
+    public static final String TC_GENORATOR = "/mods/TechCraft/textures/gui/TechCraftGenoratorv2.png";
 
 }

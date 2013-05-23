@@ -9,9 +9,7 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.blocks.technogery.TileTechnogryFocus;
-import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelTCEnergyFocus;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRenderer {
 
@@ -38,8 +36,8 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
 
         renderByOrientation(x, y, z, tile.getOrientation());
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
         GL11.glColor3f(changeColor(),changeColor(),changeColor());
+        
         model.renderAll();
 
 
@@ -48,13 +46,12 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_LIGHTING);
     }
-
-    double colorChange = 0;
     
     public float changeColor(){
         Random rand = new Random();
         return rand.nextFloat();
     }
+    
     private void renderByOrientation(double x, double y, double z, ForgeDirection forgeDirection) {
 
         GL11.glScalef(1.0F, 1.0F, 1.0F);

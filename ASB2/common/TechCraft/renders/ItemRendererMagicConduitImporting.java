@@ -6,7 +6,6 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.models.ModelMagicConduitImportingv2;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererMagicConduitImporting implements IItemRenderer {
 
@@ -64,8 +63,6 @@ public class ItemRendererMagicConduitImporting implements IItemRenderer {
         GL11.glTranslatef(x,  y,  z);
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 0f);
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/TechCraft/textures/blocks/ModelMagicConduitImportingv2.png");
 
         modelTutBox.renderAll();
         modelTutBox.renderTop();

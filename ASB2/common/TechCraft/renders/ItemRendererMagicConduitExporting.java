@@ -6,7 +6,6 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.models.ModelMagicConduitExportingv2;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererMagicConduitExporting implements IItemRenderer {
 
@@ -65,7 +64,7 @@ public class ItemRendererMagicConduitExporting implements IItemRenderer {
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 0f);
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/TechCraft/textures/blocks/ModelMagicConduitExportingv2.png");
+        
 
         modelTutBox.renderAll();
         modelTutBox.renderTop();

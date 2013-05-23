@@ -1,7 +1,5 @@
 package TechCraft.items;
 
-import java.awt.List;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,8 +14,9 @@ public class TechCraftItems extends Item{
         this.setCreativeTab(TechCraft.tabTechno);
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean var1) 
+    public void addInformation(ItemStack itemStack, EntityPlayer player, java.util.List info, boolean var1) 
     {
         info.add("From: TechnoCraft");
     }

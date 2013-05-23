@@ -17,17 +17,12 @@ public class TileEntityRendererMagicConduitImporting extends TileEntitySpecialRe
     }
     public void renderAModelAt(TileMagicConduitImporting tile, double d, double d1, double d2, float frame) {
 
-        int rotation = 0;
-        if(tile.worldObj != null)
-        {
-            rotation = tile.getBlockMetadata();
-        }
-
-        bindTextureByName("/mods/TechCraft/textures/blocks/ModelMagicConduitImportingv2.png"); //texture
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
-        GL11.glRotatef(rotation*90, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(0F, 0F, 0F, 0F);
+        
+        model.renderAll();
         
         if(tile.getRenderBottom()){
             model.renderBottom();
@@ -46,10 +41,9 @@ public class TileEntityRendererMagicConduitImporting extends TileEntitySpecialRe
         }
         if(tile.getRenderBack()){
             model.renderBack();
-        }
+        }     
         
-        model.renderAll();
-        GL11.glPopMatrix(); //end
+        GL11.glPopMatrix();
     }
 
 

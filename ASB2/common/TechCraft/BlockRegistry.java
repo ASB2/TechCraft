@@ -178,7 +178,7 @@ public class BlockRegistry {
         BlockBasicFarm = new BlockBasicFarm(518,Material.rock);
         BlockBasicFarm.setUnlocalizedName("BlockBasicFarm");
         GameRegistry.registerBlock(BlockBasicFarm, "ASB2_BlockBasicFarm");
-        LanguageRegistry.addName(BlockBasicFarm, "Basic TechCraft Farm");
+        LanguageRegistry.addName(BlockBasicFarm, "TC Farm");
         MinecraftForge.setBlockHarvestLevel(BlockBasicFarm, "pickaxe", 2);
         
         BlockGenorator = new BlockGenorator(519,Material.rock);
