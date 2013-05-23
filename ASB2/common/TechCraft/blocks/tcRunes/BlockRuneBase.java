@@ -1,19 +1,15 @@
-package TechCraft.blocks;
+package TechCraft.blocks.tcRunes;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import TechCraft.blocks.*;
 
-public class BlockFalseBlock extends TechCraftBlocks {
+public abstract class BlockRuneBase extends TechCraftContainers{
 
-    public BlockFalseBlock(int par1, int par2, Material par3Material) {
-        super(par1, Material.rock);
-    }
-
-    @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("TechCraft:stone");
+    public BlockRuneBase(int par1, Material par2Material) {
+        super(par1, par2Material);
+        setTickRandomly(true);
     }
 
     public boolean canCreatureSpawn() {
@@ -33,4 +29,5 @@ public class BlockFalseBlock extends TechCraftBlocks {
 
         return false;
     }
+
 }

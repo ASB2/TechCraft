@@ -12,8 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TechCraft.items.NBTCompoundHelper;
 import TechCraft.items.TechCraftItems;
-import TechCraft.power.IPowerItems;
-import TechCraft.power.IPowerMisc;
+import TechCraft.interfaces.power.IPowerItems;
+import TechCraft.interfaces.power.IPowerMisc;
 
 public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 

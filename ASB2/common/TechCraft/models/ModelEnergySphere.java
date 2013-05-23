@@ -35,6 +35,21 @@ public class ModelEnergySphere extends ModelBase{
 
         GL11.glScalef(0.5f, 0.5f, 0.5f);
 
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+
+        this.render();
+
+        GL11.glPopMatrix();
+    }
+
+    public void renderWithRotation(TileTCEnergySphere box, double x, double y, double z) {
+
+        GL11.glPushMatrix();
+
+        GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f+updown, (float)z + 0.5f);
+
+        GL11.glScalef(0.5f, 0.5f, 0.5f);
+
         GL11.glRotatef(rotate(box), rotate(box), rotate(box), rotate(box));
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
@@ -43,7 +58,7 @@ public class ModelEnergySphere extends ModelBase{
 
         GL11.glPopMatrix();
     }
-
+    
     public int rotate(TileTCEnergySphere tile) {
 
         if(rotate > 360) {

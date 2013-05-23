@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import TechCraft.power.IPowerStorage;
-import TechCraft.power.PowerNetwork;
-import TechCraft.power.TechCraftTile;
+import TechCraft.interfaces.power.IPowerStorage;
+import TechCraft.interfaces.power.PowerNetwork;
+import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage , IInventory{
 

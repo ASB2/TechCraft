@@ -1,6 +1,6 @@
 package TechCraft.blocks.technogery;
 
-import TechCraft.power.TechCraftTile;
+import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileMultiBlockCore extends TechCraftTile{
 

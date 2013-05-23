@@ -1,4 +1,4 @@
-package TechCraft.power;
+package TechCraft.interfaces.power;
 
 public class PowerConductors { 
 

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
-import TechCraft.power.TechCraftTile;
+import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
     

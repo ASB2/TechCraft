@@ -2,9 +2,9 @@ package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import TechCraft.power.EnumPowerClass;
-import TechCraft.power.IPowerConductor;
-import TechCraft.power.TechCraftTile;
+import TechCraft.interfaces.power.EnumPowerClass;
+import TechCraft.interfaces.power.IPowerConductor;
+import TechCraft.interfaces.power.TechCraftTile;
 
 public class TileMagicConduitExporting extends TechCraftTile implements IPowerConductor{
 

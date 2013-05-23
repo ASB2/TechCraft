@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
-import TechCraft.power.TechCraftTile;
+import TechCraft.interfaces.power.TechCraftTile;
 
 public abstract class TechCraftContainers extends BlockContainer{
 

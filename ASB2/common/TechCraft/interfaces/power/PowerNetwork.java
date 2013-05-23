@@ -1,4 +1,4 @@
-package TechCraft.power;
+package TechCraft.interfaces.power;
 
 import java.util.HashMap;
 

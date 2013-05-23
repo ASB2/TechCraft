@@ -21,9 +21,6 @@ public class GuiTCFurnace extends GuiContainer {
 
     protected void drawGuiContainerForegroundLayer(int x, int y){
         final String invTitle = "TC Furnace";
-        int posX = (this.width - xSizeOfTexture) / 2;
-        int posY = (this.height - ySizeOfTexture) / 2;
-
         fontRenderer.drawString(invTitle, xSize / 2 - fontRenderer.getStringWidth(invTitle) / 2, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
         

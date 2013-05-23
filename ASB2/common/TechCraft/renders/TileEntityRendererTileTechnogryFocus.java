@@ -1,5 +1,7 @@
 package TechCraft.renders;
 
+import java.util.Random;
+
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -35,10 +37,11 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
         GL11.glPushMatrix();
 
         renderByOrientation(x, y, z, tile.getOrientation());
-        
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        GL11.glColor3f(changeColor(),changeColor(),changeColor());
         model.renderAll();
+
 
         GL11.glPopMatrix();
 
@@ -46,12 +49,18 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
+    double colorChange = 0;
+    
+    public float changeColor(){
+        Random rand = new Random();
+        return rand.nextFloat();
+    }
     private void renderByOrientation(double x, double y, double z, ForgeDirection forgeDirection) {
-        
+
         GL11.glScalef(1.0F, 1.0F, 1.0F);
 
         switch (forgeDirection) {
-            
+
             case DOWN: {
                 GL11.glTranslatef((float) x + 0.5F, (float) y + -.5F, (float) z + .5F);
                 return;
@@ -90,5 +99,5 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
             }
         }
     }
-    
+
 }
