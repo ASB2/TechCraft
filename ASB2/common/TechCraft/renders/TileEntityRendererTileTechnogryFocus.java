@@ -44,7 +44,7 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
 
 
         GL11.glPopMatrix();
-
+ 
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_LIGHTING);
     }
