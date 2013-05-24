@@ -18,18 +18,19 @@ public class TileBasicRune extends TechCraftTile implements IInventory{
     private boolean runeSet = false;
 
     public TileBasicRune() {
+        super();
         tileItemStack = new ItemStack[1];
     }
 
-    public void updateEntity(){
+    public void updateEntity() {
 
         if(runeSet) {
 
             if(tileItemStack[0] == null) {
+                
                 runeInSlot = null;
                 runeSet = false; 
             }
-            runeInSlot.updateRune();
         }
 
         if(!runeSet) {
@@ -59,9 +60,7 @@ public class TileBasicRune extends TechCraftTile implements IInventory{
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
-
-        runeSet = par1NBTTagCompound.getBoolean("runeSet");
-
+        
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
 
         tileItemStack = new ItemStack[getSizeInventory()];
@@ -82,9 +81,7 @@ public class TileBasicRune extends TechCraftTile implements IInventory{
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeToNBT(par1NBTTagCompound);
-
-        par1NBTTagCompound.setBoolean("runeSet", runeSet);
-
+        
         NBTTagList nbttaglist = new NBTTagList();
 
         for (int i = 0; i < tileItemStack.length; i++)

@@ -8,11 +8,14 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TechCraftTile extends TileEntity implements IPowerMisc {
 
-    protected ForgeDirection orientation;
+    protected ForgeDirection orientation = null;
 
     public TechCraftTile() {
-
-        orientation = ForgeDirection.DOWN;
+        
+        if(orientation == null) {
+            
+           orientation = ForgeDirection.DOWN; 
+        }
     }
 
     public ForgeDirection getOrientation() {
@@ -33,14 +36,14 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
-        int test = nbtTagCompound.getInteger("orientation");
-        this.setOrientation(translateNumberToDirection(test));
+        
+        this.setOrientation(translateNumberToDirection(nbtTagCompound.getInteger("orientation")));
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-
+        
         nbtTagCompound.setInteger("orientation", translateDirectionToNumber());
     }
 

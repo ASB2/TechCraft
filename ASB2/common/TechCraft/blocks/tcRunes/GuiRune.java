@@ -30,7 +30,7 @@ public class GuiRune extends GuiContainer {
        
         GL11.glColor4f(1.0F, 0F, 0F, 1F);
         
-        this.mc.renderEngine.bindTexture(TEXTURES.BASIC_RUNE);
+        this.mc.renderEngine.bindTexture(TEXTURES.BASIC_RUNE_GUI);
         
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;

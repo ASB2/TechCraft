@@ -2,6 +2,7 @@ package TechCraft;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
@@ -108,6 +109,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileTCFurnace.class, "TileTCFurnace");
         
         GameRegistry.registerTileEntity(TileTCChargeBench.class, "TileTCChargeBench");
+        
+        GameRegistry.registerTileEntity(TileBasicRune.class, "TileBasicRune");
         
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
         

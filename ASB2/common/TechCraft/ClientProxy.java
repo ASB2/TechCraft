@@ -23,11 +23,13 @@ import TechCraft.renders.ItemRendererMagicConduitExporting;
 import TechCraft.renders.ItemRendererMagicConduitImporting;
 import TechCraft.renders.ItemRendererMagicConduitMoving;
 import TechCraft.renders.ItemRendererMagicEnergySphere;
+import TechCraft.renders.ItemRendererTileBasicRune;
 import TechCraft.renders.ItemRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererMagicConduitExporting;
 import TechCraft.renders.TileEntityRendererMagicConduitImporting;
 import TechCraft.renders.TileEntityRendererMagicConduitMoving;
 import TechCraft.renders.TileEntityRendererMagicEnergySphere;
+import TechCraft.renders.TileEntityRendererTileBasicRune;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import TechCraft.blocks.tcRunes.*;
@@ -59,6 +61,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileTechnogryFocus.class, new TileEntityRendererTileTechnogryFocus());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTechnogryFocus.blockID, (IItemRenderer)new ItemRendererTileTechnogryFocus());
 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune());
 
     }
 

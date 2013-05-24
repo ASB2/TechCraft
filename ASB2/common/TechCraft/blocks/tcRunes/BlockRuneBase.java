@@ -3,7 +3,7 @@ package TechCraft.blocks.tcRunes;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import TechCraft.blocks.*;
+import TechCraft.blocks.TechCraftContainers;
 
 public abstract class BlockRuneBase extends TechCraftContainers{
 
@@ -12,12 +12,13 @@ public abstract class BlockRuneBase extends TechCraftContainers{
         setTickRandomly(true);
     }
 
-    public boolean canCreatureSpawn() {
-        return false;
-    }
 
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
+    }
+    
+    public boolean canCreatureSpawn() {
+        return false;
     }
 
     public boolean renderAsNormalBlock() {
@@ -30,4 +31,11 @@ public abstract class BlockRuneBase extends TechCraftContainers{
         return false;
     }
 
+    /**
+     * The type of render function that is called for this block
+     */
+    public int getRenderType()
+    {
+        return -1;
+    }
 }
