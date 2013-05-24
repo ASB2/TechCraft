@@ -4,19 +4,18 @@ import net.minecraft.item.ItemStack;
 import TechCraft.interfaces.runes.IRuneItem;
 import TechCraft.items.TechCraftItems;
 import TechCraft.runes.RuneBase;
-import TechCraft.runes.RuneTest;
+import TechCraft.runes.RuneExplosion;
 
-public class ItemRuneTest extends TechCraftItems implements IRuneItem{
+public class ItemExplosionRune extends TechCraftItems implements IRuneItem{
 
-    public ItemRuneTest(int par1) {
+    public ItemExplosionRune(int par1) {
         super(par1);
-        
     }
 
     @Override
     public RuneBase getRune() {
 
-        return new RuneTest(new ItemStack(this));
+        return new RuneExplosion(new ItemStack(this));
     }
 
 }

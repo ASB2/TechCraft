@@ -80,7 +80,8 @@ public class ItemRegistry {
     public static ItemHoe ItemGarnetHoe;
     
     public static TechCraftItems ItemEnergyBlob;
-    public static TechCraftItems ItemRuneTest;
+    public static TechCraftItems ItemRuneTest;    
+    public static TechCraftItems ItemExplosionRune;
     
     public static void init() {
 
@@ -216,6 +217,10 @@ public class ItemRegistry {
         ItemRuneTest = new ItemRuneTest(5031);
         ItemRuneTest.setUnlocalizedName("ItemRuneTest");
         LanguageRegistry.addName(ItemRuneTest, "Test Rune");
+        
+        ItemExplosionRune = new ItemExplosionRune(5032);
+        ItemExplosionRune.setUnlocalizedName("ItemExplosionRune");
+        LanguageRegistry.addName(ItemExplosionRune, "Explosion Rune");
         
         
     }

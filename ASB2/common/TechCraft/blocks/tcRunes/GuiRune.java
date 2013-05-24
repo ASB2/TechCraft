@@ -9,29 +9,30 @@ import TechCraft.lib.TEXTURES;
 
 public class GuiRune extends GuiContainer {
 
-    @SuppressWarnings("unused")
     private TileBasicRune tileEntity;
-    
+
     public final int xSizeOfTexture = 176;
     public final int ySizeOfTexture = 166;
 
     public GuiRune(InventoryPlayer inventory, TileBasicRune tileEntity) {
         super(new ContainerRune(inventory, tileEntity));
-        
-        this.tileEntity = tileEntity;
 
+        this.tileEntity = tileEntity;
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y){
+        if(tileEntity.runeInSlot != null){
+            fontRenderer.drawString(tileEntity.runeInSlot.getName(), xSize / 2 - fontRenderer.getStringWidth(tileEntity.runeInSlot.getName()) / 2, 6, 4210752);
+        }    
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y){
-       
+
         GL11.glColor4f(1.0F, 0F, 0F, 1F);
-        
+
         this.mc.renderEngine.bindTexture(TEXTURES.BASIC_RUNE_GUI);
-        
+
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         //This draws the entire gui        
@@ -42,6 +43,6 @@ public class GuiRune extends GuiContainer {
         drawTexturedModalRect(posX+9,posY+8,176,66,52,0);
     }
 
-    
+
 
 }

@@ -1,19 +1,18 @@
 package TechCraft.items.technogery;
 
-import java.awt.List;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TechCraft.items.NBTCompoundHelper;
-import TechCraft.items.TechCraftItems;
 import TechCraft.interfaces.power.IPowerItems;
 import TechCraft.interfaces.power.IPowerMisc;
+import TechCraft.items.NBTCompoundHelper;
+import TechCraft.items.TechCraftItems;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
@@ -24,8 +23,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     public ItemEnergyBlob(int par1) {
         super(par1);
-        setMaxStackSize(1);
-        
+        setMaxStackSize(1);        
     }
 
     @Override
@@ -137,6 +135,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
         return "Energy Blob";
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean var1) {
 

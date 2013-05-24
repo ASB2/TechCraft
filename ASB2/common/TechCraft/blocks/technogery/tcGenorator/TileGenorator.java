@@ -10,49 +10,93 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import TechCraft.blocks.TechCraftTile;
 
 public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
-    
-    int powerStored = 0;
-    int powerMax = 1000;
-    int currentFuelID = 0;
-    int fuelBurnTime = 0;
+
+    private int powerStored = 0;
+    private int powerMax = 1000;
+    private int currentFuelID = 0;
+    private int fuelBurnTime = 0;
 
     boolean isBurning = false;
 
     private ItemStack[] tileItemStacks;
 
-    public TileGenorator(){
+    public TileGenorator() {
         tileItemStacks = new ItemStack[10];
     }
 
 
     public void updateEntity() {
-        super.managePowerAll(this,getOutputMin(),false);
+        super.managePowerAll(this,getOutputMin(),true);
 
-        manageBurning();
+        if(!(powerStored == powerMax)){
 
-        if(fuelBurnTime > 0) {
-            generatePower();
+            manageBurning();
         }
 
+        moveSlots();
+
+        if(fuelBurnTime > 0) {
+
+            this.gainPower(1);
+        }
     }
 
     public void manageBurning() {
 
         if(fuelBurnTime > 0) {
+
             isBurning = true;
             fuelBurnTime--;
         }
 
-        if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0){            
+        if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0) {            
+
             fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);
             currentFuelID = tileItemStacks[9].itemID;            
             decrStackSize(9,1);
         }  
     }
 
-    public void generatePower(){
+    public void moveSlots() {
+        //If there is no item in the slot or the number of items in the slot is less than the name number of items for the slot
+        if(tileItemStacks[9] == null || tileItemStacks[9].stackSize < this.getInventoryStackLimit()) {
 
-        this.gainPower(1);
+            //Loop for all the slots
+            for(int i = 0; i < 9; i++) {
+
+                //If there is something in the slot move
+                if(tileItemStacks[i] != null) {
+
+                    //if that item is equal to the burning slot or the b urning slot if equal to null
+                    if(tileItemStacks[9] == null) {
+
+                        if(tileItemStacks[i].stackSize > 1) {
+
+                            tileItemStacks[9] = tileItemStacks[i].copy();
+
+                            tileItemStacks[9].stackSize = tileItemStacks[i].stackSize - tileItemStacks[i].stackSize - 1;
+                            decrStackSize(i,1);
+                        }
+
+                        if(tileItemStacks[i].stackSize == 1) {
+                            tileItemStacks[9] = tileItemStacks[i].copy();
+                            decrStackSize(i,1);
+                        }
+
+                        if(tileItemStacks[9].stackSize > 1) {
+
+                            if(tileItemStacks[i]==(tileItemStacks[9])) {
+
+                                tileItemStacks[9].stackSize = tileItemStacks[9].stackSize +1 ;
+                                decrStackSize(i,1);
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
     }
 
     public int getBurnTimeScaled(int scale){        
@@ -88,7 +132,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public boolean outputPower() {
-        // TODO Auto-generated method stub
+
         return true;
     }
 
@@ -201,19 +245,19 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public String getInvName() {
-        // TODO Auto-generated method stub
+
         return "TC Genortor";
     }
 
     @Override
     public boolean isInvNameLocalized() {
-        // TODO Auto-generated method stub
+
         return true;
     }
 
     @Override
     public int getInventoryStackLimit() {
-        // TODO Auto-generated method stub
+
         return 64;
     }
 
@@ -248,7 +292,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
 
     @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+    public boolean canInsertItem(int slot, ItemStack itemstack, int side) {
         // TODO Auto-generated method stub
         return true;
     }

@@ -149,13 +149,13 @@ public class BlockRegistry {
         BlockMagicConduitExporting = new BlockMagicConduitExporting(513,Material.rock);
         BlockMagicConduitExporting.setUnlocalizedName("BlockMagicConduitExporting");
         GameRegistry.registerBlock(BlockMagicConduitExporting, "ASB2_BlockMagicConduitExporting");
-        LanguageRegistry.addName(BlockMagicConduitExporting, "Techno Energy Conduit (Exporting)");
+        LanguageRegistry.addName(BlockMagicConduitExporting, "TC Energy Conduit (Exporting)");
         MinecraftForge.setBlockHarvestLevel(BlockMagicConduitExporting, "pickaxe", 2);
 
         BlockMagicConduitImporting = new BlockMagicConduitImporting(514,Material.rock);
         BlockMagicConduitImporting.setUnlocalizedName("BlockMagicConduitImporting");
         GameRegistry.registerBlock(BlockMagicConduitImporting, "ASB2_BlockMagicConduitImporting");
-        LanguageRegistry.addName(BlockMagicConduitImporting, "Techno Energy Conduit (Importing)");
+        LanguageRegistry.addName(BlockMagicConduitImporting, "TC Energy Conduit (Importing)");
         MinecraftForge.setBlockHarvestLevel(BlockMagicConduitImporting, "pickaxe", 2);
 
         BlockMagicConduitMoving = new BlockMagicConduitMoving(515,Material.rock);
@@ -185,7 +185,7 @@ public class BlockRegistry {
         BlockGenorator = new BlockGenorator(519,Material.rock);
         BlockGenorator.setUnlocalizedName("BlockGenorator");
         GameRegistry.registerBlock(BlockGenorator, "ASB2_BlockGenorator");
-        LanguageRegistry.addName(BlockGenorator, "Basic Genorator");
+        LanguageRegistry.addName(BlockGenorator, "TC Genorator");
         MinecraftForge.setBlockHarvestLevel(BlockGenorator, "pickaxe", 2);
 
         BlockMultiBlockCore = new BlockMultiBlockCore(520,Material.rock);

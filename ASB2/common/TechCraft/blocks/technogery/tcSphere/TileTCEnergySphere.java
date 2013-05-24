@@ -1,29 +1,17 @@
 package TechCraft.blocks.technogery.tcSphere;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerStorage;
-import TechCraft.interfaces.power.PowerNetwork;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
 
     int powerStored;
     int powerMax = 1000;
-
-    PowerNetwork networkCore;
-    
-    public TileTCEnergySphere(){
-
-        networkCore = new PowerNetwork(this,worldObj);
-    }
-    
     
     public void updateEntity(){
-        super.managePowerAll(this,getOutputMin(),true);
-        //super.takeEnergyFromAjacentTiles(this);
-        networkCore.updateCore();
+        super.managePowerAll(this, getOutputMin(), false);
+        
     }
     
     @Override
@@ -31,12 +19,7 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
 
 
     }
-
-    public void addConductor(TileEntity tile, World world){
-        if(networkCore != null){
-            networkCore.addConductor(tile,world);
-        }
-    }
+    
     
     @Override
     public int getOutputMin(){

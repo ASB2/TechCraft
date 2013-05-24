@@ -111,24 +111,24 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     public int translateDirectionToNumber() {
 
-        int var1 = 0;
+        int var1 = -1;
 
-        switch(getOrientation()){
+        switch(getOrientation()) {
 
             case DOWN: {
-                var1 = 1;
+                var1 = 0;
                 return var1;
             }
             case UP: {
-                var1 = 2;
+                var1 = 1;
                 return var1;
             }
             case NORTH: {
-                var1 = 3;
+                var1 = 2;
                 return var1;
-            }
+            }                       
             case SOUTH: {
-                var1 = 4;
+                var1 = 3;
                 return var1;
             }
             case WEST: {
@@ -136,7 +136,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 return var1;
             }
             case EAST: {
-                var1 = 6;
+                var1 = 4;
                 return var1;
             }
             default:{
@@ -145,6 +145,37 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         }
 
 
+    }
+
+    public ForgeDirection translateNumberToDirection(int direction) {
+
+        switch(direction){
+
+            case 0: {
+                return ForgeDirection.DOWN;
+            }
+            case 1: {
+                return ForgeDirection.UP;
+            }
+            case 2: {
+                return ForgeDirection.NORTH;
+            }
+            case 3: {
+                return ForgeDirection.SOUTH;
+            }
+            case 5: {
+                return ForgeDirection.WEST;
+            }
+            case 4: {
+                return ForgeDirection.EAST;
+            }
+            case -1: {
+                return ForgeDirection.UNKNOWN;
+            }
+            default: {
+                return ForgeDirection.UNKNOWN;
+            }
+        }
     }
 
     public String translateDirectionToString() {
@@ -171,37 +202,6 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
             }
             default:{
                 return "Unknown";
-            }
-        }
-    }
-
-    public ForgeDirection translateNumberToDirection(int direction) {
-
-        switch(direction){
-
-            case 1: {
-                return ForgeDirection.DOWN;
-            }
-            case 2: {
-                return ForgeDirection.UP;
-            }
-            case 3: {
-                return ForgeDirection.NORTH;
-            }
-            case 4: {
-                return ForgeDirection.SOUTH;
-            }
-            case 5: {
-                return ForgeDirection.WEST;
-            }
-            case 6: {
-                return ForgeDirection.EAST;
-            }
-            case 0: {
-                return ForgeDirection.UNKNOWN;
-            }
-            default: {
-                return ForgeDirection.UNKNOWN;
             }
         }
     }
@@ -245,6 +245,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
 
                     else {
+
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
                             if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
@@ -256,6 +257,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                         }
                     }
                 }
+                break;
             }
             case UP: {
                 int[] coords = this.translateDirectionToCoords(direction);
@@ -278,6 +280,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
 
                     else {
+
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
                             if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
@@ -288,7 +291,8 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }
                     }
-                }                
+                }    
+                break;
             }
             case NORTH: {
                 int[] coords = this.translateDirectionToCoords(direction);
@@ -311,6 +315,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
 
                     else {
+
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
                             if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
@@ -322,6 +327,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                         }
                     }
                 }
+                break;
             }
             case SOUTH: {
                 int[] coords = this.translateDirectionToCoords(direction);
@@ -344,6 +350,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
 
                     else {
+
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
                             if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
@@ -355,6 +362,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                         }
                     }
                 }
+                break;
             }
             case WEST: {
                 int[] coords = this.translateDirectionToCoords(direction);
@@ -377,6 +385,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
 
                     else {
+                        
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
                             if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
@@ -388,6 +397,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                         }
                     }
                 }
+                break;
             }
             case EAST: {
                 int[] coords = this.translateDirectionToCoords(direction);
