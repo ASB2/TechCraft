@@ -5,14 +5,13 @@ import TechCraft.blocks.TechCraftTile;
 
 public class TileMagiciansBuildingBlocks extends TechCraftTile {
 
-    TechCraftTile pNet;    
-
     int powerStored = 0;
-    int powerMax = 50;
+    int powerMax = 25;
 
     @Override
     public void updateEntity() {
-        if(this.getPowerStored() > 0){
+        if(this.getPowerStored() > 0) {
+            
             super.managePowerAll(this, getOutputMin(),true);
         }
         

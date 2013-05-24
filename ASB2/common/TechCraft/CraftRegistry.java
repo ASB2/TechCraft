@@ -17,8 +17,27 @@ public class CraftRegistry {
 
         GameRegistry.addSmelting(BlockRegistry.BlockZycrantianOre.blockID,
                 new ItemStack(ItemRegistry.ItemZycrantianIngot), 5.0F);
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune),
+                new Object[] { "FRF", "DED", "FRF", 'F', BlockRegistry.BlockFalseBlock, 'R', Item.redstone ,'E', ItemRegistry.ItemEnergyCrystalShard , 'D', Item.diamond});
 
-      //Tools
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCChargeBench),
+                new Object[] { "EGE", "MEM", "GOG", 'G', Block.glass, 'E', ItemRegistry.ItemEnergyCrystalShard, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'O', ItemRegistry.ItemEnergyBlob});
+      
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockMagiciansBuildingBlocks ,4),
+                new Object[] { "CSC", "SES", "CSC", 'C', ItemRegistry.ItemEnergyCrystalShard, 'S', Block.stoneBrick, 'E', ItemRegistry.ItemEnergyBlob});
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCFurnace),
+                new Object[] { "GGG", "FMF", "BEB", 'G', Block.glass, 'F', ItemRegistry.ItemFireCrystalShard, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'B', Block.brick});
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator),
+                new Object[] { "FFF", "CMZ", "FEF", 'F', ItemRegistry.ItemFireCrystalShard, 'C', Item.coal, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'Z', ItemRegistry.ItemEnergyCrystalShard});
+        
+        //GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator),
+        //        new Object[] { "FFF", "CMF", "FEF", 'F', ItemRegistry.ItemFireCrystalShard, 'C', Item.coal, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks});
+        
+        
+        //Tools
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword),
                 new Object[] { " D ", " D ", " S ", 'D',
             ItemRegistry.ItemGarnet, 'S', Item.stick });
@@ -69,7 +88,6 @@ public class CraftRegistry {
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianShovel),
                 new Object[] { " D ", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
 
-        
         GameRegistry.addSmelting(Item.axeWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalAxe), 1.F);
         
