@@ -31,9 +31,9 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         this.orientation = orientation;
     }
 
-    public void setOrientation(int orientation) {
+    public void setOrientation(int id) {
 
-        this.orientation = ForgeDirection.getOrientation(orientation);
+        this.orientation = ForgeDirection.getOrientation(id);
     }
 
     @Override
