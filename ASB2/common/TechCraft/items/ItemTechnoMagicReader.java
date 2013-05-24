@@ -37,7 +37,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
         
         else {
             
-            if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile){
+            if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile) {
                 TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
                 mTile.toggleDirection();
                 player.sendChatToPlayer(mTile.getName()+ " is now at orientation: " + mTile.translateDirectionToString());
@@ -47,7 +47,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
     }
 
     @Override
-    public void registerIcons(IconRegister iconRegister){
+    public void registerIcons(IconRegister iconRegister) {
         itemIcon = iconRegister.registerIcon("TechCraft:ItemTechnoMagicReader");
     }
 

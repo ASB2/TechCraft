@@ -52,23 +52,30 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
             case DOWN: {
                 this.setOrientation(ForgeDirection.UP);
+                break;
             }
             case UP: {
                 this.setOrientation(ForgeDirection.NORTH);
+                break;
             }
             case NORTH: {
                 this.setOrientation(ForgeDirection.SOUTH);
+                break;
             }
             case SOUTH: {
                 this.setOrientation(ForgeDirection.WEST);
+                break;
             }
             case WEST: {
                 this.setOrientation(ForgeDirection.EAST);
+                break;
             }
             case EAST: {
                 this.setOrientation(ForgeDirection.DOWN);
+                break;
             }
             default: this.setOrientation(ForgeDirection.DOWN);
+            break;
 
         }
     }
