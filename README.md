@@ -18,6 +18,11 @@ Current Ideas to Build On
 	-End Game Items
 	-Way to double ores.
 
+Current Bugs
+
+	-The Orientations of certain blocks arent preserved after world restart.
+	
+	
 Textures to be done
 
 	-(Model)Power Conduits(Moving,Importing Exporting)
