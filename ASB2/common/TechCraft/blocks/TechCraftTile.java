@@ -12,7 +12,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     public TechCraftTile() {
         if(orientation == null && this.getMetadata() != null) {
-           This.setOrientation(this.getMetadata());
+           this.setOrientation(this.getMetadata());
  }
         else{
 orientation = ForgeDirection.SOUTH;
