@@ -15,7 +15,9 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     public ForgeDirection getOrientation() {
-
+        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))){
+            this.orientation = this.translateNumberToDirection(getBlockMetadata());
+        }
         return this.orientation;
     }
 
@@ -32,16 +34,11 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
-
-        int test = nbtTagCompound.getInteger("orientation");
-        this.setOrientation(translateNumberToDirection(test));
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-
-        nbtTagCompound.setInteger("orientation", translateDirectionToNumber());
     }
 
     public void toggleDirection(){
@@ -385,7 +382,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
 
                     else {
-                        
+
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
                             if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
