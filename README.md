@@ -5,6 +5,8 @@ A resulting cross of technology and magic
 
 This source code is part of the unreleased TechnoCraft Mod. 
 
+This mod is designed to be a jack of all trades dabbling in farming ore production and anyother thing that people can give me ideas on.
+
 Textures to be done
 
 	-(Model)Power Conduits(Moving,Importing Exporting)
