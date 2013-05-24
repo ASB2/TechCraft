@@ -1,6 +1,5 @@
 package TechCraft.blocks.technogery;
 
-import net.minecraft.nbt.NBTTagCompound;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.interfaces.power.IPowerSink;
 
@@ -8,9 +7,6 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 
     int powerStored = 0;
     int powerMax = 100;
-
-    public TileTechnogryFocus(){
-    }
 
     public void updateEntity() {
 
@@ -58,15 +54,5 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
     public boolean recievePower() {
 
         return true;
-    }
-    
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound){
-        super.readFromNBT(par1NBTTagCompound);
-
-    }
-
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound){
-        super.writeToNBT(par1NBTTagCompound);
-
     }
 }

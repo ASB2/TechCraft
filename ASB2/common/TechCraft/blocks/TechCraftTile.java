@@ -8,13 +8,11 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TechCraftTile extends TileEntity implements IPowerMisc {
 
-    protected ForgeDirection orientation = null;
+    protected ForgeDirection orientation;
 
     public TechCraftTile() {
-        
         if(orientation == null) {
-            
-           orientation = ForgeDirection.DOWN; 
+            orientation = ForgeDirection.SOUTH;
         }
     }
 
@@ -36,15 +34,43 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
-        
-        this.setOrientation(translateNumberToDirection(nbtTagCompound.getInteger("orientation")));
+
+        int test = nbtTagCompound.getInteger("orientation");
+        this.setOrientation(translateNumberToDirection(test));
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-        
+
         nbtTagCompound.setInteger("orientation", translateDirectionToNumber());
+    }
+
+    public void toggleDirection(){
+
+        switch(getOrientation()) {
+
+            case DOWN: {
+                this.setOrientation(ForgeDirection.UP);
+            }
+            case UP: {
+                this.setOrientation(ForgeDirection.NORTH);
+            }
+            case NORTH: {
+                this.setOrientation(ForgeDirection.SOUTH);
+            }
+            case SOUTH: {
+                this.setOrientation(ForgeDirection.WEST);
+            }
+            case WEST: {
+                this.setOrientation(ForgeDirection.EAST);
+            }
+            case EAST: {
+                this.setOrientation(ForgeDirection.DOWN);
+            }
+            default: this.setOrientation(ForgeDirection.DOWN);
+
+        }
     }
 
     public int[] translateDirectionToCoords(ForgeDirection direction) {
@@ -72,8 +98,10 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
             case UNKNOWN:{
                 return new int[]{this.xCoord,this.yCoord,this.zCoord};
             }
+
         }
         return new int[]{this.xCoord,this.yCoord,this.zCoord};
+
     }
 
     public int translateDirectionToNumber() {
@@ -174,11 +202,11 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     public void managePowerAll(TileEntity tile, int amountOfPower, boolean addPower) {
-        
+
         if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
             amountOfPower = amountOfPower / TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
         }        
-        
+
         transferPower(ForgeDirection.DOWN, tile, amountOfPower, addPower);
         transferPower(ForgeDirection.UP, tile, amountOfPower, addPower);
         transferPower(ForgeDirection.NORTH, tile, amountOfPower, addPower);
@@ -186,7 +214,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         transferPower(ForgeDirection.WEST, tile, amountOfPower, addPower);
         transferPower(ForgeDirection.EAST, tile, amountOfPower, addPower);
     }
-    
+
     public void transferPower(ForgeDirection direction, TileEntity tile, int amountOfPower, boolean addPower){
 
         switch(direction) {
@@ -199,7 +227,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                     if(addPower) {
-                        
+
                         if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
 
                             if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
@@ -210,7 +238,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }        
                     }
-                    
+
                     else {
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
@@ -232,7 +260,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                     if(addPower) {
-                        
+
                         if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
 
                             if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
@@ -243,7 +271,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }        
                     }
-                    
+
                     else {
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
@@ -265,7 +293,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                     if(addPower) {
-                        
+
                         if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
 
                             if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
@@ -276,7 +304,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }        
                     }
-                    
+
                     else {
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
@@ -298,7 +326,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                     if(addPower) {
-                        
+
                         if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
 
                             if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
@@ -309,7 +337,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }        
                     }
-                    
+
                     else {
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
@@ -331,7 +359,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                     if(addPower) {
-                        
+
                         if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
 
                             if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
@@ -342,7 +370,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }        
                     }
-                    
+
                     else {
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
@@ -364,7 +392,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                     if(addPower) {
-                        
+
                         if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
 
                             if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
@@ -375,7 +403,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                             }
                         }        
                     }
-                    
+
                     else {
                         if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
                         {
@@ -389,13 +417,13 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     }
                 }
             }
-            
+
             default:
                 break;
         }
     }
 
-    
+
     protected long ticks = 1;
     public void updateEntity(){
         if(ticks == 20){

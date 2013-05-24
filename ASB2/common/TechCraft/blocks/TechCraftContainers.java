@@ -27,8 +27,6 @@ public abstract class TechCraftContainers extends BlockContainer{
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
         
         ((TechCraftTile) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
-
-        world.setBlockMetadataWithNotify(x, y, z, 0, 3);
     }
 
     @Override
