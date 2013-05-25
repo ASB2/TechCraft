@@ -525,8 +525,8 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public EnumPowerClass getPowerClass() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return EnumPowerClass.LOW;
     }
 
     @Override

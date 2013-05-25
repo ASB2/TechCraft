@@ -34,26 +34,26 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
                 break;
             }            
             case 1: {//Up
-                GL11.glColor3f(1.0f, 1.0f, 0.0f);
+                GL11.glColor4f(1.0f, 1.0f, 0.0f, 0.5F);
                 break;
             }
 
             case 2: {//South
-                GL11.glColor3f(0, 1, 0); 
+                GL11.glColor4f(0, 1, 0, 0.5F); 
                 break;
             }
             case 3: {//North
-                GL11.glColor3f(1, 0, 0); 
+                GL11.glColor4f(1, 0, 0, 0.5F); 
                 break;
 
             }
             case 4: {//East
-                GL11.glColor3f(0, 0, 1); 
+                GL11.glColor4f(0, 0, 1, 0.5F); 
                 break;
 
             }
             default: {//Other
-                GL11.glColor3f(0F, 0F, 0F); 
+                GL11.glColor4f(0F, 0F, 0F, 0.5F); 
                 return;
             }
         }

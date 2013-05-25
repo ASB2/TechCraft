@@ -2,7 +2,7 @@ package TechCraft.power;
 
 public enum EnumPowerClass {
 
-    Low(10);
+    LOW(10);
 
     private final int powerClass;
 
