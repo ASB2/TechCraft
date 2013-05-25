@@ -33,8 +33,20 @@ public class CraftRegistry {
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator),
                 new Object[] { "FFF", "CMZ", "FEF", 'F', ItemRegistry.ItemFireCrystalShard, 'C', Item.coal, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'Z', ItemRegistry.ItemEnergyCrystalShard});
         
-        //GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator),
-        //        new Object[] { "FFF", "CMF", "FEF", 'F', ItemRegistry.ItemFireCrystalShard, 'C', Item.coal, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob),
+                new Object[] { "SES", "ERE", "SES", 'S', Item.redstone, 'E', ItemRegistry.ItemEnergyCrystalShard, 'R', ItemRegistry.ItemRealityDifferentiationDrive});
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemRealityDifferentiationDrive),
+                new Object[] { "EAE", "WDH", "EFE", 'E', ItemRegistry.ItemEnergyCrystalShard, 'A', ItemRegistry.ItemAirCrystalShard, 'W', ItemRegistry.ItemWaterCrystalShard, 'H', ItemRegistry.ItemEarthCrystalShard, 'F', ItemRegistry.ItemFireCrystalShard, 'D', Item.diamond});
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechMultiTool),
+                new Object[] { "ZEZ", "ERE", "BZB", 'Z', ItemRegistry.ItemZycrantianIngot, 'E', ItemRegistry.ItemEnergyCrystalShard, 'R', ItemRegistry.ItemRealityDifferentiationDrive, 'B', ItemRegistry.ItemEnergyBlob});
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCEnergySphere),
+                new Object[] { "BEB", "ERE", "BEB", 'E', ItemRegistry.ItemEnergyCrystalShard, 'R', ItemRegistry.ItemRealityDifferentiationDrive, 'B', ItemRegistry.ItemEnergyBlob});
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader),
+                new Object[] { "RZC", "ZSZ", "SZR", 'R', Item.redstone, 'S', Item.stick, 'C', ItemRegistry.ItemEnergyCrystalShard, 'Z', ItemRegistry.ItemZycrantianIngot});
         
         
         //Tools

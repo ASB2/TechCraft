@@ -82,6 +82,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemEnergyBlob;
     public static TechCraftItems ItemRuneTest;    
     public static TechCraftItems ItemExplosionRune;
+    public static TechCraftItems ItemRealityDifferentiationDrive;
     
     public static void init() {
 
@@ -222,7 +223,9 @@ public class ItemRegistry {
         ItemExplosionRune.setUnlocalizedName("ItemExplosionRune");
         LanguageRegistry.addName(ItemExplosionRune, "Explosion Rune");
         
-        
+        ItemRealityDifferentiationDrive = new ItemExplosionRune(5033);
+        ItemRealityDifferentiationDrive.setUnlocalizedName("ItemRealityDifferentiationDrive");
+        LanguageRegistry.addName(ItemRealityDifferentiationDrive, "Reality Differentiation Drive");
     }
 
 }
