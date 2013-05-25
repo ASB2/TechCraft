@@ -18,7 +18,7 @@ public class CraftRegistry {
         GameRegistry.addSmelting(BlockRegistry.BlockZycrantianOre.blockID,
                 new ItemStack(ItemRegistry.ItemZycrantianIngot), 5.0F);
         
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune),
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4),
                 new Object[] { "FRF", "DED", "FRF", 'F', BlockRegistry.BlockFalseBlock, 'R', Item.redstone ,'E', ItemRegistry.ItemEnergyCrystalShard , 'D', Item.diamond});
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCChargeBench),
@@ -51,8 +51,27 @@ public class CraftRegistry {
         
         //Tools
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword),
-                new Object[] { " D ", " D ", " S ", 'D',
-            ItemRegistry.ItemGarnet, 'S', Item.stick });
+                new Object[] { " D ", " D ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetShovel),
+                new Object[] { " D ", " S ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetAxe),
+                new Object[] { " DD", " SD", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetAxe),
+                new Object[] { "DD ", "DS ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetHoe),
+                new Object[] { "DD ", " S ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetHoe),
+                new Object[] { " DD", " S ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetPickaxe),
+                new Object[] { "DDD", " S ", " S ", 'D',ItemRegistry.ItemGarnet, 'S', Item.stick});
+        
+        //Zycrantian
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianShovel),
                 new Object[] { " D ", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });

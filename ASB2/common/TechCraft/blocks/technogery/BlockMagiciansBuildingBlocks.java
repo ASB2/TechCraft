@@ -1,7 +1,10 @@
 package TechCraft.blocks.technogery;
 
+import java.util.List;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -18,7 +21,12 @@ public class BlockMagiciansBuildingBlocks extends TechCraftContainers {
     public int damageDropped (int metadata) {
         return metadata;
     }
-
+    
+    @SuppressWarnings("rawtypes")
+    public void getSubBlocks(int unknown, CreativeTabs tab, List subItems){
+        
+    }
+    
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
