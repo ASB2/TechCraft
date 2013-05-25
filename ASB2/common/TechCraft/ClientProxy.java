@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import TechCraft.blocks.tcRunes.GuiRune;
+import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitExporting;
 import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
@@ -24,18 +25,14 @@ import TechCraft.renders.ItemRendererMagicConduitImporting;
 import TechCraft.renders.ItemRendererMagicConduitMoving;
 import TechCraft.renders.ItemRendererMagicEnergySphere;
 import TechCraft.renders.ItemRendererTileBasicRune;
-import TechCraft.renders.ItemRendererTileMagiciansBuildingBlocks;
 import TechCraft.renders.ItemRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererMagicConduitExporting;
 import TechCraft.renders.TileEntityRendererMagicConduitImporting;
 import TechCraft.renders.TileEntityRendererMagicConduitMoving;
 import TechCraft.renders.TileEntityRendererMagicEnergySphere;
 import TechCraft.renders.TileEntityRendererTileBasicRune;
-import TechCraft.renders.TileEntityRendererTileMagiciansBuildingBlocks;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import TechCraft.blocks.tcRunes.*;
-import TechCraft.blocks.technogery.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -65,11 +62,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTechnogryFocus.blockID, (IItemRenderer)new ItemRendererTileTechnogryFocus());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune());
-        
-        ClientRegistry.bindTileEntitySpecialRenderer(TileMagiciansBuildingBlocks.class, new TileEntityRendererTileMagiciansBuildingBlocks());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockMagiciansBuildingBlocks.blockID, (IItemRenderer)new ItemRendererTileMagiciansBuildingBlocks());
-
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
     }
 
 

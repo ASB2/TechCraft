@@ -18,6 +18,12 @@ public class BlockTCEnergySphere extends TechCraftContainers{
         return new TileTCEnergySphere();
     }
     
+    @Override
+    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData) {
+
+        return metaData;
+    }
+    
     /**
      * The type of render function that is called for this block
      */
