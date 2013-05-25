@@ -17,6 +17,7 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
+        GL11.glEnable(GL11.GL_BLEND);
         renderByOrientation(x,y,z,tileEntity.getBlockMetadata());
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
@@ -29,7 +30,7 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
         switch (metadata) {
 
             case 0: {//Down
-                GL11.glColor3f(0F, 0F, 0F); 
+                GL11.glColor4f(0f, 0f, 0f, 0.5f);
                 break;
             }            
             case 1: {//Up

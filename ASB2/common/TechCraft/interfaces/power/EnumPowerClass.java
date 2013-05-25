@@ -2,9 +2,7 @@ package TechCraft.interfaces.power;
 
 public enum EnumPowerClass {
 
-    Low(10),
-    Mid(50),
-    High(100);
+    Low(10);
 
     private final int powerClass;
 
