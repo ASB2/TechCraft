@@ -10,6 +10,7 @@ public abstract class BlockRuneBase extends TechCraftContainers{
     public BlockRuneBase(int par1, Material par2Material) {
         super(par1, par2Material);
         setTickRandomly(true);
+        
     }
 
 

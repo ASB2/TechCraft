@@ -1,6 +1,8 @@
 package TechCraft.blocks.technogery;
 
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
 
 public class TileMagiciansBuildingBlocks extends TechCraftTile {
@@ -11,15 +13,38 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile {
     @Override
     public void updateEntity() {
         if(this.getPowerStored() > 0) {
-            
+
             super.managePowerAll(this, getOutputMin(),true);
         }
+
+    }
+
+
+    public void setColor(Item item) {
         
+        if(item != null) {
+
+            if(item == ItemRegistry.ItemAirCrystalShard) {
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 3);
+            }
+            
+            if(item == ItemRegistry.ItemEarthCrystalShard) {
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
+            }
+            
+            if(item == ItemRegistry.ItemFireCrystalShard) {
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 3, 3);
+            }
+            
+            if(item == ItemRegistry.ItemWaterCrystalShard) {
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 4, 3);
+            }
+        }
     }
 
     @Override
     public void usePower(int PowerUsed) {
-        
+
         if(this.powerStored>=PowerUsed){
             this.powerStored= powerStored-PowerUsed;
         }

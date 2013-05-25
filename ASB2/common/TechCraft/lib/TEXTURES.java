@@ -15,6 +15,8 @@ public class TEXTURES {
     public static final String CHARGE_BENCH = "/mods/TechCraft/textures/gui/TCChargeBench.png";
     public static final String TC_FURNACE = "/mods/TechCraft/textures/gui/MagicFurnace.png";
     public static final String TC_GENORATOR = "/mods/TechCraft/textures/gui/TechCraftGenoratorv2.png";
+    
+    public static final String BUILDING_BLOCKS = "/mods/TechCraft/textures/blocks/ModelBox.png";
 
     
 }

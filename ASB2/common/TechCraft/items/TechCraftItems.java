@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import TechCraft.TechCraft;
 
-public class TechCraftItems extends Item{
+public class TechCraftItems extends Item {
     
     public TechCraftItems(int par1) {
         super(par1);
