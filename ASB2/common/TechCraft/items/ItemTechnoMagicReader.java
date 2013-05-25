@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.IPowerMisc;
+import TechCraft.power.IPowerMisc;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 

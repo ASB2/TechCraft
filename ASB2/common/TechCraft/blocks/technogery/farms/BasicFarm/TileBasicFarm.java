@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.IPowerSink;
+import TechCraft.power.IPowerSink;
 
-public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInventory,ISidedInventory {    
+public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInventory, ISidedInventory {    
 
     int powerStored;
     int powerMax = 100;
@@ -24,7 +24,7 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     
     public void updateEntity() {
         
-        super.managePowerAll(this, getOutputMin(),false);
+        super.managePowerAll(this, powerInput(),false);
         
         if(manageGround()){
             //harvest();
@@ -190,17 +190,25 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
-        if(this.powerMax - this.powerStored >= PowerGained){
+        if(this.powerMax - this.powerStored >= PowerGained) {
+            
             this.powerStored= powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
+    
     @Override
-    public void usePower(int PowerUsed) {
-        if(powerStored > PowerUsed){
+    public boolean usePower(int PowerUsed) {
+        
+        if(powerStored > PowerUsed) {
+            
             powerStored = powerStored - PowerUsed;
+            return true;
         }
+    return false;
     }
 
     @Override

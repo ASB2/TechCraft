@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.IPowerItems;
-import TechCraft.interfaces.power.IPowerSink;
+import TechCraft.power.IPowerItems;
+import TechCraft.power.IPowerSink;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -21,7 +21,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
         tileItemStacks = new ItemStack[6];
     }
     public void updateEntity() {
-        super.managePowerAll(this, getOutputMin(), false);
+        super.managePowerAll(this, powerInput(), false);
         addEnergyToSlot();
         removeEnergySlot();
     }    
@@ -183,33 +183,25 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     }
 
     @Override
-    public int getOutputMax() {
-
-        return 5;
-    }
-
-    @Override
-    public int getOutputMin() {
-
-        return 1;
-    }
-
-    @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
         if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
 
             this.powerStored = this.getPowerStored() + PowerGained;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed) {
         
         if(this.getPowerStored() >= PowerUsed) {
 
             powerStored = this.getPowerStored() - PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package TechCraft.blocks.technogery;
 
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.IPowerSink;
+import TechCraft.power.IPowerSink;
 
 public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 
@@ -34,25 +34,24 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
         if(this.powerMax - this.powerStored >= PowerGained){
 
             this.powerStored= powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed) {
         
         if(powerStored > PowerUsed) {
 
             powerStored = powerStored - PowerUsed;
+            return true;
         }
-    }
-
-    public boolean recievePower() {
-
-        return true;
+        return false;
     }
 }

@@ -7,10 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TechCraft.interfaces.power.IPowerItems;
-import TechCraft.interfaces.power.IPowerMisc;
 import TechCraft.items.NBTCompoundHelper;
 import TechCraft.items.TechCraftItems;
+import TechCraft.power.IPowerItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -44,43 +43,8 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     @Override
     public boolean onItemUseFirst(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
-        if(world.isRemote) {            
-
-            if(world.getBlockTileEntity(x, y, z) instanceof IPowerMisc) {
-
-                IPowerMisc tile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
-
-                if(!player.isSneaking()) {
-
-                    if(tile != null && tile.outputPower() && tile.sendingPower()) 
-                    {
-                        
-                        if(tile.getPowerStored() >= powerToMove && this.getPowerMax(itemStack) - this.getPowerStored(itemStack) >= powerToMove)
-                        {
-                            //Take power from tile
-                            player.sendChatToPlayer("Takeing power from tile");
-                            tile.usePower(powerToMove);
-                            this.gainPower(powerToMove, itemStack);
-                        }
-                    }
-                }
-
-                else {
-
-                    if(tile != null && tile.recievePower() && tile.requestingPower()) {
-
-                        if(this.getPowerStored(itemStack) >= powerToMove && tile.getPowerMax() - tile.getPowerStored() >= powerToMove) 
-                        {
-                            //Add power to tile
-                            player.sendChatToPlayer("Adding power to tile");
-                            tile.gainPower(powerToMove);
-                            this.usePower(powerToMove, itemStack);
-                        }
-                    }
-                }
-            }    
-        }
-        return true;
+        
+        return false;
     }
 
     @Override

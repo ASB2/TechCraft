@@ -1,6 +1,7 @@
 package TechCraft.blocks;
 
-import TechCraft.interfaces.power.IPowerMisc;
+import TechCraft.power.EnumPowerClass;
+import TechCraft.power.IPowerMisc;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -15,7 +16,9 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     public ForgeDirection getOrientation() {
-        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))){
+        
+        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))) {
+            
             this.orientation = this.translateNumberToDirection(getBlockMetadata());
         }
         return this.orientation;
@@ -483,18 +486,6 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public int getOutputMax() {
-        // TODO Auto-generated method stub
-        return 1;
-    }
-
-    @Override
-    public int getOutputMin() {
-        // TODO Auto-generated method stub
-        return 1;
-    }
-
-    @Override
     public int getPowerStored() {
         // TODO Auto-generated method stub
         return 0;
@@ -508,18 +499,6 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public boolean recievePower() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean outputPower() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean requestingPower() {
         if(getPowerStored() == getPowerMax()){
             return false;
         }
@@ -529,7 +508,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public boolean sendingPower() {
+    public boolean outputPower() {
         if(getPowerStored() < getPowerMax()){
             return true;
         }
@@ -545,19 +524,33 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public EnumPowerClass getPowerClass() {
         // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
-    public void usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed) {
         // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
-    public void updateConnections() {
+    public boolean gainPower(int PowerGained) {
         // TODO Auto-generated method stub
+        return false;
+    }
 
+    @Override
+    public int powerOutput() {
+        // TODO Auto-generated method stub
+        return 1;
+    }
+
+    @Override
+    public int powerInput() {
+        // TODO Auto-generated method stub
+        return 1;
     }
 
 }

@@ -4,8 +4,9 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.power.IPowerSource;
 
-public class TileMagiciansBuildingBlocks extends TechCraftTile {
+public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPowerSource {
 
     int powerStored = 0;
     int powerMax = 25;
@@ -14,7 +15,7 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile {
     public void updateEntity() {
         if(this.getPowerStored() > 0) {
 
-            super.managePowerAll(this, getOutputMin(),true);
+            super.managePowerAll(this, powerOutput(),true);
         }
 
     }
@@ -43,22 +44,31 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile {
     }
 
     @Override
-    public void usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed) {
 
         if(this.powerStored>=PowerUsed){
             this.powerStored= powerStored-PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
         if(this.powerMax - this.powerStored >= PowerGained){
             this.powerStored= powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
 
+    @Override
+    public int powerOutput() {
 
+        return 1;
+    }
+    
     @Override
     public int getPowerStored() {
 
@@ -69,30 +79,6 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile {
     public int getPowerMax() {
 
         return powerMax;
-    }
-
-    @Override
-    public boolean recievePower() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean outputPower() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public int getOutputMax() {
-        // TODO Auto-generated method stub
-        return 5;
-    }
-
-    @Override
-    public int getOutputMin() {
-        // TODO Auto-generated method stub
-        return 1;
     }
 
     @Override

@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.IPowerStorage;
+import TechCraft.power.IPowerStorage;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
 
@@ -12,12 +12,9 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     int powerMax = 1000;
 
     public void updateEntity() {
-        if(getPowerStored() >= getOutputMax()) {
+        if(getPowerStored() >= powerOutput()) {
 
-            super.managePowerAll(this, getOutputMax(), false);        
-        }
-        else{
-            super.managePowerAll(this, getOutputMin(), false);    
+            super.managePowerAll(this, powerOutput(), false);        
         }
     }    
 
@@ -41,17 +38,6 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
                 worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 4, 3);
             }
         }
-    }
-
-    @Override
-    public int getOutputMax() {
-        return 10;
-    }
-
-    @Override
-    public int getOutputMin(){
-
-        return 1;
     }
 
     public int getPowerScaled(int scale) {
@@ -95,17 +81,25 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
-        if(this.powerMax - this.powerStored >= PowerGained){
+        if(this.powerMax - this.powerStored >= PowerGained) {
+            
             this.powerStored= powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
+    
     @Override
-    public void usePower(int PowerUsed) {
-        if(powerStored >= PowerUsed){
+    public boolean usePower(int PowerUsed) {
+        
+        if(powerStored >= PowerUsed) {
+            
             powerStored = powerStored - PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override

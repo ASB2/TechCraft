@@ -89,7 +89,7 @@ public class TechCraft {
         GameRegistry.registerWorldGenerator(new WorldGenBlockFalseBlock());
 
         GameRegistry.registerTileEntity(TileTCEnergySphere.class, "TileTCEnergySphere");
-        
+
         GameRegistry.registerTileEntity(TileTechnogryFocus.class, "TileTechnogryFocus");
 
         GameRegistry.registerTileEntity(TileMagiciansBuildingBlocks.class, "TileMagiciansBuildingBlocks");
@@ -103,17 +103,17 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileMagicConduitMoving.class, "TileMagicConduitMoving");
 
         GameRegistry.registerTileEntity(TileBasicFarm.class, "TileBasicFarm");
-        
+
         GameRegistry.registerTileEntity(TileGenorator.class, "TileGenorator");
-        
+
         GameRegistry.registerTileEntity(TileTCFurnace.class, "TileTCFurnace");
-        
+
         GameRegistry.registerTileEntity(TileTCChargeBench.class, "TileTCChargeBench");
-        
+
         GameRegistry.registerTileEntity(TileBasicRune.class, "TileBasicRune");
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
-        
+
     }
 
 

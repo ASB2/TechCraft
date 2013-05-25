@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.IPowerSink;
+import TechCraft.power.IPowerSink;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
 
@@ -35,7 +35,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
 
     public void updateEntity() {        
-        super.managePowerAll(this,getOutputMin(),false);
+        super.managePowerAll(this, powerInput(),false);
 
         if(this.getPowerStored() > 0){
             isBurning = true;
@@ -209,18 +209,25 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public void usePower(int PowerUsed) {
-        if(this.powerStored>=PowerUsed){
+    public boolean usePower(int PowerUsed) {
+        
+        if(this.powerStored>=PowerUsed) {
+            
             this.powerStored = powerStored - PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
-        if(this.powerMax - this.powerStored >= PowerGained){
+        if(this.powerMax - this.powerStored >= PowerGained) {
+            
             this.powerStored = powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -234,13 +241,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
         return true;
     }
-
-    @Override
-    public int getOutputMin() {
-
-        return 5;
-    }
-
+    
     @Override
     public int[] getAccessibleSlotsFromSide(int par1)
     {

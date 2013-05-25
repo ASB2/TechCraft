@@ -26,7 +26,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
 
     public void updateEntity() {
-        super.managePowerAll(this,getOutputMin(),true);
+        super.managePowerAll(this,powerOutput(),true);
 
         if(!(powerStored == powerMax)){
 
@@ -137,20 +137,27 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public void usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed) {
 
-        if(this.powerStored>=PowerUsed){
+        if(this.powerStored>=PowerUsed) {
+            
             this.powerStored= powerStored-PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
-        if(powerMax -powerStored >= PowerGained){
+        if(powerMax -powerStored >= PowerGained) {
+            
             powerStored = powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
+    
     public String getName(){
 
         return "TechCraft Genorator";
