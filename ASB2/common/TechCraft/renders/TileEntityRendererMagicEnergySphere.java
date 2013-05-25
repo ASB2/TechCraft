@@ -1,13 +1,14 @@
 package TechCraft.renders;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+
+import org.lwjgl.opengl.GL11;
+
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergySphere;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRenderer{
 
@@ -16,11 +17,10 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        
         renderByOrientation(x,y,z,tileEntity.getBlockMetadata());
-        
+
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
-        
+
         modelTutBox.render((TileTCEnergySphere)tileEntity, x, y, z);
     }   
 
@@ -57,8 +57,6 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
             }
         }
     }
-
-
 
 }
 
