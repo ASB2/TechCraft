@@ -16,7 +16,7 @@ The over all goal of this mod is to make processes take less time.
 Current Ideas to Build On
 
 	-End Game Items
-	-Way to double ores.
+	-New Mobs
 
 Current Bugs
 
