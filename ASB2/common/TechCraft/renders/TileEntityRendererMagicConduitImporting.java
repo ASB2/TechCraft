@@ -2,6 +2,7 @@ package TechCraft.renders;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -24,24 +25,29 @@ public class TileEntityRendererMagicConduitImporting extends TileEntitySpecialRe
         
         model.renderAll();
         
-        if(tile.getRenderBottom()){
+        if(tile.decideRender(ForgeDirection.DOWN)){
             model.renderBottom();
         }
-        if(tile.getRenderTop()){
+        
+        if(tile.decideRender(ForgeDirection.UP)){
             model.renderTop();
         }
-        if(tile.getRenderLeft()){
+        
+        if(tile.decideRender(ForgeDirection.WEST)){
             model.renderLeft();
         }
-        if(tile.getRenderRight()){
+        
+        if(tile.decideRender(ForgeDirection.EAST)){
             model.renderRight();
         }
-        if(tile.getRenderFront()){
+        
+        if(tile.decideRender(ForgeDirection.SOUTH)){
             model.renderFront();
         }
-        if(tile.getRenderBack()){
+        
+        if(tile.decideRender(ForgeDirection.NORTH)){
             model.renderBack();
-        }     
+        }
         
         GL11.glPopMatrix();
     }

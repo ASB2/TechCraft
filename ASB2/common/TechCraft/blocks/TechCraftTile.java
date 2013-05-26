@@ -464,27 +464,27 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     public static int getTilesNextTo(int x, int y, int z, World worldObj) {
         int numberNextTo = 0;
         //Bottom of Tile
-        if(worldObj.getBlockTileEntity(x, y-1, z) instanceof TechCraftTile){
+        if(worldObj.getBlockTileEntity(x, y-1, z) instanceof IPowerMisc){
             numberNextTo++;
         }
         //top of Tile
-        if(worldObj.getBlockTileEntity(x, y+1, z) instanceof TechCraftTile){
+        if(worldObj.getBlockTileEntity(x, y+1, z) instanceof IPowerMisc){
             numberNextTo++;
         }        
         //left
-        if(worldObj.getBlockTileEntity(x, y, z-1) instanceof TechCraftTile){
+        if(worldObj.getBlockTileEntity(x, y, z-1) instanceof IPowerMisc){
             numberNextTo++;
         }
         //right
-        if(worldObj.getBlockTileEntity(x, y, z+1) instanceof TechCraftTile){
+        if(worldObj.getBlockTileEntity(x, y, z+1) instanceof IPowerMisc){
             numberNextTo++;
         }
         //front
-        if(worldObj.getBlockTileEntity(x+1, y, z) instanceof TechCraftTile){
+        if(worldObj.getBlockTileEntity(x+1, y, z) instanceof IPowerMisc){
             numberNextTo++;
         }
         //back
-        if(worldObj.getBlockTileEntity(x-1, y, z) instanceof TechCraftTile){
+        if(worldObj.getBlockTileEntity(x-1, y, z) instanceof IPowerMisc){
             numberNextTo++;
         }
         return numberNextTo;

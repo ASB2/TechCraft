@@ -2,7 +2,7 @@ package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerConductor;
 import TechCraft.power.IPowerMisc;
@@ -18,112 +18,131 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
         updateEnergy();
     }
 
-    private void updateEnergy(){
+    private void updateEnergy() {
 
-        if(TechCraftTile.getTilesNextTo(xCoord,yCoord,zCoord,worldObj)> 0){
+        int powerDivided = powerOutput();
 
-            int magicDivided = this.getPowerStored() / TechCraftTile.getTilesNextTo(xCoord,yCoord,zCoord,worldObj);
+        if(super.getTilesNextTo(this.xCoord, this.yCoord, this.zCoord, worldObj) > 0) {
 
-            this.addSideTop(xCoord, yCoord, zCoord, worldObj, this, magicDivided);
-            this.addSideBottom(xCoord, yCoord, zCoord, worldObj, this, magicDivided);
-            this.addSideLeft(xCoord, yCoord, zCoord, worldObj, this, magicDivided);
-            this.addSideRight(xCoord, yCoord, zCoord, worldObj, this, magicDivided);
-            this.addSideFront(xCoord, yCoord, zCoord, worldObj, this, magicDivided);
-            this.addSideBack(xCoord, yCoord, zCoord, worldObj, this, magicDivided);
-
+            powerDivided =  powerDivided / super.getTilesNextTo(this.xCoord, this.yCoord, this.zCoord, worldObj);
         }
+
+        transferEnergy(ForgeDirection.DOWN, powerDivided);
+        transferEnergy(ForgeDirection.UP, powerDivided);
+        transferEnergy(ForgeDirection.NORTH, powerDivided);
+        transferEnergy(ForgeDirection.SOUTH, powerDivided);
+        transferEnergy(ForgeDirection.WEST, powerDivided);
+        transferEnergy(ForgeDirection.EAST, powerDivided);
     }
 
-    public void addSideTop(int x,int y,int z,World world,TechCraftTile pnet, int powertoMove){
+    public int powerOutput(){
 
-        TileEntity mTile = world.getBlockTileEntity(x, y+1, z);
-
-        if(mTile != null && mTile instanceof TileMagicConduitMoving || mTile instanceof TileMagicConduitExporting){
-
-            TechCraftTile mTile2 = (TechCraftTile) world.getBlockTileEntity(x, y+1, z);
-            
-                this.logicI(mTile2,pnet,powertoMove);
-            
-        }
+        return 10;
     }
 
-    public void addSideBottom(int x,int y,int z,World world,TechCraftTile pnet, int powertoMove){
+    public int powerInput(){
 
-        TileEntity mTile = world.getBlockTileEntity(x, y-1, z);
-
-        if(mTile != null & mTile instanceof TileMagicConduitMoving || mTile instanceof TileMagicConduitExporting){
-
-            TechCraftTile mTile2 = (TechCraftTile) world.getBlockTileEntity(x, y-1, z);
-
-            this.logicI(mTile2,pnet,powertoMove);
-
-        }
+        return 10;
     }
 
-    public void addSideLeft(int x,int y,int z,World world,TechCraftTile pnet, int powertoMove){
+    public void transferEnergy(ForgeDirection direction, int amount) {
 
-        TileEntity mTile = world.getBlockTileEntity(x-1, y, z);
+        TileEntity tile = worldObj.getBlockTileEntity(super.translateDirectionToCoords(direction)[0], super.translateDirectionToCoords(direction)[1], super.translateDirectionToCoords(direction)[2]);
 
-        if(mTile != null & mTile instanceof TileMagicConduitMoving || mTile instanceof TileMagicConduitExporting){
+        switch(direction) {
 
-            TechCraftTile mTile2 = (TechCraftTile) world.getBlockTileEntity(x-1, y, z);
+            case DOWN: {
 
-            this.logicI(mTile2,pnet,powertoMove);
+                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
 
-        }
-    }
+                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
 
-    public void addSideRight(int x,int y,int z,World world,TechCraftTile pnet, int powertoMove){
+                        if(((IPowerMisc) tile).gainPower(amount)) {
 
-        TileEntity mTile = world.getBlockTileEntity(x+1, y, z);
+                            this.usePower(amount);
+                        }
+                    }
+                }
+                break;
+            }
 
-        if(mTile != null & mTile instanceof TileMagicConduitMoving || mTile instanceof TileMagicConduitExporting){
+            case EAST:{
 
-            TechCraftTile mTile2 = (TechCraftTile) world.getBlockTileEntity(x+1, y, z);
+                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
 
-            this.logicI(mTile2,pnet,powertoMove);            
-        }
-    }
+                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
 
-    public void addSideFront(int x,int y,int z,World world,TechCraftTile pnet, int powertoMove){
+                        if(((IPowerMisc) tile).gainPower(amount)) {
 
-        TileEntity mTile = world.getBlockTileEntity(x, y, z+1);
+                            this.usePower(amount);
+                        }
+                    }
+                }
+                break;
+            }
+            case NORTH: {
 
-        if(mTile != null & mTile instanceof TileMagicConduitMoving || mTile instanceof TileMagicConduitExporting){
+                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
 
-            TechCraftTile mTile2 = (TechCraftTile) world.getBlockTileEntity(x, y, z+1);
+                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
 
-            this.logicI(mTile2,pnet,powertoMove);
+                        if(((IPowerMisc) tile).gainPower(amount)) {
 
-        }
-    }
+                            this.usePower(amount);
+                        }
+                    }
+                }
+                break;
+            }
+            case SOUTH: {
 
-    public void addSideBack(int x,int y,int z,World world,TechCraftTile pnet, int powertoMove){
+                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
 
-        TileEntity mTile = world.getBlockTileEntity(x, y, z-1);
+                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
+                        
+                        if(((IPowerMisc) tile).gainPower(amount)) {
+                            
+                            this.usePower(amount);
+                        }
+                    }
+                }
+                break;
 
-        if(mTile != null & mTile instanceof TileMagicConduitMoving || mTile instanceof TileMagicConduitExporting){
+            }
+            case UP: {
 
-            TechCraftTile mTile2 = (TechCraftTile)world.getBlockTileEntity(x, y, z-1);
-            this.logicI(mTile2,pnet,powertoMove);
+                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    
+                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
+                        
+                        if(((IPowerMisc) tile).gainPower(amount)) {
+                            
+                            this.usePower(amount);
+                        }
+                    }
+                }
+                break;
+            }
+            case WEST: {
 
-        }
-    }
+                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
 
-    public void logicI(IPowerMisc tiletoAdd, IPowerMisc tiletoSubtract, int amountToSubtract){
+                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
 
-        if(tiletoAdd instanceof IPowerMisc && tiletoSubtract instanceof IPowerMisc) {
+                        if(((IPowerMisc) tile).gainPower(amount)) {
 
-            IPowerMisc tiletoAddI = (IPowerMisc) tiletoAdd;
-            IPowerMisc tiletoSubtractI = (IPowerMisc) tiletoSubtract;
+                            this.usePower(amount);
+                        }
+                    }
+                }
+                break;
+            }
+            case UNKNOWN:
+                break;
 
-            if(tiletoSubtractI.getPowerStored() >= amountToSubtract && tiletoAddI.getPowerMax() - tiletoAddI.getPowerStored() >= amountToSubtract){
+            default:
+                break;
 
-                tiletoAddI.gainPower(amountToSubtract);
-                tiletoSubtractI.usePower(amountToSubtract);
-
-
-            }        
         }
     }
 
@@ -180,70 +199,73 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
         return "TechCraft Conduit(Moving)";
     }
 
-    public boolean getRenderBottom(){
-        if(worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) instanceof TileMagicConduitImporting || (worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) instanceof TileMagicConduitExporting)|| (worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) instanceof TileMagicConduitMoving)){
+    public boolean decideRender(ForgeDirection direction) {
 
-            return true;  
+        TileEntity tile = worldObj.getBlockTileEntity(super.translateDirectionToCoords(direction)[0], super.translateDirectionToCoords(direction)[1], super.translateDirectionToCoords(direction)[2]);
+
+        if(tile != null) {
+
+            switch(direction) {
+
+                case DOWN: {
+
+                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+
+                        return true;
+                    }
+                    break;
+                }
+
+                case EAST:{
+
+                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+
+                        return true;
+                    }
+                    break;
+                }
+                case NORTH: {
+
+                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+
+                        return true;
+                    }
+                    break;
+                }
+                case SOUTH: {
+
+                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+
+                        return true;
+                    }
+                    break;
+
+                }
+                case UP: {
+
+                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+
+                        return true;
+                    }
+                    break;
+                }
+                case WEST: {
+
+                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+
+                        return true;
+                    }
+                    break;
+                }
+                case UNKNOWN:
+                    return false;
+
+                default:
+                    return false;
+            }
         }
 
-        else{
-            return false;
-        }
-    }
-
-    public boolean getRenderTop(){
-        if(worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord) instanceof TileMagicConduitImporting || (worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord) instanceof TileMagicConduitExporting)|| (worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord) instanceof TileMagicConduitMoving)){
-
-            return true;  
-        }
-
-        else{
-            return false;
-        }
-    }
-
-    public boolean getRenderLeft(){
-        if(worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord) instanceof TileMagicConduitImporting || (worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord) instanceof TileMagicConduitExporting)|| (worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord) instanceof TileMagicConduitMoving)){
-
-            return true;  
-        }
-
-        else{
-            return false;
-        }
-    }
-
-    public boolean getRenderRight(){
-        if(worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord) instanceof TileMagicConduitImporting || (worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord) instanceof TileMagicConduitExporting)|| (worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord) instanceof TileMagicConduitMoving)){
-
-            return true;  
-        }
-
-        else{
-            return false;
-        }
-    }
-
-    public boolean getRenderBack(){
-        if(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1) instanceof TileMagicConduitImporting || (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1) instanceof TileMagicConduitExporting)|| (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1) instanceof TileMagicConduitMoving)){
-
-            return true;  
-        }
-
-        else{
-            return false;
-        }
-    }
-
-    public boolean getRenderFront(){
-        if(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1) instanceof TileMagicConduitImporting || (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1) instanceof TileMagicConduitExporting)|| (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1) instanceof TileMagicConduitMoving)){
-
-            return true;  
-        }
-
-        else{
-            return false;
-        }
+        return false;
     }
 
     @Override
