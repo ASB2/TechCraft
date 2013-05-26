@@ -4,16 +4,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerConductor;
 import TechCraft.power.*;
-import TechCraft.power.PowerNetwork;
 
 public class TileMagicConduitExporting extends TechCraftTile implements IPowerConductor{
 
+    PowerNetwork network;
+    
     int powerStored;
     int powerMax = 10;
-
-
+    
     @Override
     public void updateEntity() {
         super.managePowerAll(this, powerOutput(), true);
@@ -162,8 +161,19 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
 
     @Override
     public PowerNetwork getNetwork() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return network;
+    }
+
+    @Override
+    public void overrideNetwork(PowerNetwork network) {
+        
+        if(this.network != null) {
+            
+            this.network.removeExporting(this);
+        }
+        
+        this.network = network;        
     }
 
 }

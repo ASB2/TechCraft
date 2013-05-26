@@ -8,6 +8,8 @@ import TechCraft.power.*;
 
 public class TileMagicConduitImporting extends TechCraftTile implements IPowerConductor{
 
+    PowerNetwork network;
+    
     int powerMax = 10;
     int powerStored;
 
@@ -276,8 +278,19 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
 
     @Override
     public PowerNetwork getNetwork() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return network;
+    }
+
+    @Override
+    public void overrideNetwork(PowerNetwork network) {
+        
+        if(this.network != null) {
+            
+            this.network.removeImporting(this);
+        }
+        
+        this.network = network;        
     }
 
 }

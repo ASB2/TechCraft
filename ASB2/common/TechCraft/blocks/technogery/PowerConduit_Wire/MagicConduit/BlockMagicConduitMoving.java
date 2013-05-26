@@ -7,15 +7,34 @@ import TechCraft.blocks.TechCraftContainers;
 
 public class BlockMagicConduitMoving extends TechCraftContainers{
 
+    TileMagicConduitMoving tile;
+
     public BlockMagicConduitMoving(int par1, Material par2Material) {
         super(par1, par2Material);
     }
 
+
+
+    public void breakBlock(World par1World, int x, int y, int z, int par5, int par6)
+    {
+        super.breakBlock(par1World, x, y, z, par5, par6);
+
+        if(tile != null) {
+            if(tile.getNetwork() != null) {
+                
+                tile.getNetwork().removeConductor(tile);
+                tile.getNetwork().revaluateNetwork(tile);
+            }
+        }
+    }
+
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileMagicConduitMoving();
+
+        tile = new TileMagicConduitMoving();        
+        return tile;
     }
-    
+
     /**
      * The type of render function that is called for this block
      */

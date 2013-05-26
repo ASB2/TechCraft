@@ -7,4 +7,6 @@ public abstract interface IPowerConductor extends IPowerMisc {
     int[] getPosition();
     
     PowerNetwork getNetwork();
+    
+    void overrideNetwork(PowerNetwork network);
 }

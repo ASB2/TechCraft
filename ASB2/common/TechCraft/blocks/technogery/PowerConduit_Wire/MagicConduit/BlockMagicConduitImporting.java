@@ -15,7 +15,20 @@ public class BlockMagicConduitImporting extends TechCraftContainers{
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileMagicConduitImporting();
+        tile = new TileMagicConduitImporting();
+        return tile;
+    }
+    
+    public void breakBlock(World par1World, int x, int y, int z, int par5, int par6)
+    {
+        super.breakBlock(par1World, x, y, z, par5, par6);
+        
+        if(tile != null) {
+            if(tile.getNetwork() != null) {
+                
+            tile.getNetwork().revaluateNetwork(tile);
+            }
+        }
     }
     
     /**

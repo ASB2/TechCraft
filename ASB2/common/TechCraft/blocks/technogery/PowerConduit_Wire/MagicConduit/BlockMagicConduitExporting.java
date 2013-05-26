@@ -7,6 +7,8 @@ import TechCraft.blocks.TechCraftContainers;
 
 public class BlockMagicConduitExporting extends TechCraftContainers{
 
+    TileMagicConduitExporting tile;
+    
     public BlockMagicConduitExporting(int par1, Material par2Material) {
         super(par1, par2Material);
 
@@ -14,7 +16,21 @@ public class BlockMagicConduitExporting extends TechCraftContainers{
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileMagicConduitExporting();
+        tile = new TileMagicConduitExporting();
+        return tile;
+    }
+    
+    public void breakBlock(World par1World, int x, int y, int z, int par5, int par6)
+    {
+        super.breakBlock(par1World, x, y, z, par5, par6);
+        
+        if(tile != null) {
+            
+            if(tile.getNetwork() != null) {
+                
+            tile.getNetwork().revaluateNetwork(tile);
+            }
+        }
     }
     
     

@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
+import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.*;
+import TechCraft.power.*;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 
@@ -32,11 +34,26 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
                 player.sendChatToPlayer(mTile.getName()+ " is at orientation: " + mTile.translateDirectionToString());
                 player.sendChatToPlayer(mTile.getName()+ " has metadata "+world.getBlockMetadata(x, y, z));
-            }        
+            }    
+
+            if(world.getBlockTileEntity(x,y,z) instanceof IPowerConductor){
+
+                IPowerConductor mTile = (IPowerConductor) world.getBlockTileEntity(x, y, z);
+                if(mTile.getNetwork() != null){
+                    player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductors().size() + " conductors");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getExporting().size() + " exporting");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getImporting().size() + " importing");
+                    player.sendChatToPlayer(mTile.getName()+ " power network is " + mTile.getNetwork().getAge() + " ticks old");
+                }
+                else {
+                    player.sendChatToPlayer(mTile.getName()+" has no network");
+                }
+            }  
         }
-        
+
         else {
-            
+
             if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile) {
                 TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
                 mTile.toggleDirection();
