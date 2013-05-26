@@ -168,11 +168,6 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
     @Override
     public void overrideNetwork(PowerNetwork network) {
         
-        if(this.network != null) {
-            
-            this.network.removeExporting(this);
-        }
-        
         this.network = network;        
     }
 

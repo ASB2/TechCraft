@@ -12,9 +12,9 @@ public class PowerNetwork {
 
     private List <TileMagicConduitMoving> conductors = new ArrayList<TileMagicConduitMoving>();
 
-    private List <TileMagicConduitExporting> exporting = new ArrayList<TileMagicConduitExporting>();
+    private List <IPowerMisc> powerSink = new ArrayList<IPowerMisc>();
 
-    private List <TileMagicConduitImporting> importing = new ArrayList<TileMagicConduitImporting>();
+    private List <IPowerMisc> powerSource = new ArrayList<IPowerMisc>();
 
     @SuppressWarnings("unused")
     private World worldObj;
@@ -22,7 +22,7 @@ public class PowerNetwork {
     public TileMagicConduitMoving tileCore;
 
     private int age = 0;
-    int powerToMove = 5;
+    int powerToMove = 1;
     int buffer = 0;
 
     public PowerNetwork(World world, TileMagicConduitMoving tile) {    
@@ -40,53 +40,25 @@ public class PowerNetwork {
         for(int i = 0; i < conductors.size(); i++){
 
             conductors.get(i).addConductorsAround();
-            conductors.get(i).addImportingAround();
-            conductors.get(i).addExportingAround();
+            conductors.get(i).addSourceAround();
+            conductors.get(i).addSinkAround();
         }
 
-        if(importing.size() > 0 && exporting.size() > 0) {
+        if(powerSource.size() > 0 && powerSink.size() > 0){
 
-            for(int i = 0; i < importing.size(); i++) {
+            for(int i = 0; i < powerSource.size(); i++) {
 
-                if(importing.get(i).getPowerStored() >= powerToMove) {
+                for(int z = 0; z < powerSink.size(); z++) {
 
-                    if(importing.get(i).usePower(powerToMove)) {
-
-                        buffer = buffer + powerToMove;
+                    if(powerSink.get(z).getPowerMax() - powerSink.get(i).getPowerStored() >= powerToMove){
+                        
+                        if(powerSource.get(i).usePower(powerToMove)) {
+                            
+                            powerSink.get(z).gainPower(powerToMove);
+                            break;
+                        }
                     }
                 }
-            }
-        }
-
-        if(exporting.size() > 0 && this.buffer > 0) {
-
-            for(int i = 0; i < exporting.size(); i++) {
-
-                if(exporting.get(i).getPowerMax() - exporting.get(i).getPowerStored() >= powerToMove) {
-
-                    if(buffer >= powerToMove && exporting.get(i).gainPower(powerToMove)) {
-
-                        buffer = buffer - powerToMove;
-                    }
-                }
-            }
-        }
-    }
-
-    public void revaluateNetwork(IPowerConductor tile) {
-
-        if(tile != tileCore) {
-
-            tile.overrideNetwork(null);
-
-            if(tile instanceof TileMagicConduitMoving) {
-                conductors.remove(tile);
-            }
-            if(tile instanceof TileMagicConduitImporting) {
-                importing.remove(tile);
-            }
-            if(tile instanceof TileMagicConduitExporting) {
-                exporting.remove(tile);
             }
         }
     }
@@ -101,36 +73,36 @@ public class PowerNetwork {
         conductors.remove(tile);
     }
 
-    public void addImporting(TileMagicConduitImporting tile) {
+    public void addSource(IPowerMisc tile) {
 
-        importing.add(tile);
+        powerSource.add(tile);
     }
 
-    public void removeImporting(TileMagicConduitImporting tile) {
+    public void removeSource(IPowerMisc tile) {
 
-        importing.remove(tile);
+        powerSource.remove(tile);
     }
 
-    public void addExporting(TileMagicConduitExporting tile) {
+    public void addSink(IPowerMisc tile) {
 
-        exporting.add(tile);
+        powerSink.add(tile);
     }
 
-    public void removeExporting(TileMagicConduitExporting tile) {
+    public void removeSink(IPowerMisc tile) {
 
-        exporting.remove(tile);
+        powerSink.remove(tile);
     }
 
     public List<TileMagicConduitMoving> getConductors() {
         return conductors;
     }
 
-    public List<TileMagicConduitExporting> getExporting() {
-        return exporting;
+    public List<IPowerMisc> getSink() {
+        return powerSink;
     }
 
-    public List<TileMagicConduitImporting> getImporting() {
-        return importing;
+    public List<IPowerMisc> getSource() {
+        return powerSource;
     }
 
     public int getAge() {
@@ -138,7 +110,7 @@ public class PowerNetwork {
     }
 
     public int getBuffer() {
-        
+
         return this.buffer;
     }
 }

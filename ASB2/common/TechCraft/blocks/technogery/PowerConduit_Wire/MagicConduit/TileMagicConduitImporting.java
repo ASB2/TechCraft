@@ -287,11 +287,6 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
     @Override
     public void overrideNetwork(PowerNetwork network) {
         
-        if(this.network != null) {
-            
-            this.network.removeImporting(this);
-        }
-        
         this.network = network;        
     }
 

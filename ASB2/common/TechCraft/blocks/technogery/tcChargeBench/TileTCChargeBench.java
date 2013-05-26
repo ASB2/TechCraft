@@ -8,9 +8,12 @@ import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerItems;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerNetwork;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
 
+    PowerNetwork network;
+    
     int powerStored;
     int powerMax = 1000;
     int powerToMove = 1;
@@ -20,7 +23,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     public TileTCChargeBench(){
         tileItemStacks = new ItemStack[6];
     }
-    
+
     public void updateEntity() {
         super.managePowerAll(this, powerInput(), false);
         addEnergyToSlot();
@@ -28,7 +31,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     }    
 
     public void addEnergyToSlot() {        
-        
+
         if(tileItemStacks[0] != null) {
 
             if(tileItemStacks[0].getItem() != null && tileItemStacks[0].getItem() instanceof IPowerItems) {
@@ -42,7 +45,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                 }
             }
         }
-        
+
         if(tileItemStacks[1] != null) {
 
             if(tileItemStacks[1].getItem() != null && tileItemStacks[1].getItem() instanceof IPowerItems) {
@@ -56,7 +59,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                 }
             }
         }
-        
+
         if(tileItemStacks[2] != null) {
 
             if(tileItemStacks[2].getItem() != null && tileItemStacks[2].getItem() instanceof IPowerItems) {
@@ -87,7 +90,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                 }
             }
         }
-        
+
         if(tileItemStacks[4] != null) {
 
             if(tileItemStacks[4].getItem() != null && tileItemStacks[4].getItem() instanceof IPowerItems) {
@@ -101,7 +104,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                 }
             }
         }
-        
+
         if(tileItemStacks[5] != null) {
 
             if(tileItemStacks[5].getItem() != null && tileItemStacks[5].getItem() instanceof IPowerItems) {
@@ -116,13 +119,13 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
             }
         }
     }
-    
+
     @Override
     public boolean recievePower() {
 
         return true;
     }
-    
+
     @Override
     public int getPowerStored() {
 
@@ -196,7 +199,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
 
     @Override
     public boolean usePower(int PowerUsed) {
-        
+
         if(this.getPowerStored() >= PowerUsed) {
 
             powerStored = this.getPowerStored() - PowerUsed;
@@ -298,5 +301,15 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     public boolean isStackValidForSlot(int i, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return true;
+    }
+
+    public PowerNetwork getNetwork(){
+
+        return network;
+    }
+
+    public void overrideNetwork(PowerNetwork net){
+
+        this.network = net;
     }
 }

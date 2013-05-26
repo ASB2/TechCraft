@@ -4,14 +4,15 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerStorage;
+import TechCraft.power.*;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
 
+    PowerNetwork network;
     int powerStored;
     int powerMax = 1000;
     int color = 0;
-    
+
     public void updateEntity() {
 
         super.managePowerAll(this, powerInput(), false);
@@ -118,6 +119,15 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
         par1NBTTagCompound.setInteger("color", color);        
     }
 
+    public PowerNetwork getNetwork(){
+
+        return network;
+    }
+
+    public void overrideNetwork(PowerNetwork net){
+
+        this.network = net;
+    }
 
 }
 

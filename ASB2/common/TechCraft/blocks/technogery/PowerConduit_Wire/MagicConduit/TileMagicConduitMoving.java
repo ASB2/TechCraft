@@ -6,7 +6,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerConductor;
 import TechCraft.power.IPowerMisc;
-import TechCraft.power.PowerNetwork;
+import TechCraft.power.*;
 
 public class TileMagicConduitMoving extends TechCraftTile implements IPowerConductor{
 
@@ -89,7 +89,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                             }
                         }
                         else {
-                            
+
                             ((TileMagicConduitMoving)tile).overrideNetwork(network);
                             network.addConductor((TileMagicConduitMoving) tile);
                         }
@@ -110,7 +110,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                             }
                         }
                         else {
-                            
+
                             ((TileMagicConduitMoving)tile).overrideNetwork(network);
                             network.addConductor((TileMagicConduitMoving) tile);
                         }
@@ -130,7 +130,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                             }
                         }
                         else {
-                            
+
                             ((TileMagicConduitMoving)tile).overrideNetwork(network);
                             network.addConductor((TileMagicConduitMoving) tile);
                         }
@@ -150,7 +150,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                             }
                         }
                         else {
-                            
+
                             ((TileMagicConduitMoving)tile).overrideNetwork(network);
                             network.addConductor((TileMagicConduitMoving) tile);
                         }
@@ -171,7 +171,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                             }
                         }
                         else {
-                            
+
                             ((TileMagicConduitMoving)tile).overrideNetwork(network);
                             network.addConductor((TileMagicConduitMoving) tile);
                         }
@@ -191,7 +191,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                             }
                         }
                         else {
-                            
+
                             ((TileMagicConduitMoving)tile).overrideNetwork(network);
                             network.addConductor((TileMagicConduitMoving) tile);
                         }
@@ -207,16 +207,16 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
         }
     }
 
-    public void addImportingAround(){
-        addImportingAround(ForgeDirection.DOWN);
-        addImportingAround(ForgeDirection.UP);
-        addImportingAround(ForgeDirection.NORTH);
-        addImportingAround(ForgeDirection.SOUTH);
-        addImportingAround(ForgeDirection.WEST);
-        addImportingAround(ForgeDirection.EAST);
+    public void addSourceAround(){
+        addSourceAround(ForgeDirection.DOWN);
+        addSourceAround(ForgeDirection.UP);
+        addSourceAround(ForgeDirection.NORTH);
+        addSourceAround(ForgeDirection.SOUTH);
+        addSourceAround(ForgeDirection.WEST);
+        addSourceAround(ForgeDirection.EAST);
     }
 
-    public void addImportingAround(ForgeDirection direction){
+    public void addSourceAround(ForgeDirection direction){
 
         TileEntity tile = worldObj.getBlockTileEntity(super.translateDirectionToCoords(direction)[0], super.translateDirectionToCoords(direction)[1], super.translateDirectionToCoords(direction)[2]);
 
@@ -226,18 +226,24 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
                 case DOWN: {
 
-                    if(tile instanceof TileMagicConduitImporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitImporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitImporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
 
@@ -247,18 +253,24 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
                 case EAST:{
 
-                    if(tile instanceof TileMagicConduitImporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitImporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitImporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
 
@@ -267,38 +279,50 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case NORTH: {
 
-                    if(tile instanceof TileMagicConduitImporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitImporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitImporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
 
-                    }            
+                    }         
                     break;
                 }
                 case SOUTH: {
 
-                    if(tile instanceof TileMagicConduitImporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitImporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitImporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
 
@@ -308,18 +332,24 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case UP: {
 
-                    if(tile instanceof TileMagicConduitImporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitImporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitImporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
 
@@ -328,18 +358,24 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case WEST: {
 
-                    if(tile instanceof TileMagicConduitImporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitImporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitImporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitImporting)tile).overrideNetwork(network);
-                            network.addImporting((TileMagicConduitImporting) tile);
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
                         }
 
 
@@ -355,16 +391,16 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
         }
     }
 
-    public void addExportingAround(){
-        addExportingAround(ForgeDirection.DOWN);
-        addExportingAround(ForgeDirection.UP);
-        addExportingAround(ForgeDirection.NORTH);
-        addExportingAround(ForgeDirection.SOUTH);
-        addExportingAround(ForgeDirection.WEST);
-        addExportingAround(ForgeDirection.EAST);
+    public void addSinkAround(){
+        addSinkAround(ForgeDirection.DOWN);
+        addSinkAround(ForgeDirection.UP);
+        addSinkAround(ForgeDirection.NORTH);
+        addSinkAround(ForgeDirection.SOUTH);
+        addSinkAround(ForgeDirection.WEST);
+        addSinkAround(ForgeDirection.EAST);
     }
 
-    public void addExportingAround(ForgeDirection direction){
+    public void addSinkAround(ForgeDirection direction){
 
         TileEntity tile = worldObj.getBlockTileEntity(super.translateDirectionToCoords(direction)[0], super.translateDirectionToCoords(direction)[1], super.translateDirectionToCoords(direction)[2]);
 
@@ -374,20 +410,25 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
                 case DOWN: {
 
-                    if(tile instanceof TileMagicConduitExporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitExporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitExporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
-
 
                     }
                     break;
@@ -395,60 +436,75 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
                 case EAST:{
 
-                    if(tile instanceof TileMagicConduitExporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitExporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitExporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
-
 
                     }
                     break;
                 }
                 case NORTH: {
 
-                    if(tile instanceof TileMagicConduitExporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitExporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitExporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
-
 
                     }
                     break;
                 }
                 case SOUTH: {
 
-                    if(tile instanceof TileMagicConduitExporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitExporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitExporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
-
 
                     }
                     break;
@@ -456,39 +512,50 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case UP: {
 
-                    if(tile instanceof TileMagicConduitExporting) {
+                    if(tile instanceof IPowerMisc) {
 
-                        if(((TileMagicConduitExporting)tile).network == null) {
+                        if(((IPowerMisc)tile).getNetwork() == null) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitExporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
-
 
                     }
                     break;
                 }
                 case WEST: {
-                    if(tile instanceof TileMagicConduitExporting) {
 
-                        if(((TileMagicConduitExporting)tile).network == null) {
+                    if(tile instanceof IPowerMisc) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
 
-                        else if(((TileMagicConduitExporting)tile).network.getAge() < this.network.getAge()) {
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
 
-                            ((TileMagicConduitExporting)tile).overrideNetwork(network);
-                            network.addExporting((TileMagicConduitExporting) tile);
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
                         }
-
 
                     }
                     break;

@@ -8,9 +8,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.power.*;
 
 public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
 
+    PowerNetwork network;
     private int powerStored = 0;
     private int powerMax = 1000;
     private int currentFuelID = 0;
@@ -104,7 +106,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
         return true;
     }
-    
+
     public int getBurnTimeScaled(int scale){        
 
         int internal = this.fuelBurnTime * scale / 100;
@@ -135,12 +137,12 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     public int getPowerMax() {
         return powerMax;
     }
-    
+
     @Override
     public boolean usePower(int PowerUsed) {
 
         if(this.powerStored>=PowerUsed) {
-            
+
             this.powerStored= powerStored-PowerUsed;
             return true;
         }
@@ -151,13 +153,13 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     public boolean gainPower(int PowerGained) {
 
         if(powerMax -powerStored >= PowerGained) {
-            
+
             powerStored = powerStored + PowerGained;
             return true;
         }
         return false;
     }
-    
+
     public String getName(){
 
         return "TechCraft Genorator";
@@ -309,6 +311,16 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     public boolean canExtractItem(int i, ItemStack itemstack, int j) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    public PowerNetwork getNetwork(){
+
+        return network;
+    }
+
+    public void overrideNetwork(PowerNetwork net){
+
+        this.network = net;
     }
 
 }

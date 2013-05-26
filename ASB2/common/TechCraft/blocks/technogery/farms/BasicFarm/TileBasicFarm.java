@@ -9,8 +9,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerNetwork;
 
 public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInventory, ISidedInventory {    
+
+    PowerNetwork network;
 
     int powerStored;
     int powerMax = 100;
@@ -21,17 +24,17 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
         tileItemStack = new ItemStack[14];
     }
 
-    
+
     public void updateEntity() {
-        
+
         super.managePowerAll(this, powerInput(),false);
-        
+
         if(manageGround()){
             //harvest();
             plant();
         }
     }
-    
+
     @Override
     public boolean recievePower() {
 
@@ -40,7 +43,7 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
 
     public boolean manageGround(){
         int count = 0;
-        
+
         if(worldObj.getBlockId(xCoord+1, yCoord-1, zCoord) == Block.tilledField.blockID){
             count++;
         }
@@ -199,22 +202,22 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     public boolean gainPower(int PowerGained) {
 
         if(this.powerMax - this.powerStored >= PowerGained) {
-            
+
             this.powerStored= powerStored + PowerGained;
             return true;
         }
         return false;
     }
-    
+
     @Override
     public boolean usePower(int PowerUsed) {
-        
+
         if(powerStored > PowerUsed) {
-            
+
             powerStored = powerStored - PowerUsed;
             return true;
         }
-    return false;
+        return false;
     }
 
     @Override
@@ -228,7 +231,7 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
 
         return powerMax;
     }
-    
+
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
@@ -250,7 +253,7 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
         }
 
     }
-    
+
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeToNBT(par1NBTTagCompound);
@@ -373,5 +376,15 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     public boolean canExtractItem(int i, ItemStack itemstack, int side) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    public PowerNetwork getNetwork(){
+
+        return network;
+    }
+
+    public void overrideNetwork(PowerNetwork net){
+
+        this.network = net;
     }
 }

@@ -13,21 +13,6 @@ public class BlockMagicConduitMoving extends TechCraftContainers{
         super(par1, par2Material);
     }
 
-
-
-    public void breakBlock(World par1World, int x, int y, int z, int par5, int par6)
-    {
-        super.breakBlock(par1World, x, y, z, par5, par6);
-
-        if(tile != null) {
-            if(tile.getNetwork() != null) {
-                
-                tile.getNetwork().removeConductor(tile);
-                tile.getNetwork().revaluateNetwork(tile);
-            }
-        }
-    }
-
     @Override
     public TileEntity createNewTileEntity(World world) {
 

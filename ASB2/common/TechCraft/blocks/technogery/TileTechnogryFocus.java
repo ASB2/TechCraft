@@ -2,9 +2,12 @@ package TechCraft.blocks.technogery;
 
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerNetwork;
 
 public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 
+    PowerNetwork network;
+    
     int powerStored = 0;
     int powerMax = 100;
 
@@ -20,7 +23,7 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 
         return "Technogry Focus";
     }
-    
+
     @Override
     public boolean recievePower() {
 
@@ -52,12 +55,22 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 
     @Override
     public boolean usePower(int PowerUsed) {
-        
+
         if(powerStored > PowerUsed) {
 
             powerStored = powerStored - PowerUsed;
             return true;
         }
         return false;
+    }
+
+    public PowerNetwork getNetwork(){
+
+        return network;
+    }
+
+    public void overrideNetwork(PowerNetwork net){
+
+        this.network = net;
     }
 }

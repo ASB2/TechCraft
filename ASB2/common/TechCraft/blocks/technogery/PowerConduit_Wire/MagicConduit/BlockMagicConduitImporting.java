@@ -19,18 +19,6 @@ public class BlockMagicConduitImporting extends TechCraftContainers{
         return tile;
     }
     
-    public void breakBlock(World par1World, int x, int y, int z, int par5, int par6)
-    {
-        super.breakBlock(par1World, x, y, z, par5, par6);
-        
-        if(tile != null) {
-            if(tile.getNetwork() != null) {
-                
-            tile.getNetwork().revaluateNetwork(tile);
-            }
-        }
-    }
-    
     /**
      * The type of render function that is called for this block
      */

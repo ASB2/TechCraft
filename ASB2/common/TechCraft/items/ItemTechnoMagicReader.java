@@ -36,16 +36,18 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 player.sendChatToPlayer(mTile.getName()+ " has metadata "+world.getBlockMetadata(x, y, z));
             }    
 
-            if(world.getBlockTileEntity(x,y,z) instanceof IPowerConductor){
+            if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
 
-                IPowerConductor mTile = (IPowerConductor) world.getBlockTileEntity(x, y, z);
-                if(mTile.getNetwork() != null){
+                IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
+                
+                if(mTile.getNetwork() != null) {
+                    
                     player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductors().size() + " conductors");
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getExporting().size() + " exporting");
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getImporting().size() + " importing");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSink().size() + " power sinks");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSource().size() + " power sources");
                     player.sendChatToPlayer(mTile.getName()+ " power network is " + mTile.getNetwork().getAge() + " ticks old");
-                    player.sendChatToPlayer("Power Network has " + mTile.getNetwork().getBuffer() +" technogery stored in it's buffer");
+                    //player.sendChatToPlayer("Power Network has " + mTile.getNetwork().getBuffer() +" technogery stored in it's buffer");
                 }
                 else {
                     player.sendChatToPlayer(mTile.getName()+" has no network");
@@ -60,7 +62,9 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 mTile.toggleDirection();
                 player.sendChatToPlayer(mTile.getName()+ " is now at orientation: " + mTile.translateDirectionToString());
             }
+            
         }
+        player.sendChatToPlayer("--------");
         return true;        
     }
 

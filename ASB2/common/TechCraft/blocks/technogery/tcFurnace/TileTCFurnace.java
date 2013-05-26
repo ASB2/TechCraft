@@ -11,9 +11,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerNetwork;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
 
+    PowerNetwork network;
     int powerStored = 0;
     int powerMax = 100;
 
@@ -289,5 +291,15 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
     {
         return par1 == 2 ? false : (par1 == 1 ? TileEntityFurnace.isItemFuel(par2ItemStack) : true);
+    }
+
+    public PowerNetwork getNetwork(){
+
+        return network;
+    }
+
+    public void overrideNetwork(PowerNetwork net){
+
+        this.network = net;
     }
 }

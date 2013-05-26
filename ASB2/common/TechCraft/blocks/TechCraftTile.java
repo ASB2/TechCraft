@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerNetwork;
 
 public class TechCraftTile extends TileEntity implements IPowerMisc {
 
@@ -537,6 +538,18 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     public int powerInput() {
         // TODO Auto-generated method stub
         return 1;
+    }
+
+    @Override
+    public PowerNetwork getNetwork() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void overrideNetwork(PowerNetwork network) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
