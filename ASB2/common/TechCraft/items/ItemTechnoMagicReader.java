@@ -45,6 +45,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getExporting().size() + " exporting");
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getImporting().size() + " importing");
                     player.sendChatToPlayer(mTile.getName()+ " power network is " + mTile.getNetwork().getAge() + " ticks old");
+                    player.sendChatToPlayer("Power Network has " + mTile.getNetwork().getBuffer() +" technogery stored in it's buffer");
                 }
                 else {
                     player.sendChatToPlayer(mTile.getName()+" has no network");

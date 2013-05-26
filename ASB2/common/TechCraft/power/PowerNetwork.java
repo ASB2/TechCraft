@@ -22,10 +22,8 @@ public class PowerNetwork {
     public TileMagicConduitMoving tileCore;
 
     private int age = 0;
-
-    int powerStored = 0;
-    int powerToMove = 0;
-    int powerMax = 10;
+    int powerToMove = 5;
+    int buffer = 0;
 
     public PowerNetwork(World world, TileMagicConduitMoving tile) {    
 
@@ -33,11 +31,10 @@ public class PowerNetwork {
         this.tileCore = tile;
 
         this.addConductor(tile);
-
-        powerMax = conductors.size() * ((TileMagicConduitMoving) tileCore).getPowerMax();
     }
 
     public void updateNetwork() {
+
         age = tileCore.age;
 
         for(int i = 0; i < conductors.size(); i++){
@@ -47,22 +44,30 @@ public class PowerNetwork {
             conductors.get(i).addExportingAround();
         }
 
-        for(int i = 0; i < importing.size(); i++) {
+        if(importing.size() > 0 && exporting.size() > 0) {
 
-            if(this.powerMax - this.powerStored >= powerToMove && importing.get(i).getPowerStored() >= powerToMove) {
+            for(int i = 0; i < importing.size(); i++) {
 
-                if(importing.get(i).usePower(powerToMove)) {
-                    this.gainPower(powerToMove);
+                if(importing.get(i).getPowerStored() >= powerToMove) {
+
+                    if(importing.get(i).usePower(powerToMove)) {
+
+                        buffer = buffer + powerToMove;
+                    }
                 }
             }
         }
-        
-        for(int i = 0; i < exporting.size(); i++) {
 
-            if(exporting.get(i).getPowerMax() - exporting.get(i).getPowerStored() >= powerToMove && this.powerStored >= powerToMove) {
+        if(exporting.size() > 0 && this.buffer > 0) {
 
-                if(this.usePower(powerToMove)) {
-                    exporting.get(i).gainPower(powerToMove);
+            for(int i = 0; i < exporting.size(); i++) {
+
+                if(exporting.get(i).getPowerMax() - exporting.get(i).getPowerStored() >= powerToMove) {
+
+                    if(buffer >= powerToMove && exporting.get(i).gainPower(powerToMove)) {
+
+                        buffer = buffer - powerToMove;
+                    }
                 }
             }
         }
@@ -85,29 +90,6 @@ public class PowerNetwork {
             }
         }
     }
-
-
-    public boolean usePower(int PowerUsed) {
-
-        if(this.powerStored >= PowerUsed) {
-
-            this.powerStored = this.powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-
-    public boolean gainPower(int PowerGained) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            powerStored = powerStored + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
 
     public void addConductor(TileMagicConduitMoving tile) {
 
@@ -153,5 +135,10 @@ public class PowerNetwork {
 
     public int getAge() {
         return age;
+    }
+
+    public int getBuffer() {
+        
+        return this.buffer;
     }
 }

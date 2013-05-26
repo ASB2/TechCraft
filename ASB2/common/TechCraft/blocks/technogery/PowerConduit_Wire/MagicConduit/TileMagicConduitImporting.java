@@ -180,6 +180,7 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
         if(this.powerStored >= PowerUsed){
 
             this.powerStored = this.powerStored - PowerUsed;
+            
             return true;
         }
         return false;
@@ -191,6 +192,7 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
         if(this.powerMax - this.powerStored >= PowerGained){
 
             powerStored = powerStored + PowerGained;
+            
             return true;
         }
         return false;

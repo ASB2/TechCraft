@@ -41,13 +41,15 @@ public abstract class TechCraftContainers extends BlockContainer{
 
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
+        
+        this.dropItems(par1World, par2, par3, par4);
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
-        this.dropItems(par1World, par6, par6, par6);
     }
 
     private void dropItems(World world, int x, int y, int z)
     {
         Random prng = new Random();
+        
         if(world.getBlockTileEntity(x, y, z) instanceof IInventory){
             IInventory tileEntity = (IInventory)world.getBlockTileEntity(x, y, z);
 
