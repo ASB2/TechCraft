@@ -44,18 +44,17 @@ public class PowerNetwork {
             conductors.get(i).addSinkAround();
         }
 
-        if(powerSource.size() > 0 && powerSink.size() > 0){
+        if(powerSource.size() > 0 && powerSink.size() > 0) {
 
             for(int i = 0; i < powerSource.size(); i++) {
 
                 for(int z = 0; z < powerSink.size(); z++) {
 
-                    if(powerSink.get(z).getPowerMax() - powerSink.get(i).getPowerStored() >= powerToMove){
+                    if(powerSink.get(z).getPowerMax() - powerSink.get(i).getPowerStored() >= powerToMove) {
                         
                         if(powerSource.get(i).usePower(powerToMove)) {
                             
                             powerSink.get(z).gainPower(powerToMove);
-                            break;
                         }
                     }
                 }
