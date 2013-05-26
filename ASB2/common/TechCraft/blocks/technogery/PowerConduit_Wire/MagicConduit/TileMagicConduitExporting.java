@@ -3,20 +3,26 @@ package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.EnumPowerClass;
-import TechCraft.interfaces.power.IPowerConductor;
+import TechCraft.power.IPowerConductor;
+import TechCraft.power.PowerNetwork;
 
 public class TileMagicConduitExporting extends TechCraftTile implements IPowerConductor{
 
     int powerStored;
     int powerMax = 10;
-    
+
 
     @Override
     public void updateEntity() {
-        super.managePowerAll(this,getOutputMin(),true);
+        super.managePowerAll(this, powerOutput(), true);
     }
 
+    @Override
+    public boolean outputPower() {
+
+        return true;
+    }
+    
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
@@ -30,41 +36,36 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
     }
 
     @Override
-    public int getOutputMin() {
-        // TODO Auto-generated method stub
-        return 1;
-    }
-
-    @Override
-    public boolean outputPower() {
-        return true;
-    }
-
-    @Override
     public int getPowerStored() {
-        // TODO Auto-generated method stub
+
         return powerStored;
     }
 
     @Override
     public int getPowerMax() {
-        // TODO Auto-generated method stub
+
         return powerMax;
     }
 
     @Override
-    public void usePower(int PowerUsed) {
-        if(this.powerStored >= PowerUsed){
+    public boolean usePower(int PowerUsed) {
+        if(this.powerStored >= PowerUsed) {
+
             this.powerStored = this.powerStored - PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
-        if(this.powerMax - this.powerStored >= PowerGained){
+        if(this.powerMax - this.powerStored >= PowerGained) {
+
             this.powerStored = this.powerStored + PowerGained;
+            return true;
         }
+        return false;
     }
 
 
@@ -75,29 +76,11 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
     }
 
     @Override
-    public EnumPowerClass getPowerClass() {
-
-        return EnumPowerClass.Low;
-    }
-
-    @Override
-    public double getRange() {
-
-        return 0;
-    }
-
-    @Override
     public int[] getPosition() {
 
         return new int[]{this.xCoord,this.yCoord,this.zCoord};
     }
 
-    @Override
-    public int getPrecentFilled() {
-        // TODO Auto-generated method stub
-        return (100/ this.getPowerMax()* this.getPowerStored());
-    }
-    
     public boolean getRenderBottom() {
 
         TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
@@ -106,11 +89,13 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
 
             TechCraftTile tile2 = (TechCraftTile)tile;
 
-            if(tile2.recievePower()){
+            if(tile2.recievePower()) {
+                
                 return true;
             }
 
-            else{
+            else {
+                
                 return false;
             }
 
@@ -121,7 +106,7 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
         }
     }
 
-    public boolean getRenderTop(){
+    public boolean getRenderTop() {
 
         TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
 
@@ -234,6 +219,12 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
         else{
             return false;
         }
+    }
+
+    @Override
+    public PowerNetwork getNetwork() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

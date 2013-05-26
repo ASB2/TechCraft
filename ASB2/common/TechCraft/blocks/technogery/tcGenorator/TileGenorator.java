@@ -99,6 +99,12 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         }
     }
 
+    @Override
+    public boolean outputPower() {
+
+        return true;
+    }
+    
     public int getBurnTimeScaled(int scale){        
 
         int internal = this.fuelBurnTime * scale / 100;
@@ -129,13 +135,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     public int getPowerMax() {
         return powerMax;
     }
-
-    @Override
-    public boolean outputPower() {
-
-        return true;
-    }
-
+    
     @Override
     public boolean usePower(int PowerUsed) {
 

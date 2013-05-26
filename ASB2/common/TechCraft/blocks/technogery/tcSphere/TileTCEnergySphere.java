@@ -12,10 +12,8 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     int powerMax = 1000;
 
     public void updateEntity() {
-        if(getPowerStored() >= powerOutput()) {
 
-            super.managePowerAll(this, powerOutput(), false);        
-        }
+        super.managePowerAll(this, powerInput(), false);
     }    
 
     public void setColor(Item item) {
@@ -39,23 +37,13 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
             }
         }
     }
-
-    public int getPowerScaled(int scale) {
-
-        int internal = (int)this.powerStored * scale / (int)powerMax;
-        if(internal > scale){
-            internal = scale;
-        }
-
-        return internal;
-    }
-
+    
     @Override
-    public String getName() {
+    public boolean outputPower() {
 
-        return "Energy Sphere";
+        return true;
     }
-
+    
     @Override
     public boolean recievePower() {
 
@@ -63,9 +51,9 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     }
 
     @Override
-    public boolean outputPower() {
+    public String getName() {
 
-        return true;
+        return "Energy Sphere";
     }
 
     @Override
@@ -84,21 +72,25 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     public boolean gainPower(int PowerGained) {
 
         if(this.powerMax - this.powerStored >= PowerGained) {
-            
+
             this.powerStored= powerStored + PowerGained;
+
             return true;
         }
+
         return false;
     }
-    
+
     @Override
     public boolean usePower(int PowerUsed) {
-        
+
         if(powerStored >= PowerUsed) {
-            
+
             powerStored = powerStored - PowerUsed;
+
             return true;
         }
+
         return false;
     }
 

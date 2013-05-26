@@ -31,6 +31,12 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
             plant();
         }
     }
+    
+    @Override
+    public boolean recievePower() {
+
+        return true;
+    }
 
     public boolean manageGround(){
         int count = 0;

@@ -4,9 +4,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.interfaces.power.EnumPowerClass;
-import TechCraft.interfaces.power.IPowerConductor;
-import TechCraft.interfaces.power.IPowerMisc;
+import TechCraft.power.IPowerConductor;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerNetwork;
 
 public class TileMagicConduitImporting extends TechCraftTile implements IPowerConductor{
 
@@ -15,13 +15,19 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
 
     @Override
     public void updateEntity() {
-        super.managePowerAll(this,getOutputMin(),false);
+        super.managePowerAll(this,powerInput(),false);
         this.updateEnergy();
     }
 
+    @Override
+    public boolean recievePower() {
 
+        return true;
+    }
+    
     private void updateEnergy(){
-        if(TechCraftTile.getTilesNextTo(xCoord,yCoord,zCoord,worldObj)> 0){
+        if(TechCraftTile.getTilesNextTo(xCoord,yCoord,zCoord,worldObj)> 0) {
+            
             int var1 = this.getPowerStored () / TechCraftTile.getTilesNextTo(xCoord,yCoord,zCoord,worldObj);
 
             this.addSideTop(xCoord, yCoord, zCoord, worldObj, this, var1);
@@ -47,11 +53,6 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
     }
 
     @Override
-    public int getOutputMin() {
-        return 1;
-    }
-
-    @Override
     public int getPowerStored() {
         return powerStored;
     }
@@ -62,27 +63,25 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
     }
 
     @Override
-    public void usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed) {
 
         if(this.powerStored >= PowerUsed){
 
             this.powerStored = this.powerStored - PowerUsed;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained) {
 
         if(this.powerMax - this.powerStored >= PowerGained){
 
             powerStored = powerStored + PowerGained;
+            return true;
         }
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return true;
+        return false;
     }
 
     public void addSideTop(int x,int y,int z,World world, TechCraftTile pnet,int powertoMove){
@@ -321,32 +320,17 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
         }
     }
 
-
-    @Override
-    public EnumPowerClass getPowerClass() {
-        // TODO Auto-generated method stub
-        return EnumPowerClass.Low;
-    }
-
-
-    @Override
-    public double getRange() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-
     @Override
     public int[] getPosition() {
-        // TODO Auto-generated method stub
+
         return new int[]{this.xCoord,this.yCoord,this.zCoord};
     }
 
 
     @Override
-    public int getPrecentFilled() {
+    public PowerNetwork getNetwork() {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
 
 }

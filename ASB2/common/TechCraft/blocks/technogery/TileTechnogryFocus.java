@@ -20,6 +20,12 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
 
         return "Technogry Focus";
     }
+    
+    @Override
+    public boolean recievePower() {
+
+        return true;
+    }
 
     @Override
     public int getPowerStored() {

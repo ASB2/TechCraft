@@ -34,6 +34,12 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         tileItemStacks = new ItemStack[2];
     }
 
+    @Override
+    public boolean recievePower() {
+
+        return true;
+    }
+
     public void updateEntity() {        
         super.managePowerAll(this, powerInput(),false);
 
@@ -210,9 +216,9 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public boolean usePower(int PowerUsed) {
-        
+
         if(this.powerStored>=PowerUsed) {
-            
+
             this.powerStored = powerStored - PowerUsed;
             return true;
         }
@@ -223,7 +229,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     public boolean gainPower(int PowerGained) {
 
         if(this.powerMax - this.powerStored >= PowerGained) {
-            
+
             this.powerStored = powerStored + PowerGained;
             return true;
         }
@@ -236,12 +242,6 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         return "TC Furnace";
     }
 
-    @Override
-    public boolean recievePower() {
-
-        return true;
-    }
-    
     @Override
     public int[] getAccessibleSlotsFromSide(int par1)
     {

@@ -20,7 +20,12 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
 
     }
 
+    @Override
+    public boolean outputPower() {
 
+        return true;
+    }
+    
     public void setColor(Item item) {
         
         if(item != null) {

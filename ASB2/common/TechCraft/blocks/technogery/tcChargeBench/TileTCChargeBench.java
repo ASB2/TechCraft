@@ -20,6 +20,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     public TileTCChargeBench(){
         tileItemStacks = new ItemStack[6];
     }
+    
     public void updateEntity() {
         super.managePowerAll(this, powerInput(), false);
         addEnergyToSlot();
@@ -115,7 +116,13 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
             }
         }
     }
+    
+    @Override
+    public boolean recievePower() {
 
+        return true;
+    }
+    
     @Override
     public int getPowerStored() {
 
@@ -126,12 +133,6 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     public int getPowerMax() {
 
         return powerMax;
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return true;
     }
 
     @Override

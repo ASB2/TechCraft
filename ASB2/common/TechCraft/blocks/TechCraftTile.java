@@ -12,15 +12,17 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     protected ForgeDirection orientation;
 
     public TechCraftTile() {
+
         orientation = ForgeDirection.DOWN;
     }
 
     public ForgeDirection getOrientation() {
-        
+
         if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))) {
-            
+
             this.orientation = this.translateNumberToDirection(getBlockMetadata());
         }
+
         return this.orientation;
     }
 
@@ -52,26 +54,32 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 this.setOrientation(ForgeDirection.UP);
                 break;
             }
+
             case UP: {
                 this.setOrientation(ForgeDirection.NORTH);
                 break;
             }
+
             case NORTH: {
                 this.setOrientation(ForgeDirection.SOUTH);
                 break;
             }
+
             case SOUTH: {
                 this.setOrientation(ForgeDirection.WEST);
                 break;
             }
+
             case WEST: {
                 this.setOrientation(ForgeDirection.EAST);
                 break;
             }
+
             case EAST: {
                 this.setOrientation(ForgeDirection.DOWN);
                 break;
             }
+
             default: this.setOrientation(ForgeDirection.DOWN);
             break;
 
@@ -103,10 +111,9 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
             case UNKNOWN:{
                 return new int[]{this.xCoord,this.yCoord,this.zCoord};
             }
-
         }
-        return new int[]{this.xCoord,this.yCoord,this.zCoord};
 
+        return new int[]{this.xCoord,this.yCoord,this.zCoord};
     }
 
     public int translateDirectionToNumber() {
@@ -143,13 +150,11 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 return var1;
             }
         }
-
-
     }
 
     public ForgeDirection translateNumberToDirection(int direction) {
 
-        switch(direction){
+        switch(direction) {
 
             case 0: {
                 return ForgeDirection.DOWN;
@@ -180,7 +185,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     public String translateDirectionToString() {
 
-        switch(getOrientation()){
+        switch(getOrientation()) {
 
             case DOWN: {
                 return "Down";
@@ -499,22 +504,14 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public boolean recievePower() {
-        if(getPowerStored() == getPowerMax()){
-            return false;
-        }
-        else{
-            return true;
-        }
+
+        return false;
     }
 
     @Override
     public boolean outputPower() {
-        if(getPowerStored() < getPowerMax()){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+        return false;
     }
 
     @Override
