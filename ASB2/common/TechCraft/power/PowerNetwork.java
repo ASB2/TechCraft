@@ -50,7 +50,7 @@ public class PowerNetwork {
 
                 for(int z = 0; z < powerSink.size(); z++) {
 
-                    if(powerSink.get(z).getPowerMax() - powerSink.get(i).getPowerStored() >= powerToMove) {
+                    if(powerSink.get(z).getPowerMax() - powerSink.get(z).getPowerStored() >= powerToMove) {
                         
                         if(powerSource.get(i).usePower(powerToMove)) {
                             

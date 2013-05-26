@@ -28,25 +28,6 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
             network.updateNetwork();
         }
-
-        updateEnergy();
-    }
-
-    private void updateEnergy() {
-
-        int powerDivided = powerOutput();
-
-        if(super.getTilesNextTo(this.xCoord, this.yCoord, this.zCoord, worldObj) > 0) {
-
-            powerDivided =  powerDivided / super.getTilesNextTo(this.xCoord, this.yCoord, this.zCoord, worldObj);
-        }
-
-        transferEnergy(ForgeDirection.DOWN, powerDivided);
-        transferEnergy(ForgeDirection.UP, powerDivided);
-        transferEnergy(ForgeDirection.NORTH, powerDivided);
-        transferEnergy(ForgeDirection.SOUTH, powerDivided);
-        transferEnergy(ForgeDirection.WEST, powerDivided);
-        transferEnergy(ForgeDirection.EAST, powerDivided);
     }
 
     public int powerOutput(){
@@ -568,108 +549,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
             }
         }
     }
-
-    public void transferEnergy(ForgeDirection direction, int amount) {
-
-        TileEntity tile = worldObj.getBlockTileEntity(super.translateDirectionToCoords(direction)[0], super.translateDirectionToCoords(direction)[1], super.translateDirectionToCoords(direction)[2]);
-
-        switch(direction) {
-
-            case DOWN: {
-
-                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-
-                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-
-                        if(((IPowerMisc) tile).gainPower(amount)) {
-
-                            this.usePower(amount);
-                        }
-                    }
-                }
-                break;
-            }
-
-            case EAST:{
-
-                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-
-                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-
-                        if(((IPowerMisc) tile).gainPower(amount)) {
-
-                            this.usePower(amount);
-                        }
-                    }
-                }
-                break;
-            }
-            case NORTH: {
-
-                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-
-                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-
-                        if(((IPowerMisc) tile).gainPower(amount)) {
-
-                            this.usePower(amount);
-                        }
-                    }
-                }
-                break;
-            }
-            case SOUTH: {
-
-                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-
-                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-
-                        if(((IPowerMisc) tile).gainPower(amount)) {
-
-                            this.usePower(amount);
-                        }
-                    }
-                }
-                break;
-
-            }
-            case UP: {
-
-                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-
-                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-
-                        if(((IPowerMisc) tile).gainPower(amount)) {
-
-                            this.usePower(amount);
-                        }
-                    }
-                }
-                break;
-            }
-            case WEST: {
-
-                if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-
-                    if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-
-                        if(((IPowerMisc) tile).gainPower(amount)) {
-
-                            this.usePower(amount);
-                        }
-                    }
-                }
-                break;
-            }
-            case UNKNOWN:
-                break;
-
-            default:
-                break;
-
-        }
-    }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);

@@ -70,7 +70,8 @@ public class TechCraft {
         proxy.register();
         instance = this;
         MinecraftForge.EVENT_BUS.register(new TechCraftForgeEvents());
-
+        GameRegistry.registerFuelHandler(new TechCraftFuelHandler());
+        
         // FMLCommonHandler.instance().registerTickHandler(new MyToolsTickHandler());
 
         //MinecraftForge.addGrassSeed(new ItemStack(ItemRegistry.ItemLifeCrystal), 10);
