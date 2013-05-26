@@ -1,11 +1,10 @@
 package TechCraft.blocks;
 
-import TechCraft.power.EnumPowerClass;
-import TechCraft.power.IPowerMisc;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.power.EnumPowerClass;
+import TechCraft.power.IPowerMisc;
 
 public class TechCraftTile extends TileEntity implements IPowerMisc {
 
@@ -34,16 +33,6 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     public void setOrientation(int id) {
 
         this.orientation = ForgeDirection.getOrientation(id);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {        
-        super.readFromNBT(nbtTagCompound);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
-        super.writeToNBT(nbtTagCompound);
     }
 
     public void toggleDirection(){

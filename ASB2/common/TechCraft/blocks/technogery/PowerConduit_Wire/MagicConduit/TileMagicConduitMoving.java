@@ -10,11 +10,22 @@ import TechCraft.power.PowerNetwork;
 
 public class TileMagicConduitMoving extends TechCraftTile implements IPowerConductor{
 
+    PowerNetwork network;
+
     int powerMax = 10;
     int powerStored = 0;
 
+    public TileMagicConduitMoving(){
+
+        network = new PowerNetwork(worldObj, this);
+    }
 
     public void updateEntity() {
+        if(network != null) {
+
+            network.updateNetwork();
+        }
+
         updateEnergy();
     }
 
@@ -43,6 +54,10 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
     public int powerInput(){
 
         return 10;
+    }
+
+    public void addConductor(TileEntity tile) {
+        network.addConductor(tile);
     }
 
     public void transferEnergy(ForgeDirection direction, int amount) {
@@ -99,9 +114,9 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
 
                     if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-                        
+
                         if(((IPowerMisc) tile).gainPower(amount)) {
-                            
+
                             this.usePower(amount);
                         }
                     }
@@ -112,11 +127,11 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
             case UP: {
 
                 if(tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
-                    
+
                     if(this.getPowerStored() >= amount && ((IPowerMisc) tile).getPowerMax() - ((IPowerMisc) tile).getPowerStored() >= amount){
-                        
+
                         if(((IPowerMisc) tile).gainPower(amount)) {
-                            
+
                             this.usePower(amount);
                         }
                     }

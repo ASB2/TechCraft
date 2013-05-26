@@ -18,7 +18,8 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
         GL11.glEnable(GL11.GL_BLEND);
-        renderByOrientation(x,y,z,tileEntity.getBlockMetadata());
+        
+        renderByOrientation(x,y,z,((TileTCEnergySphere) tileEntity).getColor());
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 

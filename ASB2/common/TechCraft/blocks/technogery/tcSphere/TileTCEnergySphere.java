@@ -10,40 +10,45 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
 
     int powerStored;
     int powerMax = 1000;
-
+    int color = 0;
+    
     public void updateEntity() {
 
         super.managePowerAll(this, powerInput(), false);
     }    
+
+    public void addConductor(){
+
+    }
 
     public void setColor(Item item) {
 
         if(item != null) {
 
             if(item == ItemRegistry.ItemAirCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 3);
+                color = 1;
             }
 
             if(item == ItemRegistry.ItemEarthCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
+                color = 2;
             }
 
             if(item == ItemRegistry.ItemFireCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 3, 3);
+                color = 3;
             }
 
             if(item == ItemRegistry.ItemWaterCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 4, 3);
+                color = 4;
             }
         }
     }
-    
+
     @Override
     public boolean outputPower() {
 
         return true;
     }
-    
+
     @Override
     public boolean recievePower() {
 
@@ -66,6 +71,11 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     public int getPowerMax() {
 
         return powerMax;
+    }
+
+    public int getColor(){
+
+        return color;
     }
 
     @Override
@@ -95,15 +105,19 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound){
-        super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("powerStored", powerStored);
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
         powerStored = par1NBTTagCompound.getInteger("powerStored");
+        color = par1NBTTagCompound.getInteger("color");
     }
+
+    @Override
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound){
+        super.writeToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setInteger("powerStored", powerStored);
+        par1NBTTagCompound.setInteger("color", color);        
+    }
+
+
 }
 

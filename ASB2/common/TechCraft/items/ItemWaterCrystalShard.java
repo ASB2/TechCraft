@@ -1,12 +1,11 @@
 package TechCraft.items;
 
-import TechCraft.BlockRegistry;
-import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
-import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TechCraft.BlockRegistry;
+import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 
 public class ItemWaterCrystalShard extends TechCraftItems {
 
