@@ -183,6 +183,26 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
                         return true;
                     }
                     break;
+                }                
+                case UP: {
+                    
+                    if(tile instanceof IPowerMisc) {                        
+
+                        IPowerMisc tileI = (IPowerMisc) tile;
+
+                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
+                            modelImporting.renderTop();
+                        }
+
+                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
+                            modelExporting.renderTop();
+                        }
+                        if(tile instanceof IPowerStorage){
+                            modelMoving.renderTop();
+                        }
+                        return true;
+                    }
+                    break;
                 }
                 case UNKNOWN:
                     return false;

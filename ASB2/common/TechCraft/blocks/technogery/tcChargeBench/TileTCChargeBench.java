@@ -15,7 +15,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     PowerNetwork network;
     
     int powerStored;
-    int powerMax = 1000;
+    int powerMax = 100;
     int powerToMove = 1;
 
     ItemStack[] tileItemStacks;

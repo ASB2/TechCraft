@@ -41,9 +41,11 @@ public class GuiTCTeleporter extends GuiContainer {
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
-        //int i1;
-        //i1 = tileEntity.getMagicStoredScaled(66);
-        drawTexturedModalRect(posX+9,posY+8,176,66,52,0);
+        
+        drawTexturedModalRect(posX+12,posY+8,202,37,21,65);
+        int i1;
+        i1 = tileEntity.getPowerScaled(65);
+        drawTexturedModalRect(posX+12,posY+8,178,36,21,i1);
     }
 
 

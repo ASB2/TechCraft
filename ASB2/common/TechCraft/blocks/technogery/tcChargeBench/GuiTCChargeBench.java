@@ -9,15 +9,14 @@ import TechCraft.lib.TEXTURES;
 
 public class GuiTCChargeBench extends GuiContainer {
 
-    @SuppressWarnings("unused")
     private TileTCChargeBench tileEntity;
-    
+
     public final int xSizeOfTexture = 176;
     public final int ySizeOfTexture = 166;
 
     public GuiTCChargeBench(InventoryPlayer inventory, TileTCChargeBench tileEntity){
         super(new ContainerTCChargeBench(inventory, tileEntity));
-        
+
         this.tileEntity = tileEntity;
     }
 
@@ -26,18 +25,19 @@ public class GuiTCChargeBench extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
-       
+
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        
+
         this.mc.renderEngine.bindTexture(TEXTURES.CHARGE_BENCH);
-        
+
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
-        //int i1;
-        //i1 = tileEntity.getMagicStoredScaled(66);
-        drawTexturedModalRect(posX+9,posY+8,176,66,52,0);
+
+        int i1 = tileEntity.getPowerScaled(72);
+
+        drawTexturedModalRect(posX+5,posY+5,176,52,48,i1);
     }
 }
