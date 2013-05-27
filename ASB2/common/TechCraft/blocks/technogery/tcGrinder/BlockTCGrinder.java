@@ -20,7 +20,7 @@ public class BlockTCGrinder extends TechCraftContainers{
         if(player.isSneaking())
             return false;
 
-        player.openGui(TechCraft.instance, 6, world, x, y, z);
+        player.openGui(TechCraft.instance, 7, world, x, y, z);
         return true;
     }
 
