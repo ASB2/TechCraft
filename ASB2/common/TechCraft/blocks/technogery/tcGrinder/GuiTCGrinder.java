@@ -28,7 +28,7 @@ public class GuiTCGrinder extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(TEXTURES.CHARGE_BENCH);
+        this.mc.renderEngine.bindTexture(TEXTURES.GUI_BLANK);
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;

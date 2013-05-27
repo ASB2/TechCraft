@@ -1,6 +1,5 @@
 package TechCraft;
 
-import TechCraft.blocks.tcRunes.*;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,6 +16,9 @@ import TechCraft.blocks.BlockWaterCrystalOre;
 import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
+import TechCraft.blocks.tankBasic.BlockTank;
+import TechCraft.blocks.tcRunes.BlockBasicRune;
+import TechCraft.blocks.tcRunes.BlockRuneBase;
 import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
 import TechCraft.blocks.technogery.BlockTechnogryFocus;
@@ -28,12 +30,12 @@ import TechCraft.blocks.technogery.farms.BasicFarm.BlockBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.BlockGenorator;
+import TechCraft.blocks.technogery.tcGrinder.BlockTCGrinder;
+import TechCraft.blocks.technogery.tcInfuser.BlockTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
+import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.blocks.technogery.tcInfuser.*;
-import TechCraft.blocks.technogery.tcTeleporter.*;
-import TechCraft.blocks.tankBasic.*;
 
 public class BlockRegistry {
 
@@ -70,9 +72,9 @@ public class BlockRegistry {
     public static BlockRuneBase BlockBasicRune;
     
     public static TechCraftContainers BlockTCInfuser;
-    public static TechCraftContainers BlockTCTeleporter;
-    
+    public static TechCraftContainers BlockTCTeleporter;    
     public static TechCraftContainers BlockTank;
+    public static TechCraftContainers BlockTCGrinder;
     
 
     public static void init() {
@@ -238,6 +240,12 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTank, "ASB2_BlockTank");
         LanguageRegistry.addName(BlockTank, "Test Tank");
         MinecraftForge.setBlockHarvestLevel(BlockTank, "pickaxe", 2);
+        
+        BlockTCGrinder = new BlockTCGrinder(527, Material.rock);
+        BlockTCGrinder.setUnlocalizedName("BlockTCGrinder");
+        GameRegistry.registerBlock(BlockTCGrinder, "ASB2_BlockTCGrinder");
+        LanguageRegistry.addName(BlockTCGrinder, "TC Grinder");
+        MinecraftForge.setBlockHarvestLevel(BlockTCGrinder, "pickaxe", 2);
     }
 
 }

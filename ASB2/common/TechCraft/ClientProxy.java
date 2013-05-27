@@ -19,6 +19,8 @@ import TechCraft.blocks.technogery.tcFurnace.GuiTCFurnace;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.GuiGenorator;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
+import TechCraft.blocks.technogery.tcGrinder.GuiTCGrinder;
+import TechCraft.blocks.technogery.tcGrinder.TileTCGrinder;
 import TechCraft.blocks.technogery.tcInfuser.GuiTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
@@ -84,6 +86,7 @@ public class ClientProxy extends CommonProxy {
             case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
             case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
             case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
+            case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
             //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
              
             //case 4: return new GuiMagicGauntlet(player);

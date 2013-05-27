@@ -15,9 +15,11 @@ public class ContainerTCGrinder extends Container{
         this.addSlotToContainer(new Slot(tileEntity, 1, 120, 11));
         this.addSlotToContainer(new Slot(tileEntity, 2, 138, 11));
         
-        this.addSlotToContainer(new Slot(tileEntity, 3, 102, 52));        
-        this.addSlotToContainer(new Slot(tileEntity, 4, 120, 52));
-        this.addSlotToContainer(new Slot(tileEntity, 5, 138,52));
+        this.addSlotToContainer(new Slot(tileEntity, 3, 138,52));
+        
+        this.addSlotToContainer(new Slot(tileEntity, 5, 102, 52));        
+        this.addSlotToContainer(new Slot(tileEntity, 6, 120, 52));
+        this.addSlotToContainer(new Slot(tileEntity, 7, 138,52));
         
 
         for (int i = 0; i < 3; i++)
