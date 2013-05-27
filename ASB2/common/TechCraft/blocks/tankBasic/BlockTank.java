@@ -7,7 +7,7 @@ import TechCraft.blocks.TechCraftContainers;
 
 public class BlockTank extends TechCraftContainers{
 
-    protected BlockTank(int par1, Material par2Material) {
+    public BlockTank(int par1, Material par2Material) {
         super(par1, par2Material);
     }
     

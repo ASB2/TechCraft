@@ -1,5 +1,6 @@
 package TechCraft.blocks.tankBasic;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
@@ -12,10 +13,34 @@ public class TileTank extends TechCraftTile implements ITankContainer {
 
     public final LiquidTank tank = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 16);
 
+    
+    
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+
+        if (data.hasKey("stored") && data.hasKey("liquidId")) {
+            LiquidStack liquid = new LiquidStack(data.getInteger("liquidId"), data.getInteger("stored"), 0);
+            tank.setLiquid(liquid);
+        } else {
+            LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(data.getCompoundTag("tank"));
+            if (liquid != null) {
+                tank.setLiquid(liquid);
+            }
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound data) {
+        super.writeToNBT(data);
+        if (tank.containsValidLiquid()) {
+            data.setTag("tank", tank.getLiquid().writeToNBT(new NBTTagCompound()));
+        }
+    }
+    
     @Override
     public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
-        // TODO Auto-generated method stub
-        return 0;
+        return fill(0, resource, doFill);
     }
 
     @Override

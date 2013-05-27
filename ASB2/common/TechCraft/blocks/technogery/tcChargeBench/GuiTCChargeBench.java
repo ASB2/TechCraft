@@ -36,8 +36,8 @@ public class GuiTCChargeBench extends GuiContainer {
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
 
-        int i1 = tileEntity.getPowerScaled(72);
+        int i1 = tileEntity.getPowerScaled(75);
 
-        drawTexturedModalRect(posX+5,posY+5,176,52,48,i1);
+        drawTexturedModalRect(posX+5,posY+5,178,52,49,i1);
     }
 }

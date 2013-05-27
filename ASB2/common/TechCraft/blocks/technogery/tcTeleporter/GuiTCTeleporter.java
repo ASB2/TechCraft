@@ -32,7 +32,7 @@ public class GuiTCTeleporter extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y){
 
-        GL11.glColor4f(1.0F, 0F, 0F, 1F);
+        //GL11.glColor4f(1.0F, 0F, 0F, 1F);
 
         this.mc.renderEngine.bindTexture(TEXTURES.BASIC_RUNE_GUI);
 
@@ -42,10 +42,10 @@ public class GuiTCTeleporter extends GuiContainer {
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
         
-        drawTexturedModalRect(posX+12,posY+8,202,37,21,65);
+        drawTexturedModalRect(posX+10,posY+20,200,42,21,59);
         int i1;
-        i1 = tileEntity.getPowerScaled(65);
-        drawTexturedModalRect(posX+12,posY+8,178,36,21,i1);
+        i1 = tileEntity.getPowerScaled(59);
+        drawTexturedModalRect(posX+10,posY+20,178,42,21,i1);
     }
 
 
