@@ -6,14 +6,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerItems;
 import TechCraft.power.IPowerSink;
 import TechCraft.power.PowerNetwork;
 
 public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInventory{
 
     PowerNetwork network;
-    
+
     int powerStored;
     int powerMax = 100;
     int powerToMove = 1;
@@ -21,104 +20,12 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
     ItemStack[] tileItemStacks;
 
     public TileTCGrinder(){
-        tileItemStacks = new ItemStack[6];
+        tileItemStacks = new ItemStack[9];
     }
 
     public void updateEntity() {
         super.managePowerAll(this, powerInput(), false);
-        addEnergyToSlot();
-        removeEnergySlot();
     }    
-
-    public void addEnergyToSlot() {        
-
-        if(tileItemStacks[0] != null) {
-
-            if(tileItemStacks[0].getItem() != null && tileItemStacks[0].getItem() instanceof IPowerItems) {
-
-                IPowerItems tcItem = (IPowerItems) tileItemStacks[0].getItem();
-
-                if(tcItem.getPowerMax(tileItemStacks[0]) - tcItem.getPowerStored(tileItemStacks[0]) >= powerToMove && this.getPowerStored() >= powerToMove){
-
-                    tcItem.gainPower(powerToMove, tileItemStacks[0]);
-                    this.usePower(powerToMove);
-                }
-            }
-        }
-
-        if(tileItemStacks[1] != null) {
-
-            if(tileItemStacks[1].getItem() != null && tileItemStacks[1].getItem() instanceof IPowerItems) {
-
-                IPowerItems tcItem = (IPowerItems) tileItemStacks[1].getItem();
-
-                if(tcItem.getPowerMax(tileItemStacks[1]) - tcItem.getPowerStored(tileItemStacks[1]) >= powerToMove && this.getPowerStored() >= powerToMove){
-
-                    tcItem.gainPower(powerToMove, tileItemStacks[1]);
-                    this.usePower(powerToMove);
-                }
-            }
-        }
-
-        if(tileItemStacks[2] != null) {
-
-            if(tileItemStacks[2].getItem() != null && tileItemStacks[2].getItem() instanceof IPowerItems) {
-
-                IPowerItems tcItem = (IPowerItems) tileItemStacks[2].getItem();
-
-                if(tcItem.getPowerMax(tileItemStacks[2]) - tcItem.getPowerStored(tileItemStacks[2]) >= powerToMove && this.getPowerStored() >= powerToMove){
-
-                    tcItem.gainPower(powerToMove, tileItemStacks[2]);
-                    this.usePower(powerToMove);
-                }
-            }
-        }
-    }
-
-    public void removeEnergySlot() {
-
-        if(tileItemStacks[3] != null) {
-
-            if(tileItemStacks[3].getItem() != null && tileItemStacks[3].getItem() instanceof IPowerItems) {
-
-                IPowerItems tcItem = (IPowerItems) tileItemStacks[3].getItem();
-
-                if(this.getPowerMax() - this.getPowerStored() >= powerToMove && tcItem.getPowerStored(tileItemStacks[3]) >= powerToMove){
-
-                    this.gainPower(powerToMove);
-                    tcItem.usePower(powerToMove, tileItemStacks[3]);
-                }
-            }
-        }
-
-        if(tileItemStacks[4] != null) {
-
-            if(tileItemStacks[4].getItem() != null && tileItemStacks[4].getItem() instanceof IPowerItems) {
-
-                IPowerItems tcItem = (IPowerItems) tileItemStacks[4].getItem();
-
-                if(this.getPowerMax() - this.getPowerStored() >= powerToMove && tcItem.getPowerStored(tileItemStacks[4]) >= powerToMove){
-
-                    this.gainPower(powerToMove);
-                    tcItem.usePower(powerToMove, tileItemStacks[4]);
-                }
-            }
-        }
-
-        if(tileItemStacks[5] != null) {
-
-            if(tileItemStacks[5].getItem() != null && tileItemStacks[5].getItem() instanceof IPowerItems) {
-
-                IPowerItems tcItem = (IPowerItems) tileItemStacks[5].getItem();
-
-                if(this.getPowerMax() - this.getPowerStored() >= powerToMove && tcItem.getPowerStored(tileItemStacks[5]) >= powerToMove){
-
-                    this.gainPower(powerToMove);
-                    tcItem.usePower(powerToMove, tileItemStacks[5]);
-                }
-            }
-        }
-    }
 
     @Override
     public boolean recievePower() {
@@ -141,7 +48,7 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
     @Override
     public String getName() {
 
-        return "TC Charge Bench";
+        return "TC Grinder";
     }
 
     @Override
