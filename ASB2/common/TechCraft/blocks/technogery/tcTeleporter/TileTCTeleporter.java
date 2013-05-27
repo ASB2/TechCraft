@@ -19,7 +19,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     int powerStored;
     int powerMax = 100;
     
-    int powerForProcess = 0;
+    int powerForProcess = 50;
     
     ItemStack[] tileItemStacks;
 

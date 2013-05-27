@@ -46,6 +46,8 @@ public class ItemTeleporter extends TechCraftItems{
             this.setYCoord(par1ItemStack,player.posY);
             this.setZCoord(par1ItemStack,player.posZ);
             setCoodsSet(par1ItemStack, true);
+            
+            if(!par2World.isRemote)
             player.sendChatToPlayer("Link Set");
         }
         
