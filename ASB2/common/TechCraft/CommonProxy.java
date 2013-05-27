@@ -14,6 +14,8 @@ import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.ContainerGenorator;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import cpw.mods.fml.common.network.IGuiHandler;
+import TechCraft.blocks.technogery.tcInfuser.*;
+
 
 public class CommonProxy implements IGuiHandler{
 
@@ -41,7 +43,8 @@ public class CommonProxy implements IGuiHandler{
             case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
             case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
             case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
-            case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity);            
+            case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity); 
+            case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
         }
 
         return null;

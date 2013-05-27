@@ -13,6 +13,7 @@ import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
+import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.worldGen.WorldGenBlockAirCrystalOre;
 import TechCraft.worldGen.WorldGenBlockBurningFlower;
@@ -112,6 +113,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileTCChargeBench.class, "TileTCChargeBench");
 
         GameRegistry.registerTileEntity(TileBasicRune.class, "TileBasicRune");
+        
+        GameRegistry.registerTileEntity(TileTCInfuser.class, "TileTCInfuser");
 
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

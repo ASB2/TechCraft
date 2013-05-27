@@ -6,8 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.*;
-import TechCraft.power.*;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 

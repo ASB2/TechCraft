@@ -31,6 +31,7 @@ import TechCraft.blocks.technogery.tcGenorator.BlockGenorator;
 import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.blocks.technogery.tcInfuser.*;
 
 public class BlockRegistry {
 
@@ -62,9 +63,11 @@ public class BlockRegistry {
     public static TechCraftContainers BlockGenorator;
     public static TechCraftContainers BlockMultiBlockCore;
     public static TechCraftContainers BlockTCFurnace;
-    public static TechCraftContainers BlockTCChargeBench;
+    public static TechCraftContainers BlockTCChargeBench;    
 
     public static BlockRuneBase BlockBasicRune;
+    
+    public static TechCraftContainers BlockTCInfuser;
 
     public static void init() {
 
@@ -211,6 +214,12 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockBasicRune, "ASB2_BlockBasicRune");
         LanguageRegistry.addName(BlockBasicRune, "TC Basic Rune");
         MinecraftForge.setBlockHarvestLevel(BlockBasicRune, "pickaxe", 2);
+        
+        BlockTCInfuser = new BlockTCInfuser(524,Material.rock);
+        BlockTCInfuser.setUnlocalizedName("BlockTCInfuser");
+        GameRegistry.registerBlock(BlockTCInfuser, "ASB2_BlockTCInfuser");
+        LanguageRegistry.addName(BlockTCInfuser, "TC Infuser");
+        MinecraftForge.setBlockHarvestLevel(BlockTCInfuser, "pickaxe", 2);
     }
 
 }
