@@ -44,7 +44,7 @@ public class ItemTeleporter extends TechCraftItems{
             setCoodsSet(par1ItemStack, true);
         }
         if(isCoodsSet(par1ItemStack)){
-            player.setPositionAndUpdate(this.getXCoord(par1ItemStack),this.getYCoord(par1ItemStack) , this.getZCoord(par1ItemStack));
+            player.setPositionAndUpdate((int)this.getXCoord(par1ItemStack)-.5,(int)this.getYCoord(par1ItemStack), (int)this.getZCoord(par1ItemStack)-.5);
 
         }
         return par1ItemStack;

@@ -15,6 +15,7 @@ import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
+import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.worldGen.WorldGenBlockAirCrystalOre;
 import TechCraft.worldGen.WorldGenBlockBurningFlower;
 import TechCraft.worldGen.WorldGenBlockEarthCrystalOre;
@@ -115,6 +116,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileBasicRune.class, "TileBasicRune");
         
         GameRegistry.registerTileEntity(TileTCInfuser.class, "TileTCInfuser");
+        
+        GameRegistry.registerTileEntity(TileTCTeleporter.class, "TileTCTeleporter");
 
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

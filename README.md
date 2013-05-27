@@ -26,7 +26,7 @@ Current Bugs
 Textures to be done
 
 	-(Model)Power Conduits(Moving,Importing Exporting)
-	-Charge Bench
+	-(Block, MultiSided)Charge Bench
 	-(Block, MultiSided)TC Furnace
 	-(Block, MultiSided)TC Genorator
 	-(Item)TC Energy Reader
@@ -39,3 +39,4 @@ Textures to be done
 	-(Model)TC Energy Focus
 	-(Model)Rune Block
 	-(Item)Rune Core
+	-(Block, MultiSided)TC Infuser

@@ -1,6 +1,7 @@
 package TechCraft.runes;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -11,9 +12,12 @@ public class RuneExplosion extends RuneBase {
 
     }
 
-    public void onEntityEnterBlock(World par1World, int x, int y, int z, Entity par5Entity){ 
+    public void onEntityEnterBlock(World par1World, int x, int y, int z, Entity entity){ 
 
-        par1World.createExplosion(par5Entity, x, y, z, 9, true);
+        if(entity instanceof EntityLiving) {
+            
+            par1World.createExplosion(entity, x, y, z, 9, true);
+        }
     }
 
     public String getName(){

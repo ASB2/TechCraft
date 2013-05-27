@@ -22,6 +22,8 @@ import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.GuiTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
+import TechCraft.blocks.technogery.tcTeleporter.GuiTCTeleporter;
+import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.renders.ItemRendererMagicConduitExporting;
 import TechCraft.renders.ItemRendererMagicConduitImporting;
 import TechCraft.renders.ItemRendererMagicConduitMoving;
@@ -35,7 +37,6 @@ import TechCraft.renders.TileEntityRendererMagicEnergySphere;
 import TechCraft.renders.TileEntityRendererTileBasicRune;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import cpw.mods.fml.client.registry.ClientRegistry;
-
 
 public class ClientProxy extends CommonProxy {
 
@@ -82,6 +83,7 @@ public class ClientProxy extends CommonProxy {
             case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
             case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
             case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
+            case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
             //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
              
             //case 4: return new GuiMagicGauntlet(player);
