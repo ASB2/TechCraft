@@ -480,6 +480,16 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         return numberNextTo;
     }
 
+    public int getPowerScaled(int scale) {
+
+        int internal = (int)this.getPowerStored() * scale / (int)getPowerMax();
+        if(internal > scale){
+            internal = scale;
+        }
+        return internal;
+    }
+
+
     @Override
     public int getPowerStored() {
         // TODO Auto-generated method stub
@@ -549,7 +559,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     @Override
     public void overrideNetwork(PowerNetwork network) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

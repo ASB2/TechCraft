@@ -38,11 +38,12 @@ public class GuiTCFurnace extends GuiContainer {
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
 
-        if(tileEntity.isBurning) {
+        if(tileEntity.getPowerStored() > 0) {
 
             int i3;
-            i3 = tileEntity.getPowerScaled(69);
-            drawTexturedModalRect(posX+99,posY+7,176,27,i3,30);
+            i3 = tileEntity.getPowerScaled(61);
+            
+            drawTexturedModalRect(posX+10, posY+11, 177, 32, 21, i3);
         }
     }
 

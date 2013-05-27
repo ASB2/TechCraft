@@ -37,16 +37,18 @@ public class ItemTeleporter extends TechCraftItems{
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
     {
+        if(isCoodsSet(par1ItemStack)){
+            player.setPositionAndUpdate((int)this.getXCoord(par1ItemStack)-.5,(int)this.getYCoord(par1ItemStack), (int)this.getZCoord(par1ItemStack)-.5);
+
+        }
         if(!isCoodsSet(par1ItemStack)){
             this.setXCoord(par1ItemStack,player.posX);
             this.setYCoord(par1ItemStack,player.posY);
             this.setZCoord(par1ItemStack,player.posZ);
             setCoodsSet(par1ItemStack, true);
+            player.sendChatToPlayer("Link Set");
         }
-        if(isCoodsSet(par1ItemStack)){
-            player.setPositionAndUpdate((int)this.getXCoord(par1ItemStack)-.5,(int)this.getYCoord(par1ItemStack), (int)this.getZCoord(par1ItemStack)-.5);
-
-        }
+        
         return par1ItemStack;
     }
 

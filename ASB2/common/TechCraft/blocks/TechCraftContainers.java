@@ -32,7 +32,10 @@ public abstract class TechCraftContainers extends BlockContainer{
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 
-        ((TechCraftTile) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
+        if(world.getBlockTileEntity(x, y, z) instanceof TechCraftTile) {
+            
+            ((TechCraftTile) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
+        }
     }
 
     @Override
@@ -44,17 +47,17 @@ public abstract class TechCraftContainers extends BlockContainer{
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-         
+
         if(tile instanceof IPowerMisc) {
-            
+
             IPowerMisc tile2 = ((IPowerMisc)tile);
-            
+
             if(tile2.getNetwork() != null) {
-                
+
                 if(tile2.outputPower()){
                     tile2.getNetwork().removeSource(tile2);
                 }
-                
+
                 if(tile2.recievePower()){
                     tile2.getNetwork().removeSink(tile2);
                 }
