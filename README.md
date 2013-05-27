@@ -40,3 +40,6 @@ Textures to be done
 	-(Model)Rune Block
 	-(Item)Rune Core
 	-(Block, MultiSided)TC Infuser
+
+Models to be done
+	-Grinder
