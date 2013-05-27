@@ -20,7 +20,7 @@ Current Ideas to Build On
 
 Current Bugs
 
-	-The Orientations of certain blocks arent preserved after world restart.
+	-Power Network doesnt properly remove broken tiles;
 	
 	
 Textures to be done
