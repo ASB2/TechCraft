@@ -3,12 +3,10 @@ package TechCraft.blocks.technogery.tcFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntityFurnace;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 import TechCraft.power.PowerNetwork;
@@ -26,10 +24,6 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     boolean isBurning = false;
 
     ItemStack currentItem;
-
-    private static final int[] sidedSlotSides = new int[] {0};
-    private static final int[] sidedSlotBottom = new int[] {1};
-    private static final int[] sidedSlotTop = new int[] {0};
 
     public TileTCFurnace(){
 
@@ -245,21 +239,39 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int par1)
+    public int[] getAccessibleSlotsFromSide(int side)
     {
-        return par1 == 0 ? sidedSlotBottom : (par1 == 1 /*Top:Side*/ ? sidedSlotTop : sidedSlotSides);
+        return new int[]{0,1};
     }
 
     @Override
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+    public boolean canInsertItem(int slot, ItemStack itemStack, int side)
     {
-        return this.isStackValidForSlot(par1, par2ItemStack);
+        ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(itemStack);
+
+        if(slot != 1) {
+
+            if(itemstack != null) {
+
+                if(this.tileItemStacks[0] == null || this.tileItemStacks[0].equals(itemStack)) {                    
+                   
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+    public boolean canExtractItem(int slot, ItemStack itemStack, int side)
     {
-        return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
+        if(slot != 0) {
+
+            if(this.tileItemStacks[slot] != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -288,9 +300,24 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
     }
     @Override
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isStackValidForSlot(int slot, ItemStack itemStack)
     {
-        return par1 == 2 ? false : (par1 == 1 ? TileEntityFurnace.isItemFuel(par2ItemStack) : true);
+        ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(itemStack);
+
+        if(this.tileItemStacks[0] == null) {
+
+            if(itemstack != null) {
+
+                return true;
+            }     
+        }
+
+        if(this.tileItemStacks[0].equals(itemStack)) {
+
+            return true;
+        }
+
+        return false;
     }
 
     public PowerNetwork getNetwork(){

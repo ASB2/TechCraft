@@ -29,6 +29,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
     public void updateEntity() {
         super.managePowerAll(this,powerOutput(),true);
+        super.updateEntity();
 
         if(!(powerStored == powerMax)){
 
@@ -36,10 +37,13 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         }
 
         moveSlots();
+    }
+
+    public void updatePerSecond() {
 
         if(fuelBurnTime > 0) {
 
-            this.gainPower(1);
+            this.gainPower(5);
         }
     }
 
@@ -289,20 +293,25 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
+        
         return TileEntityFurnace.isItemFuel(itemstack);
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int var1) {
-        // TODO Auto-generated method stub
-        return null;
+    public int[] getAccessibleSlotsFromSide(int side) {
+
+        return new int[]{0,1,2,3,4,5,6,7,8,9};
     }
 
 
     @Override
     public boolean canInsertItem(int slot, ItemStack itemstack, int side) {
-        // TODO Auto-generated method stub
+        
+        if(TileEntityFurnace.isItemFuel(itemstack)) {
+            
+            return true;
+        }
         return true;
     }
 

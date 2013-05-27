@@ -2,9 +2,6 @@ package TechCraft.blocks.technogery.tcTeleporter;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-
-import org.lwjgl.opengl.GL11;
-
 import TechCraft.lib.TEXTURES;
 
 public class GuiTCTeleporter extends GuiContainer {

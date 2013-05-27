@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TechCraft.ITCTankContainer;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 
@@ -50,6 +51,14 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 else {
                     player.sendChatToPlayer(mTile.getName()+" has no network");
                 }
+            }  
+            
+            if(world.getBlockTileEntity(x,y,z) instanceof ITCTankContainer) {
+
+                ITCTankContainer mTile = (ITCTankContainer) world.getBlockTileEntity(x, y, z);
+
+                player.sendChatToPlayer("Tank has liquid " + mTile.getLiquidStackName());
+                player.sendChatToPlayer("Tank has a capasity of " + mTile.getCapasity());
             }  
         }
 

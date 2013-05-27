@@ -33,6 +33,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import TechCraft.blocks.technogery.tcInfuser.*;
 import TechCraft.blocks.technogery.tcTeleporter.*;
+import TechCraft.blocks.tankBasic.*;
 
 public class BlockRegistry {
 
@@ -70,6 +71,9 @@ public class BlockRegistry {
     
     public static TechCraftContainers BlockTCInfuser;
     public static TechCraftContainers BlockTCTeleporter;
+    
+    public static TechCraftContainers BlockTank;
+    
 
     public static void init() {
 
@@ -228,6 +232,12 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCTeleporter, "ASB2_BlockTCTeleporter");
         LanguageRegistry.addName(BlockTCTeleporter, "TC Teleporter");
         MinecraftForge.setBlockHarvestLevel(BlockTCTeleporter, "pickaxe", 2);
+        
+        BlockTank = new BlockTank(526, Material.rock);
+        BlockTank.setUnlocalizedName("BlockTank");
+        GameRegistry.registerBlock(BlockTank, "ASB2_BlockTank");
+        LanguageRegistry.addName(BlockTank, "Test Tank");
+        MinecraftForge.setBlockHarvestLevel(BlockTank, "pickaxe", 2);
     }
 
 }

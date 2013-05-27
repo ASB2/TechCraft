@@ -434,17 +434,14 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
 
-    protected long ticks = 1;
+    protected long ticks = 0;
     public void updateEntity(){
+        
         if(ticks == 20){
             updatePerSecond();
+            ticks = 0;
         }
-        else if(ticks > 20){
-            ticks = 1;
-        }
-        else if(ticks < 20){
-            ticks++;
-        }
+        ticks++;
     }
 
     public void updatePerSecond(){
