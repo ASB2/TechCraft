@@ -9,11 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerNetwork;
 
 public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInventory, ISidedInventory {    
-
-    PowerNetwork network;
 
     int powerStored;
     int powerMax = 100;
@@ -26,8 +23,8 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
 
 
     public void updateEntity() {
-
-        super.managePowerAll(this, powerInput(),false);
+        super.updateEntity();        
+        this.managePowerAll(this, powerInput(),false);
 
         if(manageGround()){
             //harvest();
@@ -376,15 +373,5 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     public boolean canExtractItem(int i, ItemStack itemstack, int side) {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    public PowerNetwork getNetwork(){
-
-        return network;
-    }
-
-    public void overrideNetwork(PowerNetwork net){
-
-        this.network = net;
     }
 }

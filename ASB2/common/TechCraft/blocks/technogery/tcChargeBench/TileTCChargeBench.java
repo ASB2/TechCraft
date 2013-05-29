@@ -8,11 +8,8 @@ import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerItems;
 import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerNetwork;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
-
-    PowerNetwork network;
     
     int powerStored;
     int powerMax = 100;
@@ -25,7 +22,9 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     }
 
     public void updateEntity() {
-        super.managePowerAll(this, powerInput(), false);
+        this.managePowerAll(this, powerInput(), false);
+        super.updateEntity();
+        
         addEnergyToSlot();
         removeEnergySlot();
     }    
@@ -301,15 +300,5 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    public PowerNetwork getNetwork(){
-
-        return network;
-    }
-
-    public void overrideNetwork(PowerNetwork net){
-
-        this.network = net;
     }
 }

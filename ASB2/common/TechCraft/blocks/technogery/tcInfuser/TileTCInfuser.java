@@ -11,7 +11,6 @@ import TechCraft.power.PowerNetwork;
 
 public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInventory{
 
-    PowerNetwork network;
     int powerStored;
     int powerMax = 100;
     ItemStack[] tileItemStacks;

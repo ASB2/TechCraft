@@ -3,6 +3,7 @@ package TechCraft.power;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
 
@@ -17,8 +18,6 @@ public class PowerNetwork {
     @SuppressWarnings("unused")
     private World worldObj;
 
-    public TileMagicConduitMoving tileCore;
-
     private int age = 0;
     int powerToMove = 1;
 
@@ -27,17 +26,34 @@ public class PowerNetwork {
     int sourceSize = 0;
 
 
-    public PowerNetwork(World world, TileMagicConduitMoving tile) {    
+    public PowerNetwork(World world, TileEntity tile) {    
 
         worldObj = world;
-        this.tileCore = tile;
 
-        this.addConductor(tile);
+        if(tile instanceof TileMagicConduitMoving) {
+
+            TileMagicConduitMoving tileI = (TileMagicConduitMoving)tile;
+
+            this.addConductor(tileI);
+        }
+
+        if(tile instanceof IPowerMisc) {
+
+            IPowerMisc tileO = (IPowerMisc)tile;
+
+            if(tileO.recievePower()) {
+                this.addSink(tileO);
+            }
+
+            if(tileO.outputPower()) {
+                this.addSource(tileO);
+            }
+        }
     }
 
     public void updateNetwork() {
 
-        age = tileCore.age;
+        age++;
 
         for(int i = 0; i < conductors.size(); i++){
 

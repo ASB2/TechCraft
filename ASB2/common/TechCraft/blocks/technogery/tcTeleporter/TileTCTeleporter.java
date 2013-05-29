@@ -15,7 +15,6 @@ import TechCraft.power.PowerNetwork;
 
 public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInventory{
 
-    PowerNetwork network;
     int powerStored;
     int powerMax = 100;
     

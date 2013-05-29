@@ -10,6 +10,9 @@ public interface IPowerMisc {
     boolean recievePower();
     boolean outputPower();
 
+    boolean requestingPower();
+    boolean outputtingPower();
+    
     int powerOutput();
     int powerInput();
 

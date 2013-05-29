@@ -8,11 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.*;
 
 public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
 
-    PowerNetwork network;
     private int powerStored = 0;
     private int powerMax = 100;
     private int currentFuelID = 0;
@@ -315,21 +313,10 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         return true;
     }
 
-
     @Override
     public boolean canExtractItem(int i, ItemStack itemstack, int j) {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    public PowerNetwork getNetwork(){
-
-        return network;
-    }
-
-    public void overrideNetwork(PowerNetwork net){
-
-        this.network = net;
     }
 
 }

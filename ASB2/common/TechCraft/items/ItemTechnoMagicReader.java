@@ -41,7 +41,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 
                 if(mTile.getNetwork() != null) {
                     
-                    player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
+                   // player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductorSize() + " conductors");
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSinkSize() + " power sinks");
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSourceSize() + " power sources");

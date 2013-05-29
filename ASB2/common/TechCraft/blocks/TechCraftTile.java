@@ -3,6 +3,7 @@ package TechCraft.blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
 import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerNetwork;
@@ -10,8 +11,11 @@ import TechCraft.power.PowerNetwork;
 public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     protected ForgeDirection orientation;
+    protected PowerNetwork network;
 
     public TechCraftTile() {
+
+        network = new PowerNetwork(worldObj, this);
 
         orientation = ForgeDirection.DOWN;
     }
@@ -433,15 +437,528 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         }
     }
 
+    public void addConductorsAround(){
+        addConductorsAround(ForgeDirection.DOWN);
+        addConductorsAround(ForgeDirection.UP);
+        addConductorsAround(ForgeDirection.NORTH);
+        addConductorsAround(ForgeDirection.SOUTH);
+        addConductorsAround(ForgeDirection.WEST);
+        addConductorsAround(ForgeDirection.EAST);
+    }
+
+    public void addConductorsAround(ForgeDirection direction){
+
+        TileEntity tile = worldObj.getBlockTileEntity(this.translateDirectionToCoords(direction)[0], this.translateDirectionToCoords(direction)[1], this.translateDirectionToCoords(direction)[2]);
+
+        if(tile != null && network != null) {
+
+            switch(direction) {
+
+                case DOWN: {
+
+                    if(tile instanceof TileMagicConduitMoving) {
+
+                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
+
+                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
+
+                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                                network.addConductor((TileMagicConduitMoving) tile);
+                            }
+                        }
+                        else {
+
+                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                            network.addConductor((TileMagicConduitMoving) tile);
+                        }
+                    }
+                    break;
+                }
+
+                case EAST:{
+
+                    if(tile instanceof TileMagicConduitMoving) {
+
+                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
+
+                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
+
+                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                                network.addConductor((TileMagicConduitMoving) tile);
+                            }
+                        }
+                        else {
+
+                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                            network.addConductor((TileMagicConduitMoving) tile);
+                        }
+                    }
+                    break;
+                }
+                case NORTH: {
+
+                    if(tile instanceof TileMagicConduitMoving) {
+
+                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
+
+                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
+
+                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                                network.addConductor((TileMagicConduitMoving) tile);
+                            }
+                        }
+                        else {
+
+                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                            network.addConductor((TileMagicConduitMoving) tile);
+                        }
+                    }
+                    break;
+                }
+                case SOUTH: {
+
+                    if(tile instanceof TileMagicConduitMoving) {
+
+                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
+
+                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
+
+                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                                network.addConductor((TileMagicConduitMoving) tile);
+                            }
+                        }
+                        else {
+
+                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                            network.addConductor((TileMagicConduitMoving) tile);
+                        }
+                    }
+                    break;
+
+                }
+                case UP: {
+
+                    if(tile instanceof TileMagicConduitMoving) {
+
+                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
+
+                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
+
+                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                                network.addConductor((TileMagicConduitMoving) tile);
+                            }
+                        }
+                        else {
+
+                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                            network.addConductor((TileMagicConduitMoving) tile);
+                        }
+                    }
+                    break;
+                }
+                case WEST: {
+
+                    if(tile instanceof TileMagicConduitMoving) {
+
+                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
+
+                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
+
+                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                                network.addConductor((TileMagicConduitMoving) tile);
+                            }
+                        }
+                        else {
+
+                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
+                            network.addConductor((TileMagicConduitMoving) tile);
+                        }
+                    }
+                    break;
+                }
+                case UNKNOWN:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void addSourceAround(){
+        addSourceAround(ForgeDirection.DOWN);
+        addSourceAround(ForgeDirection.UP);
+        addSourceAround(ForgeDirection.NORTH);
+        addSourceAround(ForgeDirection.SOUTH);
+        addSourceAround(ForgeDirection.WEST);
+        addSourceAround(ForgeDirection.EAST);
+    }
+
+    public void addSourceAround(ForgeDirection direction){
+
+        TileEntity tile = worldObj.getBlockTileEntity(this.translateDirectionToCoords(direction)[0], this.translateDirectionToCoords(direction)[1], this.translateDirectionToCoords(direction)[2]);
+
+        if(tile != null && network != null) {
+
+            switch(direction) {
+
+                case DOWN: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+
+                    }
+                    break;
+                }
+
+                case EAST:{
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+
+                    }
+                    break;
+                }
+                case NORTH: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+
+                    }         
+                    break;
+                }
+                case SOUTH: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+
+                    }
+                    break;
+
+                }
+                case UP: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+
+                    }
+                    break;
+                }
+                case WEST: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).outputPower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(network);
+                                network.addSource((IPowerMisc) tile);
+                            }
+                        }
+
+
+                    }
+                    break;
+                }
+                case UNKNOWN:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void addSinkAround(){
+        addSinkAround(ForgeDirection.DOWN);
+        addSinkAround(ForgeDirection.UP);
+        addSinkAround(ForgeDirection.NORTH);
+        addSinkAround(ForgeDirection.SOUTH);
+        addSinkAround(ForgeDirection.WEST);
+        addSinkAround(ForgeDirection.EAST);
+    }
+
+    public void addSinkAround(ForgeDirection direction){
+
+        TileEntity tile = worldObj.getBlockTileEntity(this.translateDirectionToCoords(direction)[0], this.translateDirectionToCoords(direction)[1], this.translateDirectionToCoords(direction)[2]);
+
+        if(tile != null && network != null) {
+
+            switch(direction) {
+
+                case DOWN: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                    }
+                    break;
+                }
+
+                case EAST:{
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                    }
+                    break;
+                }
+                case NORTH: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                    }
+                    break;
+                }
+                case SOUTH: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                    }
+                    break;
+
+                }
+                case UP: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                    }
+                    break;
+                }
+                case WEST: {
+
+                    if(tile instanceof IPowerMisc) {
+
+                        if(((IPowerMisc)tile).getNetwork() == null) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
+
+                            if(((IPowerMisc)tile).recievePower()) {
+
+                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
+                                this.getNetwork().addSink((IPowerMisc) tile);
+                            }
+                        }
+
+                    }
+                    break;
+                }
+                case UNKNOWN:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 
     protected long ticks = 0;
     public void updateEntity(){
-        
+
+        if(network != null)
+            network.updateNetwork();
+
+        ticks++;
         if(ticks == 20){
             updatePerSecond();
             ticks = 0;
         }
-        ticks++;
+
     }
 
     public void updatePerSecond(){
@@ -549,14 +1066,32 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public PowerNetwork getNetwork() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return network;
     }
 
     @Override
     public void overrideNetwork(PowerNetwork network) {
-        // TODO Auto-generated method stub
 
+        this.network = network;
+    }
+
+    @Override
+    public boolean requestingPower() {
+
+        if(getPowerStored() < getPowerMax())
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public boolean outputtingPower() {
+
+        if(getPowerStored() > 0)
+            return true;
+
+        return false;
     }
 
 }

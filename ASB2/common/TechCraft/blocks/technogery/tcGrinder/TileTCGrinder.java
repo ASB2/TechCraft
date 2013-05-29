@@ -7,11 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerNetwork;
 
 public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInventory{
-
-    PowerNetwork network;
 
     int powerStored;
     int powerMax = 100;
@@ -208,15 +205,5 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
     public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    public PowerNetwork getNetwork(){
-
-        return network;
-    }
-
-    public void overrideNetwork(PowerNetwork net){
-
-        this.network = net;
     }
 }

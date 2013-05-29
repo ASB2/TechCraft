@@ -21,12 +21,23 @@ public abstract class TechCraftContainers extends BlockContainer{
         super(par1, par2Material);
         this.setCreativeTab(TechCraft.tabTechno);
         setHardness(3.5f);
+        setTickRandomly(true);
     }
 
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon("TechCraft:GearBlock");
+    }
+
+    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData) {
+
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+
+        if(tile instanceof IPowerMisc) {
+
+            IPowerMisc tile2 = ((IPowerMisc)tile);
+        }
     }
 
     @Override
@@ -66,9 +77,9 @@ public abstract class TechCraftContainers extends BlockContainer{
                 }
 
                 if(tile2 instanceof TileMagicConduitMoving) {
-                    
+
                     TileMagicConduitMoving tile3 = (TileMagicConduitMoving)tile2;
-                    
+
                     tile3.getNetwork().removeConductor(tile3);
                 }
             }

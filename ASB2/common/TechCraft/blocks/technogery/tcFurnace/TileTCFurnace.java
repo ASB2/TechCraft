@@ -9,11 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerNetwork;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
-
-    PowerNetwork network;
+    
     int powerStored = 0;
     int powerMax = 100;
 
@@ -37,8 +35,9 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
 
     public void updateEntity() {        
-        super.managePowerAll(this, powerInput(),false);
-
+        this.managePowerAll(this, powerInput(),false);
+        super.updateEntity();
+        
         if(this.getPowerStored() > 0){
             isBurning = true;
         }
@@ -318,15 +317,5 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         }
 
         return false;
-    }
-
-    public PowerNetwork getNetwork(){
-
-        return network;
-    }
-
-    public void overrideNetwork(PowerNetwork net){
-
-        this.network = net;
     }
 }

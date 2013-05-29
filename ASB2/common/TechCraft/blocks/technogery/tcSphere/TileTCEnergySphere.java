@@ -7,8 +7,7 @@ import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.*;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
-
-    PowerNetwork network;
+    
     int powerStored;
     int powerMax = 1000;
     int color = 0;
@@ -118,16 +117,5 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
         par1NBTTagCompound.setInteger("powerStored", powerStored);
         par1NBTTagCompound.setInteger("color", color);        
     }
-
-    public PowerNetwork getNetwork(){
-
-        return network;
-    }
-
-    public void overrideNetwork(PowerNetwork net){
-
-        this.network = net;
-    }
-
 }
 
