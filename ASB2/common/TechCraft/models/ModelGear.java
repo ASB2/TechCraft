@@ -66,7 +66,7 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderUp(double x, double y, double z) {
-        
+
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
         GL11.glScalef(0.03f, 0.03f, 0.03f);
@@ -78,28 +78,53 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderWest(double x, double y, double z) {
-        modelTutBox.renderAll();
-        GL11.glTranslatef((float) x + 13F, (float) y + 7F, (float) z + .5F);
-        GL11.glRotatef(90F, 0F, 0F, 1F);        
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+
+        GL11.glScalef(0.03f, 0.03f, 0.03f);
+
+        GL11.glTranslatef((float) x + 0F, (float) y + 45F, (float) z + 0F); 
+
+        GL11.glRotatef(90F, 0F, 0F, 1F);  
+
+        this.render(); 
+
     }
 
     public void renderEast(double x, double y, double z) {
-        modelTutBox.renderAll();
-        GL11.glTranslatef((float) x - 8F, (float) y + 13F - 1.8F, (float) z + .5F);
-        GL11.glRotatef(-90F, 0F, 0F, 1F);        
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+
+        GL11.glScalef(0.03f, 0.03f, 0.03f);
+
+        GL11.glTranslatef((float) x + 0F, (float) y + 45F, (float) z + 0F); 
+
+        GL11.glRotatef(90F, 0F, 0F, 1F);  
+
+        this.render();        
     }
 
     public void renderSouth(double x, double y, double z) {
-        modelTutBox.renderAll();
-        GL11.glTranslatef((float) x + 0F, (float) y + 5F, (float) z - 14F);
-        GL11.glRotatef(90F, 1F, 0F, 0F);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+
+        GL11.glScalef(0.03f, 0.03f, 0.03f);
+
+        GL11.glTranslatef((float) x + 0F, (float) y + 45F, (float) z + 0F); 
+
+        GL11.glRotatef(90F, 0F, 0F, 1F);  
+
+        this.render(); 
 
     }
 
     public void renderNorth(double x, double y, double z) {
-        modelTutBox.renderAll();
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 12F, (float) z + 7F);
-        GL11.glRotatef(-90F, 1F, 0F, 0F);        
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+
+        GL11.glScalef(0.03f, 0.03f, 0.03f);
+
+        GL11.glTranslatef((float) x + 0F, (float) y + 45F, (float) z + 0F); 
+
+        GL11.glRotatef(90F, 0F, 0F, 1F);  
+
+        this.render();        
     }
 
 }
