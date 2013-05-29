@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
+import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
 import TechCraft.power.*;
 
 public abstract class TechCraftContainers extends BlockContainer{
@@ -25,7 +26,7 @@ public abstract class TechCraftContainers extends BlockContainer{
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon("TechCraft:BlockTestBlock");
+        blockIcon = iconRegister.registerIcon("TechCraft:GearBlock");
     }
 
     @Override
@@ -33,7 +34,7 @@ public abstract class TechCraftContainers extends BlockContainer{
         super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
 
         if(world.getBlockTileEntity(x, y, z) instanceof TechCraftTile) {
-            
+
             ((TechCraftTile) world.getBlockTileEntity(x, y, z)).setOrientation(world.getBlockMetadata(x, y, z));
         }
     }
@@ -54,12 +55,21 @@ public abstract class TechCraftContainers extends BlockContainer{
 
             if(tile2.getNetwork() != null) {
 
-                if(tile2.outputPower()){
+                if(tile2.outputPower() && !(tile2.recievePower())) {
+
                     tile2.getNetwork().removeSource(tile2);
                 }
 
-                if(tile2.recievePower()){
+                if(tile2.recievePower() && !(tile2.outputPower())) {
+
                     tile2.getNetwork().removeSink(tile2);
+                }
+
+                if(tile2 instanceof TileMagicConduitMoving) {
+                    
+                    TileMagicConduitMoving tile3 = (TileMagicConduitMoving)tile2;
+                    
+                    tile3.getNetwork().removeConductor(tile3);
                 }
             }
         }

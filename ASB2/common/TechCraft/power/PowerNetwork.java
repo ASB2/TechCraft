@@ -21,7 +21,11 @@ public class PowerNetwork {
 
     private int age = 0;
     int powerToMove = 1;
-    int buffer = 0;
+
+    int conductorSize = 0;
+    int sinkSize = 0;
+    int sourceSize = 0;
+
 
     public PowerNetwork(World world, TileMagicConduitMoving tile) {    
 
@@ -49,9 +53,9 @@ public class PowerNetwork {
                 for(int z = 0; z < powerSink.size(); z++) {
 
                     if(powerSink.get(z).getPowerMax() - powerSink.get(z).getPowerStored() >= powerToMove) {
-                        
+
                         if(powerSource.get(i).usePower(powerToMove)) {
-                            
+
                             powerSink.get(z).gainPower(powerToMove);
                         }
                     }
@@ -61,32 +65,32 @@ public class PowerNetwork {
     }
 
     public void addConductor(TileMagicConduitMoving tile) {
-
+        conductorSize++;
         conductors.add(tile);
     }
 
     public void removeConductor(TileMagicConduitMoving tile) {
-
+        conductorSize--;
         conductors.remove(tile);
     }
 
     public void addSource(IPowerMisc tile) {
-
+        sourceSize++;
         powerSource.add(tile);
     }
 
     public void removeSource(IPowerMisc tile) {
-
+        sourceSize--;
         powerSource.remove(tile);
     }
 
     public void addSink(IPowerMisc tile) {
-
+        sinkSize++;
         powerSink.add(tile);
     }
 
     public void removeSink(IPowerMisc tile) {
-
+        sinkSize--;
         powerSink.remove(tile);
     }
 
@@ -106,8 +110,17 @@ public class PowerNetwork {
         return age;
     }
 
-    public int getBuffer() {
-
-        return this.buffer;
+    public int getConductorSize() {
+        return conductorSize;
     }
+
+    public int getSinkSize() {
+        return sinkSize;
+    }
+
+    public int getSourceSize() {
+        return sourceSize;
+    }
+
+
 }

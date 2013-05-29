@@ -17,7 +17,7 @@ public class TechCraftBlocks extends Block{
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon("TechCraft:BlockTestBlock");
+        blockIcon = iconRegister.registerIcon("TechCraft:GearBlock");
     }
 
 }

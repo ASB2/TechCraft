@@ -1,5 +1,7 @@
 package TechCraft.models;
 
+import java.util.Random;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
@@ -15,7 +17,7 @@ public class ModelEnergySphere extends ModelBase{
 
     public ModelEnergySphere() {
 
-        modelTutBox = AdvancedModelLoader.loadModel(MODELS.SPHERE_MODEL);
+        modelTutBox = AdvancedModelLoader.loadModel(MODELS.TETRA);
     }
 
     public void render() {
@@ -26,45 +28,30 @@ public class ModelEnergySphere extends ModelBase{
     int updown = 0;
 
     public void render(TileTCEnergySphere box, double x, double y, double z) {
-
+        Random rand = new Random();
+        
+        updown = (int) (rand.nextFloat() * 360);
+        
         GL11.glPushMatrix();
 
-        GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f+updown, (float)z + 0.5f);
+        GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f, (float)z + 0.5f);
 
         GL11.glScalef(0.5f, 0.5f, 0.5f);
+
+        GL11.glRotatef(updown, updown, updown, updown);
 
         this.render();
 
         GL11.glPopMatrix();
     }
 
-    public void renderWithRotation(TileTCEnergySphere box, double x, double y, double z) {
+    public int rotate() {
 
-        GL11.glPushMatrix();
-
-        GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f+updown, (float)z + 0.5f);
-
-        GL11.glScalef(0.5f, 0.5f, 0.5f);
-
-        GL11.glRotatef(rotate(box), rotate(box), rotate(box), rotate(box));
-
-        this.render();
-
-        GL11.glPopMatrix();
-    }
-    
-    public int rotate(TileTCEnergySphere tile) {
-
-        if(rotate > 360) {
-
-            rotate = 0;
+        if(rotate < 360) {
+            rotate++;
         }
-
-        rotate++;
-
-        if(tile.getPowerStored() > 0){
-
-            rotate = rotate * tile.getPowerStored();
+        else{
+            rotate = 0;
         }
         return rotate;
     }

@@ -42,9 +42,9 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 if(mTile.getNetwork() != null) {
                     
                     player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductors().size() + " conductors");
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSink().size() + " power sinks");
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSource().size() + " power sources");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductorSize() + " conductors");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSinkSize() + " power sinks");
+                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSourceSize() + " power sources");
                     player.sendChatToPlayer(mTile.getName()+ " power network is " + mTile.getNetwork().getAge() + " ticks old");
                     //player.sendChatToPlayer("Power Network has " + mTile.getNetwork().getBuffer() +" technogery stored in it's buffer");
                 }

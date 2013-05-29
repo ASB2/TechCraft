@@ -14,7 +14,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
     PowerNetwork network;
     private int powerStored = 0;
-    private int powerMax = 1000;
+    private int powerMax = 100;
     private int currentFuelID = 0;
     private int fuelBurnTime = 0;
 
