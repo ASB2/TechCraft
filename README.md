@@ -5,8 +5,6 @@ A resulting cross of technology and magic
 
 This source code is part of the unreleased TechnoCraft Mod. 
 
-This work is licensed under the GNU Lesser General Public Licence version 3. This applies to all work herein, regardless of if not explicitly stated. This means that redistribution, editing, etc. is permitted as long as credit is given to the original author. I ask that this is honored.
-
 This mod is designed to be a jack of all trades dabbling in farming ore production and any other thing that people can give me ideas on.
 
 The over all goal of this mod is to make processes take less time.
