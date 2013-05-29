@@ -8,5 +8,6 @@ public final class MODELS {
     public static final String SPROKET = "/mods/TechCraft/models/sprocketry3.obj";
     public static final String TORUS = "/mods/TechCraft/models/torus.obj";
     public static final String GEAR_CONDUIT = "/mods/TechCraft/models/ConduitNURBS.obj";
+    public static final String GEAR = "/mods/TechCraft/models/GearSingle.obj";
     public static final String TEST = "/mods/TechCraft/models/gear2d.obj";
 }

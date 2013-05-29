@@ -48,8 +48,7 @@ public class TechCraft {
 
     public static final String modid = "ASB2_TechCraft";
 
-    @Instance(TechCraft.modid)    
-
+    @Instance(TechCraft.modid)
 
     public static TechCraft instance;
 
@@ -74,7 +73,7 @@ public class TechCraft {
         instance = this;
         MinecraftForge.EVENT_BUS.register(new TechCraftForgeEvents());
         GameRegistry.registerFuelHandler(new TechCraftFuelHandler());
-        
+
         // FMLCommonHandler.instance().registerTickHandler(new MyToolsTickHandler());
 
         //MinecraftForge.addGrassSeed(new ItemStack(ItemRegistry.ItemLifeCrystal), 10);
@@ -115,13 +114,13 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileTCChargeBench.class, "TileTCChargeBench");
 
         GameRegistry.registerTileEntity(TileBasicRune.class, "TileBasicRune");
-        
+
         GameRegistry.registerTileEntity(TileTCInfuser.class, "TileTCInfuser");
-        
+
         GameRegistry.registerTileEntity(TileTCTeleporter.class, "TileTCTeleporter");
 
         GameRegistry.registerTileEntity(TileTank.class, "TileTank");
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

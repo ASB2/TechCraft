@@ -12,18 +12,21 @@ import TechCraft.models.ModelMagicConduitExportingv2;
 import TechCraft.models.ModelMagicConduitImportingv2;
 import TechCraft.models.ModelMagicConduitMovingv2;
 import TechCraft.power.*;
+import TechCraft.models.*;
 
 public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRenderer{
 
     private ModelMagicConduitMovingv2 modelMoving;
     private ModelMagicConduitImportingv2 modelImporting;
     private ModelMagicConduitExportingv2 modelExporting;
-
+    private ModelGear modelGear;
+    
     public TileEntityRendererMagicConduitMoving() {
 
         modelMoving = new ModelMagicConduitMovingv2();
         modelImporting = new ModelMagicConduitImportingv2();
         modelExporting = new ModelMagicConduitExportingv2();
+        modelGear = new ModelGear();
     }
 
     public void renderAModelAt(TileMagicConduitMoving tile, double d, double d1, double d2, float f) {
@@ -37,26 +40,32 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
 
         if(tile.decideRender(ForgeDirection.DOWN)){
             modelMoving.renderBottom();
+            modelGear.renderDown(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.UP)){
             modelMoving.renderTop();
+            modelGear.renderUp(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.WEST)){
             modelMoving.renderLeft();
+            modelGear.renderWest(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.EAST)){
             modelMoving.renderRight();
+            modelGear.renderEast(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.SOUTH)){
             modelMoving.renderFront();
+            modelGear.renderSouth(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.NORTH)){
             modelMoving.renderBack();
+            modelGear.renderNorth(d,d1,d2);
         }
 
         decideRender(ForgeDirection.DOWN, tile);
