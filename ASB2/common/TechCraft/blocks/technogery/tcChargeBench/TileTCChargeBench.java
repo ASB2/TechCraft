@@ -287,13 +287,11 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     @Override
     public void openChest() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void closeChest() {
         // TODO Auto-generated method stub
-
     }
 
     @Override

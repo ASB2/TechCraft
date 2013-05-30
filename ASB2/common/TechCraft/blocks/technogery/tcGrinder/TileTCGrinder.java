@@ -22,6 +22,7 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
 
     public void updateEntity() {
         super.managePowerAll(this, powerInput(), false);
+        super.updateEntity();
     }    
 
     @Override

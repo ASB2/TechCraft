@@ -15,7 +15,8 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
     
     @Override
     public void updateEntity() {
-        super.managePowerAll(this, powerOutput(), true);
+        super.updateEntity();
+        this.managePowerAll(this, powerOutput(), true);
     }
 
     @Override
@@ -94,7 +95,7 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
 
     public boolean decideRender(ForgeDirection direction) {
 
-        TileEntity tile = worldObj.getBlockTileEntity(super.translateDirectionToCoords(direction)[0], super.translateDirectionToCoords(direction)[1], super.translateDirectionToCoords(direction)[2]);
+        TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, this)[0], TechCraftTile.translateDirectionToCoords(direction, this)[1], TechCraftTile.translateDirectionToCoords(direction, this)[2]);
         if(tile != null) {
 
             switch(direction) {

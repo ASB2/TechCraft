@@ -30,14 +30,15 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     double y;
     double z;
 
-    public TileTCTeleporter() {
-        
+    public TileTCTeleporter() {        
         tileItemStacks = new ItemStack[1];
+        
     }
 
     public void updateEntity() {
         super.managePowerAll(this, powerInput(), false);
-
+        super.updateEntity();
+        
         if(tileItemStacks[0] == null) {
             teleporterSet = false;
             coordsSet = false;

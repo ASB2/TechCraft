@@ -15,11 +15,8 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     public void updateEntity() {
 
         super.managePowerAll(this, powerInput(), false);
+        super.updateEntity();
     }    
-
-    public void addConductor(){
-
-    }
 
     public void setColor(Item item) {
 

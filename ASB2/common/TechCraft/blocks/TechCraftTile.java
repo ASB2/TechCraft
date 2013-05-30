@@ -3,7 +3,6 @@ package TechCraft.blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
 import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerNetwork;
@@ -80,34 +79,34 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         }
     }
 
-    public int[] translateDirectionToCoords(ForgeDirection direction) {
+    public static int[] translateDirectionToCoords(ForgeDirection direction, TileEntity tile) {
 
         switch(direction) {
 
             case DOWN: {
-                return new int[]{this.xCoord,this.yCoord-1,this.zCoord};
+                return new int[]{tile.xCoord,tile.yCoord-1,tile.zCoord};
             }
             case UP: {
-                return new int[]{this.xCoord,this.yCoord+1,this.zCoord};
+                return new int[]{tile.xCoord,tile.yCoord+1,tile.zCoord};
             }
             case NORTH: {
-                return new int[]{this.xCoord,this.yCoord,this.zCoord-1};
+                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord-1};
             }
             case SOUTH: {
-                return new int[]{this.xCoord,this.yCoord,this.zCoord+1};
+                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord+1};
             }
             case WEST: {
-                return new int[]{this.xCoord-1,this.yCoord,this.zCoord};
+                return new int[]{tile.xCoord-1,tile.yCoord,tile.zCoord};
             }
             case EAST: {
-                return new int[]{this.xCoord+1,this.yCoord,this.zCoord};
+                return new int[]{tile.xCoord+1,tile.yCoord,tile.zCoord};
             }
             case UNKNOWN:{
-                return new int[]{this.xCoord,this.yCoord,this.zCoord};
+                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
             }
         }
 
-        return new int[]{this.xCoord,this.yCoord,this.zCoord};
+        return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
     }
 
     public int translateDirectionToNumber() {
@@ -224,7 +223,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         switch(direction) {
 
             case DOWN: {
-                int[] coords = this.translateDirectionToCoords(direction);
+                int[] coords = TechCraftTile.translateDirectionToCoords(direction, this);
 
                 if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                     IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
@@ -259,7 +258,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 break;
             }
             case UP: {
-                int[] coords = this.translateDirectionToCoords(direction);
+                int[] coords = TechCraftTile.translateDirectionToCoords(direction, this);
 
                 if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                     IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
@@ -294,7 +293,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 break;
             }
             case NORTH: {
-                int[] coords = this.translateDirectionToCoords(direction);
+                int[] coords = TechCraftTile.translateDirectionToCoords(direction,this);
 
                 if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                     IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
@@ -329,7 +328,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 break;
             }
             case SOUTH: {
-                int[] coords = this.translateDirectionToCoords(direction);
+                int[] coords = TechCraftTile.translateDirectionToCoords(direction, this);
 
                 if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                     IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
@@ -364,7 +363,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 break;
             }
             case WEST: {
-                int[] coords = this.translateDirectionToCoords(direction);
+                int[] coords = TechCraftTile.translateDirectionToCoords(direction, this);
 
                 if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                     IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
@@ -399,7 +398,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 break;
             }
             case EAST: {
-                int[] coords = this.translateDirectionToCoords(direction);
+                int[] coords = TechCraftTile.translateDirectionToCoords(direction, this);
 
                 if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                     IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
@@ -437,522 +436,15 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         }
     }
 
-    public void addConductorsAround(){
-        addConductorsAround(ForgeDirection.DOWN);
-        addConductorsAround(ForgeDirection.UP);
-        addConductorsAround(ForgeDirection.NORTH);
-        addConductorsAround(ForgeDirection.SOUTH);
-        addConductorsAround(ForgeDirection.WEST);
-        addConductorsAround(ForgeDirection.EAST);
-    }
-
-    public void addConductorsAround(ForgeDirection direction){
-
-        TileEntity tile = worldObj.getBlockTileEntity(this.translateDirectionToCoords(direction)[0], this.translateDirectionToCoords(direction)[1], this.translateDirectionToCoords(direction)[2]);
-
-        if(tile != null && network != null) {
-
-            switch(direction) {
-
-                case DOWN: {
-
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
-
-                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
-
-                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                                network.addConductor((TileMagicConduitMoving) tile);
-                            }
-                        }
-                        else {
-
-                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                            network.addConductor((TileMagicConduitMoving) tile);
-                        }
-                    }
-                    break;
-                }
-
-                case EAST:{
-
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
-
-                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
-
-                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                                network.addConductor((TileMagicConduitMoving) tile);
-                            }
-                        }
-                        else {
-
-                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                            network.addConductor((TileMagicConduitMoving) tile);
-                        }
-                    }
-                    break;
-                }
-                case NORTH: {
-
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
-
-                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
-
-                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                                network.addConductor((TileMagicConduitMoving) tile);
-                            }
-                        }
-                        else {
-
-                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                            network.addConductor((TileMagicConduitMoving) tile);
-                        }
-                    }
-                    break;
-                }
-                case SOUTH: {
-
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
-
-                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
-
-                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                                network.addConductor((TileMagicConduitMoving) tile);
-                            }
-                        }
-                        else {
-
-                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                            network.addConductor((TileMagicConduitMoving) tile);
-                        }
-                    }
-                    break;
-
-                }
-                case UP: {
-
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
-
-                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
-
-                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                                network.addConductor((TileMagicConduitMoving) tile);
-                            }
-                        }
-                        else {
-
-                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                            network.addConductor((TileMagicConduitMoving) tile);
-                        }
-                    }
-                    break;
-                }
-                case WEST: {
-
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        if(((TileMagicConduitMoving) tile).getNetwork() != null) {
-
-                            if(((TileMagicConduitMoving)tile).network.getAge() < this.network.getAge()) {
-
-                                ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                                network.addConductor((TileMagicConduitMoving) tile);
-                            }
-                        }
-                        else {
-
-                            ((TileMagicConduitMoving)tile).overrideNetwork(network);
-                            network.addConductor((TileMagicConduitMoving) tile);
-                        }
-                    }
-                    break;
-                }
-                case UNKNOWN:
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
-
-    public void addSourceAround(){
-        addSourceAround(ForgeDirection.DOWN);
-        addSourceAround(ForgeDirection.UP);
-        addSourceAround(ForgeDirection.NORTH);
-        addSourceAround(ForgeDirection.SOUTH);
-        addSourceAround(ForgeDirection.WEST);
-        addSourceAround(ForgeDirection.EAST);
-    }
-
-    public void addSourceAround(ForgeDirection direction){
-
-        TileEntity tile = worldObj.getBlockTileEntity(this.translateDirectionToCoords(direction)[0], this.translateDirectionToCoords(direction)[1], this.translateDirectionToCoords(direction)[2]);
-
-        if(tile != null && network != null) {
-
-            switch(direction) {
-
-                case DOWN: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-
-                    }
-                    break;
-                }
-
-                case EAST:{
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-
-                    }
-                    break;
-                }
-                case NORTH: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-
-                    }         
-                    break;
-                }
-                case SOUTH: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-
-                    }
-                    break;
-
-                }
-                case UP: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-
-                    }
-                    break;
-                }
-                case WEST: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).outputPower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(network);
-                                network.addSource((IPowerMisc) tile);
-                            }
-                        }
-
-
-                    }
-                    break;
-                }
-                case UNKNOWN:
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
-
-    public void addSinkAround(){
-        addSinkAround(ForgeDirection.DOWN);
-        addSinkAround(ForgeDirection.UP);
-        addSinkAround(ForgeDirection.NORTH);
-        addSinkAround(ForgeDirection.SOUTH);
-        addSinkAround(ForgeDirection.WEST);
-        addSinkAround(ForgeDirection.EAST);
-    }
-
-    public void addSinkAround(ForgeDirection direction){
-
-        TileEntity tile = worldObj.getBlockTileEntity(this.translateDirectionToCoords(direction)[0], this.translateDirectionToCoords(direction)[1], this.translateDirectionToCoords(direction)[2]);
-
-        if(tile != null && network != null) {
-
-            switch(direction) {
-
-                case DOWN: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                this.getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                    }
-                    break;
-                }
-
-                case EAST:{
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                this.getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                    }
-                    break;
-                }
-                case NORTH: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                this.getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                    }
-                    break;
-                }
-                case SOUTH: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                this.getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                    }
-                    break;
-
-                }
-                case UP: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                this.getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                    }
-                    break;
-                }
-                case WEST: {
-
-                    if(tile instanceof IPowerMisc) {
-
-                        if(((IPowerMisc)tile).getNetwork() == null) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                        else if(((IPowerMisc)tile).getNetwork().getAge() < this.getNetwork().getAge()) {
-
-                            if(((IPowerMisc)tile).recievePower()) {
-
-                                ((IPowerMisc)tile).overrideNetwork(getNetwork());
-                                this.getNetwork().addSink((IPowerMisc) tile);
-                            }
-                        }
-
-                    }
-                    break;
-                }
-                case UNKNOWN:
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
 
     protected long ticks = 0;
+    
     public void updateEntity(){
 
-        if(network != null)
+        if(network != null) {
             network.updateNetwork();
-
+        }
+        
         ticks++;
         if(ticks == 20){
             updatePerSecond();

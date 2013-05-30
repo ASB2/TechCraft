@@ -40,32 +40,32 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
 
         if(tile.decideRender(ForgeDirection.DOWN)){
             modelMoving.renderBottom();
-            modelGear.renderDown(d,d1,d2);
+            //modelGear.renderDown(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.UP)){
             modelMoving.renderTop();
-            modelGear.renderUp(d,d1,d2);
+           // modelGear.renderUp(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.WEST)){
             modelMoving.renderLeft();
-            modelGear.renderWest(d,d1,d2);
+            //modelGear.renderWest(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.EAST)){
             modelMoving.renderRight();
-            modelGear.renderEast(d,d1,d2);
+            //modelGear.renderEast(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.SOUTH)){
             modelMoving.renderFront();
-            modelGear.renderSouth(d,d1,d2);
+           // modelGear.renderSouth(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.NORTH)){
             modelMoving.renderBack();
-            modelGear.renderNorth(d,d1,d2);
+            //modelGear.renderNorth(d,d1,d2);
         }
 
         decideRender(ForgeDirection.DOWN, tile);
@@ -105,7 +105,8 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
                         if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
                             modelExporting.renderBottom();
                         }
-                        if(tile instanceof IPowerStorage){
+                        if(tile instanceof IPowerStorage) {
+                            
                             modelMoving.renderBottom();
                         }
                         return true;
