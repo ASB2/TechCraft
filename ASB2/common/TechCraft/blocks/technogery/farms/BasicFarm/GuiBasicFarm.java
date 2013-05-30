@@ -25,7 +25,7 @@ public class GuiBasicFarm extends GuiContainer{
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
         
-        this.mc.renderEngine.bindTexture(TEXTURES.BASIC_FARM);
+        this.mc.renderEngine.bindTexture(TEXTURES.GUI_DEFAULT);
         
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;

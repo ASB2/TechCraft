@@ -13,7 +13,7 @@ public class ContainerTCFurnace extends Container{
     public ContainerTCFurnace(InventoryPlayer par1InventoryPlayer, TileTCFurnace tileEntity){ 
 
         this.addSlotToContainer(new Slot(tileEntity, 0, 56, 32));
-        this.addSlotToContainer(new Slot(tileEntity, 1, 116,35));
+        this.addSlotToContainer(new Slot(tileEntity, 1, 116,32));
 
         for (int i = 0; i < 3; i++)
         {

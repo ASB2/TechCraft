@@ -12,23 +12,7 @@ public class ContainerBasicFarm extends Container{
 
     public ContainerBasicFarm(InventoryPlayer par1InventoryPlayer, TileBasicFarm tileEntity){
         
-        this.addSlotToContainer(new Slot(tileEntity, 0, 13,40));
-        this.addSlotToContainer(new Slot(tileEntity, 1, 31,40));
-        this.addSlotToContainer(new Slot(tileEntity, 2, 13,58));
-        this.addSlotToContainer(new Slot(tileEntity, 3, 31,58));
-        
-        this.addSlotToContainer(new Slot(tileEntity, 4, 52,40));
-        this.addSlotToContainer(new Slot(tileEntity, 5, 70,40));
-        this.addSlotToContainer(new Slot(tileEntity, 6, 52,58));
-        this.addSlotToContainer(new Slot(tileEntity, 7, 70,58));
-        
-        this.addSlotToContainer(new Slot(tileEntity, 8, 91,40));
-        this.addSlotToContainer(new Slot(tileEntity, 9, 109,40));
-        this.addSlotToContainer(new Slot(tileEntity, 10, 91,58));
-        this.addSlotToContainer(new Slot(tileEntity, 11, 109,58));
-        
-        this.addSlotToContainer(new Slot(tileEntity, 12, 135,17));
-        this.addSlotToContainer(new Slot(tileEntity, 13, 135,48));
+        //this.addSlotToContainer(new Slot(tileEntity, 0, 13,40));    
         
 
         for (int i = 0; i < 3; i++)

@@ -2,7 +2,6 @@ package TechCraft.blocks.technogery.tcFurnace;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -24,26 +23,31 @@ public class GuiTCFurnace extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int x, int y){
         final String invTitle = "TC Furnace";
         fontRenderer.drawString(invTitle, xSize / 2 - fontRenderer.getStringWidth(invTitle) / 2, 6, 4210752);
-        fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y){
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(TEXTURES.TC_FURNACE);
+        this.mc.renderEngine.bindTexture(TEXTURES.GUI_DEFAULT);
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
+        
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
+        
+        drawTexturedModalRect(posX + 56 - 1, posY + 32 - 1, 176, 32, 18, 18);
+        drawTexturedModalRect(posX + 111, posY + 27, 226, 4, 26, 26);
+        
+        drawTexturedModalRect(posX + 79, posY + 32, 200, 14, 24, 17);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
+
+        drawTexturedModalRect(posX + 4, posY + 5, 178, 127, 48, 75);
 
         if(tileEntity.getPowerStored() > 0) {
 
-            int i3;
-            i3 = tileEntity.getPowerScaled(61);
-            
-            drawTexturedModalRect(posX+10, posY+11, 177, 32, 21, i3);
+            int i1 = tileEntity.getPowerScaled(75);
+            drawTexturedModalRect(posX + 4, posY + 5, 178, 52, 49, i1);
         }
     }
 
