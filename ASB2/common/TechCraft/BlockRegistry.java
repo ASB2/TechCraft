@@ -16,7 +16,7 @@ import TechCraft.blocks.BlockWaterCrystalOre;
 import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
-import TechCraft.blocks.tankBasic.BlockTank;
+import TechCraft.blocks.tanks.BlockTCTank;
 import TechCraft.blocks.tcRunes.BlockBasicRune;
 import TechCraft.blocks.tcRunes.BlockRuneBase;
 import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
@@ -73,7 +73,7 @@ public class BlockRegistry {
     
     public static TechCraftContainers BlockTCInfuser;
     public static TechCraftContainers BlockTCTeleporter;    
-    public static TechCraftContainers BlockTank;
+    public static TechCraftContainers BlockTCTank;
     public static TechCraftContainers BlockTCGrinder;
     
 
@@ -235,11 +235,11 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockTCTeleporter, "TC Teleporter");
         MinecraftForge.setBlockHarvestLevel(BlockTCTeleporter, "pickaxe", 2);
         
-        BlockTank = new BlockTank(526, Material.rock);
-        BlockTank.setUnlocalizedName("BlockTank");
-        GameRegistry.registerBlock(BlockTank, "ASB2_BlockTank");
-        LanguageRegistry.addName(BlockTank, "Test Tank");
-        MinecraftForge.setBlockHarvestLevel(BlockTank, "pickaxe", 2);
+        BlockTCTank = new BlockTCTank(526, Material.rock);
+        BlockTCTank.setUnlocalizedName("BlockTCTank");
+        GameRegistry.registerBlock(BlockTCTank, "ASB2_BlockTCTank");
+        LanguageRegistry.addName(BlockTCTank, "TC Tank");
+        MinecraftForge.setBlockHarvestLevel(BlockTCTank, "pickaxe", 2);
         
         BlockTCGrinder = new BlockTCGrinder(527, Material.rock);
         BlockTCGrinder.setUnlocalizedName("BlockTCGrinder");

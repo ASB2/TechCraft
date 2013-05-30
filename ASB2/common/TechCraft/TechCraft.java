@@ -2,7 +2,7 @@ package TechCraft;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-import TechCraft.blocks.tankBasic.TileTank;
+import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
@@ -119,7 +119,7 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTCTeleporter.class, "TileTCTeleporter");
 
-        GameRegistry.registerTileEntity(TileTank.class, "TileTank");
+        GameRegistry.registerTileEntity(TileTCTank.class, "TileTCTank");
 
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

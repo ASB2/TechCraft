@@ -19,6 +19,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
     public boolean onItemUseFirst(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){
 
         if(!player.isSneaking()) {
+            
             if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
 
                 IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
@@ -57,8 +58,8 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
                 ITCTankContainer mTile = (ITCTankContainer) world.getBlockTileEntity(x, y, z);
 
-                player.sendChatToPlayer("Tank has liquid " + mTile.getLiquidStackName());
-                player.sendChatToPlayer("Tank has a capasity of " + mTile.getCapasity());
+                player.sendChatToPlayer("Tank has liquid " + mTile.getTank()[0].getLiquidName());
+                player.sendChatToPlayer("Tank has a capasity of " + mTile.getTank()[0].getCapacity());
             }  
         }
 

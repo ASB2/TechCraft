@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TechCraft.blocks.TechCraftTile;
+import TechCraft.power.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,9 +25,9 @@ public class ItemTestItem extends TechCraftItems {
     public boolean onItemUseFirst(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
 
         int power = 10;
-        if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile){
+        if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
 
-            TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
+            IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
 
             if(!player.isSneaking()){
 
@@ -56,10 +56,10 @@ public class ItemTestItem extends TechCraftItems {
         
         int power = 10;
         
-        if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile) {
+        if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc) {
             
 
-            TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
+            IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
 
             if(!player.isSneaking()) {
 

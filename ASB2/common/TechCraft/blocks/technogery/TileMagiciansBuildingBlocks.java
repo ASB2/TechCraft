@@ -5,11 +5,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSource;
-import TechCraft.power.PowerNetwork;
 
 public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPowerSource {
-
-    PowerNetwork network;
     
     int powerStored = 0;
     int powerMax = 25;
@@ -91,7 +88,7 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
+
         return "Magician's Building Block";
     }
     @Override
@@ -105,15 +102,4 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
         super.writeToNBT(tagCompound);
         tagCompound.setInteger("powerStored", powerStored);
     }
-    
-    public PowerNetwork getNetwork(){
-        
-        return network;
-    }
-    
-    public void overrideNetwork(PowerNetwork net){
-        
-        this.network = net;
-    }
-
 }

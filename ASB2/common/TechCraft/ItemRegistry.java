@@ -87,30 +87,31 @@ public class ItemRegistry {
     public static void init() {
 
         ItemAirCrystalShard = new ItemAirCrystalShard(5001);
-        ItemAirCrystalShard.setUnlocalizedName("ItemAirCrystalShard");
+        ItemAirCrystalShard.setUnlocalizedName("ASB2_ItemAirCrystalShard");
         LanguageRegistry.addName(ItemAirCrystalShard, "Air Crystal Shard");
 
         ItemEarthCrystalShard = new ItemEarthCrystalShard(5002);
-        ItemEarthCrystalShard.setUnlocalizedName("ItemEarthCrystalShard");
+        ItemEarthCrystalShard.setUnlocalizedName("ASB2_ItemEarthCrystalShard");
         LanguageRegistry.addName(ItemEarthCrystalShard, "Earth Crystal Shard");
 
         ItemFireCrystalShard = new ItemFireCrystalShard(5003);
-        ItemFireCrystalShard.setUnlocalizedName("ItemFireCrystalShard");
+        ItemFireCrystalShard.setUnlocalizedName("ASB2_ItemFireCrystalShard");
         LanguageRegistry.addName(ItemFireCrystalShard, "Fire Crystal Shard");
 
         ItemWaterCrystalShard = new ItemWaterCrystalShard(5004);
-        ItemWaterCrystalShard.setUnlocalizedName("ItemWaterCrystalShard");
+        ItemWaterCrystalShard.setUnlocalizedName("ASB2_ItemWaterCrystalShard");
         LanguageRegistry.addName(ItemWaterCrystalShard, "Water Crystal Shard");
 
         ItemGarnet = new ItemGarnet(5005);
+        ItemGarnet.setUnlocalizedName("ASB2_ItemGarnet");
         LanguageRegistry.addName(ItemGarnet, "Garnet");
 
         ItemEnergyCrystalShard = new ItemEnergyCrystalShard(5006);
-        ItemEnergyCrystalShard.setUnlocalizedName("ItemEnergyCrystalShard");
+        ItemEnergyCrystalShard.setUnlocalizedName("ASB2_ItemEnergyCrystalShard");
         LanguageRegistry.addName(ItemEnergyCrystalShard, "Energy Crystal Shard");
 
         ItemZycrantianIngot = new ItemZycrantianIngot(5007);
-        ItemZycrantianIngot.setUnlocalizedName("ItemZycrantianIngot");
+        ItemZycrantianIngot.setUnlocalizedName("ASB2_ItemZycrantianIngot");
         LanguageRegistry.addName(ItemZycrantianIngot, "Zycrantian Ingot");
         
         ItemTestItem = new ItemTestItem(5008);
@@ -118,113 +119,113 @@ public class ItemRegistry {
         LanguageRegistry.addName(ItemTestItem, "Test Item");
         
         ItemTechnoMagicReader = new ItemTechnoMagicReader(5009);
-        ItemTechnoMagicReader.setUnlocalizedName("ItemTechnoMagicReader");
+        ItemTechnoMagicReader.setUnlocalizedName("ASB2_ItemTechnoMagicReader");
         LanguageRegistry.addName(ItemTechnoMagicReader, "TechnoMagic Reader");
         
         ItemTechMultiTool = new ItemTechMultiTool(5010);
-        ItemTechMultiTool.setUnlocalizedName("ItemTechMultiTool");
+        ItemTechMultiTool.setUnlocalizedName("ASB2_ItemTechMultiTool");
         LanguageRegistry.addName(ItemTechMultiTool, "Techergy Multi-Tool");
         
         ItemTeleporter = new ItemTeleporter(5011);
-        ItemTeleporter.setUnlocalizedName("ItemTeleporter");
+        ItemTeleporter.setUnlocalizedName("ASB2_ItemTeleporter");
         LanguageRegistry.addName(ItemTeleporter, "Teleporter");
 
         //Charcoal Items
         ItemCharcoalAxe = new ItemCharcoalAxe(5012, EnumToolMaterial.STONE);
-        ItemCharcoalAxe.setUnlocalizedName("ItemCharcoalAxe");
+        ItemCharcoalAxe.setUnlocalizedName("ASB2_ItemCharcoalAxe");
         LanguageRegistry.addName(ItemCharcoalAxe, "Charcoal Axe");
         
         ItemCharcoalPickaxe = new ItemCharcoalPickaxe(5013, EnumToolMaterial.STONE);
-        ItemCharcoalPickaxe.setUnlocalizedName("ItemCharcoalPickaxe");
+        ItemCharcoalPickaxe.setUnlocalizedName("ASB2_ItemCharcoalPickaxe");
         LanguageRegistry.addName(ItemCharcoalPickaxe, "Charcoal Pickaxe");
         
         ItemCharcoalShovel = new ItemCharcoalShovel(5014, EnumToolMaterial.STONE);
-        ItemCharcoalShovel.setUnlocalizedName("ItemCharcoalShovel");
+        ItemCharcoalShovel.setUnlocalizedName("ASB2_ItemCharcoalShovel");
         LanguageRegistry.addName(ItemCharcoalShovel, "Charcoal Shovel");
         
         ItemCharcoalSword = new ItemCharcoalSword(5015, EnumToolMaterial.STONE);
-        ItemCharcoalSword.setUnlocalizedName("ItemCharcoalSword");
+        ItemCharcoalSword.setUnlocalizedName("ASB2_ItemCharcoalSword");
         LanguageRegistry.addName(ItemCharcoalSword, "Charcoal Sword");
         
         //Zycrantian Items
         
         ItemZycrantianAxe = new ItemZycrantianAxe(5016, EnumToolMaterial.EMERALD);
-        ItemZycrantianAxe.setUnlocalizedName("ItemZycrantianAxe");
+        ItemZycrantianAxe.setUnlocalizedName("ASB2_ItemZycrantianAxe");
         LanguageRegistry.addName(ItemZycrantianAxe, "Zycrantian Axe");
         
         ItemZycrantianPickaxe = new ItemZycrantianPickaxe(5017, EnumToolMaterial.EMERALD);
-        ItemZycrantianPickaxe.setUnlocalizedName("ItemZycrantianPickaxe");
+        ItemZycrantianPickaxe.setUnlocalizedName("ASB2_ItemZycrantianPickaxe");
         LanguageRegistry.addName(ItemZycrantianPickaxe, "Zycrantian Pickaxe");
         
         ItemZycrantianShovel = new ItemZycrantianShovel(5018, EnumToolMaterial.EMERALD);
-        ItemZycrantianShovel.setUnlocalizedName("ItemZycrantianShovel");
+        ItemZycrantianShovel.setUnlocalizedName("ASB2_ItemZycrantianShovel");
         LanguageRegistry.addName(ItemZycrantianShovel, "Zycrantian Shovel");
         
         ItemZycrantianSword = new ItemZycrantianSword(5019, EnumToolMaterial.EMERALD);
-        ItemZycrantianSword.setUnlocalizedName("ItemZycrantianSword");
+        ItemZycrantianSword.setUnlocalizedName("ASB2_ItemZycrantianSword");
         LanguageRegistry.addName(ItemZycrantianSword, "Zycrantian Sword");
         
         ItemZycrantianHoe = new ItemZycrantianHoe(5020, EnumToolMaterial.EMERALD);
-        ItemZycrantianHoe.setUnlocalizedName("ItemZycrantianHoe");
+        ItemZycrantianHoe.setUnlocalizedName("ASB2_ItemZycrantianHoe");
         LanguageRegistry.addName(ItemZycrantianHoe, "Zycrantian Hoe");
         
         //Zycrantian Armor
         
         ItemZycrantianHelmet = new ItemZycrantianHelmet(5021, EnumArmorMaterial.DIAMOND, CommonProxy.addArmor("ItemZycrantianHelmet"), 0);
-        ItemZycrantianHelmet.setUnlocalizedName("ItemZycrantianHelmet");
+        ItemZycrantianHelmet.setUnlocalizedName("ASB2_ItemZycrantianHelmet");
         LanguageRegistry.addName(ItemZycrantianHelmet, "Zycrantian Helmet");
         
         ItemZycrantianChestPlate = new ItemZycrantianChestPlate(5022, EnumArmorMaterial.DIAMOND, CommonProxy.addArmor("ItemZycrantianChestPlate"), 1);
-        ItemZycrantianChestPlate.setUnlocalizedName("ItemZycrantianChestPlate");
+        ItemZycrantianChestPlate.setUnlocalizedName("ASB2_ItemZycrantianChestPlate");
         LanguageRegistry.addName(ItemZycrantianChestPlate, "Zycrantian Chestplate");
         
         ItemZycrantianPants = new ItemZycrantianPants(5023, EnumArmorMaterial.DIAMOND, CommonProxy.addArmor("ItemZycrantianPants"), 2);
-        ItemZycrantianPants.setUnlocalizedName("ItemZycrantianPants");
+        ItemZycrantianPants.setUnlocalizedName("ASB2_ItemZycrantianPants");
         LanguageRegistry.addName(ItemZycrantianPants, "Zycrantian Pants");
         
         ItemZycrantianBoots = new ItemZycrantianBoots(5024, EnumArmorMaterial.DIAMOND, CommonProxy.addArmor("ItemZycrantianBoots"), 3);
-        ItemZycrantianBoots.setUnlocalizedName("ItemZycrantianBoots");
+        ItemZycrantianBoots.setUnlocalizedName("ASB2_ItemZycrantianBoots");
         LanguageRegistry.addName(ItemZycrantianBoots, "Zycrantian Boots");
         
         
         //Garnet Items
         
         ItemGarnetAxe = new ItemGarnetAxe(5025, EnumToolMaterial.IRON);
-        ItemGarnetAxe.setUnlocalizedName("ItemGarnetAxe");
+        ItemGarnetAxe.setUnlocalizedName("ASB2_ItemGarnetAxe");
         LanguageRegistry.addName(ItemGarnetAxe, "Garnet Axe");
         
         ItemGarnetPickaxe = new ItemGarnetPickaxe(5026, EnumToolMaterial.IRON);
-        ItemGarnetPickaxe.setUnlocalizedName("ItemGarnetPickaxe");
+        ItemGarnetPickaxe.setUnlocalizedName("ASB2_ItemGarnetPickaxe");
         LanguageRegistry.addName(ItemGarnetPickaxe, "Garnet Pickaxe");
         
         ItemGarnetShovel = new ItemGarnetShovel(5027, EnumToolMaterial.IRON);
-        ItemGarnetShovel.setUnlocalizedName("ItemGarnetShovel");
+        ItemGarnetShovel.setUnlocalizedName("ASB2_ItemGarnetShovel");
         LanguageRegistry.addName(ItemGarnetShovel, "Garnet Shovel");
         
         ItemGarnetSword = new ItemGarnetSword(5028, EnumToolMaterial.IRON);
-        ItemGarnetSword.setUnlocalizedName("ItemGarnetSword");
+        ItemGarnetSword.setUnlocalizedName("ASB2_ItemGarnetSword");
         LanguageRegistry.addName(ItemGarnetSword, "Garnet Sword");
         
         ItemGarnetHoe = new ItemGarnetHoe(5029, EnumToolMaterial.IRON);
-        ItemGarnetHoe.setUnlocalizedName("ItemGarnetHoe");
+        ItemGarnetHoe.setUnlocalizedName("ASB2_ItemGarnetHoe");
         LanguageRegistry.addName(ItemGarnetHoe, "Garnet Hoe");
         
         //Regular
         
         ItemEnergyBlob = new ItemEnergyBlob(5030);
-        ItemEnergyBlob.setUnlocalizedName("ItemEnergyBlob");
+        ItemEnergyBlob.setUnlocalizedName("ASB2_ItemEnergyBlob");
         LanguageRegistry.addName(ItemEnergyBlob, "TC Energy Blob");
         
         ItemRuneTest = new ItemRuneTest(5031);
-        ItemRuneTest.setUnlocalizedName("ItemRuneTest");
+        ItemRuneTest.setUnlocalizedName("ASB2_ItemRuneTest");
         LanguageRegistry.addName(ItemRuneTest, "Test Rune");
         
         ItemExplosionRune = new ItemExplosionRune(5032);
-        ItemExplosionRune.setUnlocalizedName("ItemExplosionRune");
+        ItemExplosionRune.setUnlocalizedName("ASB2_ItemExplosionRune");
         LanguageRegistry.addName(ItemExplosionRune, "Explosion Rune");
         
         ItemRealityDifferentiationDrive = new ItemExplosionRune(5033);
-        ItemRealityDifferentiationDrive.setUnlocalizedName("ItemRealityDifferentiationDrive");
+        ItemRealityDifferentiationDrive.setUnlocalizedName("ASB2_ItemRealityDifferentiationDrive");
         LanguageRegistry.addName(ItemRealityDifferentiationDrive, "Reality Differentiation Drive");
     }
 

@@ -20,6 +20,7 @@ import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcTeleporter.ContainerTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import cpw.mods.fml.common.network.IGuiHandler;
+import TechCraft.blocks.tanks.*;
 
 public class CommonProxy implements IGuiHandler{
 
@@ -53,6 +54,7 @@ public class CommonProxy implements IGuiHandler{
                 case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
                 case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
                 case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
+                case 8:return new ContainerTCTank(player.inventory, (TileTCTank)tileEntity);
             }
         }
         return null;

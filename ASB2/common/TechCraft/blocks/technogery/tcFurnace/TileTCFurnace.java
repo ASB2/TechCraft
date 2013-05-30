@@ -311,7 +311,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
             }     
         }
 
-        if(this.tileItemStacks[0].equals(itemStack)) {
+        else if(this.tileItemStacks[0].equals(itemStack)) {
 
             return true;
         }
