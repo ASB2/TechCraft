@@ -2,11 +2,10 @@ package TechCraft.blocks.technogery.tcInfuser;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import TechCraft.lib.TEXTURES;
+import TechCraft.lib.GUI;
 
 public class GuiTCInfuser extends GuiContainer {
 
-    @SuppressWarnings("unused")
     private TileTCInfuser tileEntity;
 
     public final int xSizeOfTexture = 176;
@@ -26,16 +25,20 @@ public class GuiTCInfuser extends GuiContainer {
 
         //GL11.glColor4f(1.0F, 0F, 0F, 1F);
 
-        this.mc.renderEngine.bindTexture(TEXTURES.TC_INFUSER);
+        this.mc.renderEngine.bindTexture(GUI.TC_INFUSER);
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        //This renders the energy gauge. Lower the last number to increase the energy displayed
-        //int i1;
-        //i1 = tileEntity.getMagicStoredScaled(66);
-        drawTexturedModalRect(posX+9,posY+8,176,66,52,0);
+
+        drawTexturedModalRect(posX + 4, posY + 5, 178, 127, 48, 75);
+
+        if(tileEntity.getPowerStored() > 0) {
+
+            int i1 = tileEntity.getPowerScaled(75);
+            drawTexturedModalRect(posX + 4, posY + 5, 178, 52, 49, i1);
+        }
     }
 
 

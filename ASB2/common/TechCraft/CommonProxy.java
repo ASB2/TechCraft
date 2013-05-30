@@ -42,17 +42,19 @@ public class CommonProxy implements IGuiHandler{
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        switch(ID){
-            case 0: return new ContainerBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
-            case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
-            case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
-            case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
-            case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity); 
-            case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
-            case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-            case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
-        }
+        if(tileEntity != null) {
 
+            switch(ID){
+                case 0: return new ContainerBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
+                case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
+                case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
+                case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
+                case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity); 
+                case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
+                case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
+                case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
+            }
+        }
         return null;
     }
 

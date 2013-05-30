@@ -36,6 +36,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     }
 
     public void updateEntity() {
+        
         super.managePowerAll(this, powerInput(), false);
         super.updateEntity();
         
@@ -62,9 +63,9 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
                 y = (int)teleporter.getYCoord(tileItemStacks[0]);
                 z = (int)teleporter.getZCoord(tileItemStacks[0]);
 
-                x = x -.5;
+                x = x +=.5;
                 y = y + 1;
-                z = z -.5;
+                z = z +.5;
 
                 coordsSet = true;
             }

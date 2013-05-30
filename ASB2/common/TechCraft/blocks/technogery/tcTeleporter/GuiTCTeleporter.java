@@ -2,7 +2,7 @@ package TechCraft.blocks.technogery.tcTeleporter;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import TechCraft.lib.TEXTURES;
+import TechCraft.lib.*;
 
 public class GuiTCTeleporter extends GuiContainer {
 
@@ -27,22 +27,23 @@ public class GuiTCTeleporter extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y){
+    protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
 
-        //GL11.glColor4f(1.0F, 0F, 0F, 1F);
-
-        this.mc.renderEngine.bindTexture(TEXTURES.BASIC_RUNE_GUI);
+        this.mc.renderEngine.bindTexture(GUI.GUI_DEFAULT);
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        //This renders the energy gauge. Lower the last number to increase the energy displayed
+        drawTexturedModalRect(posX + 79, posY + 37, 176, 32, 18, 18);
         
-        drawTexturedModalRect(posX+10,posY+20,200,42,21,59);
-        int i1;
-        i1 = tileEntity.getPowerScaled(59);
-        drawTexturedModalRect(posX+10,posY+20,178,42,21,i1);
+        drawTexturedModalRect(posX + 4, posY + 5, 178, 127, 48, 75);
+
+        if(tileEntity.getPowerStored() > 0) {
+
+            int i1 = tileEntity.getPowerScaled(75);
+            drawTexturedModalRect(posX + 4, posY + 5, 178, 52, 49, i1);
+        }
     }
 
 

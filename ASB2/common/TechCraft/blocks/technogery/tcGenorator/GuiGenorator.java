@@ -31,11 +31,24 @@ public class GuiGenorator extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y){
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(TEXTURES.TC_GENORATOR);
+        this.mc.renderEngine.bindTexture(GUI.TC_GENORATOR);
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
+        
+        drawTexturedModalRect(posX + 30 - 1, posY + 17 - 1, 176, 32, 18, 18);        
+        drawTexturedModalRect(posX + 48 - 1, posY + 17 - 1, 176, 32, 18, 18);        
+        drawTexturedModalRect(posX + 66 - 1, posY + 17 - 1, 176, 32, 18, 18);
+        
+        drawTexturedModalRect(posX + 30 - 1, posY + 35 - 1, 176, 32, 18, 18);        
+        drawTexturedModalRect(posX + 48 - 1, posY + 35 - 1, 176, 32, 18, 18);        
+        drawTexturedModalRect(posX + 66 - 1, posY + 35 - 1, 176, 32, 18, 18);
+        
+        drawTexturedModalRect(posX + 30 - 1, posY + 53 - 1, 176, 32, 18, 18);        
+        drawTexturedModalRect(posX + 48 - 1, posY + 53 - 1, 176, 32, 18, 18);        
+        drawTexturedModalRect(posX + 66 - 1, posY + 53 - 1, 176, 32, 18, 18);
+
         //This renders the energy gauge. Lower the last number to increase the energy displayed
 
         if(tileEntity.isBurning) {
@@ -45,7 +58,7 @@ public class GuiGenorator extends GuiContainer {
 
             int i3;
             i3 = tileEntity.getMagicScaled(69);
-            drawTexturedModalRect(posX+99,posY+7,176,27,i3,30);
+            drawTexturedModalRect(posX+99, posY + 7, 55, 169, i3, 30);
         }
     }
 

@@ -5,7 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.lib.TEXTURES;
+import TechCraft.lib.*;
 
 public class GuiTCGrinder extends GuiContainer {
 
@@ -28,7 +28,7 @@ public class GuiTCGrinder extends GuiContainer {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(TEXTURES.GUI_DEFAULT);
+        this.mc.renderEngine.bindTexture(GUI.GUI_DEFAULT);
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;

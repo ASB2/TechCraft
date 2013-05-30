@@ -2,8 +2,7 @@ package TechCraft.blocks.technogery.farms.BasicFarm;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import TechCraft.lib.TEXTURES;
-
+import TechCraft.lib.*;
 
 public class GuiBasicFarm extends GuiContainer{
 
@@ -25,7 +24,7 @@ public class GuiBasicFarm extends GuiContainer{
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y) {
         
-        this.mc.renderEngine.bindTexture(TEXTURES.GUI_DEFAULT);
+        this.mc.renderEngine.bindTexture(GUI.GUI_DEFAULT);
         
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;

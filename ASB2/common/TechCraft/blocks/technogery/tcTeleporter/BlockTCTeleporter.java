@@ -6,8 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
-import TechCraft.blocks.*;
-import TechCraft.items.ItemTeleporter;
+import TechCraft.blocks.TechCraftContainers;
 
 public class BlockTCTeleporter extends TechCraftContainers {
 
@@ -23,10 +22,6 @@ public class BlockTCTeleporter extends TechCraftContainers {
     {
         if(player.isSneaking())
             return false;
-
-        if(player.getCurrentEquippedItem().getItem() instanceof ItemTeleporter && !world.isRemote){
-            player.sendChatToPlayer("Put it in the middle");
-        }
         
         player.openGui(TechCraft.instance, 6, world, x, y, z);
         return true;
