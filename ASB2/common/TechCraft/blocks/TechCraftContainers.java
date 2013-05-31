@@ -39,19 +39,22 @@ public abstract class TechCraftContainers extends BlockContainer{
 
             if(!(TechCraftTile.getTilesNextTo(x, y, z, world) > 0)) {
 
-                if(tile instanceof TileMagicConduitMoving) {
+                if(tileT.getNetwork() != null) {
+                    
+                    if(tile instanceof TileMagicConduitMoving) {
 
-                    tileT.getNetwork().removeConductor((TileMagicConduitMoving)tile);
-                }
+                        tileT.getNetwork().removeConductor((TileMagicConduitMoving)tile);
+                    }
 
-                if(tileT.recievePower()) {
+                    if(tileT.recievePower()) {
 
-                    tileT.getNetwork().removeSink(tile);
-                }
+                        tileT.getNetwork().removeSink(tile);
+                    }
 
-                if(tileT.outputPower()) {
+                    if(tileT.outputPower()) {
 
-                    tileT.getNetwork().removeSource(tile);
+                        tileT.getNetwork().removeSource(tile);
+                    }
                 }
             }
             else{

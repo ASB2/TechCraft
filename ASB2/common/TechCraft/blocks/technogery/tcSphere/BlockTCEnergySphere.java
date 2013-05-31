@@ -14,14 +14,8 @@ public class BlockTCEnergySphere extends TechCraftContainers{
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        // TODO Auto-generated method stub
-        return new TileTCEnergySphere();
-    }
-    
-    @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData) {
 
-        return metaData;
+        return new TileTCEnergySphere();
     }
     
     /**

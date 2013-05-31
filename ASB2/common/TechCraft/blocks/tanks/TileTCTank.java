@@ -212,7 +212,7 @@ public class TileTCTank extends TechCraftTile implements ITCTankContainer, IInve
 
     @Override
     public LiquidTank[] getTank() {
-        // TODO Auto-generated method stub
+
         return new LiquidTank[]{tank};
     }
 

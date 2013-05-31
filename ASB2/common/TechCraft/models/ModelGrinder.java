@@ -1,7 +1,5 @@
 package TechCraft.models;
 
-import java.util.Random;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.AdvancedModelLoader;

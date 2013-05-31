@@ -57,8 +57,6 @@ public class PowerNetwork {
 
         age++;
 
-        //if(updateNetworkSize) {
-
         for(int i = 0; i < conductors.size(); i++) {
 
             if(conductors.get(i) == null) { 
@@ -106,24 +104,26 @@ public class PowerNetwork {
             this.addSourceAround(powerSink.get(i));
             this.addSinkAround(powerSink.get(i));
         }
-        //}
 
-        if(powerSource.size() > 0 && powerSink.size() > 0) {
+        if(conductors.size() > 0) {
 
-            for(int i = 0; i < powerSource.size(); i++) {
+            if(powerSource.size() > 0 && powerSink.size() > 0) {
 
-                for(int z = 0; z < powerSink.size(); z++) {
+                for(int i = 0; i < powerSource.size(); i++) {
 
-                    if(powerSink.get(z) instanceof IPowerMisc && powerSource.get(i) instanceof IPowerMisc) {
+                    for(int z = 0; z < powerSink.size(); z++) {
 
-                        IPowerMisc sink = (IPowerMisc)powerSink.get(z);
-                        IPowerMisc source = (IPowerMisc)powerSource.get(i);
+                        if(powerSink.get(z) instanceof IPowerMisc && powerSource.get(i) instanceof IPowerMisc) {
 
-                        if(sink.getPowerMax() - sink.getPowerStored() >= powerToMove) {
+                            IPowerMisc sink = (IPowerMisc)powerSink.get(z);
+                            IPowerMisc source = (IPowerMisc)powerSource.get(i);
 
-                            if(source.usePower(powerToMove)) {
+                            if(sink.getPowerMax() - sink.getPowerStored() >= powerToMove) {
 
-                                sink.gainPower(powerToMove);
+                                if(source.usePower(powerToMove)) {
+
+                                    sink.gainPower(powerToMove);
+                                }
                             }
                         }
                     }
@@ -377,7 +377,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -394,7 +394,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -403,7 +403,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -419,7 +419,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -428,7 +428,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -444,7 +444,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -453,7 +453,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -470,7 +470,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -479,7 +479,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -495,7 +495,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -504,7 +504,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).outputPower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSource(tile);
+                                    this.addSource(tileI);
                                 }
                             }
 
@@ -548,7 +548,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -557,7 +557,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -574,7 +574,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -583,7 +583,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -599,7 +599,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -608,7 +608,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -624,7 +624,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -633,7 +633,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -650,7 +650,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -659,7 +659,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -675,7 +675,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }
                             }
 
@@ -684,7 +684,7 @@ public class PowerNetwork {
                                 if(((IPowerMisc)tileI).recievePower()) {
 
                                     ((IPowerMisc)tileI).overrideNetwork(this);
-                                    this.addSink(tile);
+                                    this.addSink(tileI);
                                 }                            
                             }
 
