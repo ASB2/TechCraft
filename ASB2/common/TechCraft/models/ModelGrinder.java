@@ -3,21 +3,21 @@ package TechCraft.models;
 import java.util.Random;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.lib.MODELS;
 
-public class ModelEnergySphere extends ModelBase{
+public class ModelGrinder extends ModelBase{
 
     private IModelCustom modelTutBox;
 
-    public ModelEnergySphere() {
+    public ModelGrinder() {
 
-        modelTutBox = AdvancedModelLoader.loadModel(MODELS.ISOSPHERE);
+        modelTutBox = AdvancedModelLoader.loadModel(MODELS.TEST);
     }
 
     public void render() {
@@ -27,18 +27,16 @@ public class ModelEnergySphere extends ModelBase{
     int rotate = 1;
     int updown = 0;
 
-    public void render(TileTCEnergySphere box, double x, double y, double z) {
-        Random rand = new Random();
+    public void render(TileEntity box, double x, double y, double z) {
         
-        updown = (int) (rand.nextFloat() * 360);
-        
+        float scale = 0.05F;
         GL11.glPushMatrix();
 
-        GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f, (float)z + 0.5f);
+        GL11.glTranslatef((float)x + 0.5f, (float)y + 1.5f, (float)z + 0.5f);
 
-        GL11.glScalef(0.5f, 0.5f, 0.5f);
+        GL11.glScalef(scale, scale, scale);
 
-        GL11.glRotatef(updown, updown, updown, updown);
+        //GL11.glRotatef(updown, updown, updown, updown);
 
         this.render();
 

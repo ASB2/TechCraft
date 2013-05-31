@@ -7,11 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 import TechCraft.ITCTankContainer;
-import TechCraft.blocks.TechCraftTile;
+import TechCraft.blocks.*;
+import TechCraft.*;
 
 public class TileTCTank extends TechCraftTile implements ITCTankContainer, IInventory {
 
@@ -48,67 +48,94 @@ public class TileTCTank extends TechCraftTile implements ITCTankContainer, IInve
         }
     }
 
-    /* ITANKCONTAINER */
     @Override
     public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
-
-        return tank.fill(resource, doFill);
-    }
-
-    @Override
-    public ILiquidTank getTank(ForgeDirection direction, LiquidStack liquid) {
-
-        if(liquid == tank.getLiquid()) {
-
-            return tank;
-        }
-
-        if(tank == null){
-
-            return tank;
-        }
-
-        return null;
-    }
-
-
-    @Override
-    public LiquidTank[] getTank() {
-
-        return new LiquidTank[] {tank};
+        
+        return fill(0, resource, doFill);
     }
 
     @Override
     public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-
-        if(tankIndex != 0) {
-
+        
+        if (tankIndex != 0 || resource == null) {
             return 0;
         }
-        else {
-            return tank.fill(resource, doFill);
+
+        resource = resource.copy();
+        int totalUsed = 0;
+        
+        TileTCTank tankToFill = this;
+
+        LiquidStack liquid = tankToFill.tank.getLiquid();
+        if (liquid != null && liquid.amount > 0 && !liquid.isLiquidEqual(resource)) {
+            return 0;
         }
+
+        while (tankToFill != null && resource.amount > 0) {
+            int used = tankToFill.tank.fill(resource, doFill);
+            resource.amount -= used;
+
+            totalUsed += used;
+        }
+        return totalUsed;
     }
 
     @Override
     public LiquidStack drain(ForgeDirection from, int maxEmpty, boolean doDrain) {
-
-        return tank.drain(maxEmpty, doDrain);
+        
+        return drain(0, maxEmpty, doDrain);
     }
 
     @Override
     public LiquidStack drain(int tankIndex, int maxEmpty, boolean doDrain) {
-
-        if(tankIndex != 0)
-            return null;
-
-        return tank.drain(maxEmpty, doDrain);
+        TileTCTank bottom = this;
+        
+        return bottom.tank.drain(maxEmpty, doDrain);
     }
 
     @Override
-    public LiquidTank[] getTanks(ForgeDirection direction) {
+    public ILiquidTank[] getTanks(ForgeDirection direction) {
+        LiquidTank compositeTank = new LiquidTank(tank.getCapacity());
 
-        return new LiquidTank[1];
+        TileTCTank tile = this;
+
+        int capacity = tank.getCapacity();
+
+        if (tile != null && tile.tank.getLiquid() != null) {
+            compositeTank.setLiquid(tile.tank.getLiquid().copy());
+        } else {
+            return new ILiquidTank[]{compositeTank};
+        }
+
+        tile = this;
+
+        while (tile != null) {
+
+            LiquidStack liquid = tile.tank.getLiquid();
+            if (liquid == null || liquid.amount == 0) {
+                // NOOP
+            } else if (!compositeTank.getLiquid().isLiquidEqual(liquid)) {
+                break;
+            } else {
+                compositeTank.getLiquid().amount += liquid.amount;
+            }
+
+            capacity += tile.tank.getCapacity();
+            tile = this;
+        }
+
+        compositeTank.setCapacity(capacity);
+        return new ILiquidTank[]{compositeTank};
+    }
+
+    @Override
+    public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
+        
+        if (direction == ForgeDirection.DOWN && worldObj != null && worldObj.getBlockId(xCoord, yCoord - 1, zCoord) != BlockRegistry.BlockTCTank.blockID) {
+            
+            return tank;
+        }
+        return null;
     }
 
     @Override
@@ -138,7 +165,7 @@ public class TileTCTank extends TechCraftTile implements ITCTankContainer, IInve
     @Override
     public void setInventorySlotContents(int i, ItemStack itemstack) {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
@@ -168,13 +195,13 @@ public class TileTCTank extends TechCraftTile implements ITCTankContainer, IInve
     @Override
     public void openChest() {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
     public void closeChest() {
         // TODO Auto-generated method stub
-
+        
     }
 
     @Override
@@ -182,5 +209,12 @@ public class TileTCTank extends TechCraftTile implements ITCTankContainer, IInve
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public LiquidTank[] getTank() {
+        // TODO Auto-generated method stub
+        return new LiquidTank[]{tank};
+    }
+
 
 }

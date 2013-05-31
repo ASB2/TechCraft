@@ -6,50 +6,24 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
-import TechCraft.models.ModelMagicConduitImportingv2;
+import TechCraft.lib.TEXTURES;
+import TechCraft.models.*;
 
 public class TileEntityRendererMagicConduitImporting extends TileEntitySpecialRenderer{
 
-    private ModelMagicConduitImportingv2 model;
+    private ModelGrinder model;
 
     public TileEntityRendererMagicConduitImporting(){
-        model = new ModelMagicConduitImportingv2();
+        model = new ModelGrinder();
     }
-    public void renderAModelAt(TileMagicConduitImporting tile, double d, double d1, double d2, float frame) {
+    public void renderAModelAt(TileMagicConduitImporting tile, double x, double y, double z, float frame) {
 
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F);
-        GL11.glScalef(1.0F, -1F, -1F);
-        GL11.glRotatef(0F, 0F, 0F, 0F);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
         
-        model.renderAll();
-        
-        if(tile.decideRender(ForgeDirection.DOWN)){
-            model.renderBottom();
-        }
-        
-        if(tile.decideRender(ForgeDirection.UP)){
-            model.renderTop();
-        }
-        
-        if(tile.decideRender(ForgeDirection.WEST)){
-            model.renderLeft();
-        }
-        
-        if(tile.decideRender(ForgeDirection.EAST)){
-            model.renderRight();
-        }
-        
-        if(tile.decideRender(ForgeDirection.SOUTH)){
-            model.renderFront();
-        }
-        
-        if(tile.decideRender(ForgeDirection.NORTH)){
-            model.renderBack();
-        }
-        
-        GL11.glPopMatrix();
+        model.render(tile, x, y, z);
     }
 
 
