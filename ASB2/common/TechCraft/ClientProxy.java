@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
 import TechCraft.blocks.tanks.GuiTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.GuiRune;
@@ -34,12 +35,14 @@ import TechCraft.renders.ItemRendererMagicConduitImporting;
 import TechCraft.renders.ItemRendererMagicConduitMoving;
 import TechCraft.renders.ItemRendererMagicEnergySphere;
 import TechCraft.renders.ItemRendererTileBasicRune;
+import TechCraft.renders.ItemRendererTileItemReciever;
 import TechCraft.renders.ItemRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererMagicConduitExporting;
 import TechCraft.renders.TileEntityRendererMagicConduitImporting;
 import TechCraft.renders.TileEntityRendererMagicConduitMoving;
 import TechCraft.renders.TileEntityRendererMagicEnergySphere;
 import TechCraft.renders.TileEntityRendererTileBasicRune;
+import TechCraft.renders.TileEntityRendererTileItemReciever;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererTileTest;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -73,6 +76,9 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
+        
+        ClientRegistry.bindTileEntitySpecialRenderer(TileItemReciever.class, new TileEntityRendererTileItemReciever());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
     }
 
 

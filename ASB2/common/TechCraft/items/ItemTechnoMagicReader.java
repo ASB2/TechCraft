@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TechCraft.ITCTankContainer;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 
@@ -19,7 +18,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
     public boolean onItemUseFirst(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){
 
         if(!player.isSneaking()) {
-            
+
             if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
 
                 IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
@@ -39,10 +38,10 @@ public class ItemTechnoMagicReader extends TechCraftItems{
             if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
 
                 IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
-                
+
                 if(mTile.getNetwork() != null) {
-                    
-                   // player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
+
+                    // player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductorSize() + " conductors");
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSinkSize() + " power sinks");
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSourceSize() + " power sources");
@@ -52,15 +51,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 else {
                     player.sendChatToPlayer(mTile.getName()+" has no network");
                 }
-            }  
-            
-            if(world.getBlockTileEntity(x,y,z) instanceof ITCTankContainer) {
-
-                ITCTankContainer mTile = (ITCTankContainer) world.getBlockTileEntity(x, y, z);
-
-                player.sendChatToPlayer("Tank has liquid " + mTile.getTank()[0].getLiquidName());
-                player.sendChatToPlayer("Tank has a capasity of " + mTile.getTank()[0].getCapacity());
-            }  
+            }    
         }
 
         else {
@@ -70,7 +61,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 mTile.toggleDirection();
                 player.sendChatToPlayer(mTile.getName()+ " is now at orientation: " + mTile.translateDirectionToString());
             }
-            
+
         }
         player.sendChatToPlayer("--------");
         return true;        

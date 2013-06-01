@@ -16,6 +16,7 @@ import TechCraft.blocks.BlockWaterCrystalOre;
 import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
+import TechCraft.blocks.item_transfer_wireless.BlockItemReciever;
 import TechCraft.blocks.tanks.BlockTCTank;
 import TechCraft.blocks.tcRunes.BlockBasicRune;
 import TechCraft.blocks.tcRunes.BlockRuneBase;
@@ -75,6 +76,8 @@ public class BlockRegistry {
     public static TechCraftContainers BlockTCTeleporter;    
     public static TechCraftContainers BlockTCTank;
     public static TechCraftContainers BlockTCGrinder;
+    
+    public static TechCraftContainers BlockItemReciever;
     
 
     public static void init() {
@@ -246,6 +249,12 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCGrinder, "ASB2_BlockTCGrinder");
         LanguageRegistry.addName(BlockTCGrinder, "TC Grinder");
         MinecraftForge.setBlockHarvestLevel(BlockTCGrinder, "pickaxe", 2);
+        
+        BlockItemReciever = new BlockItemReciever(528, Material.rock);
+        BlockItemReciever.setUnlocalizedName("BlockItemReciever");
+        GameRegistry.registerBlock(BlockItemReciever, "ASB2_BlockItemReciever");
+        LanguageRegistry.addName(BlockItemReciever, "Item Reciever");
+        MinecraftForge.setBlockHarvestLevel(BlockItemReciever, "pickaxe", 2);
     }
 
 }

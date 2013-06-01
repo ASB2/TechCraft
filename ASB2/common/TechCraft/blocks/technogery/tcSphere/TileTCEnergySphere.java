@@ -13,8 +13,7 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     int color = 0;
 
     public void updateEntity() {
-
-        super.managePowerAll(this, powerInput(), false);
+        this.managePowerAll(this, powerInput(), false);
         super.updateEntity();
     }    
 
@@ -80,7 +79,7 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
 
         if(this.powerMax - this.powerStored >= PowerGained) {
 
-            this.powerStored= powerStored + PowerGained;
+            this.powerStored = powerStored + PowerGained;
 
             return true;
         }

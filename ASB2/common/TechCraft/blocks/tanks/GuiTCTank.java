@@ -3,7 +3,6 @@ package TechCraft.blocks.tanks;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
-import net.minecraftforge.liquids.LiquidDictionary;
 
 import org.lwjgl.opengl.GL11;
 
@@ -24,13 +23,12 @@ public class GuiTCTank extends GuiContainer {
 
     protected void drawGuiContainerForegroundLayer(int x, int y) {
 
-        Icon texture = LiquidDictionary.getCanonicalLiquid("Water").getRenderingIcon();
+        if(tileEntity.tank.getLiquid() != null) {
 
-        this.mc.renderEngine.bindTexture(LiquidDictionary.getCanonicalLiquid("Water").getTextureSheet());
+            Icon texture = tileEntity.tank.getLiquid().getRenderingIcon();
+            this.mc.renderEngine.bindTexture(tileEntity.tank.getLiquid().getTextureSheet());
 
-        if(tileEntity.getTank()[0].getLiquid() != null) {
-            
-            fontRenderer.drawString(tileEntity.getTank()[0].getLiquidName(), xSize / 2 - fontRenderer.getStringWidth(tileEntity.getTank()[0].getLiquidName()) / 2, 6, 4210752);
+            fontRenderer.drawString(tileEntity.tank.getLiquidName(), xSize / 2 - fontRenderer.getStringWidth(tileEntity.tank.getLiquidName()) / 2, 6, 4210752);
             this.drawTexturedModelRectFromIcon(9, 10, texture, 53, 66);
         }
     }

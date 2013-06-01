@@ -20,7 +20,7 @@ public class ItemTeleporter extends TechCraftItems{
     public ItemTeleporter(int par1) {
         super(par1);
         setMaxStackSize(1);
-
+        setMaxDamage(30);
     }
 
     @Override

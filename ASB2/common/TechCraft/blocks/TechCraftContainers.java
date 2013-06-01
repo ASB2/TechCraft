@@ -21,9 +21,13 @@ public abstract class TechCraftContainers extends BlockContainer{
         super(par1, par2Material);
         this.setCreativeTab(TechCraft.tabTechno);
         setHardness(3.5f);
-        setTickRandomly(true);
     }
 
+    public boolean canCreatureSpawn() {
+        
+        return false;
+    }
+    
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
