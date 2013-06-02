@@ -21,6 +21,7 @@ Current Ideas to Build On
 Current Bugs
 
 	-Power Network doesnt properly remove broken tiles;
+	-NPE on Item Reciever
 	
 	
 Textures to be done
