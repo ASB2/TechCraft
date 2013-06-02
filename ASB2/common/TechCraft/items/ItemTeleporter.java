@@ -59,7 +59,7 @@ public class ItemTeleporter extends TechCraftItems{
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer player,@SuppressWarnings("rawtypes") List info, boolean b){
         if(isCoodsSet(par1ItemStack)){
-            //info.add("You will be teleported to x: "+this.getXCoord(par1ItemStack)+" y: "+this.getYCoord(par1ItemStack) +" z:"+this.getZCoord(par1ItemStack));
+            info.add("Destination X: " + (int)this.getXCoord(par1ItemStack)+" Y: " + (int)this.getYCoord(par1ItemStack) + " Z:" + (int)this.getZCoord(par1ItemStack));
         }
         if(!isCoodsSet(par1ItemStack)){
             info.add("Link not set.");

@@ -66,39 +66,36 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
 
                                 for(int z = 0; z < tileI.getSizeInventory(); z++) {
 
-                                    if(z != 0) {
-                                        
-                                        if(tileI.getStackInSlot(z) != null) {
+                                    if(tileI.getStackInSlot(z) != null) {
 
-                                            if(tileI.isStackValidForSlot(z, tileItemStack[i])) {
+                                        if(tileI.isStackValidForSlot(z, tileItemStack[i])) {
 
-                                                if(tileI.getStackInSlot(z).stackSize <= tileI.getInventoryStackLimit() && tileI.getStackInSlot(z).stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+                                            if(tileI.getStackInSlot(z).stackSize <= tileI.getInventoryStackLimit() && tileI.getStackInSlot(z).stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                                    int size = tileI.getStackInSlot(z).stackSize;
+                                                int size = tileI.getStackInSlot(z).stackSize;
 
-                                                    if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+                                                if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                                        if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
+                                                    if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
 
-                                                            if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+                                                        if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                                                ItemStack internalStack = tileItemStack[i].copy();
+                                                            ItemStack internalStack = tileItemStack[i].copy();
 
-                                                                internalStack.stackSize = size + tileItemStack[i].stackSize;
+                                                            internalStack.stackSize = size + tileItemStack[i].stackSize;
 
-                                                                tileI.setInventorySlotContents(z,internalStack);
-                                                                tileItemStack[i] = null;
-                                                            }
+                                                            tileI.setInventorySlotContents(z,internalStack);
+                                                            tileItemStack[i] = null;
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-                                        else {
-                                            tileI.setInventorySlotContents(z, tileItemStack[i]);
-                                            tileItemStack[i] = null;
+                                    }
+                                    else {
+                                        tileI.setInventorySlotContents(z, tileItemStack[i]);
+                                        tileItemStack[i] = null;
 
-                                        }
                                     }
                                 }
                             }

@@ -29,6 +29,22 @@ public class ItemLinker extends TechCraftItems {
         
         return !this.isCoodsSet(itemStack);
     }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, java.util.List info, boolean var1) 
+    {
+        super.addInformation(itemStack, player, info, var1);
+        
+        if(this.isCoodsSet(itemStack)) {
+            
+            info.add("X: "+  this.getXCoord(itemStack) +" Y: "+ this.getYCoord(itemStack)+" Z: " + this.getXCoord(itemStack));
+        }
+        else{
+            info.add("Coordinates not set.");
+        }
+        
+    }
 
     public boolean isCoodsSet(ItemStack item) {
 
