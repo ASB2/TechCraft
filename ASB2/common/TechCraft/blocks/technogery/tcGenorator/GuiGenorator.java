@@ -17,7 +17,7 @@ public class GuiGenorator extends GuiContainer {
     public GuiGenorator(InventoryPlayer inventory, TileGenorator tileEntity){
         super(new ContainerGenorator(inventory, tileEntity));
 
-        this.tileEntity=tileEntity;
+        this.tileEntity = tileEntity;
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y){

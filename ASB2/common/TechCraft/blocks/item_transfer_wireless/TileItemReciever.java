@@ -2,21 +2,108 @@ package TechCraft.blocks.item_transfer_wireless;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.items.ItemLinker;
 
 public class TileItemReciever extends TechCraftTile implements IInventory{
 
     private ItemStack[] tileItemStack;
 
     public TileItemReciever() {
-        tileItemStack = new ItemStack[1];
+        tileItemStack = new ItemStack[10];
+    }
+
+    public ForgeDirection getOrientation() {
+
+        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))) {
+
+            this.orientation = this.translateNumberToDirection(getBlockMetadata());
+        }
+
+        if(orientation == ForgeDirection.SOUTH) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        if(orientation == ForgeDirection.NORTH) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        if(orientation == ForgeDirection.UP) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        if(orientation == ForgeDirection.DOWN) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        return orientation;
     }
 
     public void updateEntity() {
 
+        moveSlotToInventory();
+    }
+
+    public void moveSlotToInventory() {
+
+        TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(getOrientation(), this)[0], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[1], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[2]);
+
+        if(tile != null) {
+
+            if(tile instanceof IInventory && !(tile instanceof ISidedInventory)) {
+
+                IInventory tileI = (IInventory)tile;
+
+                if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
+
+                    for(int i = 0; i < tileItemStack.length; i++) {
+
+                        if(tileItemStack[i] != null) {
+
+                            if(i != 0) {
+
+                                for(int z = 0; z < tileI.getSizeInventory(); z++) {
+
+                                    if(tileI.getStackInSlot(z) != null) {
+
+                                        if(tileI.isStackValidForSlot(z, tileItemStack[i])) {
+
+                                            if(tileI.getStackInSlot(z).stackSize <= tileI.getInventoryStackLimit() && tileI.getStackInSlot(z).stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+
+                                                int size = tileI.getStackInSlot(z).stackSize;
+
+                                                if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+
+                                                    if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
+
+                                                        if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+
+                                                            ItemStack internalStack = tileItemStack[i].copy();
+
+                                                            internalStack.stackSize = size + tileItemStack[i].stackSize;
+
+                                                            tileI.setInventorySlotContents(z,internalStack);
+                                                            tileItemStack[i] = null;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        tileI.setInventorySlotContents(z, tileItemStack[i]);
+                                        tileItemStack[i] = null;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -118,7 +205,8 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
 
     @Override
     public int getInventoryStackLimit() {
-        return 1;
+
+        return 64;
     }
 
     @Override
@@ -140,8 +228,17 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isStackValidForSlot(int slot, ItemStack itemStack) {
 
-        return true;
+        if(slot == 0 && itemStack.getItem() instanceof ItemLinker) {
+            return true;
+        }
+
+        else if(slot > 0) {
+
+            return true;
+        }
+
+        return false;
     }
 }

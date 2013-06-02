@@ -41,6 +41,7 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import TechCraft.items.runes.*;
+import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -83,6 +84,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemRuneTest;    
     public static TechCraftItems ItemExplosionRune;
     public static TechCraftItems ItemRealityDifferentiationDrive;
+    public static TechCraftItems ItemLinker;
     
     public static void init() {
 
@@ -227,6 +229,10 @@ public class ItemRegistry {
         ItemRealityDifferentiationDrive = new ItemExplosionRune(5033);
         ItemRealityDifferentiationDrive.setUnlocalizedName("ASB2_ItemRealityDifferentiationDrive");
         LanguageRegistry.addName(ItemRealityDifferentiationDrive, "Reality Differentiation Drive");
+    
+        ItemLinker = new ItemLinker(5034);
+        ItemRealityDifferentiationDrive.setUnlocalizedName("ASB2_ItemLinker");
+        LanguageRegistry.addName(ItemLinker, "TC Linker");
     }
 
 }

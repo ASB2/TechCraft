@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+import TechCraft.blocks.item_transfer_wireless.GuiItemReciever;
 import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
 import TechCraft.blocks.tanks.GuiTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
@@ -78,7 +79,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
         
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemReciever.class, new TileEntityRendererTileItemReciever());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemReciever.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
     }
 
 
@@ -99,6 +100,7 @@ public class ClientProxy extends CommonProxy {
                 case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
                 case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
                 case 8: return new GuiTCTank(player.inventory, (TileTCTank)tileEntity);
+                case 9: return new GuiItemReciever(player.inventory, (TileItemReciever)tileEntity);
                 //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
 
                 //case 4: return new GuiMagicGauntlet(player);

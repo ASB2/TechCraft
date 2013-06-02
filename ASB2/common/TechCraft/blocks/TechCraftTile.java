@@ -109,6 +109,36 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
     }
 
+    public static ForgeDirection translateDirectionToOpposite(ForgeDirection direction) {
+
+        switch(direction) {
+
+            case DOWN: {
+                return ForgeDirection.UP;
+            }
+            case UP: {
+                return ForgeDirection.DOWN;
+            }
+            case NORTH: {
+                return ForgeDirection.SOUTH;
+            }
+            case SOUTH: {
+                return ForgeDirection.NORTH;
+            }
+            case WEST: {
+                return ForgeDirection.EAST;
+            }
+            case EAST: {
+                return ForgeDirection.WEST;
+            }
+            case UNKNOWN:{
+                return ForgeDirection.UNKNOWN;
+            }
+        }
+
+        return ForgeDirection.UNKNOWN;
+    }
+    
     public int translateDirectionToNumber() {
 
         int var1 = -1;

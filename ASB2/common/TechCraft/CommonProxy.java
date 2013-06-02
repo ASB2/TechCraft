@@ -3,6 +3,10 @@ package TechCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import TechCraft.blocks.item_transfer_wireless.ContainerItemReciever;
+import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
+import TechCraft.blocks.tanks.ContainerTCTank;
+import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.ContainerRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.farms.BasicFarm.ContainerBasicFarm;
@@ -20,9 +24,8 @@ import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcTeleporter.ContainerTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import cpw.mods.fml.common.network.IGuiHandler;
-import TechCraft.blocks.tanks.*;
 
-public class CommonProxy implements IGuiHandler{
+public class CommonProxy implements IGuiHandler {
 
     public void registerServerTickHandler(){
         //TickRegistry.registerTickHandler(new MyToolsTickHandlerServer(), Side.SERVER);
@@ -55,6 +58,7 @@ public class CommonProxy implements IGuiHandler{
                 case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
                 case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
                 case 8:return new ContainerTCTank(player.inventory, (TileTCTank)tileEntity);
+                case 9:return new ContainerItemReciever(player.inventory, (TileItemReciever)tileEntity);
             }
         }
         return null;

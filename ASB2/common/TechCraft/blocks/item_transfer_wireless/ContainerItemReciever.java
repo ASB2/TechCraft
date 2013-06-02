@@ -1,5 +1,6 @@
 package TechCraft.blocks.item_transfer_wireless;
 
+import TechCraft.blocks.technogery.tcGenorator.SlotGenorator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,7 +11,18 @@ public class ContainerItemReciever extends Container {
 
     public ContainerItemReciever(InventoryPlayer par1InventoryPlayer, TileItemReciever tileEntity) {
         
-        this.addSlotToContainer(new Slot(tileEntity, 0, 80,38));        
+        this.addSlotToContainer(new Slot(tileEntity, 0, 121, 38));
+
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 1, 30,17));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 2, 48,17));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 3, 66,17));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 4, 30,35));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 5, 48,35));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 6, 66,35));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 7, 30,53));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 8, 48,53));
+        this.addSlotToContainer(new SlotGenorator(tileEntity, 9, 66,53));
+
 
         for (int i = 0; i < 3; i++)
         {
@@ -31,7 +43,7 @@ public class ContainerItemReciever extends Container {
 
         return true;
     }
-    
+
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber)
     {
