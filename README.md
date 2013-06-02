@@ -5,10 +5,6 @@ A resulting cross of technology and magic
 
 This source code is part of the unreleased TechnoCraft Mod. 
 
-This mod is designed to be a jack of all trades dabbling in farming ore production and any other thing that people can give me ideas on.
-
-The over all goal of this mod is to make processes take less time.
-
 	Examples
 	
 		-The Furnace uses more fuel but smelts items instantly.
