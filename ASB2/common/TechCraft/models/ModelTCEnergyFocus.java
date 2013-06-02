@@ -106,7 +106,7 @@ public class ModelTCEnergyFocus extends ModelBase
     }
 
     public void renderAll() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.ENERGY_FOCUS);
 
         Bottom.render(0.0625F);
         SecondLevel.render(0.0625F);

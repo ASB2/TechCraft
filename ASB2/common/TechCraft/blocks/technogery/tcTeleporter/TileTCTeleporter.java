@@ -17,9 +17,9 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
     int powerStored;
     int powerMax = 100;
-    
+
     int powerForProcess = 50;
-    
+
     ItemStack[] tileItemStacks;
 
     ItemTeleporter teleporter;
@@ -32,14 +32,14 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
     public TileTCTeleporter() {        
         tileItemStacks = new ItemStack[1];
-        
+
     }
 
     public void updateEntity() {
-        
+
         super.managePowerAll(this, powerInput(), false);
         super.updateEntity();
-        
+
         if(tileItemStacks[0] == null) {
             teleporterSet = false;
             coordsSet = false;
@@ -74,14 +74,17 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 
-        if(teleporterSet && teleporter != null && coordsSet && this.getPowerStored() >= powerForProcess) {
+        if(teleporterSet && coordsSet && this.getPowerStored() >= powerForProcess) {
+           
+            if(teleporter != null) {
+                
+                if(entity instanceof EntityLiving) {
 
-            if(entity instanceof EntityLiving) {
+                    if(this.usePower(powerForProcess)) {
 
-                if(this.usePower(powerForProcess)) {
-
-                    EntityLiving pEntity = (EntityLiving) entity;                
-                    pEntity.setPositionAndUpdate(this.x,this.y,this.z);
+                        EntityLiving pEntity = (EntityLiving) entity;                
+                        pEntity.setPositionAndUpdate(this.x, this.y, this.z);
+                    }
                 }
             }
         }

@@ -19,6 +19,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
     private ModelMagicConduitMovingv2 modelMoving;
     private ModelMagicConduitImportingv2 modelImporting;
     private ModelMagicConduitExportingv2 modelExporting;
+    @SuppressWarnings("unused")
     private ModelGear modelGear;
     
     public TileEntityRendererMagicConduitMoving() {
