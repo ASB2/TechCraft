@@ -57,7 +57,7 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
                 IInventory tileI = (IInventory)tile;
 
                 if(tileI != null) {
-                    
+
                     if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
 
                         for(int i = 0; i < tileItemStack.length; i++) {
@@ -78,7 +78,8 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
 
                                                     if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                                        /*NPE happening on this line. I have no idea why*/if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
+                                                        /*NPE happening on this line.\/ I have no idea why*/
+                                                        if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
 
                                                             if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
