@@ -38,6 +38,8 @@ import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
+import TechCraft.blocks.item_transfer_wireless.*;
+
 public class BlockRegistry {
 
     public static TechCraftBlocks BlockAirCrystalOre;
@@ -78,6 +80,7 @@ public class BlockRegistry {
     public static TechCraftContainers BlockTCGrinder;
     
     public static TechCraftContainers BlockItemReciever;
+    public static TechCraftContainers BlockItemSender;
     
 
     public static void init() {
@@ -255,6 +258,12 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockItemReciever, "ASB2_BlockItemReciever");
         LanguageRegistry.addName(BlockItemReciever, "Item Reciever");
         MinecraftForge.setBlockHarvestLevel(BlockItemReciever, "pickaxe", 2);
+        
+        BlockItemSender = new BlockItemSender(529, Material.rock);
+        BlockItemSender.setUnlocalizedName("BlockItemSender");
+        GameRegistry.registerBlock(BlockItemSender, "ASB2_BlockItemSender");
+        LanguageRegistry.addName(BlockItemSender, "Item Sender");
+        MinecraftForge.setBlockHarvestLevel(BlockItemSender, "pickaxe", 2);
     }
 
 }

@@ -47,6 +47,7 @@ import TechCraft.renders.TileEntityRendererTileItemReciever;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererTileTest;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import TechCraft.blocks.item_transfer_wireless.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -101,6 +102,7 @@ public class ClientProxy extends CommonProxy {
                 case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
                 case 8: return new GuiTCTank(player.inventory, (TileTCTank)tileEntity);
                 case 9: return new GuiItemReciever(player.inventory, (TileItemReciever)tileEntity);
+                case 10: return new GuiItemSender(player.inventory, (TileItemSender)tileEntity);
                 //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
 
                 //case 4: return new GuiMagicGauntlet(player);

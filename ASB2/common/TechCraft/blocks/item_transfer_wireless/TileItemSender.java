@@ -2,104 +2,110 @@ package TechCraft.blocks.item_transfer_wireless;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemLinker;
 
-public class TileItemReciever extends TechCraftTile implements IInventory{
+public class TileItemSender extends TechCraftTile implements IInventory{
 
     private ItemStack[] tileItemStack;
 
-    public TileItemReciever() {
+    boolean linkerSet = false;
+
+    int x;
+    int y;
+    int z;
+
+    public TileItemSender() {
+
         tileItemStack = new ItemStack[10];
-    }
-
-    public ForgeDirection getOrientation() {
-
-        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))) {
-
-            this.orientation = this.translateNumberToDirection(getBlockMetadata());
-        }
-
-        if(orientation == ForgeDirection.SOUTH) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        if(orientation == ForgeDirection.NORTH) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        if(orientation == ForgeDirection.UP) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        if(orientation == ForgeDirection.DOWN) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        return orientation;
     }
 
     public void updateEntity() {
 
-        moveSlotToInventory();
+        if(!linkerSet) {
+
+            if(tileItemStack[0] != null) {
+
+                if(tileItemStack[0].getItem() instanceof ItemLinker) {
+
+                    if(((ItemLinker)tileItemStack[0].getItem()).isCoodsSet(tileItemStack[0])) {
+
+                        x = (int) ((ItemLinker)tileItemStack[0].getItem()).getXCoord(tileItemStack[0]);
+                        y = (int) ((ItemLinker)tileItemStack[0].getItem()).getYCoord(tileItemStack[0]);
+                        z = (int) ((ItemLinker)tileItemStack[0].getItem()).getZCoord(tileItemStack[0]);
+                        linkerSet = true;
+                    }
+                }
+            }
+        }
+
+        if(linkerSet) {
+
+            if(tileItemStack[0] == null) {
+
+                linkerSet = false;
+            }
+        }
+        
+        if(linkerSet && worldObj.getBlockTileEntity(x, y, z) != null) {
+            
+            moveSlotToInventory();
+        }
     }
 
     public void moveSlotToInventory() {
+        
+        TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
+        
+        if(tile instanceof TileItemReciever) {
+            
+            TileItemReciever tileI = (TileItemReciever)tile;
+            
+            
+            if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
 
-        TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(getOrientation(), this)[0], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[1], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[2]);
+                for(int i = 0; i < tileItemStack.length; i++) {
 
-        if(tile != null) {
+                    if(tileItemStack[i] != null) {
 
-            if(tile instanceof IInventory && !(tile instanceof ISidedInventory)) {
+                        if(i != 0) {
 
-                IInventory tileI = (IInventory)tile;
+                            for(int z = 0; z < tileI.getSizeInventory(); z++) {
 
-                if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
+                                if(tileI.getStackInSlot(z) != null) {
 
-                    for(int i = 0; i < tileItemStack.length; i++) {
+                                    if(tileI.isStackValidForSlot(z, tileItemStack[i])) {
 
-                        if(tileItemStack[i] != null) {
+                                        if(tileI.getStackInSlot(z).stackSize <= tileI.getInventoryStackLimit() && tileI.getStackInSlot(z).stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                            if(i != 0) {
+                                            int size = tileI.getStackInSlot(z).stackSize;
 
-                                for(int z = 0; z < tileI.getSizeInventory(); z++) {
+                                            if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                    if(z != 0) {
-                                        
-                                        if(tileI.getStackInSlot(z) != null) {
+                                                if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
 
-                                            if(tileI.isStackValidForSlot(z, tileItemStack[i])) {
+                                                    if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                                if(tileI.getStackInSlot(z).stackSize <= tileI.getInventoryStackLimit() && tileI.getStackInSlot(z).stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+                                                        ItemStack internalStack = tileItemStack[i].copy();
 
-                                                    int size = tileI.getStackInSlot(z).stackSize;
+                                                        internalStack.stackSize = size + tileItemStack[i].stackSize;
 
-                                                    if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
-
-                                                        if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
-
-                                                            if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
-
-                                                                ItemStack internalStack = tileItemStack[i].copy();
-
-                                                                internalStack.stackSize = size + tileItemStack[i].stackSize;
-
-                                                                tileI.setInventorySlotContents(z,internalStack);
-                                                                tileItemStack[i] = null;
-                                                            }
-                                                        }
+                                                        tileI.setInventorySlotContents(z,internalStack);
+                                                        tileItemStack[i] = null;
                                                     }
                                                 }
                                             }
                                         }
-                                        else {
-                                            tileI.setInventorySlotContents(z, tileItemStack[i]);
-                                            tileItemStack[i] = null;
-
-                                        }
                                     }
+                                }
+                                else {
+                                    tileI.setInventorySlotContents(z, tileItemStack[i]);
+                                    tileItemStack[i] = null;
+
                                 }
                             }
                         }
@@ -107,6 +113,7 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
                 }
             }
         }
+
     }
 
     @Override

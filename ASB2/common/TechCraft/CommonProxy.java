@@ -4,7 +4,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.item_transfer_wireless.ContainerItemReciever;
+import TechCraft.blocks.item_transfer_wireless.ContainerItemSender;
 import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
+import TechCraft.blocks.item_transfer_wireless.TileItemSender;
 import TechCraft.blocks.tanks.ContainerTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.ContainerRune;
@@ -59,6 +61,7 @@ public class CommonProxy implements IGuiHandler {
                 case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
                 case 8:return new ContainerTCTank(player.inventory, (TileTCTank)tileEntity);
                 case 9:return new ContainerItemReciever(player.inventory, (TileItemReciever)tileEntity);
+                case 10:return new ContainerItemSender(player.inventory, (TileItemSender)tileEntity);
             }
         }
         return null;

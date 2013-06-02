@@ -40,6 +40,7 @@ Textures to be done
 	-(Model)Rune Block
 	-(Item)Rune Core
 	-(Block, MultiSided)TC Infuser
+	-(Item)Linker
 
 Models to be done
 
