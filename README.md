@@ -38,6 +38,7 @@ Textures to be done
 	-(Item)Rune Core
 	-(Block, MultiSided)TC Infuser
 	-(Item)Linker
+	-(Block, Multi-Sided)Item Sender
 
 Models to be done
 
