@@ -76,31 +76,35 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
 
                                                     int size = tileI.getStackInSlot(z).stackSize;
 
-                                                    if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+                                                    if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit() && size <= tileI.getInventoryStackLimit()) {
 
-                                                        /*NPE happening on this line.\/ I have no idea why*/
-                                                        if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
+                                                        if(this.tileItemStack[i] != null) {  
 
-                                                            if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+                                                            if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
 
-                                                                ItemStack internalStack = tileItemStack[i].copy();
+                                                                if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
 
-                                                                internalStack.stackSize = size + tileItemStack[i].stackSize;
+                                                                    ItemStack internalStack = tileItemStack[i].copy();
 
-                                                                tileI.setInventorySlotContents(z,internalStack);
-                                                                tileItemStack[i] = null;
+                                                                    internalStack.stackSize = size + tileItemStack[i].stackSize;
+
+                                                                    tileI.setInventorySlotContents(z,internalStack);
+                                                                    tileItemStack[i] = null;
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
+
                                         }
+                                        
                                         else {
                                             tileI.setInventorySlotContents(z, tileItemStack[i]);
                                             tileItemStack[i] = null;
-
                                         }
                                     }
+
                                 }
                             }
                         }
