@@ -34,7 +34,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         return true;
     }
 
-    public void updateEntity() {        
+    public void updateEntity() {            
         this.managePowerAll(this, powerInput(),false);
         super.updateEntity();
         
