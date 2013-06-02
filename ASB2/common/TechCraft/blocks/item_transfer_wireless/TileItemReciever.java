@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemLinker;
 
@@ -18,29 +17,6 @@ public class TileItemReciever extends TechCraftTile implements IInventory{
     public TileItemReciever() {
         tileItemStack = new ItemStack[10];
     }
-
-    public ForgeDirection getOrientation() {
-
-        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))) {
-
-            this.orientation = this.translateNumberToDirection(getBlockMetadata());
-        }
-
-        if(orientation == ForgeDirection.SOUTH) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        if(orientation == ForgeDirection.NORTH) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        if(orientation == ForgeDirection.UP) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        if(orientation == ForgeDirection.DOWN) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
-        }
-        return orientation;
-    }
-
     public void updateEntity() {
 
         moveSlotToInventory();

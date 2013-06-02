@@ -1,14 +1,20 @@
 package TechCraft.blocks.tanks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftContainers;
 
 public class BlockTCTank extends TechCraftContainers{
 
+    Icon top;
+    Icon sides;
+    Icon bottom;
+    
     public BlockTCTank(int par1, Material par2Material) {
         super(par1, par2Material);
     }
@@ -21,6 +27,39 @@ public class BlockTCTank extends TechCraftContainers{
 
         player.openGui(TechCraft.instance, 8, world, x, y, z);
         return true;
+    }
+    
+    public boolean renderAsNormalBlock() {
+
+        return false;
+    }
+    
+    public boolean isOpaqueCube() {
+
+        return false;
+    }
+    
+    @Override
+    public void registerIcons(IconRegister iconRegister)
+    {
+        top = iconRegister.registerIcon("TechCraft:BlockTankTop");
+        sides = iconRegister.registerIcon("TechCraft:BlockTankSide");
+        bottom = iconRegister.registerIcon("TechCraft:ColoredBlack");
+    }
+    
+    @Override
+    public Icon getIcon(int side, int metadata) {
+        
+        switch(side) {
+            
+            case 0:{
+                return bottom;
+            }
+            case 1:{
+                return top;
+            }
+            default: return sides;
+        }
     }
     
     @Override

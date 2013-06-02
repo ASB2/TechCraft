@@ -26,7 +26,19 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
             this.orientation = this.translateNumberToDirection(getBlockMetadata());
         }
 
-        return this.orientation;
+        if(orientation == ForgeDirection.SOUTH) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        if(orientation == ForgeDirection.NORTH) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        if(orientation == ForgeDirection.UP) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        if(orientation == ForgeDirection.DOWN) {
+            return TechCraftTile.translateDirectionToOpposite(orientation);
+        }
+        return orientation;
     }
 
     public void setOrientation(ForgeDirection orientation) {
