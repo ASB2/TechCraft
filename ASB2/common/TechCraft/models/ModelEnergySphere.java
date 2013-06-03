@@ -17,7 +17,7 @@ public class ModelEnergySphere extends ModelBase{
 
     public ModelEnergySphere() {
 
-        modelTutBox = AdvancedModelLoader.loadModel(MODELS.ISOSPHERE);
+        modelTutBox = AdvancedModelLoader.loadModel(MODELS.TETRA);
     }
 
     public void render() {

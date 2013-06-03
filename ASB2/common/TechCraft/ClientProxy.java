@@ -48,6 +48,7 @@ import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererTileTest;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import TechCraft.blocks.item_transfer_wireless.*;
+import TechCraft.renders.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -81,6 +82,8 @@ public class ClientProxy extends CommonProxy {
         
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemReciever.class, new TileEntityRendererTileItemReciever());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemReciever.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
+        
+        ClientRegistry.bindTileEntitySpecialRenderer(TileTCTank.class, new TileEntityRendererTileTank());
     }
 
 

@@ -51,12 +51,13 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         this.orientation = ForgeDirection.getOrientation(id);
     }
 
-    public void toggleDirection(){
+    public void toggleDirection() {
 
         switch(getOrientation()) {
 
             case DOWN: {
                 this.setOrientation(ForgeDirection.UP);
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(getOrientation())), 3);
                 break;
             }
 
@@ -85,7 +86,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 break;
             }
 
-            default: this.setOrientation(ForgeDirection.DOWN);
+            default: //this.setOrientation(ForgeDirection.DOWN);
             break;
 
         }
@@ -151,11 +152,11 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         return ForgeDirection.UNKNOWN;
     }
     
-    public int translateDirectionToNumber() {
+    public static int translateDirectionToNumber(ForgeDirection direction) {
 
         int var1 = -1;
 
-        switch(getOrientation()) {
+        switch(direction) {
 
             case DOWN: {
                 var1 = 0;

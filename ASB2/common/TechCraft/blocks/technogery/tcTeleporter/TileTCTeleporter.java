@@ -1,12 +1,13 @@
 package TechCraft.blocks.technogery.tcTeleporter;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemTeleporter;
@@ -29,8 +30,10 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     double x;
     double y;
     double z;
+    int dimentionID = 0;
 
     public TileTCTeleporter() {        
+        
         tileItemStacks = new ItemStack[1];
 
     }
@@ -62,10 +65,11 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
                 x = (int)teleporter.getXCoord(tileItemStacks[0]);
                 y = (int)teleporter.getYCoord(tileItemStacks[0]);
                 z = (int)teleporter.getZCoord(tileItemStacks[0]);
+                dimentionID = (int)teleporter.getDimentionIDCoord(tileItemStacks[0]);   
 
-                x = x +=.5;
-                y = y + 1;
-                z = z +.5;
+                x = x + .5;
+                y = y;
+                z = z + .5;
 
                 coordsSet = true;
             }
@@ -75,15 +79,27 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 
         if(teleporterSet && coordsSet && this.getPowerStored() >= powerForProcess) {
-           
+
             if(teleporter != null) {
-                
-                if(entity instanceof EntityLiving) {
+
+                if(entity instanceof EntityPlayerMP) {
 
                     if(this.usePower(powerForProcess)) {
 
-                        EntityLiving pEntity = (EntityLiving) entity;                
-                        pEntity.setPositionAndUpdate(this.x, this.y, this.z);
+                        EntityPlayerMP player = (EntityPlayerMP) entity;     
+
+                        for(int i = 0; i < 2; i++) {
+
+                            if (player.dimension != this.dimentionID) {
+
+                                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, this.dimentionID, new Teleporter(player.mcServer.worldServerForDimension(this.dimentionID)));
+                            }
+
+                            else {
+
+                                player.setPositionAndUpdate(this.x, this.y, this.z);
+                            }
+                        }
                     }
                 }
             }

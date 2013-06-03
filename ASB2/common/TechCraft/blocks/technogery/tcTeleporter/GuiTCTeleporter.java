@@ -21,8 +21,8 @@ public class GuiTCTeleporter extends GuiContainer {
         
         if(tileEntity.teleporter != null && tileEntity.coordsSet) {
             
-            String coords = "Destination" + " X: " + (int)tileEntity.x + " Y: " + (int)tileEntity.y + " Z: " + (int)tileEntity.z;
-            fontRenderer.drawString(coords, xSize / 2 - fontRenderer.getStringWidth(coords) / 2, 6, 4210752);
+            String coords = "X: " + (int)tileEntity.x + " Y: " + (int)tileEntity.y + " Z: " + (int)tileEntity.z;
+            fontRenderer.drawString(coords + " D-ID " + tileEntity.dimentionID, xSize / 2 - fontRenderer.getStringWidth(coords) / 2, 60, 4210752);
         }    
     }
 
