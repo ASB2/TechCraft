@@ -2,13 +2,11 @@ package TechCraft.blocks.item_transfer_wireless;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-
-import org.lwjgl.opengl.GL11;
-
 import TechCraft.lib.GUI;
 
 public class GuiItemSender extends GuiContainer {
 
+    @SuppressWarnings("unused")
     private TileItemSender tileEntity;
 
     public final int xSizeOfTexture = 176;

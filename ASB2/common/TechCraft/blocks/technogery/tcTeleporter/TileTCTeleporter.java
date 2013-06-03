@@ -68,7 +68,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
                 dimentionID = (int)teleporter.getDimentionIDCoord(tileItemStacks[0]);   
 
                 x = x + .5;
-                y = y;
                 z = z + .5;
 
                 coordsSet = true;

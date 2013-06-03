@@ -36,6 +36,7 @@ public class TileEntityRendererTileTank extends TileEntitySpecialRenderer {
         this.renderAModelAt(par1TileEntity, par2, par4, par6, par8);
     }    
 
+    @SuppressWarnings("unused")
     private void renderAllOrientation(double x, double y, double z, int metadata) {
         
         GL11.glScalef(1.0F, 1.0F, 1.0F);

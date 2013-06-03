@@ -42,7 +42,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = TechCraft.modid, name = "TechCraft The TechnoMagic Mod", version = "0.0.2")
+@Mod(modid = TechCraft.modid, name = "TechCraft The TechnoMagic Mod", version = "Not a Full Release Yet")
 
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"GenericRandom"}, packetHandler = TechCraftPacketHandler.class)
 
