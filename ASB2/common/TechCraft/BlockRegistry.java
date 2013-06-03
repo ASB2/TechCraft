@@ -166,13 +166,13 @@ public class BlockRegistry {
         BlockMagicConduitExporting = new BlockMagicConduitExporting(513,Material.rock);
         BlockMagicConduitExporting.setUnlocalizedName("BlockMagicConduitExporting");
         GameRegistry.registerBlock(BlockMagicConduitExporting, "ASB2_BlockMagicConduitExporting");
-        LanguageRegistry.addName(BlockMagicConduitExporting, "TC Energy Conduit (Exporting)");
+        LanguageRegistry.addName(BlockMagicConduitExporting, "Force Exporting Conduit");
         MinecraftForge.setBlockHarvestLevel(BlockMagicConduitExporting, "pickaxe", 2);
 
         BlockMagicConduitImporting = new BlockMagicConduitImporting(514,Material.rock);
         BlockMagicConduitImporting.setUnlocalizedName("BlockMagicConduitImporting");
         GameRegistry.registerBlock(BlockMagicConduitImporting, "ASB2_BlockMagicConduitImporting");
-        LanguageRegistry.addName(BlockMagicConduitImporting, "TC Energy Conduit (Importing)");
+        LanguageRegistry.addName(BlockMagicConduitImporting, "Force Importing Conduit");
         MinecraftForge.setBlockHarvestLevel(BlockMagicConduitImporting, "pickaxe", 2);
 
         BlockMagicConduitMoving = new BlockMagicConduitMoving(515,Material.rock);

@@ -105,18 +105,18 @@ public class PowerNetwork {
             this.addSinkAround(powerSink.get(i));
         }
 
-        if(conductors.size() > 0) {
+        if(powerSource.size() > 0 && powerSink.size() > 0) {
 
-            if(powerSource.size() > 0 && powerSink.size() > 0) {
+            for(int i = 0; i < powerSource.size(); i++) {
 
-                for(int i = 0; i < powerSource.size(); i++) {
+                for(int z = 0; z < powerSink.size(); z++) {
 
-                    for(int z = 0; z < powerSink.size(); z++) {
+                    if(powerSink.get(z) instanceof IPowerMisc && powerSource.get(i) instanceof IPowerMisc) {
 
-                        if(powerSink.get(z) instanceof IPowerMisc && powerSource.get(i) instanceof IPowerMisc) {
+                        IPowerMisc sink = (IPowerMisc)powerSink.get(z);
+                        IPowerMisc source = (IPowerMisc)powerSource.get(i);
 
-                            IPowerMisc sink = (IPowerMisc)powerSink.get(z);
-                            IPowerMisc source = (IPowerMisc)powerSource.get(i);
+                        if(sink != source) {
 
                             if(sink.getPowerMax() - sink.getPowerStored() >= powerToMove) {
 

@@ -113,20 +113,42 @@ public class CraftRegistry {
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe),
                 new Object[] { " DD", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHelmet),
-                new Object[] { "DDD", "DED", "  ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHelmet), new Object[] {
+            "DDD",
+            "DED",
+            "  ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianChestPlate),
-                new Object[] { "D D", "DED", "DDD", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianChestPlate), new Object[] {
+            "D D",
+            "DED",
+            "DDD",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,'E',
+            ItemRegistry.ItemEnergyCrystalShard });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianPants),
-                new Object[] { "DDD", "DED", "D D", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianPants), new Object[] {
+            "DDD",
+            "DED",
+            "D D",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianSword),
                 new Object[] { "EDE", "EDE", "ESE", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianShovel),
-                new Object[] { " D ", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianShovel), new Object[] {
+            " D ",
+            " E ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });
 
         GameRegistry.addSmelting(Item.axeWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalAxe), 1.F);
@@ -140,12 +162,63 @@ public class CraftRegistry {
         GameRegistry.addSmelting(Item.swordWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalSword), 1.F);
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving),
-                new Object[] { "GEG", "CRC", "GEG", 'G', Block.glass, 'R', Item.redstone,'C', Block.cobblestone,'E', ItemRegistry.ItemEnergyCrystalShard});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving), new Object[] {
+            "GEG",
+            "CRC",
+            "GEG",
+            'G', Block.glass,
+            'R', Item.redstone,
+            'C', Block.cobblestone,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });
 
-        GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitImporting),new ItemStack(BlockRegistry.BlockMagicConduitMoving));
-        GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitExporting),new ItemStack(BlockRegistry.BlockMagicConduitImporting));
-        GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving),new ItemStack(BlockRegistry.BlockMagicConduitExporting));
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker), new Object[] {
+            "GSG",
+            "RGR",
+            "EZE",
+            'G', ItemRegistry.ItemGarnet,
+            'R', Item.redstone,
+            'S', Block.glass,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'E', Item.enderPearl
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker), new Object[] {
+            "GSG",
+            "RGR",
+            "EZE",
+            'G', ItemRegistry.ItemGarnet,
+            'R', Item.redstone,
+            'S', Block.glass,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'E', Item.enderPearl
+        });
+
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
+            "GZG",
+            "SLS",
+            "ZBZ",
+            'G', ItemRegistry.ItemGarnet,
+            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'S', Block.glass,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'L', ItemRegistry.ItemLinker
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
+            "ZBZ",
+            "SLS",
+            "GZG",
+            'G', ItemRegistry.ItemGarnet,
+            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'S', Block.glass,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'L', ItemRegistry.ItemLinker
+        });
+        
+        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitImporting),new ItemStack(BlockRegistry.BlockMagicConduitMoving));
+        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitExporting),new ItemStack(BlockRegistry.BlockMagicConduitImporting));
+        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving),new ItemStack(BlockRegistry.BlockMagicConduitExporting));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
     }
