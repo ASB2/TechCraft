@@ -11,8 +11,8 @@
 	</target>
 
 	<target name="increment_build_number">
-		<propertyfile file="build_number.properties">
-			<entry key="build_number" type="int" operation="+" default="0.0.1"/>
+		<propertyfile file="build.properties">
+			<entry key="release.mod.build_number" type="int" operation="+" default="0"/>
 		</propertyfile>
 	</target>
 
@@ -50,8 +50,8 @@
 		<antcall target="reobfuscate" />
 
 		<!-- Build the jar -->
-		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
-		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\TechnoMagic-Universal-${build.release.mod.version}-${TODAY}-${TSTAMP}.jar">
+		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.forgeversion}" />
+		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.forgeversion}\TechnoMagic-Universal-Forge ${build.release.mod.forgeversion} - Build ${build.release.mod.build_number} -${TODAY}-${TSTAMP} .jar">
 			<fileset dir="${build.dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
 			<fileset dir="${build.dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${build.dir.development}\source\TechnoMagic-Mod\ASB2\resource" excludes="**/xcf/**" />
@@ -71,8 +71,8 @@
 		<antcall target="reobfuscate" />
 
 		<!-- Build the jar -->
-		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
-		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\TechnoMagic-Universal-${build.release.mod.version}-${TODAY}-${TSTAMP}.jar">
+		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.forgeversion}" />
+		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.forgeversion}\TechnoMagic-Universal-Forge ${build.release.mod.forgeversion} - Build ${build.release.mod.build_number} -${TODAY}-${TSTAMP} .jar">
 			<fileset dir="${build.dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
 			<fileset dir="${build.dir.development}\mcp\reobf\minecraft" />
 			<fileset dir="${build.dir.development}\source\TechnoMagic-Mod\ASB2\resource" excludes="**/xcf/**" />
