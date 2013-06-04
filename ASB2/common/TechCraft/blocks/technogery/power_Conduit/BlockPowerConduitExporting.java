@@ -1,22 +1,23 @@
-package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
+package TechCraft.blocks.technogery.power_Conduit;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftContainers;
 
-public class BlockMagicConduitExporting extends TechCraftContainers{
+public class BlockPowerConduitExporting extends TechCraftContainers{
 
-    TileMagicConduitExporting tile;
+    TilePowerConduitExporting tile;
     
-    public BlockMagicConduitExporting(int par1, Material par2Material) {
+    public BlockPowerConduitExporting(int par1, Material par2Material) {
         super(par1, par2Material);
 
     }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        tile = new TileMagicConduitExporting();
+        
+        tile = new TilePowerConduitExporting();
         return tile;
     }
     

@@ -1,17 +1,25 @@
-package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
+package TechCraft.blocks.technogery.power_Conduit;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerConductor;
+import TechCraft.power.PowerNetwork;
 
-public class TileMagicConduitMoving extends TechCraftTile implements IPowerConductor {
+public class TilePowerConduitMoving extends TechCraftTile implements IPowerConductor {
 
+    PowerNetwork network;
+    
     public void updateEntity() {
+        
         super.updateEntity();
         
-        if(network != null){
-           // network.updateNetwork();
+        if(network != null) {
+            
+           network.updateNetwork();
+        }
+        else {
+            network = new PowerNetwork(worldObj, this);
         }
     }
     
@@ -21,6 +29,25 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
         return "TechCraft Conduit(Moving)";
     }
 
+    
+    @Override
+    public int[] getPosition() {
+
+        return new int[]{this.xCoord,this.yCoord,this.zCoord};
+    }
+
+
+    public PowerNetwork getNetwork() {
+
+        return network;
+    }
+
+
+    public void overrideNetwork(PowerNetwork network) {
+
+        this.network = network;
+    }
+    
     public boolean decideRender(ForgeDirection direction) {
 
         TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, this)[0], TechCraftTile.translateDirectionToCoords(direction, this)[1], TechCraftTile.translateDirectionToCoords(direction, this)[2]);
@@ -31,7 +58,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
                 case DOWN: {
 
-                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    if( tile instanceof TilePowerConduitImporting || tile instanceof TilePowerConduitMoving || tile instanceof TilePowerConduitExporting) {
 
                         return true;
                     }
@@ -40,7 +67,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
 
                 case EAST:{
 
-                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    if( tile instanceof TilePowerConduitImporting || tile instanceof TilePowerConduitMoving || tile instanceof TilePowerConduitExporting) {
 
                         return true;
                     }
@@ -48,7 +75,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case NORTH: {
 
-                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    if( tile instanceof TilePowerConduitImporting || tile instanceof TilePowerConduitMoving || tile instanceof TilePowerConduitExporting) {
 
                         return true;
                     }
@@ -56,7 +83,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case SOUTH: {
 
-                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    if( tile instanceof TilePowerConduitImporting || tile instanceof TilePowerConduitMoving || tile instanceof TilePowerConduitExporting) {
 
                         return true;
                     }
@@ -65,7 +92,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case UP: {
 
-                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    if( tile instanceof TilePowerConduitImporting || tile instanceof TilePowerConduitMoving || tile instanceof TilePowerConduitExporting) {
 
                         return true;
                     }
@@ -73,7 +100,7 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
                 }
                 case WEST: {
 
-                    if( tile instanceof TileMagicConduitImporting || tile instanceof TileMagicConduitMoving || tile instanceof TileMagicConduitExporting) {
+                    if( tile instanceof TilePowerConduitImporting || tile instanceof TilePowerConduitMoving || tile instanceof TilePowerConduitExporting) {
 
                         return true;
                     }
@@ -88,11 +115,5 @@ public class TileMagicConduitMoving extends TechCraftTile implements IPowerCondu
         }
 
         return false;
-    }
-
-    @Override
-    public int[] getPosition() {
-
-        return new int[]{this.xCoord,this.yCoord,this.zCoord};
     }
 }

@@ -7,30 +7,31 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
-import TechCraft.models.ModelMagicConduitExportingv2;
-import TechCraft.models.ModelMagicConduitImportingv2;
-import TechCraft.models.ModelMagicConduitMovingv2;
-import TechCraft.power.*;
-import TechCraft.models.*;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
+import TechCraft.models.ModelGear;
+import TechCraft.models.ModelPowerConduitExportingv2;
+import TechCraft.models.ModelPowerConduitImportingv2;
+import TechCraft.models.ModelPowerConduitMovingv2;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.IPowerStorage;
 
 public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRenderer{
 
-    private ModelMagicConduitMovingv2 modelMoving;
-    private ModelMagicConduitImportingv2 modelImporting;
-    private ModelMagicConduitExportingv2 modelExporting;
+    private ModelPowerConduitMovingv2 modelMoving;
+    private ModelPowerConduitImportingv2 modelImporting;
+    private ModelPowerConduitExportingv2 modelExporting;
     @SuppressWarnings("unused")
     private ModelGear modelGear;
     
     public TileEntityRendererMagicConduitMoving() {
 
-        modelMoving = new ModelMagicConduitMovingv2();
-        modelImporting = new ModelMagicConduitImportingv2();
-        modelExporting = new ModelMagicConduitExportingv2();
+        modelMoving = new ModelPowerConduitMovingv2();
+        modelImporting = new ModelPowerConduitImportingv2();
+        modelExporting = new ModelPowerConduitExportingv2();
         modelGear = new ModelGear();
     }
 
-    public void renderAModelAt(TileMagicConduitMoving tile, double d, double d1, double d2, float f) {
+    public void renderAModelAt(TilePowerConduitMoving tile, double d, double d1, double d2, float f) {
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F);
@@ -80,7 +81,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
 
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8){
 
-        this.renderAModelAt((TileMagicConduitMoving)par1TileEntity, par2, par4, par6, par8);
+        this.renderAModelAt((TilePowerConduitMoving)par1TileEntity, par2, par4, par6, par8);
     }    
 
     public boolean decideRender(ForgeDirection direction, TileEntity tileT) {

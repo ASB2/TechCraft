@@ -1,13 +1,13 @@
 package TechCraft.models;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import TechCraft.lib.*;
+import TechCraft.lib.TEXTURES;
+import cpw.mods.fml.client.FMLClientHandler;
 
-public class ModelMagicConduitMovingv2 extends ModelBase
-{
+public class ModelPowerConduitMovingv2 extends ModelBase {
+    
     ModelRenderer Center_Square;
     ModelRenderer WireLeft;
     ModelRenderer WireBack;
@@ -16,7 +16,7 @@ public class ModelMagicConduitMovingv2 extends ModelBase
     ModelRenderer WireTop;
     ModelRenderer WireBottom;
 
-    public ModelMagicConduitMovingv2()
+    public ModelPowerConduitMovingv2()
     {
         textureWidth = 128;
         textureHeight = 64;

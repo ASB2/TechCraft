@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerNetwork;
 
 public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -190,19 +189,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
         return powerMax;
     }
-
-    @Override
-    public PowerNetwork getNetwork() {
-
-        return network;
-    }
-
-    @Override
-    public void overrideNetwork(PowerNetwork network) {
-
-        this.network = network;        
-    }
-
+    
     @Override
     public int getSizeInventory() {
 

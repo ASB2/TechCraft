@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerNetwork;
 
 public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -110,18 +109,6 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     public int getPowerMax(){
 
         return powerMax;
-    }
-
-    @Override
-    public PowerNetwork getNetwork() {
-
-        return network;
-    }
-
-    @Override
-    public void overrideNetwork(PowerNetwork network) {
-
-        this.network = network;        
     }
 
     @Override

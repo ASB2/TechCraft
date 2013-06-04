@@ -1,5 +1,7 @@
 package TechCraft.power;
 
+import net.minecraftforge.common.ForgeDirection;
+
 public interface IPowerMisc {
 
     int getPowerStored();
@@ -10,6 +12,9 @@ public interface IPowerMisc {
     boolean recievePower();
     boolean outputPower();
 
+    boolean canGainPower(int power);
+    boolean canUsePower(int power);
+    
     boolean requestingPower();
     boolean outputtingPower();
     
@@ -19,9 +24,9 @@ public interface IPowerMisc {
     String getName();
 
     boolean usePower(int PowerUsed);
-    boolean gainPower(int PowerGained);    
+    boolean gainPower(int PowerGained);
 
-    PowerNetwork getNetwork();
-
-    void overrideNetwork(PowerNetwork network);
+    int[] getPosition();
+    
+    boolean renderByDirection(ForgeDirection direction);
 }

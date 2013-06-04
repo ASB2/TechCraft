@@ -7,9 +7,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftRegistry {
 
-
-
-
     public static void init() {
         //Creates a new itemstack with the enchangment specidied
         //ItemStack enchanted = new ItemStack(Item.pickaxeStone);
@@ -162,7 +159,7 @@ public class CraftRegistry {
         GameRegistry.addSmelting(Item.swordWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalSword), 1.F);
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving), new Object[] {
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPowerConduitMoving), new Object[] {
             "GEG",
             "CRC",
             "GEG",

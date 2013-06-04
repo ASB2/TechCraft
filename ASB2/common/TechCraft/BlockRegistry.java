@@ -17,6 +17,7 @@ import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
 import TechCraft.blocks.item_transfer_wireless.BlockItemReciever;
+import TechCraft.blocks.item_transfer_wireless.BlockItemSender;
 import TechCraft.blocks.tanks.BlockTCTank;
 import TechCraft.blocks.tcRunes.BlockBasicRune;
 import TechCraft.blocks.tcRunes.BlockRuneBase;
@@ -24,9 +25,6 @@ import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
 import TechCraft.blocks.technogery.BlockTechnogryFocus;
 import TechCraft.blocks.technogery.BlockTestBlock;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.BlockMagicConduitExporting;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.BlockMagicConduitImporting;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.BlockMagicConduitMoving;
 import TechCraft.blocks.technogery.farms.BasicFarm.BlockBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
@@ -37,8 +35,7 @@ import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-
-import TechCraft.blocks.item_transfer_wireless.*;
+import TechCraft.blocks.technogery.power_Conduit.*;
 
 public class BlockRegistry {
 
@@ -59,9 +56,9 @@ public class BlockRegistry {
     public static TechCraftContainers BlockTestBlock;
     public static TechCraftContainers BlockTCEnergySphere;
 
-    public static TechCraftContainers BlockMagicConduitExporting;
-    public static TechCraftContainers BlockMagicConduitImporting;
-    public static TechCraftContainers BlockMagicConduitMoving;
+    public static TechCraftContainers BlockPowerConduitExporting;
+    public static TechCraftContainers BlockPowerConduitImporting;
+    public static TechCraftContainers BlockPowerConduitMoving;
 
     public static TechCraftContainers BlockTechnogryFocus;
     public static TechCraftContainers BlockMagiciansBuildingBlocks;
@@ -163,23 +160,23 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockTCEnergySphere, "TC Energy Sphere");
         MinecraftForge.setBlockHarvestLevel(BlockTCEnergySphere, "pickaxe", 2);
 
-        BlockMagicConduitExporting = new BlockMagicConduitExporting(513,Material.rock);
-        BlockMagicConduitExporting.setUnlocalizedName("BlockMagicConduitExporting");
-        GameRegistry.registerBlock(BlockMagicConduitExporting, "ASB2_BlockMagicConduitExporting");
-        LanguageRegistry.addName(BlockMagicConduitExporting, "Force Exporting Conduit");
-        MinecraftForge.setBlockHarvestLevel(BlockMagicConduitExporting, "pickaxe", 2);
+        BlockPowerConduitExporting = new BlockPowerConduitExporting(513,Material.rock);
+        BlockPowerConduitExporting.setUnlocalizedName("BlockPowerConduitExporting");
+        GameRegistry.registerBlock(BlockPowerConduitExporting, "ASB2_BlockPowerConduitExporting");
+        LanguageRegistry.addName(BlockPowerConduitExporting, "Force Exporting Conduit");
+        MinecraftForge.setBlockHarvestLevel(BlockPowerConduitExporting, "pickaxe", 2);
 
-        BlockMagicConduitImporting = new BlockMagicConduitImporting(514,Material.rock);
-        BlockMagicConduitImporting.setUnlocalizedName("BlockMagicConduitImporting");
-        GameRegistry.registerBlock(BlockMagicConduitImporting, "ASB2_BlockMagicConduitImporting");
-        LanguageRegistry.addName(BlockMagicConduitImporting, "Force Importing Conduit");
-        MinecraftForge.setBlockHarvestLevel(BlockMagicConduitImporting, "pickaxe", 2);
+        BlockPowerConduitImporting = new BlockPowerConduitImporting(514,Material.rock);
+        BlockPowerConduitImporting.setUnlocalizedName("BlockPowerConduitImporting");
+        GameRegistry.registerBlock(BlockPowerConduitImporting, "ASB2_BlockPowerConduitImporting");
+        LanguageRegistry.addName(BlockPowerConduitImporting, "Force Importing Conduit");
+        MinecraftForge.setBlockHarvestLevel(BlockPowerConduitImporting, "pickaxe", 2);
 
-        BlockMagicConduitMoving = new BlockMagicConduitMoving(515,Material.rock);
-        BlockMagicConduitMoving.setUnlocalizedName("BlockMagicConduitMoving");
-        GameRegistry.registerBlock(BlockMagicConduitMoving, "ASB2_BlockMagicConduitMoving");
-        LanguageRegistry.addName(BlockMagicConduitMoving, "Techno Energy Conduit (Moving)");
-        MinecraftForge.setBlockHarvestLevel(BlockMagicConduitMoving, "pickaxe", 2);
+        BlockPowerConduitMoving = new BlockPowerConduitMoving(515,Material.rock);
+        BlockPowerConduitMoving.setUnlocalizedName("BlockPowerConduitMoving");
+        GameRegistry.registerBlock(BlockPowerConduitMoving, "ASB2_BlockPowerConduitMoving");
+        LanguageRegistry.addName(BlockPowerConduitMoving, "Basic Energy Conduit");
+        MinecraftForge.setBlockHarvestLevel(BlockPowerConduitMoving, "pickaxe", 2);
 
         BlockTechnogryFocus = new BlockTechnogryFocus(516,Material.rock);
         BlockTechnogryFocus.setUnlocalizedName("BlockTechnogryFocus");

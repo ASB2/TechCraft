@@ -1,15 +1,15 @@
 package TechCraft.models;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.lib.MODELS;
+import TechCraft.lib.TEXTURES;
 import cpw.mods.fml.client.FMLClientHandler;
-
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
-import TechCraft.lib.*;
 
 public class ModelGearConduit extends ModelBase{
 
@@ -28,7 +28,7 @@ public class ModelGearConduit extends ModelBase{
     int rotate = 1;
     int updown = 0;
 
-    public void render(TileMagicConduitImporting box, double x, double y, double z) {
+    public void render(TileEntity box, double x, double y, double z) {
 
         GL11.glPushMatrix();
 

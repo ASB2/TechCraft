@@ -5,15 +5,15 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.models.ModelMagicConduitImportingv2;
+import TechCraft.models.ModelPowerConduitImportingv2;
 
 public class ItemRendererMagicConduitImporting implements IItemRenderer {
 
-    private ModelMagicConduitImportingv2 modelTutBox;
+    private ModelPowerConduitImportingv2 modelTutBox;
 
     public ItemRendererMagicConduitImporting()
     {
-        modelTutBox = new ModelMagicConduitImportingv2();
+        modelTutBox = new ModelPowerConduitImportingv2();
     }
 
     @Override

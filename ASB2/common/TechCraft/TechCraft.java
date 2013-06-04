@@ -9,10 +9,10 @@ import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitExporting;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
 import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitExporting;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitImporting;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
@@ -101,11 +101,11 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
 
-        GameRegistry.registerTileEntity(TileMagicConduitExporting.class, "TileMagicConduitExporting");
+        GameRegistry.registerTileEntity(TilePowerConduitExporting.class, "TilePowerConduitExporting");
 
-        GameRegistry.registerTileEntity(TileMagicConduitImporting.class, "TileMagicConduitImporting");
+        GameRegistry.registerTileEntity(TilePowerConduitImporting.class, "TileMagicConduitImporting");
 
-        GameRegistry.registerTileEntity(TileMagicConduitMoving.class, "TileMagicConduitMoving");
+        GameRegistry.registerTileEntity(TilePowerConduitMoving.class, "TilePowerConduitMoving");
 
         GameRegistry.registerTileEntity(TileBasicFarm.class, "TileBasicFarm");
 

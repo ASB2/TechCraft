@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
+import TechCraft.blocks.technogery.power_Conduit.*;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 
@@ -35,9 +36,9 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 player.sendChatToPlayer(mTile.getName()+ " has metadata "+world.getBlockMetadata(x, y, z));
             }    
 
-            if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
+            if(world.getBlockTileEntity(x,y,z) instanceof TilePowerConduitMoving){
 
-                IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
+                TilePowerConduitMoving mTile = (TilePowerConduitMoving) world.getBlockTileEntity(x, y, z);
 
                 if(mTile.getNetwork() != null) {
 

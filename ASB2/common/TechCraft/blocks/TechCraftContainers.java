@@ -9,11 +9,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
-import TechCraft.power.IPowerMisc;
 
 public abstract class TechCraftContainers extends BlockContainer{
 
@@ -24,10 +21,10 @@ public abstract class TechCraftContainers extends BlockContainer{
     }
 
     public boolean canCreatureSpawn() {
-        
+
         return false;
     }
-    
+
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
@@ -35,67 +32,17 @@ public abstract class TechCraftContainers extends BlockContainer{
     }
 
     public void onNeighborBlockChange(World world, int x, int y, int z, int metadata) {
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
-
-        if(tile instanceof TechCraftTile) {
-
-            TechCraftTile tileT = (TechCraftTile)tile;
-
-            if(!(TechCraftTile.getTilesNextTo(x, y, z, world) > 0)) {
-
-                if(tileT.getNetwork() != null) {
-                    
-                    if(tile instanceof TileMagicConduitMoving) {
-
-                        tileT.getNetwork().removeConductor((TileMagicConduitMoving)tile);
-                    }
-
-                    if(tileT.recievePower()) {
-
-                        tileT.getNetwork().removeSink(tile);
-                    }
-
-                    if(tileT.outputPower()) {
-
-                        tileT.getNetwork().removeSource(tile);
-                    }
-                }
-            }
-            else{
-
-            }
-        }
+        
+        //TileEntity tile = world.getBlockTileEntity(x, y, z);
+        
     }
 
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData) {
 
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
-
-        if(tile instanceof IPowerMisc) {
-
-            IPowerMisc tile2 = ((IPowerMisc)tile);
-
-            if(tile2.getNetwork() != null) {
-
-                if(tile2.outputPower() && !(tile2.recievePower())) {
-
-                    tile2.getNetwork().removeSource(tile);
-                }
-
-                if(tile2.recievePower() && !(tile2.outputPower())) {
-
-                    tile2.getNetwork().removeSink(tile);
-                }
-
-                if(tile2 instanceof TileMagicConduitMoving) {
-
-                    TileMagicConduitMoving tile3 = (TileMagicConduitMoving)tile2;
-
-                    tile3.getNetwork().removeConductor(tile3);
-                }
-            }
-        }
-
+        //TileEntity tile = world.getBlockTileEntity(x, y, z);
+        
+        
+        this.dropItems(world, x, y, z);
         super.onBlockDestroyedByPlayer(world, x, y, z, metaData);
     }
 
@@ -110,41 +57,16 @@ public abstract class TechCraftContainers extends BlockContainer{
         return sideHit;
     }
 
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6)
-    {
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
-
-        if(tile instanceof IPowerMisc) {
-
-            IPowerMisc tile2 = ((IPowerMisc)tile);
-
-            if(tile2.getNetwork() != null) {
-
-                if(tile2.outputPower() && !(tile2.recievePower())) {
-
-                    tile2.getNetwork().removeSource(tile);
-                }
-
-                if(tile2.recievePower() && !(tile2.outputPower())) {
-
-                    tile2.getNetwork().removeSink(tile);
-                }
-
-                if(tile2 instanceof TileMagicConduitMoving) {
-
-                    TileMagicConduitMoving tile3 = (TileMagicConduitMoving)tile2;
-
-                    tile3.getNetwork().removeConductor(tile3);
-                }
-            }
-        }
-
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+        
+        //TileEntity tile = world.getBlockTileEntity(x, y, z);
+        
         this.dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, par5, par6);
     }
 
-    private void dropItems(World world, int x, int y, int z)
-    {
+    private void dropItems(World world, int x, int y, int z) {
+
         Random prng = new Random();
 
         if(world.getBlockTileEntity(x, y, z) instanceof IInventory) {

@@ -1,4 +1,4 @@
-package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
+package TechCraft.blocks.technogery.power_Conduit;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -6,9 +6,8 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.*;
 
-public class TileMagicConduitExporting extends TechCraftTile implements IPowerConductor{
-
-    PowerNetwork network;
+public class TilePowerConduitExporting extends TechCraftTile implements IPowerConductor {
+    
     
     int powerStored;
     int powerMax = 10;
@@ -159,18 +158,5 @@ public class TileMagicConduitExporting extends TechCraftTile implements IPowerCo
         }
         return false;
     }
-
-    @Override
-    public PowerNetwork getNetwork() {
-
-        return network;
-    }
-
-    @Override
-    public void overrideNetwork(PowerNetwork network) {
-        
-        this.network = network;        
-    }
-
 }
 

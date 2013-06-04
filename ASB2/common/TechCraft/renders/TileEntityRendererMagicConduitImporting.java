@@ -6,17 +6,18 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
-import TechCraft.models.ModelMagicConduitImportingv2;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitImporting;
+import TechCraft.models.ModelPowerConduitImportingv2;
 
 public class TileEntityRendererMagicConduitImporting extends TileEntitySpecialRenderer{
 
-    private ModelMagicConduitImportingv2 model;
+    private ModelPowerConduitImportingv2 model;
 
     public TileEntityRendererMagicConduitImporting(){
-        model = new ModelMagicConduitImportingv2();
+        model = new ModelPowerConduitImportingv2();
     }
-    public void renderAModelAt(TileMagicConduitImporting tile, double x, double y, double z, float frame) {
+    
+    public void renderAModelAt(TilePowerConduitImporting tile, double x, double y, double z, float frame) {
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
@@ -56,7 +57,7 @@ public class TileEntityRendererMagicConduitImporting extends TileEntitySpecialRe
 
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8){
 
-        this.renderAModelAt((TileMagicConduitImporting)par1TileEntity, par2, par4, par6, par8);
+        this.renderAModelAt((TilePowerConduitImporting)par1TileEntity, par2, par4, par6, par8);
     }    
 
 }

@@ -4,16 +4,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
-
-import TechCraft.models.ModelMagicConduitExportingv2;
+import TechCraft.models.*;
 
 public class ItemRendererMagicConduitExporting implements IItemRenderer {
 
-    private ModelMagicConduitExportingv2 modelTutBox;
+    private ModelPowerConduitExportingv2 modelTutBox;
 
     public ItemRendererMagicConduitExporting()
     {
-        modelTutBox = new ModelMagicConduitExportingv2();
+        modelTutBox = new ModelPowerConduitExportingv2();
     }
 
     @Override

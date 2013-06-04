@@ -1,4 +1,4 @@
-package TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit;
+package TechCraft.blocks.technogery.power_Conduit;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -6,7 +6,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.*;
 
-public class TileMagicConduitImporting extends TechCraftTile implements IPowerConductor{
+public class TilePowerConduitImporting extends TechCraftTile implements IPowerConductor{
 
     PowerNetwork network;
 
@@ -36,6 +36,12 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
         return 10;
     }
 
+    @Override
+    public String getName() {
+
+        return "TechCraft Conduit(Importing)";
+    }
+    
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
@@ -80,12 +86,6 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getName() {
-
-        return "TechCraft Conduit(Importing)";
     }
 
     public boolean decideRender(ForgeDirection direction) {
@@ -155,24 +155,5 @@ public class TileMagicConduitImporting extends TechCraftTile implements IPowerCo
         }
         return false;
     }
-
-    @Override
-    public int[] getPosition() {
-
-        return new int[]{this.xCoord,this.yCoord,this.zCoord};
-    }
-
-    @Override
-    public PowerNetwork getNetwork() {
-
-        return network;
-    }
-
-    @Override
-    public void overrideNetwork(PowerNetwork network) {
-
-        this.network = network;        
-    }
-
 }
 

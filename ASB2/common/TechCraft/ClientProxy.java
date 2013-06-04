@@ -6,18 +6,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import TechCraft.blocks.item_transfer_wireless.GuiItemReciever;
+import TechCraft.blocks.item_transfer_wireless.GuiItemSender;
 import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
+import TechCraft.blocks.item_transfer_wireless.TileItemSender;
 import TechCraft.blocks.tanks.GuiTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.GuiRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitExporting;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitImporting;
-import TechCraft.blocks.technogery.PowerConduit_Wire.MagicConduit.TileMagicConduitMoving;
 import TechCraft.blocks.technogery.farms.BasicFarm.GuiBasicFarm;
 import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitExporting;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitImporting;
+import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
 import TechCraft.blocks.technogery.tcChargeBench.GuiTCChargeBench;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcFurnace.GuiTCFurnace;
@@ -44,11 +46,10 @@ import TechCraft.renders.TileEntityRendererMagicConduitMoving;
 import TechCraft.renders.TileEntityRendererMagicEnergySphere;
 import TechCraft.renders.TileEntityRendererTileBasicRune;
 import TechCraft.renders.TileEntityRendererTileItemReciever;
+import TechCraft.renders.TileEntityRendererTileTank;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererTileTest;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import TechCraft.blocks.item_transfer_wireless.*;
-import TechCraft.renders.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -59,14 +60,14 @@ public class ClientProxy extends CommonProxy {
 
         //MinecraftForgeClient.registerItemRenderer(ItemRegistry.ItemMagicGauntlet.itemID,  (IItemRenderer)new ItemRendererMagicGauntlet());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileMagicConduitImporting.class, new TileEntityRendererMagicConduitImporting());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockMagicConduitImporting.blockID, (IItemRenderer)new ItemRendererMagicConduitImporting());
+        ClientRegistry.bindTileEntitySpecialRenderer(TilePowerConduitImporting.class, new TileEntityRendererMagicConduitImporting());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockPowerConduitImporting.blockID, (IItemRenderer)new ItemRendererMagicConduitImporting());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileMagicConduitExporting.class, new TileEntityRendererMagicConduitExporting());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockMagicConduitExporting.blockID, (IItemRenderer)new ItemRendererMagicConduitExporting());
+        ClientRegistry.bindTileEntitySpecialRenderer(TilePowerConduitExporting.class, new TileEntityRendererMagicConduitExporting());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockPowerConduitExporting.blockID, (IItemRenderer)new ItemRendererMagicConduitExporting());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileMagicConduitMoving.class, new TileEntityRendererMagicConduitMoving());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockMagicConduitMoving.blockID, (IItemRenderer)new ItemRendererMagicConduitMoving());
+        ClientRegistry.bindTileEntitySpecialRenderer(TilePowerConduitMoving.class, new TileEntityRendererMagicConduitMoving());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockPowerConduitMoving.blockID, (IItemRenderer)new ItemRendererMagicConduitMoving());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCEnergySphere.class, new TileEntityRendererMagicEnergySphere());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCEnergySphere.blockID, (IItemRenderer)new ItemRendererMagicEnergySphere());
