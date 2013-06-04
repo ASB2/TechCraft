@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftContainers;
+import TechCraft.*;
 
 public class BlockBasicFarm extends TechCraftContainers {
 
@@ -26,7 +27,8 @@ public class BlockBasicFarm extends TechCraftContainers {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        // TODO Auto-generated method stub
+        
+        ClientMessenger.displayInChat("hi");
         return new TileBasicFarm();
     }
 

@@ -23,10 +23,12 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
 
 
     public void updateEntity() {
-        super.updateEntity();        
+
+        super.updateEntity();
         this.managePowerAll(this, powerInput(),false);
 
-        if(manageGround()){
+        if(manageGround()) {
+            
             //harvest();
             plant();
         }
