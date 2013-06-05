@@ -4,7 +4,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ClientMessenger {
+public class Messenger {
 
     @SideOnly(Side.CLIENT)
     public static void displayInChat(String e) {       
