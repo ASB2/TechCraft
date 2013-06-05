@@ -32,23 +32,22 @@ public class GuiTCFurnace extends GuiContainer {
         this.mc.renderEngine.bindTexture(GUI.GUI_DEFAULT);
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
-        
+
         //This draws the entire gui        
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        
+
         drawTexturedModalRect(posX + 56 - 1, posY + 32 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 111, posY + 27, 226, 4, 26, 26);
-        
+
         drawTexturedModalRect(posX + 79, posY + 32, 200, 14, 24, 17);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
 
         drawTexturedModalRect(posX + 4, posY + 5, 178, 127, 48, 75);
 
-        if(tileEntity.getPowerStored() > 0) {
-
             int i1 = tileEntity.getPowerScaled(75);
-            drawTexturedModalRect(posX + 4, posY + 5, 178, 52, 49, i1);
-        }
+
+            drawTexturedModalRect(posX + 7, posY + 5, 176, 51, 18, 71);
+            drawTexturedModalRect(posX + 7, posY + 5, 194, 51, 18, i1);
     }
 
 }

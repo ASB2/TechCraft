@@ -39,11 +39,10 @@ public class GuiTCTeleporter extends GuiContainer {
         
         drawTexturedModalRect(posX + 4, posY + 5, 178, 127, 48, 75);
 
-        if(tileEntity.getPowerStored() > 0) {
+        int i1 = tileEntity.getPowerScaled(75);
 
-            int i1 = tileEntity.getPowerScaled(75);
-            drawTexturedModalRect(posX + 4, posY + 5, 178, 52, 49, i1);
-        }
+        drawTexturedModalRect(posX + 9, posY + 7, 176, 51, 18, 71);
+        drawTexturedModalRect(posX + 9, posY + 7, 194, 51, 18, i1);
     }
 
 

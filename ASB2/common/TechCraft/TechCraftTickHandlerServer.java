@@ -22,14 +22,14 @@ public class TechCraftTickHandlerServer implements ITickHandler {
 
     @Override
     public EnumSet<TickType> ticks() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return EnumSet.of(TickType.SERVER);
     }
 
     @Override
     public String getLabel() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return "TechCraft Server";
     }
 
    // private List <PowerNetwork> conductors = new ArrayList<PowerNetwork>();

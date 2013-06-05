@@ -9,26 +9,25 @@ public class TechCraftTickHandlerClient implements ITickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
-        // TODO Auto-generated method stub
-
+        //TODO
     }
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+        
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public EnumSet<TickType> ticks() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return EnumSet.of(TickType.CLIENT);
     }
 
     @Override
     public String getLabel() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return "TechCraft Client";
     }
 
 }
