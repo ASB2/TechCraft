@@ -1,5 +1,6 @@
 package TechCraft.blocks.item_transfer_wireless;
 
+import cpw.mods.fml.server.FMLServerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,7 @@ public class TileItemSender extends TechCraftTile implements IInventory{
     int x;
     int y;
     int z;
+    int dimentionID = 0;
 
     public TileItemSender() {
 
@@ -37,6 +39,7 @@ public class TileItemSender extends TechCraftTile implements IInventory{
                         x = (int) ((ItemLinker)tileItemStack[0].getItem()).getXCoord(tileItemStack[0]);
                         y = (int) ((ItemLinker)tileItemStack[0].getItem()).getYCoord(tileItemStack[0]);
                         z = (int) ((ItemLinker)tileItemStack[0].getItem()).getZCoord(tileItemStack[0]);
+                        dimentionID = ((ItemLinker)tileItemStack[0].getItem()).getDimentionIDCoord(tileItemStack[0]);
                         linkerSet = true;
                     }
                 }
@@ -53,18 +56,25 @@ public class TileItemSender extends TechCraftTile implements IInventory{
 
         if(linkerSet && worldObj.getBlockTileEntity(x, y, z) != null) {
 
-            moveSlotToInventory();
+            if(!(worldObj.getBlockPowerInput(x, y, z) > 0)) {
+
+                if(worldObj.blockExists(x, y, z)) {
+                    
+                    moveSlotToInventory();                    
+                }
+            }
         }
     }
 
     public void moveSlotToInventory() {
 
+        FMLServerHandler.instance().getServer().getConfigurationManager();
+        
         TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
 
         if(tile instanceof TileItemReciever) {
 
             TileItemReciever tileI = (TileItemReciever)tile;
-
 
             if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
 

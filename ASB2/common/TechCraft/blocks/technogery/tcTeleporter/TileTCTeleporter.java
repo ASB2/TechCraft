@@ -32,7 +32,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     int dimentionID = 0;
 
     public TileTCTeleporter() {        
-        
+
         tileItemStacks = new ItemStack[1];
 
     }
@@ -76,30 +76,34 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 
-        if(teleporterSet && coordsSet && this.getPowerStored() >= powerForProcess) {
+        if(worldObj.getBlockPowerInput(x, y, z) > 0) {
 
-            if(teleporter != null) {
+            if(teleporterSet && coordsSet && this.getPowerStored() >= powerForProcess) {
 
-                if(entity instanceof EntityPlayerMP) {
+                if(teleporter != null) {
 
-                    if(this.usePower(powerForProcess)) {
+                    if(entity instanceof EntityPlayerMP) {
 
-                        EntityPlayerMP player = (EntityPlayerMP) entity;     
+                        if(this.usePower(powerForProcess)) {
 
-                        for(int i = 0; i < 2; i++) {
+                            EntityPlayerMP player = (EntityPlayerMP) entity;     
 
-                            if (player.dimension != this.dimentionID) {
+                            for(int i = 0; i < 2; i++) {
 
-                                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, this.dimentionID, new Teleporter(player.mcServer.worldServerForDimension(this.dimentionID)));
-                            }
+                                if (player.dimension != this.dimentionID) {
 
-                            else {
+                                    player.mcServer.getConfigurationManager().transferPlayerToDimension(player, this.dimentionID, new Teleporter(player.mcServer.worldServerForDimension(this.dimentionID)));
+                                }
 
-                                player.setPositionAndUpdate(this.x, this.y, this.z);
+                                else {
+
+                                    player.setPositionAndUpdate(this.x, this.y, this.z);
+                                }
                             }
                         }
                     }
                 }
+
             }
         }
     }
@@ -189,7 +193,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
         return powerMax;
     }
-    
+
     @Override
     public int getSizeInventory() {
 

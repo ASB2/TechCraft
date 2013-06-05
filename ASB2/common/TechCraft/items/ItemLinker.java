@@ -21,6 +21,7 @@ public class ItemLinker extends TechCraftItems {
             this.setXCoord(itemStack, x);
             this.setYCoord(itemStack, y);
             this.setZCoord(itemStack, z);
+            this.setDimentionIDCoord(itemStack, player.dimension);
             this.setCoodsSet(itemStack, true);
             
             if(!world.isRemote)
@@ -39,6 +40,9 @@ public class ItemLinker extends TechCraftItems {
         if(this.isCoodsSet(itemStack)) {
             
             info.add("X: "+  this.getXCoord(itemStack) +" Y: "+ this.getYCoord(itemStack)+" Z: " + this.getXCoord(itemStack));
+            info.add("Dimention " + this.getDimentionIDCoord(itemStack));
+            
+            
         }
         else{
             info.add("Coordinates not set.");
@@ -46,6 +50,20 @@ public class ItemLinker extends TechCraftItems {
         
     }
 
+    public int getDimentionIDCoord(ItemStack item) {
+        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        if (nbtTagCompound != null){
+            return nbtTagCompound.getInteger("dimentionID");
+        }
+        return 0;
+    }
+
+    public void setDimentionIDCoord(ItemStack item, int x) {
+
+        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        nbtTagCompound.setInteger("dimentionID", x);
+    }
+    
     public boolean isCoodsSet(ItemStack item) {
 
         NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
