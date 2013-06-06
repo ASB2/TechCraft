@@ -11,7 +11,7 @@ import cpw.mods.fml.common.TickType;
 
 public class TechCraftKeyBindings extends KeyHandler {
 
-    static KeyBinding binding = new KeyBinding("MP", Keyboard.KEY_M);
+    static KeyBinding binding = new KeyBinding("TechCraft", Keyboard.KEY_M);
 
     public TechCraftKeyBindings() {
 

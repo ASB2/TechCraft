@@ -12,103 +12,318 @@ public class CraftRegistry {
         //ItemStack enchanted = new ItemStack(Item.pickaxeStone);
         //.addEnchantment(Enchantment.sharpness, 2);
 
-        GameRegistry.addRecipe(new ItemStack(Item.bucketLava),
-                new Object[] { "FFF", "FSF", "FBF", 'F', ItemRegistry.ItemFireCrystalShard, 'S', Block.stone, 'B', Item.bucketEmpty});
+        GameRegistry.addRecipe(new ItemStack(Item.bucketLava), new Object[] {
+            "FFF",
+            "FSF",
+            "FBF",
+            'F', ItemRegistry.ItemFireCrystalShard,
+            'S', Block.stone,
+            'B', Item.bucketEmpty
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGarnetBlock),
-                new Object[] { "DDD", "DDD", "DDD", 'D',
-            ItemRegistry.ItemGarnet });
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGarnetBlock), new Object[] {
+            "DDD",
+            "DDD",
+            "DDD",
+            'D', ItemRegistry.ItemGarnet
+        });
 
-        GameRegistry.addShapelessRecipe(new ItemStack(Item.seeds),new ItemStack(Item.wheat));
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob), new Object[] {
+            "ERE",
+            "RGR", 
+            "EZE",
+            'E', ItemRegistry.ItemEnergyCrystalShard,
+            'R', Item.redstone,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'G', Item.ingotGold
+        });
 
-        GameRegistry.addSmelting(BlockRegistry.BlockZycrantianOre.blockID,
-                new ItemStack(ItemRegistry.ItemZycrantianIngot), 5.0F);
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemRealityDifferentiationDrive), new Object[] { 
+            "BZB",
+            "PDP",
+            "BZB",
+            'B', ItemRegistry.ItemEnergyBlob,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'D', Item.diamond,
+            'P', Item.enderPearl
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4),
-                new Object[] { "FRF", "DED", "FRF", 'F', BlockRegistry.BlockFalseBlock, 'R', Item.redstone ,'E', ItemRegistry.ItemEnergyCrystalShard , 'D', Item.diamond});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockMagiciansBuildingBlocks ,4), new Object[] {
+            "CSC", 
+            "SES",
+            "CSC", 
+            'C', ItemRegistry.ItemEnergyCrystalShard,
+            'S', Block.stoneBrick,
+            'E', ItemRegistry.ItemEnergyBlob
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCChargeBench),
-                new Object[] { "EGE", "MEM", "GOG", 'G', Block.glass, 'E', ItemRegistry.ItemEnergyCrystalShard, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'O', ItemRegistry.ItemEnergyBlob});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCEnergySphere), new Object[] {
+            "BRB",
+            "ZMZ",
+            "BRB",
+            'B', ItemRegistry.ItemEnergyBlob,
+            'R', ItemRegistry.ItemRealityDifferentiationDrive, 
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockMagiciansBuildingBlocks ,4),
-                new Object[] { "CSC", "SES", "CSC", 'C', ItemRegistry.ItemEnergyCrystalShard, 'S', Block.stoneBrick, 'E', ItemRegistry.ItemEnergyBlob});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCFurnace), new Object[] { 
+            "ZZZ",
+            "ZMZ",
+            "FSF",
+            'Z', Block.glass,
+            'F', ItemRegistry.ItemZycrantianIngot, 
+            'B', Block.brick,
+            'F', ItemRegistry.ItemFireCrystalShard
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCFurnace),
-                new Object[] { "GGG", "FMF", "BEB", 'G', Block.glass, 'F', ItemRegistry.ItemFireCrystalShard, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'B', Block.brick});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCChargeBench), new Object[] {
+            "AAA",
+            "EME",
+            "MRM",
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'E', ItemRegistry.ItemEnergyCrystalShard,
+            'R', Item.redstone,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator),
-                new Object[] { "FFF", "CMZ", "FEF", 'F', ItemRegistry.ItemFireCrystalShard, 'C', Item.coal, 'E', ItemRegistry.ItemEnergyBlob, 'M', BlockRegistry.BlockMagiciansBuildingBlocks, 'Z', ItemRegistry.ItemEnergyCrystalShard});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker,2), new Object[] {
+            "AGA",
+            "PAP",
+            "RZR",
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'G', ItemRegistry.ItemGarnet,
+            'R', Item.redstone,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'P', Item.enderPearl
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob),
-                new Object[] { "SES", "ERE", "SES", 'S', Item.redstone, 'E', ItemRegistry.ItemEnergyCrystalShard, 'R', ItemRegistry.ItemRealityDifferentiationDrive});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
+            "GZG",
+            "SLS",
+            "ZBZ",
+            'G', ItemRegistry.ItemGarnet,
+            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'S', Block.glass,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'L', ItemRegistry.ItemLinker
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemRealityDifferentiationDrive),
-                new Object[] { "EAE", "WDH", "EFE", 'E', ItemRegistry.ItemEnergyCrystalShard, 'A', ItemRegistry.ItemAirCrystalShard, 'W', ItemRegistry.ItemWaterCrystalShard, 'H', ItemRegistry.ItemEarthCrystalShard, 'F', ItemRegistry.ItemFireCrystalShard, 'D', Item.diamond});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPowerConduitMoving), new Object[] {
+            "GEG",
+            "CRC",
+            "GEG",
+            'G', Block.glass,
+            'R', Item.redstone,
+            'C', Block.cobblestone,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechMultiTool),
-                new Object[] { "ZEZ", "ERE", "BZB", 'Z', ItemRegistry.ItemZycrantianIngot, 'E', ItemRegistry.ItemEnergyCrystalShard, 'R', ItemRegistry.ItemRealityDifferentiationDrive, 'B', ItemRegistry.ItemEnergyBlob});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
+            "ZBZ",
+            "SLS",
+            "GZG",
+            'G', ItemRegistry.ItemGarnet,
+            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'S', Block.glass,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'L', ItemRegistry.ItemLinker
+        });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCEnergySphere),
-                new Object[] { "BEB", "ERE", "BEB", 'E', ItemRegistry.ItemEnergyCrystalShard, 'R', ItemRegistry.ItemRealityDifferentiationDrive, 'B', ItemRegistry.ItemEnergyBlob});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4), new Object[] {
+            "FRF",
+            "DED",
+            "FRF", 
+            'F', BlockRegistry.BlockFalseBlock, 
+            'R', Item.redstone ,
+            'E', ItemRegistry.ItemEnergyCrystalShard ,
+            'D', Item.diamond
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader),
-                new Object[] { "RZC", "ZSZ", "SZR", 'R', Item.redstone, 'S', Item.stick, 'C', ItemRegistry.ItemEnergyCrystalShard, 'Z', ItemRegistry.ItemZycrantianIngot});
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator), new Object[] { 
+            "FFF",
+            "CMZ",
+            "FEF", 
+            'F', ItemRegistry.ItemFireCrystalShard,
+            'C', Item.coal,
+            'E', ItemRegistry.ItemEnergyBlob, 
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'Z', ItemRegistry.ItemEnergyCrystalShard
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechMultiTool), new Object[] { 
+            "ZEZ",
+            "ERE",
+            "BZB", 
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'E', ItemRegistry.ItemEnergyCrystalShard, 
+            'R', ItemRegistry.ItemRealityDifferentiationDrive, 
+            'B', ItemRegistry.ItemEnergyBlob
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader), new Object[] {
+            "RZC",
+            "ZSZ",
+            "SZR",
+            'R', Item.redstone, 
+            'S', Item.stick,
+            'C', ItemRegistry.ItemEnergyCrystalShard, 
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
 
 
         //Tools
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword),
-                new Object[] { " D ", " D ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword), new Object[] {
+            " D ",
+            " D ",
+            " S ",
+            'D', ItemRegistry.ItemGarnet, 
+            'S', Item.stick
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetShovel),
-                new Object[] { " D ", " S ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetShovel), new Object[] { 
+            " D ",
+            " S ",
+            " S ",
+            'D', ItemRegistry.ItemGarnet,
+            'S', Item.stick
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetAxe),
-                new Object[] { " DD", " SD", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetAxe), new Object[] {
+            " DD",
+            " SD", 
+            " S ", 
+            'D', ItemRegistry.ItemGarnet, 
+            'S', Item.stick
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetAxe),
-                new Object[] { "DD ", "DS ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetAxe), new Object[] { 
+            "DD ",
+            "DS ",
+            " S ",
+            'D', ItemRegistry.ItemGarnet,
+            'S', Item.stick
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetHoe),
-                new Object[] { "DD ", " S ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetHoe), new Object[] {
+            "DD ",
+            " S ",
+            " S ",
+            'D', ItemRegistry.ItemGarnet,
+            'S', Item.stick
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetHoe),
-                new Object[] { " DD", " S ", " S ", 'D', ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetHoe), new Object[] {
+            " DD",
+            " S ",
+            " S ",
+            'D', ItemRegistry.ItemGarnet,
+            'S', Item.stick
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetPickaxe),
-                new Object[] { "DDD", " S ", " S ", 'D',ItemRegistry.ItemGarnet, 'S', Item.stick});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetPickaxe), new Object[] {
+            "DDD",
+            " S ",
+            " S ",
+            'D',ItemRegistry.ItemGarnet, 
+            'S', Item.stick
+        });
 
         //Zycrantian
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianShovel),
-                new Object[] { " D ", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+                new Object[] {
+            " D ",
+            " E ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe), new Object[] { 
+            " DD",
+            " ED",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe),
-                new Object[] { " DD", " ED", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+                new Object[] {
+            "DD ",
+            "DE ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe),
-                new Object[] { "DD ", "DE ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe), new Object[] {
+            "DD ",
+            " E ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,'E',
+            ItemRegistry.ItemEnergyCrystalShard 
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe),
-                new Object[] { "DD ", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe), new Object[] {
+            " DD",
+            " E ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe),
-                new Object[] { " DD", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianPickaxe),
-                new Object[] { "DDD", " E ", " S ", 'D',ItemRegistry.ItemZycrantianIngot, 'S', Item.stick, 'E',ItemRegistry.ItemEnergyCrystalShard});
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianPickaxe), new Object[] {
+            "DDD",
+            " E ",
+            " S ",
+            'D',ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E',ItemRegistry.ItemEnergyCrystalShard
+        });
 
         //Armor
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe),
-                new Object[] { " DD", " ED", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe), new Object[] {
+            " DD",
+            " ED",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe),
-                new Object[] { "DD ", "DE ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianAxe), new Object[] {
+            "DD ",
+            "DE ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe), new Object[] {
+            "DD ",
+            " E ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe),
-                new Object[] { "DD ", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHoe),
-                new Object[] { " DD", " E ", " S ", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+                new Object[] {
+            " DD",
+            " E ",
+            " S ",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianHelmet), new Object[] {
             "DDD",
@@ -135,8 +350,14 @@ public class CraftRegistry {
             'E', ItemRegistry.ItemEnergyCrystalShard
         });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianSword),
-                new Object[] { "EDE", "EDE", "ESE", 'D', ItemRegistry.ItemZycrantianIngot, 'S', Item.stick,'E', ItemRegistry.ItemEnergyCrystalShard });
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianSword), new Object[] {
+            "EDE",
+            "EDE",
+            "ESE",
+            'D', ItemRegistry.ItemZycrantianIngot,
+            'S', Item.stick,
+            'E', ItemRegistry.ItemEnergyCrystalShard 
+        });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemZycrantianShovel), new Object[] {
             " D ",
@@ -146,6 +367,18 @@ public class CraftRegistry {
             'S', Item.stick,
             'E', ItemRegistry.ItemEnergyCrystalShard
         });
+
+        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitImporting),new ItemStack(BlockRegistry.BlockMagicConduitMoving));
+        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitExporting),new ItemStack(BlockRegistry.BlockMagicConduitImporting));
+        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving),new ItemStack(BlockRegistry.BlockMagicConduitExporting));
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemLinker),new ItemStack(ItemRegistry.ItemLinker));
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
+
+        GameRegistry.addShapelessRecipe(new ItemStack(Item.seeds),new ItemStack(Item.wheat));
+
+        GameRegistry.addSmelting(BlockRegistry.BlockZycrantianOre.blockID,
+                new ItemStack(ItemRegistry.ItemZycrantianIngot), 5.0F);
 
         GameRegistry.addSmelting(Item.axeWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalAxe), 1.F);
@@ -158,66 +391,6 @@ public class CraftRegistry {
 
         GameRegistry.addSmelting(Item.swordWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalSword), 1.F);
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPowerConduitMoving), new Object[] {
-            "GEG",
-            "CRC",
-            "GEG",
-            'G', Block.glass,
-            'R', Item.redstone,
-            'C', Block.cobblestone,
-            'E', ItemRegistry.ItemEnergyCrystalShard
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker), new Object[] {
-            "GSG",
-            "RGR",
-            "EZE",
-            'G', ItemRegistry.ItemGarnet,
-            'R', Item.redstone,
-            'S', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'E', Item.enderPearl
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker), new Object[] {
-            "GSG",
-            "RGR",
-            "EZE",
-            'G', ItemRegistry.ItemGarnet,
-            'R', Item.redstone,
-            'S', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'E', Item.enderPearl
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
-            "GZG",
-            "SLS",
-            "ZBZ",
-            'G', ItemRegistry.ItemGarnet,
-            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'S', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'L', ItemRegistry.ItemLinker
-        });
-        
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
-            "ZBZ",
-            "SLS",
-            "GZG",
-            'G', ItemRegistry.ItemGarnet,
-            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'S', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'L', ItemRegistry.ItemLinker
-        });
-        
-        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitImporting),new ItemStack(BlockRegistry.BlockMagicConduitMoving));
-        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitExporting),new ItemStack(BlockRegistry.BlockMagicConduitImporting));
-        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving),new ItemStack(BlockRegistry.BlockMagicConduitExporting));
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
     }
 
 }

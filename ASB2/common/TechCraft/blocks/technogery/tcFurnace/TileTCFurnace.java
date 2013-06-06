@@ -13,9 +13,9 @@ import TechCraft.power.IPowerSink;
 public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
     
     int powerStored = 0;
-    int powerMax = 100;
+    int powerMax = 500;
 
-    int powerForProcess = 10;
+    int powerForProcess = 20;
 
     private ItemStack[] tileItemStacks;
 

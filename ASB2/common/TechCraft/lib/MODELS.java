@@ -9,6 +9,6 @@ public final class MODELS {
     public static final String TORUS = "/mods/TechCraft/models/torus.obj";
     public static final String GEAR_CONDUIT = "/mods/TechCraft/models/ConduitNURBS.obj";
     public static final String GEAR = "/mods/TechCraft/models/GearSingle.obj";
-    public static final String GRINDER = "/mods/TechCraft/models/grinderfromblender.obj";
+    public static final String GRINDER = "/mods/TechCraft/models/GrinderFromBlender.obj";
     public static final String TEST = "/mods/TechCraft/models/grinderfromblender.obj";
 }

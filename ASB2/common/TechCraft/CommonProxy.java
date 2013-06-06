@@ -26,12 +26,14 @@ import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcTeleporter.ContainerTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy implements IGuiHandler {
 
     public void registerServerTickHandler(){
-        //TickRegistry.registerTickHandler(new MyToolsTickHandlerServer(), Side.SERVER);
-    }
+        TickRegistry.registerTickHandler(new TechCraftTickHandlerServer(), Side.SERVER);
+ }
 
     // Client stuff
     public void register() {

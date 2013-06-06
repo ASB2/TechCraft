@@ -50,15 +50,17 @@ import TechCraft.renders.TileEntityRendererTileTank;
 import TechCraft.renders.TileEntityRendererTileTechnogryFocus;
 import TechCraft.renders.TileEntityRendererTileTest;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy {
 
     @Override
     public void register() {
 
-        //KeyBindingRegistry.registerKeyBinding(new MyToolsKeyBindings());
-
-        //MinecraftForgeClient.registerItemRenderer(ItemRegistry.ItemMagicGauntlet.itemID,  (IItemRenderer)new ItemRendererMagicGauntlet());
+        KeyBindingRegistry.registerKeyBinding(new TechCraftKeyBindings());
+        TickRegistry.registerTickHandler(new TechCraftTickHandlerClient(), Side.CLIENT);
 
         ClientRegistry.bindTileEntitySpecialRenderer(TilePowerConduitImporting.class, new TileEntityRendererMagicConduitImporting());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockPowerConduitImporting.blockID, (IItemRenderer)new ItemRendererMagicConduitImporting());
@@ -80,10 +82,10 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
-        
+
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemReciever.class, new TileEntityRendererTileItemReciever());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemReciever.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
-        
+
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCTank.class, new TileEntityRendererTileTank());
     }
 
@@ -93,8 +95,9 @@ public class ClientProxy extends CommonProxy {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        
+
         if(tileEntity != null) {
+            
             switch(ID){
                 case 0: return new GuiBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
                 case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);

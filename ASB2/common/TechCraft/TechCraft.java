@@ -29,7 +29,6 @@ import TechCraft.worldGen.WorldGenBlockFreezingFlower;
 import TechCraft.worldGen.WorldGenBlockGarnetOre;
 import TechCraft.worldGen.WorldGenBlockWaterCrystalOre;
 import TechCraft.worldGen.WorldGenBlockZycrantianOre;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -42,8 +41,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = TechCraft.modid, name = "TechCraft The TechnoMagic Mod", version = "Not a Full Release Yet")
 
@@ -76,13 +73,10 @@ public class TechCraft {
 
         proxy.register();
         instance = this;
-        
+
         MinecraftForge.EVENT_BUS.register(new TechCraftForgeEvents());
         GameRegistry.registerFuelHandler(new TechCraftFuelHandler());
-        KeyBindingRegistry.registerKeyBinding(new TechCraftKeyBindings());
-        TickRegistry.registerTickHandler(new TechCraftTickHandlerServer(), Side.SERVER);
-        TickRegistry.registerTickHandler(new TechCraftTickHandlerClient(), Side.CLIENT);
-
+  
         //MinecraftForge.addGrassSeed(new ItemStack(ItemRegistry.ItemLifeCrystal), 10);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockBurningFlower,0,20);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockFreezingFlower,0,20);
@@ -127,11 +121,11 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileTCTeleporter.class, "TileTCTeleporter");
 
         GameRegistry.registerTileEntity(TileTCTank.class, "TileTCTank");
-        
+
         GameRegistry.registerTileEntity(TileItemReciever.class, "TileItemReciever");
 
         GameRegistry.registerTileEntity(TileItemSender.class, "TileItemSender");
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

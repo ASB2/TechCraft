@@ -16,10 +16,9 @@ public class TechCraftForgeEvents {
 
                 EntityPlayer player = (EntityPlayer)event.entity;
 
-                switch(player.username) {
-
-                    case "asb2": Messenger.displayInChat("Welcome ASB2");
-                    default:
+                if(player.username == "ASB2") {
+                    
+                    Messenger.displayInChat("Welcome ASB2");
                 }
             }
         }

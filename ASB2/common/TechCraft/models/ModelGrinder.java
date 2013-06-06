@@ -15,10 +15,11 @@ public class ModelGrinder extends ModelBase{
 
     public ModelGrinder() {
 
-        modelTutBox = AdvancedModelLoader.loadModel(MODELS.TEST);
+        modelTutBox = AdvancedModelLoader.loadModel(MODELS.GRINDER);
     }
 
     public void render() {
+
         modelTutBox.renderAll();
     }
 
@@ -26,7 +27,7 @@ public class ModelGrinder extends ModelBase{
     int updown = 0;
 
     public void render(TileEntity box, double x, double y, double z) {
-        
+
         float scale = 0.05F;
         GL11.glPushMatrix();
 
