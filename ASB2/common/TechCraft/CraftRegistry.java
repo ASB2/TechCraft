@@ -71,10 +71,10 @@ public class CraftRegistry {
             "ZZZ",
             "ZMZ",
             "FSF",
-            'Z', Block.glass,
-            'F', ItemRegistry.ItemZycrantianIngot, 
-            'B', Block.brick,
-            'F', ItemRegistry.ItemFireCrystalShard
+            'Z', ItemRegistry.ItemZycrantianIngot, 
+            'F', Block.glass, 
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'S', BlockRegistry.BlockTCEnergySphere
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCChargeBench), new Object[] {
@@ -99,14 +99,25 @@ public class CraftRegistry {
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
-            "GZG",
-            "SLS",
-            "ZBZ",
+            "AGA",
+            "MLM",
+            "GRG",
+            'A', ItemRegistry.ItemAirCrystalShard,
             'G', ItemRegistry.ItemGarnet,
-            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'S', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'L', ItemRegistry.ItemLinker
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'L', ItemRegistry.ItemLinker,
+            'R', Item.redstone
+        });
+
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
+            "GMG",
+            "LGL",
+            "AAA",
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'G', ItemRegistry.ItemGarnet,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'L', ItemRegistry.ItemLinker,
+            'R', Item.redstone
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPowerConduitMoving), new Object[] {
@@ -117,17 +128,6 @@ public class CraftRegistry {
             'R', Item.redstone,
             'C', Block.cobblestone,
             'E', ItemRegistry.ItemEnergyCrystalShard
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
-            "ZBZ",
-            "SLS",
-            "GZG",
-            'G', ItemRegistry.ItemGarnet,
-            'B', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'S', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'L', ItemRegistry.ItemLinker
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4), new Object[] {
@@ -171,6 +171,15 @@ public class CraftRegistry {
             'Z', ItemRegistry.ItemZycrantianIngot
         });
 
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCTeleporter), new Object[] {
+            "RZC",
+            "ZSZ",
+            "SZR",
+            'R', Item.redstone, 
+            'S', Item.stick,
+            'C', ItemRegistry.ItemEnergyCrystalShard, 
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
 
         //Tools
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword), new Object[] {

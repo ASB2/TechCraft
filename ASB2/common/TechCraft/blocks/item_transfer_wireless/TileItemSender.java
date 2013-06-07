@@ -1,6 +1,5 @@
 package TechCraft.blocks.item_transfer_wireless;
 
-import cpw.mods.fml.server.FMLServerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -68,7 +67,7 @@ public class TileItemSender extends TechCraftTile implements IInventory{
 
     public void moveSlotToInventory() {
 
-        FMLServerHandler.instance().getServer().getConfigurationManager();
+        //FMLServerHandler.instance().getServer().getConfigurationManager();
         
         TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
 

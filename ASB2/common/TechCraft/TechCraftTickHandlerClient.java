@@ -27,7 +27,7 @@ public class TechCraftTickHandlerClient implements ITickHandler {
     @Override
     public String getLabel() {
 
-        return "TechCraft Client";
+        return "TechCraft Client Ticks";
     }
 
 }

@@ -76,7 +76,7 @@ public class TechCraft {
 
         MinecraftForge.EVENT_BUS.register(new TechCraftForgeEvents());
         GameRegistry.registerFuelHandler(new TechCraftFuelHandler());
-  
+
         //MinecraftForge.addGrassSeed(new ItemStack(ItemRegistry.ItemLifeCrystal), 10);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockBurningFlower,0,20);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockFreezingFlower,0,20);
@@ -134,6 +134,6 @@ public class TechCraft {
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
-
     }
+
 }

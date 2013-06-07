@@ -11,13 +11,12 @@ public class TechCraftTickHandlerServer implements ITickHandler {
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-        // TODO Auto-generated method stub
-        
+        //TODO
     }
 
     @Override
@@ -29,8 +28,6 @@ public class TechCraftTickHandlerServer implements ITickHandler {
     @Override
     public String getLabel() {
 
-        return "TechCraft Server";
+        return "TechCraft Server Ticks";
     }
-
-   // private List <PowerNetwork> conductors = new ArrayList<PowerNetwork>();
 }

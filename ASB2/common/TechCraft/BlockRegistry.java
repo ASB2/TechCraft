@@ -175,7 +175,7 @@ public class BlockRegistry {
         BlockPowerConduitMoving = new BlockPowerConduitMoving(515,Material.rock);
         BlockPowerConduitMoving.setUnlocalizedName("BlockPowerConduitMoving");
         GameRegistry.registerBlock(BlockPowerConduitMoving, "ASB2_BlockPowerConduitMoving");
-        LanguageRegistry.addName(BlockPowerConduitMoving, "Basic Energy Conduit");
+        LanguageRegistry.addName(BlockPowerConduitMoving, "TC Energy Conduit");
         MinecraftForge.setBlockHarvestLevel(BlockPowerConduitMoving, "pickaxe", 2);
 
         BlockTechnogryFocus = new BlockTechnogryFocus(516,Material.rock);
@@ -187,7 +187,7 @@ public class BlockRegistry {
         BlockMagiciansBuildingBlocks = new BlockMagiciansBuildingBlocks(517,Material.rock);
         BlockMagiciansBuildingBlocks.setUnlocalizedName("BlockMagiciansBuildingBlocks");
         GameRegistry.registerBlock(BlockMagiciansBuildingBlocks, "ASB2_BlockMagiciansBuildingBlocks");
-        LanguageRegistry.addName(BlockMagiciansBuildingBlocks, "Magician's Building Blocks");
+        LanguageRegistry.addName(BlockMagiciansBuildingBlocks, "Energized Building Blocks");
         MinecraftForge.setBlockHarvestLevel(BlockMagiciansBuildingBlocks, "pickaxe", 2);
 
         BlockBasicFarm = new BlockBasicFarm(518,Material.rock);
@@ -205,7 +205,7 @@ public class BlockRegistry {
         BlockMultiBlockCore = new BlockMultiBlockCore(520,Material.rock);
         BlockMultiBlockCore.setUnlocalizedName("BlockMultiBlockCore");
         GameRegistry.registerBlock(BlockMultiBlockCore, "ASB2_BlockMultiBlockCore");
-        LanguageRegistry.addName(BlockMultiBlockCore, "Multi-Block Core");
+        LanguageRegistry.addName(BlockMultiBlockCore, "TC Multi-Block Core");
         MinecraftForge.setBlockHarvestLevel(BlockMultiBlockCore, "pickaxe", 2);
 
         BlockTCFurnace = new BlockTCFurnace(521,Material.rock);
