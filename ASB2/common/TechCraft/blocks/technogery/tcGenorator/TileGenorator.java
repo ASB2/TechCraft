@@ -12,7 +12,7 @@ import TechCraft.blocks.TechCraftTile;
 public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
 
     private int powerStored = 0;
-    private int powerMax = 100;
+    private int powerMax = 1000;
     private int currentFuelID = 0;
     private int fuelBurnTime = 0;
 
@@ -26,6 +26,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
 
     public void updateEntity() {
+        
         super.managePowerAll(this,powerOutput(),true);
         super.updateEntity();
 
@@ -34,15 +35,12 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
             manageBurning();
         }
 
-        moveSlots();
-    }
-
-    public void updatePerSecond() {
-
         if(fuelBurnTime > 0) {
 
-            this.gainPower(5);
+            this.gainPower(1);
         }
+
+        moveSlots();
     }
 
     public void manageBurning() {
@@ -292,7 +290,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
-        
+
         return TileEntityFurnace.isItemFuel(itemstack);
     }
 
@@ -305,9 +303,9 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public boolean canInsertItem(int slot, ItemStack itemstack, int side) {
-        
+
         if(TileEntityFurnace.isItemFuel(itemstack)) {
-            
+
             return true;
         }
         return true;

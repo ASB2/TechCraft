@@ -38,7 +38,7 @@ public class CraftRegistry {
             'G', Item.ingotGold
         });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemRealityDifferentiationDrive), new Object[] { 
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemRealityDifferentiationDrive, 4), new Object[] { 
             "BZB",
             "PDP",
             "BZB",
@@ -72,19 +72,20 @@ public class CraftRegistry {
             "ZMZ",
             "FSF",
             'Z', ItemRegistry.ItemZycrantianIngot, 
-            'F', Block.glass, 
+            'F', ItemRegistry.ItemFireCrystalShard, 
             'M', BlockRegistry.BlockMagiciansBuildingBlocks,
             'S', BlockRegistry.BlockTCEnergySphere
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCChargeBench), new Object[] {
             "AAA",
-            "EME",
+            "ESE",
             "MRM",
             'A', ItemRegistry.ItemAirCrystalShard,
             'E', ItemRegistry.ItemEnergyCrystalShard,
             'R', Item.redstone,
-            'M', BlockRegistry.BlockMagiciansBuildingBlocks
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'S', BlockRegistry.BlockTCEnergySphere
         });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker,2), new Object[] {
@@ -171,16 +172,33 @@ public class CraftRegistry {
             'Z', ItemRegistry.ItemZycrantianIngot
         });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCTeleporter), new Object[] {
-            "RZC",
-            "ZSZ",
-            "SZR",
-            'R', Item.redstone, 
-            'S', Item.stick,
-            'C', ItemRegistry.ItemEnergyCrystalShard, 
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTeleportModule, 2), new Object[] {
+            " Z ",
+            "ZEZ",
+            "DZD",
+            'D', Item.diamond, 
+            'E', ItemRegistry.ItemEnergyCrystalShard,
             'Z', ItemRegistry.ItemZycrantianIngot
         });
 
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCTeleporter), new Object[] {
+            "PIP",
+            " D ",
+            "III",
+            'I', Item.ingotIron, 
+            'D', Item.diamond,
+            'P', ItemRegistry.ItemTeleportModule
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemExplosionRune), new Object[] {
+            "ITI",
+            "TET",
+            "ITI",
+            'I', Item.ingotIron,
+            'T', Block.tnt,
+            'E', Item.redstone
+        });
+        
         //Tools
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword), new Object[] {
             " D ",

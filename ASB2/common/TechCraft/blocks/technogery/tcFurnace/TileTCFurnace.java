@@ -11,11 +11,11 @@ import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
-    
-    int powerStored = 0;
-    int powerMax = 500;
 
-    int powerForProcess = 20;
+    int powerStored = 0;
+    int powerMax = 1000;
+
+    int powerForProcess = 50;
 
     private ItemStack[] tileItemStacks;
 
@@ -34,10 +34,11 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         return true;
     }
 
-    public void updateEntity() {            
+    public void updateEntity() {
+
         this.managePowerAll(this, powerInput(),false);
         super.updateEntity();
-        
+
         if(this.getPowerStored() > 0){
             isBurning = true;
         }
@@ -253,7 +254,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
             if(itemstack != null) {
 
                 if(this.tileItemStacks[0] == null || this.tileItemStacks[0].equals(itemStack)) {                    
-                   
+
                     return true;
                 }
             }

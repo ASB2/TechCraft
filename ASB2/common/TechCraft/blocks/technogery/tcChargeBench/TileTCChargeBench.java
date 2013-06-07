@@ -12,7 +12,7 @@ import TechCraft.power.IPowerSink;
 public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
     
     int powerStored;
-    int powerMax = 100;
+    int powerMax = 1000;
     int powerToMove = 1;
 
     ItemStack[] tileItemStacks;

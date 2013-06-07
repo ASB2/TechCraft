@@ -36,6 +36,8 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 player.sendChatToPlayer(mTile.getName()+ " has metadata "+world.getBlockMetadata(x, y, z));
             }    
 
+            player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));
+            
             if(world.getBlockTileEntity(x,y,z) instanceof TilePowerConduitMoving){
 
                 TilePowerConduitMoving mTile = (TilePowerConduitMoving) world.getBlockTileEntity(x, y, z);

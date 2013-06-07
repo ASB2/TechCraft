@@ -85,6 +85,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemExplosionRune;
     public static TechCraftItems ItemRealityDifferentiationDrive;
     public static TechCraftItems ItemLinker;
+    public static TechCraftItems ItemTeleportModule;
     
     public static void init() {
 
@@ -226,13 +227,17 @@ public class ItemRegistry {
         ItemExplosionRune.setUnlocalizedName("ASB2_ItemExplosionRune");
         LanguageRegistry.addName(ItemExplosionRune, "Explosion Rune");
         
-        ItemRealityDifferentiationDrive = new ItemExplosionRune(5033);
+        ItemRealityDifferentiationDrive = new TechCraftItems(5033);
         ItemRealityDifferentiationDrive.setUnlocalizedName("ASB2_ItemRealityDifferentiationDrive");
-        LanguageRegistry.addName(ItemRealityDifferentiationDrive, "Reality Differentiation Drive");
+        LanguageRegistry.addName(ItemRealityDifferentiationDrive, "Reality Confabulator");
     
         ItemLinker = new ItemLinker(5034);
-        ItemRealityDifferentiationDrive.setUnlocalizedName("ASB2_ItemLinker");
+        ItemLinker.setUnlocalizedName("ASB2_ItemLinker");
         LanguageRegistry.addName(ItemLinker, "TC Linker");
+        
+        ItemTeleportModule = new TechCraftItems(5035);
+        ItemTeleportModule.setUnlocalizedName("ASB2_ItemTeleportModule");
+        LanguageRegistry.addName(ItemTeleportModule, "Teleportation Module");
     }
 
 }
