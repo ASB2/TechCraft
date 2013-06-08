@@ -73,7 +73,7 @@ public class CraftRegistry {
             "FSF",
             'Z', ItemRegistry.ItemZycrantianIngot, 
             'F', ItemRegistry.ItemFireCrystalShard, 
-            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'M', Block.furnaceIdle  ,
             'S', BlockRegistry.BlockTCEnergySphere
         });
 
@@ -183,11 +183,13 @@ public class CraftRegistry {
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCTeleporter), new Object[] {
             "PIP",
-            " D ",
-            "III",
+            "BDB",
+            "ISI",
             'I', Item.ingotIron, 
             'D', Item.diamond,
-            'P', ItemRegistry.ItemTeleportModule
+            'P', ItemRegistry.ItemTeleportModule,
+            'S', BlockRegistry.BlockTCEnergySphere,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks
         });
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemExplosionRune), new Object[] {

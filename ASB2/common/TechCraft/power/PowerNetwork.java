@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.Message;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.blocks.technogery.power_Conduit.*;
 
@@ -26,6 +27,8 @@ public class PowerNetwork {
     int sinkSize = 0;
     int sourceSize = 0;
 
+    private boolean addTileAdjacent = false;
+
     public boolean updateNetworkSize = false;
 
     public PowerNetwork(World world, TileEntity tile) {    
@@ -38,19 +41,10 @@ public class PowerNetwork {
 
             this.addConductor(tileI);
         }
-
-        if(tile instanceof IPowerMisc) {
-
-            IPowerMisc tileO = (IPowerMisc)tile;
-
-            if(tileO.recievePower()) {
-                this.addSink(tile);
-            }
-
-            if(tileO.outputPower()) {
-                this.addSource(tile);
-            }
+        else {
+            Message.sendToClient("Non-Power Moving Conduit object has started a network");  
         }
+
     }
 
     public void updateNetwork() {
@@ -71,38 +65,6 @@ public class PowerNetwork {
             this.addConductorsAround(conductors.get(i));
             this.addSourceAround(conductors.get(i));
             this.addSinkAround(conductors.get(i));
-        }
-
-        for(int i = 0; i < powerSource.size(); i++) {
-
-            if(powerSource.get(i) == null) {
-
-                powerSource.remove(i);
-            }
-
-            if(worldObj == null){
-                worldObj = powerSource.get(i).worldObj;
-            }
-
-            this.addConductorsAround(powerSource.get(i));
-            this.addSourceAround(powerSource.get(i));
-            this.addSinkAround(powerSource.get(i));
-        }
-
-        for(int i = 0; i < powerSink.size(); i++) {
-
-            if(powerSink.get(i) == null) {
-
-                powerSink.remove(i);
-            }
-
-            if(worldObj == null){
-                worldObj = powerSink.get(i).worldObj;
-            }
-
-            this.addConductorsAround(powerSink.get(i));
-            this.addSourceAround(powerSink.get(i));
-            this.addSinkAround(powerSink.get(i));
         }
 
         if(!(powerSource.isEmpty() && powerSink.isEmpty())) {
@@ -132,10 +94,10 @@ public class PowerNetwork {
                                 }
                             }
                         }
-                        
+
                         else {
-                            
-                         this.removeSink(powerSink.get(z));
+
+                            this.removeSink(powerSink.get(z));
                         }
                     }
                 }
@@ -155,7 +117,6 @@ public class PowerNetwork {
 
     public void removeConductor(TilePowerConduitMoving tile) {
         conductorSize--;
-        ((ArrayList<TilePowerConduitMoving>) conductors).trimToSize();
         conductors.remove(tile);
     }
 
@@ -166,7 +127,6 @@ public class PowerNetwork {
 
     public void removeSource(TileEntity tile) {
         sourceSize--;
-        ((ArrayList<TileEntity>) powerSource).trimToSize();
         powerSource.remove(tile);
     }
 
@@ -177,7 +137,6 @@ public class PowerNetwork {
 
     public void removeSink(TileEntity tile) {
         sinkSize--;
-        ((ArrayList<TileEntity>) powerSink).trimToSize();
         powerSink.remove(tile);
     }
 
@@ -209,6 +168,14 @@ public class PowerNetwork {
         return sourceSize;
     }
 
+    public boolean isAddTileAdjacent() {
+        return addTileAdjacent;
+    }
+
+    public void setAddTileAdjacent(boolean addTileAdjacent) {
+        this.addTileAdjacent = addTileAdjacent;
+    }
+
     public void addConductorsAround(TileEntity tile){
         addConductorsAround(ForgeDirection.DOWN, tile);
         addConductorsAround(ForgeDirection.UP, tile);
@@ -234,16 +201,19 @@ public class PowerNetwork {
 
                             if(((TilePowerConduitMoving) tileI).getNetwork() != null) {
 
-                                if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
+                                if(((TilePowerConduitMoving)tileI).getNetwork() != this) {
 
-                                    ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                    this.addConductor((TilePowerConduitMoving) tileI);
-                                }
-                            }
-                            else {
+                                    if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
 
-                                ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                this.addConductor((TilePowerConduitMoving) tileI);
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                    else {
+
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                }                                
                             }
                         }
                         break;
@@ -255,16 +225,19 @@ public class PowerNetwork {
 
                             if(((TilePowerConduitMoving) tileI).getNetwork() != null) {
 
-                                if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
+                                if(((TilePowerConduitMoving)tileI).getNetwork() != this) {
 
-                                    ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                    this.addConductor((TilePowerConduitMoving) tileI);
-                                }
-                            }
-                            else {
+                                    if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
 
-                                ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                this.addConductor((TilePowerConduitMoving) tileI);
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                    else {
+
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                }                                
                             }
                         }
                         break;
@@ -275,16 +248,19 @@ public class PowerNetwork {
 
                             if(((TilePowerConduitMoving) tileI).getNetwork() != null) {
 
-                                if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
+                                if(((TilePowerConduitMoving)tileI).getNetwork() != this) {
 
-                                    ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                    this.addConductor((TilePowerConduitMoving) tileI);
-                                }
-                            }
-                            else {
+                                    if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
 
-                                ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                this.addConductor((TilePowerConduitMoving) tileI);
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                    else {
+
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                }                                
                             }
                         }
                         break;
@@ -295,16 +271,19 @@ public class PowerNetwork {
 
                             if(((TilePowerConduitMoving) tileI).getNetwork() != null) {
 
-                                if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
+                                if(((TilePowerConduitMoving)tileI).getNetwork() != this) {
 
-                                    ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                    this.addConductor((TilePowerConduitMoving) tileI);
-                                }
-                            }
-                            else {
+                                    if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
 
-                                ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                this.addConductor((TilePowerConduitMoving) tileI);
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                    else {
+
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                }                                
                             }
                         }
                         break;
@@ -316,16 +295,19 @@ public class PowerNetwork {
 
                             if(((TilePowerConduitMoving) tileI).getNetwork() != null) {
 
-                                if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
+                                if(((TilePowerConduitMoving)tileI).getNetwork() != this) {
 
-                                    ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                    this.addConductor((TilePowerConduitMoving) tileI);
-                                }
-                            }
-                            else {
+                                    if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
 
-                                ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                this.addConductor((TilePowerConduitMoving) tileI);
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                    else {
+
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                }                                
                             }
                         }
                         break;
@@ -336,16 +318,19 @@ public class PowerNetwork {
 
                             if(((TilePowerConduitMoving) tileI).getNetwork() != null) {
 
-                                if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
+                                if(((TilePowerConduitMoving)tileI).getNetwork() != this) {
 
-                                    ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                    this.addConductor((TilePowerConduitMoving) tileI);
-                                }
-                            }
-                            else {
+                                    if(((TilePowerConduitMoving)tileI).getNetwork().getAge() < this.getAge()) {
 
-                                ((TilePowerConduitMoving)tileI).overrideNetwork(this);
-                                this.addConductor((TilePowerConduitMoving) tileI);
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                    else {
+
+                                        ((TilePowerConduitMoving)tileI).overrideNetwork(this);
+                                        this.addConductor((TilePowerConduitMoving) tileI);
+                                    }
+                                }                                
                             }
                         }
                         break;
@@ -385,6 +370,11 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).outputPower()) {
 
+                                for(int i = 0; i < powerSource.size(); i++){
+                                    if(powerSource.get(i) == tile)
+                                        return;
+                                }
+
                                 this.addSource(tile);
                             }
                         }
@@ -397,6 +387,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).outputPower()) {
 
+                                for(int i = 0; i < powerSource.size(); i++){
+                                    if(powerSource.get(i) == tile)
+                                        return;
+                                }
                                 this.addSource(tile);
                             }
                         }
@@ -409,6 +403,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).outputPower()) {
 
+                                for(int i = 0; i < powerSource.size(); i++){
+                                    if(powerSource.get(i) == tile)
+                                        return;
+                                }
                                 this.addSource(tile);
                             }
                         }
@@ -421,6 +419,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).outputPower()) {
 
+                                for(int i = 0; i < powerSource.size(); i++){
+                                    if(powerSource.get(i) == tile)
+                                        return;
+                                }
                                 this.addSource(tile);
                             }
                         }
@@ -434,6 +436,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).outputPower()) {
 
+                                for(int i = 0; i < powerSource.size(); i++){
+                                    if(powerSource.get(i) == tile)
+                                        return;
+                                }
                                 this.addSource(tile);
                             }
                         }
@@ -445,6 +451,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).outputPower()) {
 
+                                for(int i = 0; i < powerSource.size(); i++){
+                                    if(powerSource.get(i) == tile)
+                                        return;
+                                }
                                 this.addSource(tile);
                             }
                         }
@@ -472,6 +482,7 @@ public class PowerNetwork {
     public void addSinkAround(ForgeDirection direction, TileEntity tile){
 
         if(worldObj != null) {
+
             TileEntity tileI = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
 
             if(tileI != null) {
@@ -484,6 +495,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
+                                for(int i = 0; i < powerSink.size(); i++){
+                                    if(powerSink.get(i) == tile)
+                                        return;
+                                }
                                 this.addSink(tileI);
                             }
                         }
@@ -496,6 +511,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
+                                for(int i = 0; i < powerSink.size(); i++){
+                                    if(powerSink.get(i) == tile)
+                                        return;
+                                }
                                 this.addSink(tileI);
                             }
                         }
@@ -507,6 +526,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
+                                for(int i = 0; i < powerSink.size(); i++){
+                                    if(powerSink.get(i) == tile)
+                                        return;
+                                }
                                 this.addSink(tileI);
                             }
                         }
@@ -518,6 +541,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
+                                for(int i = 0; i < powerSink.size(); i++){
+                                    if(powerSink.get(i) == tile)
+                                        return;
+                                }
                                 this.addSink(tileI);
                             }
                         }
@@ -530,6 +557,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
+                                for(int i = 0; i < powerSink.size(); i++){
+                                    if(powerSink.get(i) == tile)
+                                        return;
+                                }
                                 this.addSink(tileI);
                             }
                         }
@@ -541,6 +572,10 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
+                                for(int i = 0; i < powerSink.size(); i++){
+                                    if(powerSink.get(i) == tile)
+                                        return;
+                                }
                                 this.addSink(tileI);
                             }
                         }
@@ -555,6 +590,4 @@ public class PowerNetwork {
             }
         }
     }
-
-
 }

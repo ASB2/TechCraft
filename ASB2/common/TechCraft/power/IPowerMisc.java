@@ -28,5 +28,5 @@ public interface IPowerMisc {
 
     int[] getPosition();
     
-    boolean renderByDirection(ForgeDirection direction);
+    boolean powerByDirection(ForgeDirection direction);
 }

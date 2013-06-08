@@ -28,12 +28,6 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         tileItemStacks = new ItemStack[2];
     }
 
-    @Override
-    public boolean recievePower() {
-
-        return true;
-    }
-
     public void updateEntity() {
 
         this.managePowerAll(this, powerInput(),false);
@@ -95,13 +89,10 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         }
     }
 
-    public int getPowerScaled(int scale) {
+    @Override
+    public boolean recievePower() {
 
-        int internal = (int)this.powerStored * scale / (int)powerMax;
-        if(internal > scale){
-            internal = scale;
-        }
-        return internal;
+        return true;
     }
 
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
@@ -150,18 +141,22 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public int getSizeInventory() {
+        
         return tileItemStacks.length;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
+        
         return tileItemStacks[slot];
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
+        
         tileItemStacks[slot] = stack;
         if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+            
             stack.stackSize = getInventoryStackLimit();
         }               
     }

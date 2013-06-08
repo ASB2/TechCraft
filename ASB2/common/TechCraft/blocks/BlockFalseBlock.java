@@ -1,7 +1,10 @@
 package TechCraft.blocks;
 
+import TechCraft.lib.SpecialPlayers;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -32,5 +35,28 @@ public class BlockFalseBlock extends TechCraftBlocks {
     public boolean isOpaqueCube() {
 
         return false;
+    }
+
+    public boolean canProvidePower()
+    {
+        return true;
+    }
+    
+    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity entity) {
+
+        if(entity instanceof EntityPlayer) {
+
+            if((SpecialPlayers.isSpecialPlayer(((EntityPlayer)entity).username))) {
+
+                entity.extinguish();
+            }
+            
+            else {
+                entity.setInWeb();
+            }
+        }
+        else {
+            entity.setInWeb();
+        }
     }
 }

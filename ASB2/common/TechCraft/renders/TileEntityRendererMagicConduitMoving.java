@@ -7,25 +7,25 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
 import TechCraft.models.ModelGear;
+import TechCraft.models.ModelPowerConduit;
 import TechCraft.models.ModelPowerConduitExportingv2;
 import TechCraft.models.ModelPowerConduitImportingv2;
-import TechCraft.models.ModelPowerConduitMovingv2;
 import TechCraft.power.IPowerMisc;
-import TechCraft.power.IPowerStorage;
 
 public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRenderer{
 
-    private ModelPowerConduitMovingv2 modelMoving;
+    private ModelPowerConduit modelMoving;
     private ModelPowerConduitImportingv2 modelImporting;
     private ModelPowerConduitExportingv2 modelExporting;
     @SuppressWarnings("unused")
     private ModelGear modelGear;
-    
+
     public TileEntityRendererMagicConduitMoving() {
 
-        modelMoving = new ModelPowerConduitMovingv2();
+        modelMoving = new ModelPowerConduit();
         modelImporting = new ModelPowerConduitImportingv2();
         modelExporting = new ModelPowerConduitExportingv2();
         modelGear = new ModelGear();
@@ -41,32 +41,32 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
         modelMoving.renderAll();
 
         if(tile.decideRender(ForgeDirection.DOWN)){
-            modelMoving.renderBottom();
+            modelMoving.renderDOWN();
             //modelGear.renderDown(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.UP)){
-            modelMoving.renderTop();
-           // modelGear.renderUp(d,d1,d2);
+            modelMoving.renderUP();
+            // modelGear.renderUp(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.WEST)){
-            modelMoving.renderLeft();
+            modelMoving.renderWEST();
             //modelGear.renderWest(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.EAST)){
-            modelMoving.renderRight();
+            modelMoving.renderEAST();
             //modelGear.renderEast(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.SOUTH)){
-            modelMoving.renderFront();
-           // modelGear.renderSouth(d,d1,d2);
+            modelMoving.renderSOUTH();
+            // modelGear.renderSouth(d,d1,d2);
         }
 
         if(tile.decideRender(ForgeDirection.NORTH)){
-            modelMoving.renderBack();
+            modelMoving.renderNORTH();
             //modelGear.renderNorth(d,d1,d2);
         }
 
@@ -88,171 +88,130 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
 
         World world = tileT.worldObj;
 
-        TileEntity tile = world.getBlockTileEntity(this.translateDirectionToCoords(direction, tileT)[0], this.translateDirectionToCoords(direction, tileT)[1], this.translateDirectionToCoords(direction, tileT)[2]);
+        TileEntity tile = world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tileT)[0], TechCraftTile.translateDirectionToCoords(direction, tileT)[1], TechCraftTile.translateDirectionToCoords(direction, tileT)[2]);
 
         if(tile != null){
 
-            switch(direction) {
+            if(tile instanceof IPowerMisc) { 
 
-                case DOWN: {
+                IPowerMisc tileI = (IPowerMisc) tile;
 
-                    if(tile instanceof IPowerMisc) {                        
+                if(tileI.powerByDirection(TechCraftTile.translateDirectionToOpposite(direction))) {
 
-                        IPowerMisc tileI = (IPowerMisc) tile;
+                    switch(direction) {
 
-                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
-                            modelImporting.renderBottom();
+                        case DOWN: {
+
+                            if(tileI.outputPower() && !(tileI.recievePower())) {
+
+                                modelImporting.renderBottom();
+                            }
+
+                            if(tileI.recievePower() && !(tileI.outputPower())) {
+                                modelExporting.renderBottom();
+                            }
+
+                            if(tileI.outputPower() && tileI.recievePower()) {
+
+                                modelMoving.renderDOWN();
+                            }
+                            return true;
                         }
+                        case EAST: {                  
 
-                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
-                            modelExporting.renderBottom();
+                            if(tileI.outputPower() && !(tileI.recievePower())) {
+
+                                modelImporting.renderRight();
+                            }
+
+                            if(tileI.recievePower() && !(tileI.outputPower())) {
+                                modelExporting.renderRight();
+                            }
+
+                            if(tileI.outputPower() && tileI.recievePower()) {
+
+                                modelMoving.renderEAST();
+                            }
+                            return true;
                         }
-                        if(tile instanceof IPowerStorage) {
-                            
-                            modelMoving.renderBottom();
+                        case NORTH: {
+
+                            if(tileI.outputPower() && !(tileI.recievePower())) {
+
+                                modelImporting.renderBack();
+                            }
+
+                            if(tileI.recievePower() && !(tileI.outputPower())) {
+                                modelExporting.renderBack();
+                            }
+
+                            if(tileI.outputPower() && tileI.recievePower()) {
+
+                                modelMoving.renderNORTH();
+                            }
+                            return true;
                         }
-                        return true;
+                        case SOUTH: {
+
+                            if(tileI.outputPower() && !(tileI.recievePower())) {
+
+                                modelImporting.renderFront();
+                            }
+
+                            if(tileI.recievePower() && !(tileI.outputPower())) {
+                                modelExporting.renderFront();
+                            }
+
+                            if(tileI.outputPower() && tileI.recievePower()) {
+
+                                modelMoving.renderSOUTH();
+                            }
+                            return true;
+                        }
+                        case WEST: {
+
+                            if(tileI.outputPower() && !(tileI.recievePower())) {
+
+                                modelImporting.renderLeft();
+                            }
+
+                            if(tileI.recievePower() && !(tileI.outputPower())) {
+                                modelExporting.renderLeft();
+                            }
+
+                            if(tileI.outputPower() && tileI.recievePower()) {
+
+                                modelMoving.renderWEST();
+                            }
+                            return true;
+                        }
+                        case UP: {
+
+                            if(tileI.outputPower() && !(tileI.recievePower())) {
+
+                                modelImporting.renderTop();
+                            }
+
+                            if(tileI.recievePower() && !(tileI.outputPower())) {
+                                modelExporting.renderTop();
+                            }
+
+                            if(tileI.outputPower() && tileI.recievePower()) {
+
+                                modelMoving.renderUP();
+                            }
+                            return true;
+                        }
+                        case UNKNOWN:
+                            return false;
+
+                        default:
+                            return false;
                     }
-                    break;
                 }
-
-                case EAST:{
-
-                    if(tile instanceof IPowerMisc) {                        
-
-                        IPowerMisc tileI = (IPowerMisc) tile;
-
-                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
-                            modelImporting.renderRight();
-                        }
-
-                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
-                            modelExporting.renderRight();
-                        }
-                        if(tile instanceof IPowerStorage){
-                            modelMoving.renderRight();
-                        }
-                        return true;
-                    }
-                    break;
-                }
-                case NORTH: {
-
-                    if(tile instanceof IPowerMisc) {                        
-
-                        IPowerMisc tileI = (IPowerMisc) tile;
-
-                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
-                            modelImporting.renderBack();
-                        }
-
-                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
-                            modelExporting.renderBack();
-                        }
-                        if(tile instanceof IPowerStorage){
-                            modelMoving.renderBack();
-                        }
-                        return true;
-                    }
-                    break;
-                }
-                case SOUTH: {
-
-                    if(tile instanceof IPowerMisc) {                        
-
-                        IPowerMisc tileI = (IPowerMisc) tile;
-
-                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
-                            modelImporting.renderFront();
-                        }
-
-                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
-                            modelExporting.renderFront();
-                        }
-                        if(tile instanceof IPowerStorage){
-                            modelMoving.renderFront();
-                        }
-                        return true;
-                    }
-                    break;
-                }
-                case WEST: {
-
-                    if(tile instanceof IPowerMisc) {                        
-
-                        IPowerMisc tileI = (IPowerMisc) tile;
-
-                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
-                            modelImporting.renderLeft();
-                        }
-
-                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
-                            modelExporting.renderLeft();
-                        }
-                        if(tile instanceof IPowerStorage){
-                            modelMoving.renderLeft();
-                        }
-                        return true;
-                    }
-                    break;
-                }                
-                case UP: {
-                    
-                    if(tile instanceof IPowerMisc) {                        
-
-                        IPowerMisc tileI = (IPowerMisc) tile;
-
-                        if(tileI.outputPower() && !(tile instanceof IPowerStorage)) {
-                            modelImporting.renderTop();
-                        }
-
-                        if(tileI.recievePower() && !(tile instanceof IPowerStorage)) {
-                            modelExporting.renderTop();
-                        }
-                        if(tile instanceof IPowerStorage){
-                            modelMoving.renderTop();
-                        }
-                        return true;
-                    }
-                    break;
-                }
-                case UNKNOWN:
-                    return false;
-
-                default:
-                    return false;
+                return false;
             }
         }
         return false;
-    }
-
-    public int[] translateDirectionToCoords(ForgeDirection direction, TileEntity tile) {
-
-        switch(direction) {
-
-            case DOWN: {
-                return new int[]{tile.xCoord,tile.yCoord-1,tile.zCoord};
-            }
-            case UP: {
-                return new int[]{tile.xCoord,tile.yCoord+1,tile.zCoord};
-            }
-            case NORTH: {
-                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord-1};
-            }
-            case SOUTH: {
-                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord+1};
-            }
-            case WEST: {
-                return new int[]{tile.xCoord-1,tile.yCoord,tile.zCoord};
-            }
-            case EAST: {
-                return new int[]{tile.xCoord+1,tile.yCoord,tile.zCoord};
-            }
-            case UNKNOWN:{
-                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
-            }
-        }
-
-        return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
     }
 }

@@ -18,7 +18,7 @@ public class TechCraftForgeEvents {
 
                 if(player.username == "ASB2") {
                     
-                    Messenger.displayInChat("Welcome ASB2");
+                    Message.sendToClient("Welcome ASB2");
                 }
             }
         }

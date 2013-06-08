@@ -437,7 +437,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                     break;
                 }
                 case EAST: {
-                    
+
                     if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
                         IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
                         IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
@@ -524,27 +524,27 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     public static int getTilesNextTo(TileEntity tile, World worldObj) {
         int numberNextTo = 0;
         //Bottom of Tile
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord-1, tile.zCoord) instanceof IPowerMisc){
+        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord-1, tile.zCoord) instanceof TileEntity){
             numberNextTo++;
         }
         //top of Tile
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord+1, tile.zCoord) instanceof IPowerMisc){
+        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord+1, tile.zCoord) instanceof TileEntity){
             numberNextTo++;
         }        
         //left
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord-1) instanceof IPowerMisc){
+        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord-1) instanceof TileEntity){
             numberNextTo++;
         }
         //right
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord+1) instanceof IPowerMisc){
+        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord+1) instanceof TileEntity){
             numberNextTo++;
         }
         //front
-        if(worldObj.getBlockTileEntity(tile.xCoord+1, tile.yCoord, tile.zCoord) instanceof IPowerMisc){
+        if(worldObj.getBlockTileEntity(tile.xCoord+1, tile.yCoord, tile.zCoord) instanceof TileEntity){
             numberNextTo++;
         }
         //back
-        if(worldObj.getBlockTileEntity(tile.xCoord-1, tile.yCoord, tile.zCoord) instanceof IPowerMisc){
+        if(worldObj.getBlockTileEntity(tile.xCoord-1, tile.yCoord, tile.zCoord) instanceof TileEntity){
             numberNextTo++;
         }
         return numberNextTo;
@@ -670,14 +670,28 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public boolean canGainPower(int power) {
-        // TODO Auto-generated method stub
-        return false;
+
+        if(getPowerMax() - getPowerStored() >= power) {
+            
+            return true;
+        }
+        
+        else {
+           return false; 
+        }
+        
     }
 
     @Override
     public boolean canUsePower(int power) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        if(getPowerStored() >= power) {
+            
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
@@ -687,7 +701,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public boolean renderByDirection(ForgeDirection direction) {
+    public boolean powerByDirection(ForgeDirection direction) {
 
         switch(direction){
             case DOWN: return true;

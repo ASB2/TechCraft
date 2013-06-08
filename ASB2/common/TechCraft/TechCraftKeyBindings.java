@@ -31,7 +31,7 @@ public class TechCraftKeyBindings extends KeyHandler {
     @Override
     public void keyUp(EnumSet<TickType> types, KeyBinding key, boolean tickEnd) {
         
-        Messenger.displayInChat("Test Key");
+        Message.sendToClient("Test Key");
     }
 
     @Override

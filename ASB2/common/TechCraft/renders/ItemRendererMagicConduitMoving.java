@@ -66,10 +66,8 @@ public class ItemRendererMagicConduitMoving  implements IItemRenderer{
         
         modelTutBox.renderAll();
         
-        modelTutBox.renderTop();
-        modelTutBox.renderBottom();
-        modelTutBox.renderRight();
-        modelTutBox.renderLeft();
+        modelTutBox.renderFront();
+        modelTutBox.renderBack();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

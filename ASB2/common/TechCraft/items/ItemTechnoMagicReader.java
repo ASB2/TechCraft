@@ -24,7 +24,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
                 IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
 
-                player.sendChatToPlayer(mTile.getName()+" has "+mTile.getPowerStored()+" out of "+mTile.getPowerMax() + " Technogry Stored");
+                player.sendChatToPlayer(mTile.getName()+" has "+mTile.getPowerStored()+" out of "+mTile.getPowerMax() + " TCU Stored");
 
             }
 
@@ -33,10 +33,14 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                 TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
 
                 player.sendChatToPlayer(mTile.getName()+ " is at orientation: " + mTile.translateDirectionToString());
-                player.sendChatToPlayer(mTile.getName()+ " has metadata "+world.getBlockMetadata(x, y, z));
+                player.sendChatToPlayer(mTile.getName()+ " has metadata: "+world.getBlockMetadata(x, y, z));
+                player.sendChatToPlayer(mTile.getName()+ " output power: "+mTile.outputPower());
+                player.sendChatToPlayer(mTile.getName()+ " recieve power: "+mTile.recievePower());
             }    
-
-            player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));
+            else {
+                player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));
+            }
+            
             
             if(world.getBlockTileEntity(x,y,z) instanceof TilePowerConduitMoving){
 

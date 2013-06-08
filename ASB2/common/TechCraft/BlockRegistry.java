@@ -121,7 +121,7 @@ public class BlockRegistry {
         BlockFalseBlock = new BlockFalseBlock(506, Material.rock);
         BlockFalseBlock.setUnlocalizedName("BlockFalseBlock");
         GameRegistry.registerBlock(BlockFalseBlock, "ASB2_BlockFalseBlock");
-        LanguageRegistry.addName(BlockFalseBlock, "False Floor");
+        LanguageRegistry.addName(BlockFalseBlock, "False Stone");
         MinecraftForge.setBlockHarvestLevel(BlockFalseBlock, "pickaxe", 1);
 
         BlockEnergyCrystalOre = new BlockEnergyCrystalOre(507, Material.rock);

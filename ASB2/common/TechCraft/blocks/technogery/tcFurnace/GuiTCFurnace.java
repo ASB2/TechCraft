@@ -21,12 +21,11 @@ public class GuiTCFurnace extends GuiContainer {
     public GuiTCFurnace(InventoryPlayer inventory,TileTCFurnace tileEntity) {        
         super(new ContainerTCFurnace(inventory, tileEntity));
         this.tileEntity=tileEntity;
-
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y){
-        final String invTitle = "TC Furnace";
-        fontRenderer.drawString(invTitle, xSize / 2 - fontRenderer.getStringWidth(invTitle) / 2, 6, 4210752);
+        //final String invTitle = "TC Furnace";
+        //fontRenderer.drawString(invTitle, xSize / 2 - fontRenderer.getStringWidth(invTitle) / 2, 6, 4210752);
     }
 
     @Override
@@ -58,16 +57,11 @@ public class GuiTCFurnace extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float gameTicks) {
         super.drawScreen(mouseX, mouseY, gameTicks);
 
-        drawTooltips(mouseX, mouseY);
-    }
-
-    protected void drawTooltips(int mouseX, int mouseY) {
-
         if(isPointInRegion(7, 5, 18, 71, mouseX, mouseY)) {
 
             drawBarTooltip("Energy", "TCU", tileEntity.getPowerStored(), tileEntity.getPowerMax(), mouseX, mouseY);
         }
-    }
+    }       
     
     protected void drawBarTooltip(String name, String unit, int value, int max, int x, int y)
     {
