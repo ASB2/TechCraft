@@ -1,15 +1,19 @@
 package TechCraft.lib;
 
-public class SpecialPlayers {
+public class MiscUtilities {
 
     public static String[] specialPlayers = new String[] {"ASB2", "Proswhere", "iOverpowered"};
+    
+    //Currently 10 ticks to power
+    
+    public static int TICKSTOPOWER = 10;
     
     @SuppressWarnings("unused")
     public static boolean isSpecialPlayer(String player) {
         
-        for(int p = 0; p < SpecialPlayers.specialPlayers.length; p++) {
+        for(int p = 0; p < MiscUtilities.specialPlayers.length; p++) {
             
-            if(SpecialPlayers.specialPlayers[p].equals(player)) {    
+            if(MiscUtilities.specialPlayers[p].equals(player)) {    
                 
                 return true;
             }   
@@ -22,8 +26,4 @@ public class SpecialPlayers {
         return false;
     }
 
-    public static String[] getSpecialPlayers() {
-        
-        return specialPlayers;
-    }
 }

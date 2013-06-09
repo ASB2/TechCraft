@@ -1,15 +1,14 @@
-package TechCraft.blocks.item_transfer_wireless;
+package TechCraft.blocks.item_transfer.tcItemSorter;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemLinker;
 
-public class TileItemSender extends TechCraftTile implements IInventory{
+public class TileItemSorter extends TechCraftTile implements IInventory{
 
     private ItemStack[] tileItemStack;
 
@@ -20,7 +19,7 @@ public class TileItemSender extends TechCraftTile implements IInventory{
     int z;
     int dimentionID = 0;
 
-    public TileItemSender() {
+    public TileItemSorter() {
 
         tileItemStack = new ItemStack[10];
     }
@@ -59,13 +58,13 @@ public class TileItemSender extends TechCraftTile implements IInventory{
 
                 if(worldObj.blockExists(x, y, z)) {
                     
-                    moveSlotToInventory();                    
+                    //moveSlotToInventory();                    
                 }
             }
         }
     }
 
-    public void moveSlotToInventory() {
+    /*public void moveSlotToInventory() {
 
         //FMLServerHandler.instance().getServer().getConfigurationManager();
         
@@ -125,7 +124,7 @@ public class TileItemSender extends TechCraftTile implements IInventory{
             }
         }
 
-    }
+    }*/
 
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {

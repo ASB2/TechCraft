@@ -3,18 +3,22 @@ package TechCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import TechCraft.blocks.item_transfer_wireless.ContainerItemReciever;
-import TechCraft.blocks.item_transfer_wireless.ContainerItemSender;
-import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
-import TechCraft.blocks.item_transfer_wireless.TileItemSender;
+import TechCraft.blocks.item_transfer.item_SenderReciever.ContainerItemReciever;
+import TechCraft.blocks.item_transfer.item_SenderReciever.ContainerItemSender;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
 import TechCraft.blocks.tanks.ContainerTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.ContainerRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
+import TechCraft.blocks.tcToolManager.ContainerToolManager;
+import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.farms.BasicFarm.ContainerBasicFarm;
 import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.ContainerTCChargeBench;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
+import TechCraft.blocks.technogery.tcEnergyConstructor.ContainerTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.ContainerTCFurnace;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.ContainerGenorator;
@@ -64,6 +68,8 @@ public class CommonProxy implements IGuiHandler {
                 case 8:return new ContainerTCTank(player.inventory, (TileTCTank)tileEntity);
                 case 9:return new ContainerItemReciever(player.inventory, (TileItemReciever)tileEntity);
                 case 10:return new ContainerItemSender(player.inventory, (TileItemSender)tileEntity);
+                case 11:return new ContainerToolManager(player.inventory, (TileToolManager)tileEntity);
+                case 12:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
             }
         }
         return null;

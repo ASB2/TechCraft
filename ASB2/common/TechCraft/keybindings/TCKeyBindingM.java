@@ -1,4 +1,4 @@
-package TechCraft;
+package TechCraft.keybindings;
 
 import java.util.EnumSet;
 
@@ -8,12 +8,13 @@ import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
+import TechCraft.*;
 
-public class TechCraftKeyBindings extends KeyHandler {
+public class TCKeyBindingM extends KeyHandler {
 
     static KeyBinding binding = new KeyBinding("TechCraft", Keyboard.KEY_M);
 
-    public TechCraftKeyBindings() {
+    public TCKeyBindingM() {
 
         super(new KeyBinding[]{binding}, new boolean[]{false});
     }

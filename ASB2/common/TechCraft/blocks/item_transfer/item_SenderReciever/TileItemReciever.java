@@ -1,4 +1,4 @@
-package TechCraft.blocks.item_transfer_wireless;
+package TechCraft.blocks.item_transfer.item_SenderReciever;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

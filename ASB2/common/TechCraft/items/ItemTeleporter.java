@@ -9,9 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import TechCraft.power.IPowerItems;
 
-public class ItemTeleporter extends TechCraftItems {
+public class ItemTeleporter extends TechCraftItems implements IPowerItems {
 
+    int powerStored;
+    int powerMax = 1000;
+    int powerForTeleport = 50;
+    
     protected double x = 0;
     protected double y = 0;
     protected double z = 0;
@@ -39,10 +44,12 @@ public class ItemTeleporter extends TechCraftItems {
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
     {
-        if(isCoodsSet(par1ItemStack)) {
+        if(isCoodsSet(par1ItemStack) && this.getPowerStored(par1ItemStack) >= powerForTeleport) {
 
             if(player instanceof EntityPlayerMP) {
 
+                this.usePower(powerForTeleport, par1ItemStack);
+                
                 for(int i = 0; i < 2; i++) {
 
                     if (player.dimension != this.getDimentionIDCoord(par1ItemStack)) {
@@ -84,6 +91,8 @@ public class ItemTeleporter extends TechCraftItems {
         if(!isCoodsSet(par1ItemStack)){
             info.add("Link not set.");
         }
+        info.add("Power stored: " + this.getPowerStored(par1ItemStack) +" / " + this.getPowerMax(par1ItemStack));
+        info.add("Power for Teleport: " + this.powerForTeleport);
     }
 
 
@@ -158,4 +167,55 @@ public class ItemTeleporter extends TechCraftItems {
         nbtTagCompound.setDouble("Z", z);
     }
 
+    @Override
+    public int getPowerStored(ItemStack item) {
+
+        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        if(nbtTagCompound != null)
+
+            return nbtTagCompound.getInteger("powerStored");
+
+        return powerStored;
+    }
+
+    @Override
+    public int getPowerMax(ItemStack item) {
+
+        //NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        //if(nbtTagCompound != null)
+        //return nbtTagCompound.getInteger("powerMax");
+
+        return powerMax;
+    }
+
+    @Override
+    public void usePower(int PowerUsed, ItemStack item) {
+        if(this.getPowerStored(item) > PowerUsed) {
+
+            this.setPowerStored(item, this.getPowerStored(item) - PowerUsed);
+        }
+    }
+
+    @Override
+    public void gainPower(int PowerGained, ItemStack item) {
+
+        if(this.getPowerMax(item) - this.getPowerStored(item) >= PowerGained){            
+
+            this.setPowerStored(item, this.getPowerStored(item) + PowerGained);
+        }
+    }
+
+    private void setPowerStored(ItemStack item,int power) {
+
+        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        nbtTagCompound.setInteger("powerStored", power);
+
+        this.powerStored = power;
+    }
+
+    @Override
+    public String getName() {
+
+        return "Energy Blob";
+    }
 }

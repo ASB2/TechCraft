@@ -57,12 +57,12 @@ public class BlockTCFurnace extends TechCraftContainers {
                         return frontLit;
                     }
                     
-                    else{
+                    else {
                         return frontUnlit;
                     }
                 }
                 
-                else{
+                else {
                     
                     return frontUnlit;
                 }

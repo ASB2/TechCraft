@@ -1,6 +1,6 @@
 package TechCraft.blocks;
 
-import TechCraft.lib.SpecialPlayers;
+import TechCraft.lib.MiscUtilities;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -36,17 +36,12 @@ public class BlockFalseBlock extends TechCraftBlocks {
 
         return false;
     }
-
-    public boolean canProvidePower()
-    {
-        return true;
-    }
     
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity entity) {
 
         if(entity instanceof EntityPlayer) {
 
-            if((SpecialPlayers.isSpecialPlayer(((EntityPlayer)entity).username))) {
+            if((MiscUtilities.isSpecialPlayer(((EntityPlayer)entity).username))) {
 
                 entity.extinguish();
             }

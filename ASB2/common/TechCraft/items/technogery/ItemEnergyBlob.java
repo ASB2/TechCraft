@@ -27,7 +27,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     @Override
     public void registerIcons(IconRegister iconRegister) {
-        
+
         itemIcon = iconRegister.registerIcon("TechCraft:ItemEnergyBlob");
     }
 
@@ -43,7 +43,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     @Override
     public boolean onItemUseFirst(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
-        
+
         return false;
     }
 
@@ -102,7 +102,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean var1) {
-
+        super.addInformation(itemStack, player, info, var1);
         info.add("Power stored: " + this.getPowerStored(itemStack) +" / " + this.getPowerMax(itemStack));
         info.add("A basic device for storing power.");
     }

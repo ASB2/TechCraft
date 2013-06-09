@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.BlockRegistry;
 import TechCraft.Message;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.blocks.technogery.power_Conduit.*;
@@ -26,10 +27,6 @@ public class PowerNetwork {
     int conductorSize = 0;
     int sinkSize = 0;
     int sourceSize = 0;
-
-    private boolean addTileAdjacent = false;
-
-    public boolean updateNetworkSize = false;
 
     public PowerNetwork(World world, TileEntity tile) {    
 
@@ -56,55 +53,36 @@ public class PowerNetwork {
             if(conductors.get(i) == null) { 
 
                 conductors.remove(i);
+                return;
             }
 
             if(worldObj == null){
                 worldObj = conductors.get(i).worldObj;
             }
 
+            if(!(worldObj.getBlockId(conductors.get(i).xCoord, conductors.get(i).yCoord, conductors.get(i).zCoord) == BlockRegistry.BlockPowerConduitMoving.blockID)) {
+
+                conductors.remove(i);
+                return;
+            }
+
             this.addConductorsAround(conductors.get(i));
-            this.addSourceAround(conductors.get(i));
-            this.addSinkAround(conductors.get(i));
-        }
 
-        if(!(powerSource.isEmpty() && powerSink.isEmpty())) {
+            for(int z = 0; z < TechCraftTile.getArrayTilesAround(worldObj, conductors.get(i)).length; z++) {
 
-            for(int i = 0; i < powerSource.size(); i++) {
+                if(TechCraftTile.getArrayTilesAround(worldObj, conductors.get(i))[z] != null) {
+                    
+                    if(TechCraftTile.getArrayTilesAround(worldObj, conductors.get(i))[z] instanceof IPowerMisc) {
 
-                if(powerSource.get(i) != null) {
-
-                    for(int z = 0; z < powerSink.size(); z++) {
-
-                        if(powerSink.get(z) != null) {
-
-                            if(powerSink.get(z) instanceof IPowerMisc && powerSource.get(i) instanceof IPowerMisc) {
-
-                                IPowerMisc sink = (IPowerMisc)powerSink.get(z);
-                                IPowerMisc source = (IPowerMisc)powerSource.get(i);
-
-                                if(sink != source) {
-
-                                    if(sink.getPowerMax() - sink.getPowerStored() >= powerToMove) {
-
-                                        if(source.usePower(powerToMove)) {
-
-                                            sink.gainPower(powerToMove);
-                                        }
-                                    }
-                                }
-                            }
+                        IPowerMisc tileI = ((IPowerMisc)TechCraftTile.getArrayTilesAround(worldObj, conductors.get(i))[z]);
+                        
+                        if(tileI.recievePower()) {
+                            this.addSink((TileEntity) tileI);
                         }
-
-                        else {
-
-                            this.removeSink(powerSink.get(z));
+                        if(tileI.outputPower()) {
+                            this.addSource((TileEntity) tileI);
                         }
                     }
-                }
-
-                else {
-
-                    this.removeSource(powerSource.get(i));
                 }
             }
         }
@@ -121,6 +99,11 @@ public class PowerNetwork {
     }
 
     public void addSource(TileEntity tile) {
+        
+        for(int i = 0; i < powerSource.size(); i++){
+            if(powerSource.get(i) == tile)
+                return;
+        }
         sourceSize++;
         powerSource.add(tile);
     }
@@ -131,6 +114,11 @@ public class PowerNetwork {
     }
 
     public void addSink(TileEntity tile) {
+        
+        for(int i = 0; i < powerSink.size(); i++){
+            if(powerSink.get(i) == tile)
+                return;
+        }
         sinkSize++;
         powerSink.add(tile);
     }
@@ -166,14 +154,6 @@ public class PowerNetwork {
 
     public int getSourceSize() {
         return sourceSize;
-    }
-
-    public boolean isAddTileAdjacent() {
-        return addTileAdjacent;
-    }
-
-    public void setAddTileAdjacent(boolean addTileAdjacent) {
-        this.addTileAdjacent = addTileAdjacent;
     }
 
     public void addConductorsAround(TileEntity tile){
@@ -495,7 +475,8 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
-                                for(int i = 0; i < powerSink.size(); i++){
+                                for(int i = 0; i < powerSink.size(); i++) {
+
                                     if(powerSink.get(i) == tile)
                                         return;
                                 }
@@ -511,7 +492,8 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
-                                for(int i = 0; i < powerSink.size(); i++){
+                                for(int i = 0; i < powerSink.size(); i++) {
+
                                     if(powerSink.get(i) == tile)
                                         return;
                                 }
@@ -526,7 +508,8 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
-                                for(int i = 0; i < powerSink.size(); i++){
+                                for(int i = 0; i < powerSink.size(); i++) {
+
                                     if(powerSink.get(i) == tile)
                                         return;
                                 }
@@ -541,7 +524,8 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
-                                for(int i = 0; i < powerSink.size(); i++){
+                                for(int i = 0; i < powerSink.size(); i++) {
+
                                     if(powerSink.get(i) == tile)
                                         return;
                                 }
@@ -557,7 +541,8 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
-                                for(int i = 0; i < powerSink.size(); i++){
+                                for(int i = 0; i < powerSink.size(); i++) {
+
                                     if(powerSink.get(i) == tile)
                                         return;
                                 }
@@ -572,7 +557,8 @@ public class PowerNetwork {
 
                             if(((IPowerMisc)tileI).recievePower()) {
 
-                                for(int i = 0; i < powerSink.size(); i++){
+                                for(int i = 0; i < powerSink.size(); i++) {
+
                                     if(powerSink.get(i) == tile)
                                         return;
                                 }
@@ -591,3 +577,5 @@ public class PowerNetwork {
         }
     }
 }
+
+

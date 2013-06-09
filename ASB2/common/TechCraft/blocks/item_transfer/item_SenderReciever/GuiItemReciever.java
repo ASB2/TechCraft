@@ -1,19 +1,19 @@
-package TechCraft.blocks.item_transfer_wireless;
+package TechCraft.blocks.item_transfer.item_SenderReciever;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import TechCraft.lib.GUI;
 
-public class GuiItemSender extends GuiContainer {
+public class GuiItemReciever extends GuiContainer {
 
     @SuppressWarnings("unused")
-    private TileItemSender tileEntity;
+    private TileItemReciever tileEntity;
 
     public final int xSizeOfTexture = 176;
     public final int ySizeOfTexture = 166;
 
-    public GuiItemSender(InventoryPlayer inventory, TileItemSender tileEntity) {
-        super(new ContainerItemSender(inventory, tileEntity));
+    public GuiItemReciever(InventoryPlayer inventory, TileItemReciever tileEntity) {
+        super(new ContainerItemReciever(inventory, tileEntity));
 
         this.tileEntity = tileEntity;
     }

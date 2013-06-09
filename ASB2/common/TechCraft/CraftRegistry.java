@@ -3,11 +3,12 @@ package TechCraft;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftRegistry {
 
-    public static void init() {
+    public static void init(Configuration config) {
         //Creates a new itemstack with the enchangment specidied
         //ItemStack enchanted = new ItemStack(Item.pickaxeStone);
         //.addEnchantment(Enchantment.sharpness, 2);

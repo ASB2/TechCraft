@@ -1,11 +1,13 @@
 package TechCraft;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
-import TechCraft.blocks.item_transfer_wireless.TileItemSender;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.TileBasicRune;
+import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
@@ -14,6 +16,7 @@ import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitExporting;
 import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitImporting;
 import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
+import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
@@ -44,7 +47,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = TechCraft.modid, name = "TechCraft The TechnoMagic Mod", version = "Not a Full Release Yet")
 
-@NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"GenericRandom"}, packetHandler = TechCraftPacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={"GenericRandom"}, packetHandler = TechCraftPacketHandler.class)
 
 public class TechCraft {
 
@@ -62,14 +65,18 @@ public class TechCraft {
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
+        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+
+        ItemRegistry.init(config);
+        BlockRegistry.init(config);
+        CraftRegistry.init(config);
+        
+        config.save();
     }
 
     @Init
     public void load(FMLInitializationEvent event) {
-
-        ItemRegistry.init();
-        BlockRegistry.init();
-        CraftRegistry.init();
 
         proxy.register();
         instance = this;
@@ -125,6 +132,10 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileItemReciever.class, "TileItemReciever");
 
         GameRegistry.registerTileEntity(TileItemSender.class, "TileItemSender");
+
+        GameRegistry.registerTileEntity(TileToolManager.class, "TileToolManager");
+
+        GameRegistry.registerTileEntity(TileTCEnergyConstructor.class, "TileTCEnergyConstructor");
 
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

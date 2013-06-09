@@ -1,4 +1,4 @@
-package TechCraft.blocks.item_transfer_wireless;
+package TechCraft.blocks.tcToolManager;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -6,15 +6,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftContainers;
+import TechCraft.TechCraft;
 
-public class BlockItemSender extends TechCraftContainers {
+public class BlockToolManager extends TechCraftContainers {
 
     Icon top;
     Icon sides;
     
-    public BlockItemSender(int par1, Material par2Material) {
+    public BlockToolManager(int par1, Material par2Material) {
         super(par1, par2Material);        
     }
 
@@ -24,15 +24,15 @@ public class BlockItemSender extends TechCraftContainers {
         if(player.isSneaking())
             return false;
 
-        player.openGui(TechCraft.instance, 10, world, x, y, z);
+        player.openGui(TechCraft.instance, 11, world, x, y, z);
         return true;
     }
     
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
-        top = iconRegister.registerIcon("TechCraft:BlockItemSenderTop");
-        sides = iconRegister.registerIcon("TechCraft:BlockItemSender");
+        top = iconRegister.registerIcon("TechCraft:Gear128Block");
+        sides = iconRegister.registerIcon("TechCraft:ColoredBlack");
     }
     
     @Override
@@ -50,6 +50,6 @@ public class BlockItemSender extends TechCraftContainers {
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TileItemSender();
+        return new TileToolManager();
     }
 }

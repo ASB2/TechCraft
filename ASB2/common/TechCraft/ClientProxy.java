@@ -5,14 +5,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import TechCraft.blocks.item_transfer_wireless.GuiItemReciever;
-import TechCraft.blocks.item_transfer_wireless.GuiItemSender;
-import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
-import TechCraft.blocks.item_transfer_wireless.TileItemSender;
+import TechCraft.blocks.item_transfer.item_SenderReciever.GuiItemReciever;
+import TechCraft.blocks.item_transfer.item_SenderReciever.GuiItemSender;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
 import TechCraft.blocks.tanks.GuiTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.GuiRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
+import TechCraft.blocks.tcToolManager.GuiToolManager;
+import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.farms.BasicFarm.GuiBasicFarm;
@@ -22,6 +24,8 @@ import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitImporting;
 import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
 import TechCraft.blocks.technogery.tcChargeBench.GuiTCChargeBench;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
+import TechCraft.blocks.technogery.tcEnergyConstructor.GuiTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.GuiTCFurnace;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.GuiGenorator;
@@ -33,6 +37,7 @@ import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.GuiTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
+import TechCraft.keybindings.TCKeyBindingM;
 import TechCraft.renders.ItemRendererMagicConduitExporting;
 import TechCraft.renders.ItemRendererMagicConduitImporting;
 import TechCraft.renders.ItemRendererMagicConduitMoving;
@@ -59,7 +64,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void register() {
 
-        KeyBindingRegistry.registerKeyBinding(new TechCraftKeyBindings());
+        KeyBindingRegistry.registerKeyBinding(new TCKeyBindingM());
         TickRegistry.registerTickHandler(new TechCraftTickHandlerClient(), Side.CLIENT);
 
         ClientRegistry.bindTileEntitySpecialRenderer(TilePowerConduitImporting.class, new TileEntityRendererMagicConduitImporting());
@@ -97,7 +102,7 @@ public class ClientProxy extends CommonProxy {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
         if(tileEntity != null) {
-            
+
             switch(ID){
                 case 0: return new GuiBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
                 case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
@@ -110,6 +115,8 @@ public class ClientProxy extends CommonProxy {
                 case 8: return new GuiTCTank(player.inventory, (TileTCTank)tileEntity);
                 case 9: return new GuiItemReciever(player.inventory, (TileItemReciever)tileEntity);
                 case 10: return new GuiItemSender(player.inventory, (TileItemSender)tileEntity);
+                case 11: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
+                case 12: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);                
                 //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
 
                 //case 4: return new GuiMagicGauntlet(player);

@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.blocks.item_transfer_wireless.TileItemReciever;
+import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelItemReciever;
 import cpw.mods.fml.client.FMLClientHandler;

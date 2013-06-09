@@ -11,14 +11,13 @@ import TechCraft.modes.ModeBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemTechMultiTool extends TechCraftItems{
+public class ItemTechMultiTool extends TechCraftItems {
 
     public ItemTechMultiTool(int par1) {
         super(par1);
         
     }
-
-    
+   
     @Override
     public void registerIcons(IconRegister iconRegister){
         itemIcon = iconRegister.registerIcon("TechCraft:ItemTechMultiTool");

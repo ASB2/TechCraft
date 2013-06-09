@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
-import TechCraft.lib.SpecialPlayers;
+import TechCraft.lib.MiscUtilities;
 
 public class BlockBurningFlower extends BlockFlower {
 
@@ -27,7 +27,7 @@ public class BlockBurningFlower extends BlockFlower {
 
         if(entity instanceof EntityPlayer) {
 
-            if(!(SpecialPlayers.isSpecialPlayer(((EntityPlayer)entity).username))) {
+            if(!(MiscUtilities.isSpecialPlayer(((EntityPlayer)entity).username))) {
 
                 entity.attackEntityFrom(DamageSource.onFire, 1); 
             }

@@ -24,9 +24,11 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         tileItemStacks = new ItemStack[10];
     }
 
+    int ticks = 0;
 
     public void updateEntity() {
-        
+
+        ticks++;
         super.managePowerAll(this,powerOutput(),true);
         super.updateEntity();
 
@@ -37,7 +39,11 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
         if(fuelBurnTime > 0) {
 
-            this.gainPower(1);
+            if(ticks == 10) {
+                ticks = 0;
+                this.gainPower(1);
+            }
+
         }
 
         moveSlots();

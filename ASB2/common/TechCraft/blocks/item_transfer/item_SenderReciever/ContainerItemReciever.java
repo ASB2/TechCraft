@@ -1,4 +1,4 @@
-package TechCraft.blocks.item_transfer_wireless;
+package TechCraft.blocks.item_transfer.item_SenderReciever;
 
 import TechCraft.blocks.technogery.tcGenorator.SlotGenorator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,9 +7,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerItemSender extends Container {
+public class ContainerItemReciever extends Container {
 
-    public ContainerItemSender(InventoryPlayer par1InventoryPlayer, TileItemSender tileEntity) {
+    public ContainerItemReciever(InventoryPlayer par1InventoryPlayer, TileItemReciever tileEntity) {
         
         this.addSlotToContainer(new Slot(tileEntity, 0, 121, 38));
 
