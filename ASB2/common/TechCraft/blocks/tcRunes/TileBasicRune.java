@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.runes.IRuneItem;
-import TechCraft.runes.*;
+import TechCraft.runes.RuneBase;
 
 public class TileBasicRune extends TechCraftTile implements IInventory{
 

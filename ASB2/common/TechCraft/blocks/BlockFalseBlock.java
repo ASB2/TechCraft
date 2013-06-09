@@ -1,12 +1,12 @@
 package TechCraft.blocks;
 
-import TechCraft.lib.MiscUtilities;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import TechCraft.lib.MiscUtilities;
 
 public class BlockFalseBlock extends TechCraftBlocks {
 

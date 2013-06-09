@@ -1,4 +1,4 @@
-package TechCraft.renders;
+package TechCraft.blocks.technogery.tcSphere;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

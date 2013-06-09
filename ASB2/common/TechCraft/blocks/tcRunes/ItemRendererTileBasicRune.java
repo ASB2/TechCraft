@@ -1,4 +1,4 @@
-package TechCraft.renders;
+package TechCraft.blocks.tcRunes;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -6,16 +6,16 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.lib.TEXTURES;
-import TechCraft.models.ModelTCEnergyFocus;
+import TechCraft.models.ModelFlat;
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemRendererTileTechnogryFocus implements IItemRenderer {
+public class ItemRendererTileBasicRune implements IItemRenderer {
 
-    private ModelTCEnergyFocus model;
+    private ModelFlat model;
 
-    public ItemRendererTileTechnogryFocus()
+    public ItemRendererTileBasicRune()
     {
-        model = new ModelTCEnergyFocus();
+        model = new ModelFlat();
     }
 
     @Override
@@ -69,12 +69,12 @@ public class ItemRendererTileTechnogryFocus implements IItemRenderer {
         GL11.glTranslatef(x + 0.5F, y + 2.5F, z + .5F);
         GL11.glRotatef(180F, 1F, 0F, 0F);
         
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BASIC_RUNE_BLOCK);
 
         model.renderAll();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
-    
+
 }

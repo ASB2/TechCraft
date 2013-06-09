@@ -1,18 +1,21 @@
-package TechCraft.renders;
+package TechCraft.blocks.item_transfer.item_SenderReciever;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
-import TechCraft.models.*;
 
-public class ItemRendererMagicConduitExporting implements IItemRenderer {
+import TechCraft.lib.TEXTURES;
+import TechCraft.models.ModelItemReciever;
+import cpw.mods.fml.client.FMLClientHandler;
 
-    private ModelPowerConduitExportingv2 modelTutBox;
+public class ItemRendererTileItemReciever implements IItemRenderer {
 
-    public ItemRendererMagicConduitExporting()
+    private ModelItemReciever model;
+
+    public ItemRendererTileItemReciever()
     {
-        modelTutBox = new ModelPowerConduitExportingv2();
+        model = new ModelItemReciever();
     }
 
     @Override
@@ -33,28 +36,28 @@ public class ItemRendererMagicConduitExporting implements IItemRenderer {
         switch(type)
         {
             case ENTITY:{
-                renderTutBox(0f, 0f, 0f, 1f);
+                render(0f, 0f, 0f, 1f);
                 return;
             }
 
             case EQUIPPED:{
-                renderTutBox(0f, 0f, 1f, 1f);
+                render(0f, 0f, 1f, 1f);
                 return;
             }
 
             case INVENTORY:{
-                renderTutBox(0f, -1f, 0f, 1f);
+                render(0f, -1f, 0f, 1f);
                 return;
             }
             case EQUIPPED_FIRST_PERSON:{
-                renderTutBox(1f, -.2f, 1f, 1f);
+                //render(-.5f, -.1f, 1f, 1f);
             }
 
             default:return;
         }
     }
 
-    private void renderTutBox(float x, float y, float z, float scale)
+    private void render(float x, float y, float z, float scale)
     {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -63,15 +66,15 @@ public class ItemRendererMagicConduitExporting implements IItemRenderer {
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 0f);
 
+        GL11.glTranslatef(x + 0.5F, y + 2.5F, z + .5F);
+        GL11.glRotatef(180F, 1F, 0F, 0F);
         
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.ITEM_RECIEVER);
 
-        modelTutBox.renderAll();
-        modelTutBox.renderTop();
-        modelTutBox.renderBottom();
-        //modelTutBox.renderRight();
-        //modelTutBox.renderLeft();
+        model.renderAll();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
+
 }

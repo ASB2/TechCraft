@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.*;
+import TechCraft.power.IPowerStorage;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     

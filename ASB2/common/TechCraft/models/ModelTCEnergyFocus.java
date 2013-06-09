@@ -1,10 +1,10 @@
 package TechCraft.models;
 
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import TechCraft.lib.TEXTURES;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelTCEnergyFocus extends ModelBase 
 {

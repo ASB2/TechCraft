@@ -2,7 +2,7 @@ package TechCraft.blocks.technogery.farms.BasicFarm;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import TechCraft.lib.*;
+import TechCraft.lib.GUI;
 
 public class GuiBasicFarm extends GuiContainer{
 

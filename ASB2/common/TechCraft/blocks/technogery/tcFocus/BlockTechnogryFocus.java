@@ -1,4 +1,4 @@
-package TechCraft.blocks.technogery;
+package TechCraft.blocks.technogery.tcFocus;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

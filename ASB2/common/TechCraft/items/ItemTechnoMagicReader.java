@@ -5,8 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.blocks.tcConduits.TileTCConduit;
 import TechCraft.power.IPowerMisc;
-import TechCraft.blocks.technogery.power_Conduit.*;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 
@@ -40,22 +40,19 @@ public class ItemTechnoMagicReader extends TechCraftItems{
             else {
                 player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));
             }
-            
-            
-            if(world.getBlockTileEntity(x,y,z) instanceof TilePowerConduitMoving){
 
-                TilePowerConduitMoving mTile = (TilePowerConduitMoving) world.getBlockTileEntity(x, y, z);
+
+            if(world.getBlockTileEntity(x,y,z) instanceof TileTCConduit){
+
+                TileTCConduit mTile = (TileTCConduit) world.getBlockTileEntity(x, y, z);
 
                 if(mTile.getNetwork() != null) {
 
-                    // player.sendChatToPlayer(mTile.getName()+ " network start is at x " + mTile.getNetwork().tileCore.xCoord + " y "+ mTile.getNetwork().tileCore.yCoord+" z "+ mTile.getNetwork().tileCore.zCoord);
                     player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductorSize() + " conductors");
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSinkSize() + " power sinks");
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getSourceSize() + " power sources");
                     player.sendChatToPlayer(mTile.getName()+ " power network is " + mTile.getNetwork().getAge() + " ticks old");
-                    //player.sendChatToPlayer("Power Network has " + mTile.getNetwork().getBuffer() +" technogery stored in it's buffer");
                 }
                 else {
+                    
                     player.sendChatToPlayer(mTile.getName()+" has no network");
                 }
             }    

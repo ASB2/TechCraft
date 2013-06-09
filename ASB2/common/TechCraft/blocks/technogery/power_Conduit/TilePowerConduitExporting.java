@@ -4,9 +4,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.*;
+import TechCraft.power.IPowerSink;
+import TechCraft.power.IPowerStorage;
 
-public class TilePowerConduitExporting extends TechCraftTile implements IPowerConductor {
+public class TilePowerConduitExporting extends TechCraftTile {
     
     
     int powerStored;

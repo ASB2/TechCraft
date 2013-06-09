@@ -24,7 +24,7 @@ public class BlockItemSorter extends TechCraftContainers {
         if(player.isSneaking())
             return false;
 
-        player.openGui(TechCraft.instance, 10, world, x, y, z);
+        player.openGui(TechCraft.instance, 13, world, x, y, z);
         return true;
     }
     

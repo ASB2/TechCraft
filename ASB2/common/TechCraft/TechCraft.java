@@ -5,16 +5,14 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
+import TechCraft.blocks.item_transfer.tcItemSorter.TileItemSorter;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
-import TechCraft.blocks.technogery.TileTechnogryFocus;
+import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
-import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitExporting;
-import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitImporting;
-import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
@@ -106,13 +104,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileMagiciansBuildingBlocks.class, "TileMagiciansBuildingBlocks");
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
-
-        GameRegistry.registerTileEntity(TilePowerConduitExporting.class, "TilePowerConduitExporting");
-
-        GameRegistry.registerTileEntity(TilePowerConduitImporting.class, "TileMagicConduitImporting");
-
-        GameRegistry.registerTileEntity(TilePowerConduitMoving.class, "TilePowerConduitMoving");
-
+        
+        
         GameRegistry.registerTileEntity(TileBasicFarm.class, "TileBasicFarm");
 
         GameRegistry.registerTileEntity(TileGenorator.class, "TileGenorator");
@@ -136,7 +129,9 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileToolManager.class, "TileToolManager");
 
         GameRegistry.registerTileEntity(TileTCEnergyConstructor.class, "TileTCEnergyConstructor");
-
+        
+        GameRegistry.registerTileEntity(TileItemSorter.class, "TileItemSorter");
+        
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

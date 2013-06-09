@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import TechCraft.blocks.TechCraftContainers;
 import TechCraft.TechCraft;
+import TechCraft.blocks.TechCraftContainers;
 
 public class BlockToolManager extends TechCraftContainers {
 

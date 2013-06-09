@@ -25,12 +25,12 @@ import TechCraft.blocks.tcRunes.BlockRuneBase;
 import TechCraft.blocks.tcToolManager.BlockToolManager;
 import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
-import TechCraft.blocks.technogery.BlockTechnogryFocus;
+import TechCraft.blocks.technogery.tcFocus.BlockTechnogryFocus;
 import TechCraft.blocks.technogery.BlockTestBlock;
 import TechCraft.blocks.technogery.farms.BasicFarm.BlockBasicFarm;
 import TechCraft.blocks.technogery.power_Conduit.BlockPowerConduitExporting;
 import TechCraft.blocks.technogery.power_Conduit.BlockPowerConduitImporting;
-import TechCraft.blocks.technogery.power_Conduit.BlockPowerConduitMoving;
+import TechCraft.blocks.tcConduits.*;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.BlockTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
@@ -63,7 +63,7 @@ public class BlockRegistry {
 
     public static TechCraftContainers BlockPowerConduitExporting;
     public static TechCraftContainers BlockPowerConduitImporting;
-    public static TechCraftContainers BlockPowerConduitMoving;
+    public static TechCraftContainers BlockTCConduit;
 
     public static TechCraftContainers BlockTechnogryFocus;
     public static TechCraftContainers BlockMagiciansBuildingBlocks;
@@ -179,11 +179,11 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockPowerConduitImporting, "Force Importing Conduit");
         MinecraftForge.setBlockHarvestLevel(BlockPowerConduitImporting, "pickaxe", 2);
 
-        BlockPowerConduitMoving = new BlockPowerConduitMoving(config.getBlock("BlockPowerConduitMoving", 515).getInt(),Material.rock);
-        BlockPowerConduitMoving.setUnlocalizedName("ASB2_BlockPowerConduitMoving");
-        GameRegistry.registerBlock(BlockPowerConduitMoving, "ASB2_BlockPowerConduitMoving");
-        LanguageRegistry.addName(BlockPowerConduitMoving, "TC Energy Conduit");
-        MinecraftForge.setBlockHarvestLevel(BlockPowerConduitMoving, "pickaxe", 2);
+        BlockTCConduit = new BlockTCConduit(config.getBlock("BlockTCConduit", 515).getInt(),Material.rock);
+        BlockTCConduit.setUnlocalizedName("ASB2_BlockTCConduit");
+        GameRegistry.registerBlock(BlockTCConduit, "ASB2_BlockTCConduit");
+        LanguageRegistry.addName(BlockTCConduit, "TC Conduit");
+        MinecraftForge.setBlockHarvestLevel(BlockTCConduit, "pickaxe", 2);
 
         BlockTechnogryFocus = new BlockTechnogryFocus(config.getBlock("BlockTechnogryFocus", 516).getInt(),Material.rock);
         BlockTechnogryFocus.setUnlocalizedName("ASB2_BlockTechnogryFocus");

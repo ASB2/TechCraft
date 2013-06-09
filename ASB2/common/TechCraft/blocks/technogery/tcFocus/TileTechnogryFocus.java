@@ -1,4 +1,4 @@
-package TechCraft.blocks.technogery;
+package TechCraft.blocks.technogery.tcFocus;
 
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;

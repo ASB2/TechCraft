@@ -4,11 +4,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.*;
+import TechCraft.power.IPowerSource;
+import TechCraft.power.IPowerStorage;
 
-public class TilePowerConduitImporting extends TechCraftTile implements IPowerConductor{
-
-    PowerNetwork network;
+public class TilePowerConduitImporting extends TechCraftTile {
 
     int powerMax = 10;
     int powerStored;

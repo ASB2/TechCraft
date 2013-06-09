@@ -14,6 +14,7 @@ import TechCraft.items.ItemEarthCrystalShard;
 import TechCraft.items.ItemEnergyCrystalShard;
 import TechCraft.items.ItemFireCrystalShard;
 import TechCraft.items.ItemGarnet;
+import TechCraft.items.ItemLinker;
 import TechCraft.items.ItemTechMultiTool;
 import TechCraft.items.ItemTechnoMagicReader;
 import TechCraft.items.ItemTeleporter;
@@ -21,6 +22,8 @@ import TechCraft.items.ItemTestItem;
 import TechCraft.items.ItemWaterCrystalShard;
 import TechCraft.items.ItemZycrantianIngot;
 import TechCraft.items.TechCraftItems;
+import TechCraft.items.runes.ItemExplosionRune;
+import TechCraft.items.runes.ItemRuneTest;
 import TechCraft.items.technogery.ItemEnergyBlob;
 import TechCraft.items.tools_armor.ItemCharcoalAxe;
 import TechCraft.items.tools_armor.ItemCharcoalPickaxe;
@@ -41,8 +44,6 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.items.runes.*;
-import TechCraft.items.*;
 
 public class ItemRegistry {
 

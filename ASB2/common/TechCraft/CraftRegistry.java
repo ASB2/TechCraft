@@ -122,13 +122,13 @@ public class CraftRegistry {
             'R', Item.redstone
         });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPowerConduitMoving), new Object[] {
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCConduit), new Object[] {
             "GEG",
             "CRC",
             "GEG",
             'G', Block.glass,
             'R', Item.redstone,
-            'C', Block.cobblestone,
+            'C', Block.thinGlass,
             'E', ItemRegistry.ItemEnergyCrystalShard
         });
 

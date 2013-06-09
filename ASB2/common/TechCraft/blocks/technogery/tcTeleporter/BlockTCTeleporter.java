@@ -1,7 +1,5 @@
 package TechCraft.blocks.technogery.tcTeleporter;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -11,6 +9,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftContainers;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTCTeleporter extends TechCraftContainers {
 

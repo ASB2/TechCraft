@@ -1,4 +1,4 @@
-package TechCraft.renders;
+package TechCraft.blocks.tcRunes;
 
 import java.util.Random;
 
@@ -7,50 +7,54 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.blocks.technogery.TileTechnogryFocus;
-import TechCraft.models.ModelTCEnergyFocus;
+import TechCraft.blocks.tcRunes.TileBasicRune;
+import TechCraft.lib.TEXTURES;
+import TechCraft.models.ModelFlat;
+import cpw.mods.fml.client.FMLClientHandler;
 
-public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRenderer {
+public class TileEntityRendererTileBasicRune extends TileEntitySpecialRenderer {
 
-    private ModelTCEnergyFocus model;
+    private ModelFlat model;
 
-    public TileEntityRendererTileTechnogryFocus(){
-        model = new ModelTCEnergyFocus();
+    public TileEntityRendererTileBasicRune(){
+        model = new ModelFlat();
     }
 
     public void renderTileEntityAt(TileEntity par1TileEntity, double x, double y, double z, float frames){
 
-        if(par1TileEntity instanceof TileTechnogryFocus) {
+        if(par1TileEntity instanceof TileBasicRune) {
 
-            this.renderAModelAt((TileTechnogryFocus)par1TileEntity, x, y, z, frames);
+            this.renderAModelAt((TileBasicRune)par1TileEntity, x, y, z, frames);
         }
     } 
 
-    public void renderAModelAt(TileTechnogryFocus tile, double x, double y, double z, float frames) {
+    public void renderAModelAt(TileBasicRune tile, double x, double y, double z, float frames) {
 
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_CULL_FACE);
 
         GL11.glPushMatrix();
 
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BASIC_RUNE_BLOCK);
+        
         renderByOrientation(x, y, z, tile.getBlockMetadata());
 
-        GL11.glColor3f(changeColor(),changeColor(),changeColor());
-        
+        //GL11.glColor3f(changeColor(),changeColor(),changeColor());
+
         model.renderAll();
 
 
         GL11.glPopMatrix();
- 
+
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_LIGHTING);
     }
-    
+
     public float changeColor(){
         Random rand = new Random();
         return rand.nextFloat();
     }
-    
+
     private void renderByOrientation(double x, double y, double z, int metadata) {
 
         GL11.glScalef(1.0F, 1.0F, 1.0F);
@@ -90,6 +94,8 @@ public class TileEntityRendererTileTechnogryFocus extends TileEntitySpecialRende
             default: {//Other
                 return;
             }
-        }    
+        }
     }
+
+
 }

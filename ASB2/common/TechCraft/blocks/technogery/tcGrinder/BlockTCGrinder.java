@@ -4,8 +4,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import TechCraft.blocks.TechCraftContainers;
 import TechCraft.TechCraft;
+import TechCraft.blocks.TechCraftContainers;
 
 public class BlockTCGrinder extends TechCraftContainers{
 

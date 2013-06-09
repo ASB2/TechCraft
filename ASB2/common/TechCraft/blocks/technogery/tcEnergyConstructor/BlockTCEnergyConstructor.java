@@ -1,15 +1,15 @@
 package TechCraft.blocks.technogery.tcEnergyConstructor;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import TechCraft.blocks.TechCraftContainers;
 import TechCraft.TechCraft;
+import TechCraft.blocks.TechCraftContainers;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTCEnergyConstructor extends TechCraftContainers{
 

@@ -1,22 +1,19 @@
-package TechCraft.renders;
+package TechCraft.blocks.technogery.power_Conduit;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import TechCraft.models.ModelPowerConduitImportingv2;
 
-import TechCraft.lib.TEXTURES;
-import TechCraft.models.ModelEnergySphere;
+public class ItemRendererMagicConduitImporting implements IItemRenderer {
 
-public class ItemRendererMagicEnergySphere implements IItemRenderer
-{
-    private ModelEnergySphere modelTutBox;
+    private ModelPowerConduitImportingv2 modelTutBox;
 
-    public ItemRendererMagicEnergySphere()
+    public ItemRendererMagicConduitImporting()
     {
-        modelTutBox = new ModelEnergySphere();
+        modelTutBox = new ModelPowerConduitImportingv2();
     }
 
     @Override
@@ -37,18 +34,21 @@ public class ItemRendererMagicEnergySphere implements IItemRenderer
         switch(type)
         {
             case ENTITY:{
-                renderTutBox(0f, 0f, 0f, 0.5f);
+                renderTutBox(0f, 0f, 0f, 1f);
                 return;
             }
 
             case EQUIPPED:{
-                renderTutBox(0f, 1f, 1f, 0.5f);
+                renderTutBox(0f, 0f, 1f, 1f);
                 return;
             }
 
             case INVENTORY:{
-                renderTutBox(0f, 0f, 0f, 0.5f);
+                renderTutBox(0f, -1f, 0f, 1f);
                 return;
+            }
+            case EQUIPPED_FIRST_PERSON:{
+                renderTutBox(1f, -.2f, 1f, 1f);
             }
 
             default:return;
@@ -64,9 +64,11 @@ public class ItemRendererMagicEnergySphere implements IItemRenderer
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 0f);
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
-        
-        modelTutBox.render();
+        modelTutBox.renderAll();
+        modelTutBox.renderTop();
+        modelTutBox.renderBottom();
+        //modelTutBox.renderRight();
+        //modelTutBox.renderLeft();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

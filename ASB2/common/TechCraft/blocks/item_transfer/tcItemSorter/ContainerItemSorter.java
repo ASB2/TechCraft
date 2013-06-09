@@ -1,11 +1,11 @@
 package TechCraft.blocks.item_transfer.tcItemSorter;
 
-import TechCraft.blocks.technogery.tcGenorator.SlotGenorator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import TechCraft.blocks.technogery.tcGenorator.SlotGenorator;
 
 public class ContainerItemSorter extends Container {
 

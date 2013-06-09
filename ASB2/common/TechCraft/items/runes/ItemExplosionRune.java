@@ -1,8 +1,8 @@
 package TechCraft.items.runes;
 
 import net.minecraft.item.ItemStack;
-import TechCraft.runes.IRuneItem;
 import TechCraft.items.TechCraftItems;
+import TechCraft.runes.IRuneItem;
 import TechCraft.runes.RuneBase;
 import TechCraft.runes.RuneExplosion;
 

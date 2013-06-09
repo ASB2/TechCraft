@@ -7,6 +7,8 @@ import TechCraft.blocks.item_transfer.item_SenderReciever.ContainerItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.ContainerItemSender;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
+import TechCraft.blocks.item_transfer.tcItemSorter.ContainerItemSorter;
+import TechCraft.blocks.item_transfer.tcItemSorter.TileItemSorter;
 import TechCraft.blocks.tanks.ContainerTCTank;
 import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.ContainerRune;
@@ -70,6 +72,7 @@ public class CommonProxy implements IGuiHandler {
                 case 10:return new ContainerItemSender(player.inventory, (TileItemSender)tileEntity);
                 case 11:return new ContainerToolManager(player.inventory, (TileToolManager)tileEntity);
                 case 12:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
+                case 13:return new ContainerItemSorter(player.inventory, (TileItemSorter)tileEntity);
             }
         }
         return null;

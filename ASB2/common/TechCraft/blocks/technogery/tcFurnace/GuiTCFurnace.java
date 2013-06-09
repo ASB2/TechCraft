@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import TechCraft.lib.*;
+import TechCraft.lib.GUI;
 
 public class GuiTCFurnace extends GuiContainer {
 

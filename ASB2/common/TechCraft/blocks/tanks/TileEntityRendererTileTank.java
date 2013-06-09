@@ -1,4 +1,4 @@
-package TechCraft.renders;
+package TechCraft.blocks.tanks;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

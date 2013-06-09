@@ -10,7 +10,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import TechCraft.lib.*;
+import TechCraft.lib.GUI;
 
 public class GuiGenorator extends GuiContainer {
 

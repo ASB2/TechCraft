@@ -1,4 +1,4 @@
-package TechCraft.renders;
+package TechCraft.blocks.tcConduits;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -8,14 +8,14 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.blocks.technogery.power_Conduit.TilePowerConduitMoving;
+import TechCraft.blocks.tcConduits.TileTCConduit;
 import TechCraft.models.ModelGear;
 import TechCraft.models.ModelPowerConduit;
 import TechCraft.models.ModelPowerConduitExportingv2;
 import TechCraft.models.ModelPowerConduitImportingv2;
 import TechCraft.power.IPowerMisc;
 
-public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRenderer{
+public class TileRendererTCConduit extends TileEntitySpecialRenderer {
 
     private ModelPowerConduit modelMoving;
     private ModelPowerConduitImportingv2 modelImporting;
@@ -23,7 +23,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
     @SuppressWarnings("unused")
     private ModelGear modelGear;
 
-    public TileEntityRendererMagicConduitMoving() {
+    public TileRendererTCConduit() {
 
         modelMoving = new ModelPowerConduit();
         modelImporting = new ModelPowerConduitImportingv2();
@@ -31,7 +31,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
         modelGear = new ModelGear();
     }
 
-    public void renderAModelAt(TilePowerConduitMoving tile, double d, double d1, double d2, float f) {
+    public void renderAModelAt(TileTCConduit tile, double d, double d1, double d2, float f) {
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F);
@@ -39,7 +39,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
         GL11.glRotatef(0F, 0F, 0F, 0F);
 
         modelMoving.renderAll();
-
+/*
         if(tile.decideRender(ForgeDirection.DOWN)){
             modelMoving.renderDOWN();
             //modelGear.renderDown(d,d1,d2);
@@ -69,7 +69,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
             modelMoving.renderNORTH();
             //modelGear.renderNorth(d,d1,d2);
         }
-
+*/
         decideRender(ForgeDirection.DOWN, tile);
         decideRender(ForgeDirection.UP, tile);
         decideRender(ForgeDirection.WEST, tile);
@@ -81,7 +81,7 @@ public class TileEntityRendererMagicConduitMoving  extends TileEntitySpecialRend
 
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8){
 
-        this.renderAModelAt((TilePowerConduitMoving)par1TileEntity, par2, par4, par6, par8);
+        this.renderAModelAt((TileTCConduit)par1TileEntity, par2, par4, par6, par8);
     }    
 
     public boolean decideRender(ForgeDirection direction, TileEntity tileT) {
