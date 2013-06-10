@@ -34,6 +34,7 @@ import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import TechCraft.blocks.conduitInterface.items.*;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -73,6 +74,7 @@ public class CommonProxy implements IGuiHandler {
                 case 11:return new ContainerToolManager(player.inventory, (TileToolManager)tileEntity);
                 case 12:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
                 case 13:return new ContainerItemSorter(player.inventory, (TileItemSorter)tileEntity);
+                case 14:return new ContainerItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);
             }
         }
         return null;

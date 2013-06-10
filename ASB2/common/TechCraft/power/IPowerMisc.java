@@ -3,7 +3,9 @@ package TechCraft.power;
 import net.minecraftforge.common.ForgeDirection;
 
 public interface IPowerMisc {
-
+    
+    ForgeDirection getOrientation();
+    
     int getPowerStored();
     int getPowerMax();
 

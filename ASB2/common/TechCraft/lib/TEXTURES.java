@@ -11,4 +11,5 @@ public class TEXTURES {
     public static final String BASIC_RUNE_BLOCK = "/mods/TechCraft/textures/blocks/ModelFlat.png";
     public static final String ITEM_RECIEVER = "/mods/TechCraft/textures/blocks/ModelItemReciever.png";
     public static final String ENERGY_FOCUS = "/mods/TechCraft/textures/blocks/TCEnergyFocus.png";
+    public static final String CONDUIT_ITEM_INTERFACE = "/mods/TechCraft/textures/blocks/ModelConduitInterface.png";
 }

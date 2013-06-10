@@ -60,6 +60,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import TechCraft.blocks.conduitInterface.items.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -94,6 +95,9 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemReciever.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCTank.class, new TileEntityRendererTileTank());
+        
+        ClientRegistry.bindTileEntitySpecialRenderer(TileItemConduitInterface.class, new TileRendererItemConduitInterface());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemConduitInterface.blockID, (IItemRenderer)new ItemRendererItemConduitInterface()); 
     }
 
 
@@ -120,6 +124,7 @@ public class ClientProxy extends CommonProxy {
                 case 11: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
                 case 12: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
                 case 13: return new GuiItemSorter(player.inventory, (TileItemSorter)tileEntity);                
+                case 14: return new GuiItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);  
                 //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
 
                 //case 4: return new GuiMagicGauntlet(player);

@@ -41,6 +41,7 @@ import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.blocks.conduitInterface.items.*;
 
 public class BlockRegistry {
 
@@ -86,6 +87,7 @@ public class BlockRegistry {
     public static TechCraftContainers BlockToolManager;
     public static TechCraftContainers BlockTCEnergyConstructor;
     
+    public static TechCraftContainers BlockItemConduitInterface;
 
     public static void init(Configuration config) {
 
@@ -280,6 +282,12 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCEnergyConstructor, "ASB2_BlockTCEnergyConstructor");
         LanguageRegistry.addName(BlockTCEnergyConstructor, "Energy Constructor");
         MinecraftForge.setBlockHarvestLevel(BlockTCEnergyConstructor, "pickaxe", 2);
+        
+        BlockItemConduitInterface = new BlockItemConduitInterface(config.getBlock("BlockItemConduitInterface", 532).getInt(), Material.rock);
+        BlockItemConduitInterface.setUnlocalizedName("ASB2_BlockItemConduitInterface");
+        GameRegistry.registerBlock(BlockItemConduitInterface, "ASB2_BlockItemConduitInterface");
+        LanguageRegistry.addName(BlockItemConduitInterface, "Item Interface");
+        MinecraftForge.setBlockHarvestLevel(BlockItemConduitInterface, "pickaxe", 2);
     }
 
 }

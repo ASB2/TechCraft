@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.blocks.tcConduits.TileTCConduit;
+import TechCraft.conduit.IConduitInterface;
 import TechCraft.power.IPowerMisc;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
@@ -42,18 +42,24 @@ public class ItemTechnoMagicReader extends TechCraftItems{
             }
 
 
-            if(world.getBlockTileEntity(x,y,z) instanceof TileTCConduit){
+            if(world.getBlockTileEntity(x,y,z) instanceof IConduitInterface){
 
-                TileTCConduit mTile = (TileTCConduit) world.getBlockTileEntity(x, y, z);
+                IConduitInterface mTile = (IConduitInterface) world.getBlockTileEntity(x, y, z);
 
                 if(mTile.getNetwork() != null) {
 
-                    player.sendChatToPlayer(mTile.getName()+ " power network has " + mTile.getNetwork().getConductorSize() + " conductors");
-                    player.sendChatToPlayer(mTile.getName()+ " power network is " + mTile.getNetwork().getAge() + " ticks old");
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getConductorSize() + " conductors");
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getItemInterfaceSize() + " item interfaces");
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getTcuInterfaceSize() + " tcu interfaces");
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getLiquidInterfaceSize() + " liquid interfaces");
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getBcInterfaceSize() + " buildcraft interfaces");
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getIc2InterfaceSize() + " ic2 interfaces");
+                    
+                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getAge() + " ticks old");
                 }
                 else {
                     
-                    player.sendChatToPlayer(mTile.getName()+" has no network");
+                    player.sendChatToPlayer("Object has no network");
                 }
             }    
         }

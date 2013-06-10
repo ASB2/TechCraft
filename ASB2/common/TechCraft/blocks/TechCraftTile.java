@@ -8,10 +8,10 @@ import TechCraft.power.IPowerMisc;
 
 public class TechCraftTile extends TileEntity implements IPowerMisc {
 
-    protected ForgeDirection orientation;
-
+    protected ForgeDirection orientation;    
+    
     public TechCraftTile() {
-
+        
         orientation = ForgeDirection.DOWN;
     }
 
@@ -253,8 +253,6 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
                 TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.WEST),
                 TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.EAST)};
     }
-    
-
 
     public static int getTilesNextTo(int x, int y, int z, World worldObj) {
         int numberNextTo = 0;
@@ -343,7 +341,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
         return null;
     }
-    
+
     public void managePowerAll(TileEntity tile, int amountOfPower, boolean addPower) {
 
         if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
@@ -581,7 +579,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     protected long ticks = 0;
 
     public void updateEntity() {
-
+        
         ticks++;
         if(ticks == 20){
             updatePerSecond();
@@ -722,12 +720,10 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
             case EAST: return true;
             case NORTH: return true;
             case SOUTH: return true;
-            case UNKNOWN: return true;
             case UP: return true;
             case WEST: return true;
             default: return true;
 
         }
     }
-
 }

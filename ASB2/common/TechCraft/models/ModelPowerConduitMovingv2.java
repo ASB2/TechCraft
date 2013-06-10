@@ -16,8 +16,8 @@ public class ModelPowerConduitMovingv2 extends ModelBase {
     ModelRenderer WireTop;
     ModelRenderer WireBottom;
 
-    public ModelPowerConduitMovingv2()
-    {
+    public ModelPowerConduitMovingv2() {
+        
         textureWidth = 128;
         textureHeight = 64;
 
