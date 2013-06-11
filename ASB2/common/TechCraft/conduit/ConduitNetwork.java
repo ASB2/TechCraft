@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -110,63 +109,6 @@ public class ConduitNetwork {
                     itemInterface.remove(i);
                     return;
                 }
-
-                if(((IConduitInterface)itemInterface.get(i)).importingToNetwork()) {
-
-                    for(int z = 0; z < itemInterface.size(); z++) {
-
-                        if(itemInterface.get(z) instanceof IConduitInterface && itemInterface.get(z) instanceof IInventory) {
-
-                            if(itemInterface.get(z) == null) {
-
-                                itemInterface.remove(i);
-                                return;
-                            }
-
-                            if(worldObj == null) {
-
-                                worldObj = itemInterface.get(z).worldObj;
-                            }
-
-                            if(worldObj.getBlockId(itemInterface.get(z).xCoord, itemInterface.get(z).yCoord, itemInterface.get(z).zCoord) == 0) {
-
-                                itemInterface.remove(i);
-                                return;
-                            }
-
-                            if(!(itemInterface.get(z) == itemInterface.get(i))) {
-
-                                if(!((IConduitInterface)itemInterface.get(z)).importingToNetwork()) {
-
-                                    this.moveInventory((IInventory)itemInterface.get(i), (IInventory)itemInterface.get(z));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public void moveInventory(IInventory from, IInventory to) {
-
-        for(int i = 0; i < from.getSizeInventory(); i++) {
-
-            if(from.getStackInSlot(i) != null) {
-
-                for(int z = 0; z < to.getSizeInventory(); z++) {
-
-                    if(to.getStackInSlot(z) != null) {
-
-                        
-                    }
-                    else {
-
-                        to.setInventorySlotContents(z, from.getStackInSlot(i));
-                        from.setInventorySlotContents(i, null);
-
-                    }
-                }
             }
         }
     }
@@ -214,6 +156,30 @@ public class ConduitNetwork {
         return ic2Interface.size();
     }
 
+    public List<TileTCConduit> getConductors() {
+        return conductors;
+    }
+
+    public List<TileEntity> getItemInterface() {
+        return itemInterface;
+    }
+
+    public List<TileEntity> getTcuInterface() {
+        return tcuInterface;
+    }
+
+    public List<TileEntity> getLiquidInterface() {
+        return liquidInterface;
+    }
+
+    public List<TileEntity> getBcInterface() {
+        return bcInterface;
+    }
+
+    public List<TileEntity> getIc2Interface() {
+        return ic2Interface;
+    }
+    
     public void addConductorsAround(TileEntity tile) {
         addConductorsAround(ForgeDirection.DOWN, tile);
         addConductorsAround(ForgeDirection.UP, tile);

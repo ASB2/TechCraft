@@ -3,12 +3,11 @@ package TechCraft;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftRegistry {
 
-    public static void init(Configuration config) {
+    public static void init() {
         //Creates a new itemstack with the enchangment specidied
         //ItemStack enchanted = new ItemStack(Item.pickaxeStone);
         //.addEnchantment(Enchantment.sharpness, 2);
@@ -28,6 +27,69 @@ public class CraftRegistry {
             "DDD",
             'D', ItemRegistry.ItemGarnet
         });
+
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker,2), new Object[] {
+            "AGA",
+            "PAP",
+            "RZR",
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'G', ItemRegistry.ItemGarnet,
+            'R', Item.redstone,
+            'Z', ItemRegistry.ItemZycrantianIngot,
+            'P', Item.enderPearl
+        });
+
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
+            "AGA",
+            "MLM",
+            "GRG",
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'G', ItemRegistry.ItemGarnet,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'L', ItemRegistry.ItemLinker,
+            'R', Item.redstone
+        });
+
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
+            "GMG",
+            "LGL",
+            "AAA",
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'G', ItemRegistry.ItemGarnet,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'L', ItemRegistry.ItemLinker,
+            'R', Item.redstone
+        });
+
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCConduit), new Object[] {
+            "GEG",
+            "CRC",
+            "GEG",
+            'G', Block.glass,
+            'R', Item.redstone,
+            'C', Block.thinGlass,
+            'E', ItemRegistry.ItemEnergyCrystalShard
+        });        
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader), new Object[] {
+            "RZC",
+            "ZSZ",
+            "SZR",
+            'R', Item.redstone, 
+            'S', Item.stick,
+            'C', ItemRegistry.ItemEnergyCrystalShard, 
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemLinker),new ItemStack(ItemRegistry.ItemLinker));
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
+        GameRegistry.addShapelessRecipe(new ItemStack(Item.seeds),new ItemStack(Item.wheat));
+    }
+
+    public static void craftPower() {
+
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob), new Object[] {
             "ERE",
@@ -89,59 +151,6 @@ public class CraftRegistry {
             'S', BlockRegistry.BlockTCEnergySphere
         });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemLinker,2), new Object[] {
-            "AGA",
-            "PAP",
-            "RZR",
-            'A', ItemRegistry.ItemAirCrystalShard,
-            'G', ItemRegistry.ItemGarnet,
-            'R', Item.redstone,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'P', Item.enderPearl
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
-            "AGA",
-            "MLM",
-            "GRG",
-            'A', ItemRegistry.ItemAirCrystalShard,
-            'G', ItemRegistry.ItemGarnet,
-            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'L', ItemRegistry.ItemLinker,
-            'R', Item.redstone
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
-            "GMG",
-            "LGL",
-            "AAA",
-            'A', ItemRegistry.ItemAirCrystalShard,
-            'G', ItemRegistry.ItemGarnet,
-            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'L', ItemRegistry.ItemLinker,
-            'R', Item.redstone
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCConduit), new Object[] {
-            "GEG",
-            "CRC",
-            "GEG",
-            'G', Block.glass,
-            'R', Item.redstone,
-            'C', Block.thinGlass,
-            'E', ItemRegistry.ItemEnergyCrystalShard
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4), new Object[] {
-            "FRF",
-            "DED",
-            "FRF", 
-            'F', BlockRegistry.BlockFalseBlock, 
-            'R', Item.redstone ,
-            'E', ItemRegistry.ItemEnergyCrystalShard ,
-            'D', Item.diamond
-        });
-
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockGenorator), new Object[] { 
             "FFF",
             "CMZ",
@@ -163,16 +172,6 @@ public class CraftRegistry {
             'B', ItemRegistry.ItemEnergyBlob
         });
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader), new Object[] {
-            "RZC",
-            "ZSZ",
-            "SZR",
-            'R', Item.redstone, 
-            'S', Item.stick,
-            'C', ItemRegistry.ItemEnergyCrystalShard, 
-            'Z', ItemRegistry.ItemZycrantianIngot
-        });
-
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTeleportModule, 2), new Object[] {
             " Z ",
             "ZEZ",
@@ -192,16 +191,10 @@ public class CraftRegistry {
             'S', BlockRegistry.BlockTCEnergySphere,
             'M', BlockRegistry.BlockMagiciansBuildingBlocks
         });
+    }
 
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemExplosionRune), new Object[] {
-            "ITI",
-            "TET",
-            "ITI",
-            'I', Item.ingotIron,
-            'T', Block.tnt,
-            'E', Item.redstone
-        });
-        
+    public static void craftTool_Armor() {
+
         //Tools
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemGarnetSword), new Object[] {
             " D ",
@@ -397,15 +390,31 @@ public class CraftRegistry {
             'S', Item.stick,
             'E', ItemRegistry.ItemEnergyCrystalShard
         });
+    }
 
-        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitImporting),new ItemStack(BlockRegistry.BlockMagicConduitMoving));
-        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitExporting),new ItemStack(BlockRegistry.BlockMagicConduitImporting));
-        //GameRegistry.addShapelessRecipe(new ItemStack(BlockRegistry.BlockMagicConduitMoving),new ItemStack(BlockRegistry.BlockMagicConduitExporting));
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemLinker),new ItemStack(ItemRegistry.ItemLinker));
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
+    public static void craftRunes() {
 
-        GameRegistry.addShapelessRecipe(new ItemStack(Item.seeds),new ItemStack(Item.wheat));
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4), new Object[] {
+            "FRF",
+            "DED",
+            "FRF", 
+            'F', BlockRegistry.BlockFalseBlock, 
+            'R', Item.redstone ,
+            'E', ItemRegistry.ItemEnergyCrystalShard ,
+            'D', Item.diamond
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemExplosionRune), new Object[] {
+            "ITI",
+            "TET",
+            "ITI",
+            'I', Item.ingotIron,
+            'T', Block.tnt,
+            'E', Item.redstone
+        });
+    }
+
+    public static void craftSmelting() {
 
         GameRegistry.addSmelting(BlockRegistry.BlockZycrantianOre.blockID,
                 new ItemStack(ItemRegistry.ItemZycrantianIngot), 5.0F);
@@ -422,5 +431,4 @@ public class CraftRegistry {
         GameRegistry.addSmelting(Item.swordWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalSword), 1.F);
     }
-
 }

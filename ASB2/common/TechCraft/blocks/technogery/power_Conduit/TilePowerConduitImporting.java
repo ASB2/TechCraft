@@ -64,7 +64,7 @@ public class TilePowerConduitImporting extends TechCraftTile {
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(this.powerStored >= PowerUsed){
 
@@ -76,7 +76,7 @@ public class TilePowerConduitImporting extends TechCraftTile {
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
         if(this.powerMax - this.powerStored >= PowerGained){
 

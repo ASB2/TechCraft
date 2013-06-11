@@ -1,8 +1,11 @@
 package TechCraft.blocks.tcConduits;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.conduit.*;
+import TechCraft.conduit.ConduitInterfaceType;
+import TechCraft.conduit.ConduitNetwork;
+import TechCraft.conduit.IConduitInterface;
 
 public class TileTCConduit extends TechCraftTile implements IConduitInterface {
 
@@ -143,6 +146,30 @@ public class TileTCConduit extends TechCraftTile implements IConduitInterface {
 
     @Override
     public boolean importingToNetwork() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean canMoveItemToInventory(ItemStack itemStack, int slot, int amount) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean moveItemToInventory(ItemStack itemStack, int slot, int amount) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemFromInventory(ItemStack itemStack, int slot, int amount) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean takeItemFromInventory(ItemStack itemStack, int slot, int amount) {
         // TODO Auto-generated method stub
         return false;
     }

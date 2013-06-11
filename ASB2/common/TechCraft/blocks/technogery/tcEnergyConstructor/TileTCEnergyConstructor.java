@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.lib.MiscUtilities;
 import TechCraft.power.IPowerSink;
@@ -59,7 +60,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
 
                 if(this.getPowerStored() <= TileEntityFurnace.getItemBurnTime(targetFuel) / MiscUtilities.TICKSTOPOWER) {
 
-                    if(this.usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ MiscUtilities.TICKSTOPOWER)) {
+                    if(this.usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ MiscUtilities.TICKSTOPOWER, ForgeDirection.UNKNOWN)) {
 
                         if(tileItemStacks[1] == null) {
 
@@ -193,7 +194,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
         if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
 
@@ -204,7 +205,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(this.getPowerStored() >= PowerUsed) {
 

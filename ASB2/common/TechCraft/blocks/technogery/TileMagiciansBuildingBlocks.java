@@ -2,6 +2,7 @@ package TechCraft.blocks.technogery;
 
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSource;
@@ -49,7 +50,7 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(this.powerStored>=PowerUsed){
             this.powerStored= powerStored-PowerUsed;
@@ -59,7 +60,7 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
         if(this.powerMax - this.powerStored >= PowerGained){
             this.powerStored= powerStored + PowerGained;

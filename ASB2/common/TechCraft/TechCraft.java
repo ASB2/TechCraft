@@ -61,6 +61,10 @@ public class TechCraft {
 
     public static CreativeTabs tabTechno = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechnoCraft");
 
+    public static boolean includePowerRecipies = false;
+    public static boolean includeArmorRecipies = false;
+    public static boolean includeRuneRecipies = false;
+
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -68,8 +72,18 @@ public class TechCraft {
 
         ItemRegistry.init(config);
         BlockRegistry.init(config);
-        CraftRegistry.init(config);
+        CraftRegistry.init();
+        CraftRegistry.craftSmelting();
         
+        if(includePowerRecipies)
+            CraftRegistry.craftPower();
+
+        if(includeArmorRecipies)
+            CraftRegistry.craftTool_Armor();
+
+        if(includePowerRecipies)
+            CraftRegistry.craftRunes();
+
         config.save();
     }
 
@@ -104,8 +118,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileMagiciansBuildingBlocks.class, "TileMagiciansBuildingBlocks");
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
-        
-        
+
+
         GameRegistry.registerTileEntity(TileBasicFarm.class, "TileBasicFarm");
 
         GameRegistry.registerTileEntity(TileGenorator.class, "TileGenorator");
@@ -129,9 +143,9 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileToolManager.class, "TileToolManager");
 
         GameRegistry.registerTileEntity(TileTCEnergyConstructor.class, "TileTCEnergyConstructor");
-        
+
         GameRegistry.registerTileEntity(TileItemSorter.class, "TileItemSorter");
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

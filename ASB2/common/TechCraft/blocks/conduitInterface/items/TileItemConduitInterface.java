@@ -8,22 +8,36 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.blocks.tcConduits.TileTCConduit;
+import TechCraft.conduit.ConduitInterfaceType;
+import TechCraft.conduit.ConduitNetwork;
+import TechCraft.conduit.IConduitInterface;
 import TechCraft.items.ItemLinker;
-import TechCraft.conduit.*;
 
 public class TileItemConduitInterface extends TechCraftTile implements IInventory, IConduitInterface {
 
     private ItemStack[] tileItemStack;
-    
+
     ConduitNetwork network;
 
     public TileItemConduitInterface() {
+        super();
 
         tileItemStack = new ItemStack[22];
     }
 
     public void updateEntity() {
 
+        this.moveInventory();
+    }
+
+    public void moveInventory() {
+
+        if(this.getNetwork() != null) {
+
+            if(this.getNetwork().getConductorSize() != 0) {
+
+            }
+        }
     }
 
     @Override
@@ -195,12 +209,96 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
     @Override
     public boolean importingToNetwork() {
-        
+
         if(TechCraftTile.translateDirectionToTile(this, worldObj, this.getOrientation()) instanceof TileTCConduit) {
-            
+
             return true;
         }
         return false;
     }
 
+    @Override
+    public boolean canMoveItemToInventory(ItemStack itemStack, int slot, int amount) {
+
+        if(slot != 0 && slot != 1) {
+
+            if(tileItemStack[slot] == null) {
+
+                return true;
+            }
+
+            else if(tileItemStack[slot].equals(itemStack)) {
+
+                if(tileItemStack[slot].stackSize + itemStack.stackSize <= this.getInventoryStackLimit()) {
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean moveItemToInventory(ItemStack itemStack, int slot, int amount) {
+
+        if(slot != 0 && slot != 1) {
+
+            if(tileItemStack[slot] == null) {
+
+                tileItemStack[slot] = itemStack;
+                return true;
+            }
+
+            else if(tileItemStack[slot].equals(itemStack)) {
+
+                if(tileItemStack[slot].stackSize + itemStack.stackSize <= this.getInventoryStackLimit()) {
+
+                    tileItemStack[slot].stackSize = tileItemStack[slot].stackSize + itemStack.stackSize;
+                    itemStack = null;
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemFromInventory(ItemStack itemStack, int slot, int amount) {
+
+        if(slot != 0 && slot != 1) {
+
+            if(tileItemStack[slot] == null) {
+
+                return false;
+            }
+
+            else if(tileItemStack[slot].stackSize >= amount)
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean takeItemFromInventory(ItemStack itemStack, int slot, int amount) {
+
+        if(slot != 0 && slot != 1) {
+
+            if(tileItemStack[slot] == null) {
+
+                return false;
+            }
+
+            else if(tileItemStack[slot].stackSize >= amount) {
+
+                if(tileItemStack[slot].stackSize - amount >= 0) {
+
+                    tileItemStack[slot].stackSize = tileItemStack[slot].stackSize - amount;
+                    return true; 
+                }
+                return false;
+            }
+        }
+        return false;
+    }
 }

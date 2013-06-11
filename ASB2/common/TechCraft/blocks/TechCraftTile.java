@@ -3,23 +3,26 @@ package TechCraft.blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.EnumColor;
 import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
 
-public class TechCraftTile extends TileEntity implements IPowerMisc {
+public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
 
     protected ForgeDirection orientation;    
-    
+    protected EnumColor color;
+
     public TechCraftTile() {
-        
+
+        color = EnumColor.WHITE;
         orientation = ForgeDirection.DOWN;
     }
 
     public ForgeDirection getOrientation() {
 
-        if(!(orientation == this.translateNumberToDirection(getBlockMetadata()))) {
+        if(!(orientation == TechCraftTile.translateNumberToDirection(getBlockMetadata()))) {
 
-            this.orientation = this.translateNumberToDirection(getBlockMetadata());
+            this.orientation = TechCraftTile.translateNumberToDirection(getBlockMetadata());
         }
 
         if(orientation == ForgeDirection.SOUTH) {
@@ -184,7 +187,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
         }
     }
 
-    public ForgeDirection translateNumberToDirection(int direction) {
+    public static ForgeDirection translateNumberToDirection(int direction) {
 
         switch(direction) {
 
@@ -363,223 +366,49 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
 
         if(worldObj.blockExists(coords[0], coords[1], coords[2])) {
 
-            switch(direction) {
+            if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
+                IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
+                IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
-                case DOWN: {
+                if(addPower) {
 
+                    if(tileCallingMeathod.canGainPower(amountOfPower)&& tileToChange.canUsePower(amountOfPower))
+                    {
+                        if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
 
-                    if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-                        IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                        IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
+                            if(tileToChange.gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
 
-                        if(addPower) {
-
-                            if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
-
-                                if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
-
-                                    tileToChange.gainPower(amountOfPower);
-                                    tileCallingMeathod.usePower(amountOfPower);
-
-                                }
-                            }        
-                        }
-
-                        else {
-
-                            if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
-                            {
-                                if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
-
-                                    tileCallingMeathod.gainPower(amountOfPower);
-                                    tileToChange.usePower(amountOfPower);
-
-                                }
+                                tileCallingMeathod.usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
                             }
+
+
                         }
-                    }
-                    break;
+                    }        
                 }
-                case UP: {
 
-                    if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-                        IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                        IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
+                else {
 
-                        if(addPower) {
+                    if(tileToChange.canGainPower(amountOfPower) && tileCallingMeathod.canUsePower(amountOfPower))
+                    {
+                        if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
 
-                            if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
+                            if(tileCallingMeathod.gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
 
-                                if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
-
-                                    tileToChange.gainPower(amountOfPower);
-                                    tileCallingMeathod.usePower(amountOfPower);
-
-                                }
-                            }        
-                        }
-
-                        else {
-
-                            if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
-                            {
-                                if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
-
-                                    tileCallingMeathod.gainPower(amountOfPower);
-                                    tileToChange.usePower(amountOfPower);
-
-                                }
+                                tileToChange.usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
                             }
-                        }
-                    }    
-                    break;
-                }
-                case NORTH: {
 
-                    if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-                        IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                        IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
-                        if(addPower) {
-
-                            if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
-
-                                if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
-
-                                    tileToChange.gainPower(amountOfPower);
-                                    tileCallingMeathod.usePower(amountOfPower);
-
-                                }
-                            }        
-                        }
-
-                        else {
-
-                            if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
-                            {
-                                if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
-
-                                    tileCallingMeathod.gainPower(amountOfPower);
-                                    tileToChange.usePower(amountOfPower);
-
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-                case SOUTH: {
-
-                    if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-                        IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                        IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
-
-                        if(addPower) {
-
-                            if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
-
-                                if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
-
-                                    tileToChange.gainPower(amountOfPower);
-                                    tileCallingMeathod.usePower(amountOfPower);
-
-                                }
-                            }        
-                        }
-
-                        else {
-
-                            if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
-                            {
-                                if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
-
-                                    tileCallingMeathod.gainPower(amountOfPower);
-                                    tileToChange.usePower(amountOfPower);
-
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-                case WEST: {
-
-                    if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-                        IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                        IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
-
-                        if(addPower) {
-
-                            if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
-
-                                if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
-
-                                    tileToChange.gainPower(amountOfPower);
-                                    tileCallingMeathod.usePower(amountOfPower);
-
-                                }
-                            }        
-                        }
-
-                        else {
-
-                            if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
-                            {
-                                if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
-
-                                    tileCallingMeathod.gainPower(amountOfPower);
-                                    tileToChange.usePower(amountOfPower);
-
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-                case EAST: {
-
-                    if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-                        IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                        IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
-
-                        if(addPower) {
-
-                            if(tileCallingMeathod.getPowerStored() >= amountOfPower && tileToChange.getPowerMax() - tileToChange.getPowerStored() >= amountOfPower){
-
-                                if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
-
-                                    tileToChange.gainPower(amountOfPower);
-                                    tileCallingMeathod.usePower(amountOfPower);
-
-                                }
-                            }        
-                        }
-
-                        else {
-                            if(tileToChange.getPowerStored() >= amountOfPower && tileCallingMeathod.getPowerMax() - tileCallingMeathod.getPowerStored() >= amountOfPower)
-                            {
-                                if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
-
-                                    tileCallingMeathod.gainPower(amountOfPower);
-                                    tileToChange.usePower(amountOfPower);
-
-                                }
-                            }
                         }
                     }
                 }
-
-                default:
-                    break;
             }
         }
     }
 
-
     protected long ticks = 0;
 
     public void updateEntity() {
-        
+
         ticks++;
         if(ticks == 20){
             updatePerSecond();
@@ -639,13 +468,13 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
         // TODO Auto-generated method stub
         return false;
     }
@@ -663,7 +492,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public boolean requestingPower() {
+    public boolean requestingPower(ForgeDirection direction) {
 
         if(getPowerStored() < getPowerMax())
             return true;
@@ -672,7 +501,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public boolean outputtingPower() {
+    public boolean outputtingPower(ForgeDirection direction) {
 
         if(getPowerStored() > 0)
             return true;
@@ -713,7 +542,7 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
     }
 
     @Override
-    public boolean powerByDirection(ForgeDirection direction) {
+    public boolean renderByDirection(ForgeDirection direction) {
 
         switch(direction){
             case DOWN: return true;
@@ -725,5 +554,17 @@ public class TechCraftTile extends TileEntity implements IPowerMisc {
             default: return true;
 
         }
+    }
+
+    @Override
+    public EnumColor getColorEnum() {
+
+        return color;
+    }
+
+    @Override
+    public void setColor(EnumColor color) {
+
+        this.color = color;
     }
 }

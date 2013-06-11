@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 
@@ -43,7 +44,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
         if (this.isBurning && this.canSmelt() && this.getPowerStored() >= this.powerForProcess) {            
             this.smeltItem();    
-            this.usePower(powerForProcess);
+            this.usePower(powerForProcess, ForgeDirection.UNKNOWN);
         }
 
     }
@@ -206,7 +207,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(this.powerStored>=PowerUsed) {
 
@@ -217,7 +218,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
         if(this.powerMax - this.powerStored >= PowerGained) {
 

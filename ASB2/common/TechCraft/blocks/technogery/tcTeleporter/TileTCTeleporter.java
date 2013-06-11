@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.power.IPowerSink;
@@ -84,7 +85,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
                     if(entity instanceof EntityPlayerMP) {
 
-                        if(this.usePower(powerForProcess)) {
+                        if(this.usePower(powerForProcess, ForgeDirection.UNKNOWN)) {
 
                             EntityPlayerMP player = (EntityPlayerMP) entity;     
 
@@ -151,22 +152,22 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
-        if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
+        if(this.powerStored>=PowerUsed) {
 
-            this.powerStored = this.getPowerStored() + PowerGained;
+            this.powerStored = powerStored - PowerUsed;
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
-        if(this.getPowerStored() >= PowerUsed) {
+        if(this.powerMax - this.powerStored >= PowerGained) {
 
-            powerStored = this.getPowerStored() - PowerUsed;
+            this.powerStored = powerStored + PowerGained;
             return true;
         }
         return false;

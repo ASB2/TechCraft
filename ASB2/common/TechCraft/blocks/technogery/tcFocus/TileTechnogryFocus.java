@@ -1,5 +1,6 @@
 package TechCraft.blocks.technogery.tcFocus;
 
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 
@@ -40,7 +41,7 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
         if(this.powerMax - this.powerStored >= PowerGained){
 
@@ -51,7 +52,7 @@ public class TileTechnogryFocus extends TechCraftTile implements IPowerSink{
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(powerStored > PowerUsed) {
 

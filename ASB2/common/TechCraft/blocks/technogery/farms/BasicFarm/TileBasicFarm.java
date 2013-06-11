@@ -7,6 +7,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 
@@ -198,7 +199,7 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
         if(this.powerMax - this.powerStored >= PowerGained) {
 
@@ -209,7 +210,7 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(powerStored > PowerUsed) {
 

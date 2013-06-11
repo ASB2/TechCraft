@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 
@@ -68,22 +69,22 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     }
     
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
-        if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
+        if(this.powerStored>=PowerUsed) {
 
-            this.powerStored = this.getPowerStored() + PowerGained;
+            this.powerStored = powerStored - PowerUsed;
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
-        if(this.getPowerStored() >= PowerUsed) {
+        if(this.powerMax - this.powerStored >= PowerGained) {
 
-            powerStored = this.getPowerStored() - PowerUsed;
+            this.powerStored = powerStored + PowerGained;
             return true;
         }
         return false;

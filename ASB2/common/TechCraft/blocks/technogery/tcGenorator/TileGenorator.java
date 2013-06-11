@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 
 public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
@@ -41,7 +42,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
 
             if(ticks == 10) {
                 ticks = 0;
-                this.gainPower(1);
+                this.gainPower(1, ForgeDirection.UNKNOWN);
             }
 
         }
@@ -145,22 +146,22 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
         if(this.powerStored>=PowerUsed) {
 
-            this.powerStored= powerStored-PowerUsed;
+            this.powerStored = powerStored - PowerUsed;
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
-        if(powerMax -powerStored >= PowerGained) {
+        if(this.powerMax - this.powerStored >= PowerGained) {
 
-            powerStored = powerStored + PowerGained;
+            this.powerStored = powerStored + PowerGained;
             return true;
         }
         return false;

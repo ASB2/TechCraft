@@ -2,6 +2,7 @@ package TechCraft.blocks.technogery.tcSphere;
 
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerStorage;
@@ -75,28 +76,24 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     }
 
     @Override
-    public boolean gainPower(int PowerGained) {
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
-        if(this.powerMax - this.powerStored >= PowerGained) {
+        if(this.powerStored>=PowerUsed) {
 
-            this.powerStored = powerStored + PowerGained;
-
+            this.powerStored = powerStored - PowerUsed;
             return true;
         }
-
         return false;
     }
 
     @Override
-    public boolean usePower(int PowerUsed) {
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
 
-        if(powerStored >= PowerUsed) {
+        if(this.powerMax - this.powerStored >= PowerGained) {
 
-            powerStored = powerStored - PowerUsed;
-
+            this.powerStored = powerStored + PowerGained;
             return true;
         }
-
         return false;
     }
 

@@ -1,5 +1,8 @@
 package TechCraft.conduit;
 
+/**
+ * What an interface moves
+ */
 public enum ConduitInterfaceType {
 
      ITEM,
