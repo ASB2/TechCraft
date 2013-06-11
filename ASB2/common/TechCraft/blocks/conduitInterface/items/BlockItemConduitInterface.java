@@ -4,8 +4,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import TechCraft.blocks.TechCraftContainers;
+import TechCraft.EnumColor;
 import TechCraft.TechCraft;
+import TechCraft.blocks.TechCraftContainers;
+import TechCraft.blocks.*;
 
 public class BlockItemConduitInterface extends TechCraftContainers {
 
@@ -15,14 +17,21 @@ public class BlockItemConduitInterface extends TechCraftContainers {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) 
-    {
+    {        
         if(player.isSneaking())
             return false;
 
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if(TechCraftTile.getItemColorValue(player.inventory.getCurrentItem()) != EnumColor.NONE) {
+            
+            this.setColor(tile, player.inventory.getCurrentItem());
+            return true;
+        }
+
         player.openGui(TechCraft.instance, 14, world, x, y, z);
-        return true;
+        return  super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
     }
-    
+
     public boolean renderAsNormalBlock() {
 
         return false;
@@ -37,7 +46,7 @@ public class BlockItemConduitInterface extends TechCraftContainers {
     {
         return -1;
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world) {
 

@@ -69,7 +69,7 @@ public class ItemRendererItemConduitInterface implements IItemRenderer {
         GL11.glTranslatef(x + 0.5F, y + 2.5F, z + .5F);
         GL11.glRotatef(180F, 1F, 0F, 0F);
         
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
 
         model.renderAll();
 

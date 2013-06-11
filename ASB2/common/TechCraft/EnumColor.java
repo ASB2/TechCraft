@@ -1,10 +1,11 @@
 package TechCraft;
 
+/**
+ * An enum to standardize the coloring of my mod's colors
+ */
 public enum EnumColor {
 
-    /**
-     * An enum to standardize the coloring of my mod's colors
-     */
+
     WHITE,
     ORANGE,
     MAGENTA,

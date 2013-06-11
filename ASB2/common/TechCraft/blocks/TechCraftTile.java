@@ -1,5 +1,9 @@
 package TechCraft.blocks;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -14,8 +18,11 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
 
     public TechCraftTile() {
 
-        color = EnumColor.WHITE;
-        orientation = ForgeDirection.DOWN;
+        if(color == null)
+            color = EnumColor.NONE;
+
+        if(orientation == null)
+            orientation = ForgeDirection.DOWN;
     }
 
     public ForgeDirection getOrientation() {
@@ -50,29 +57,144 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
         this.orientation = ForgeDirection.getOrientation(id);
     }
 
+    public static EnumColor translateNumberToColor(int numb) {
+
+        switch(numb) {
+
+            case 0: return EnumColor.WHITE;
+            case 1:return EnumColor.ORANGE;
+            case 2:return EnumColor.MAGENTA;
+            case 3:return EnumColor.LIGHT_BLUE;
+            case 4:return EnumColor.YELLOW;
+            case 5:return EnumColor.LIME;
+            case 6:return EnumColor.PINK;
+            case 7:return EnumColor.GRAY;
+            case 8:return EnumColor.LIGHT_GREY;
+            case 9:return EnumColor.CYAN;
+            case 10:return EnumColor.PURPLE;
+            case 11:return EnumColor.BLUE;
+            case 12:return EnumColor.BROWN;
+            case 13:return EnumColor.GREEN;
+            case 14:return EnumColor.RED;
+            case 15:return EnumColor.BLACK;
+            default: return EnumColor.NONE;
+        }
+    }
+
+    public static int translateColorToInt(EnumColor color) {
+
+        switch(color) {
+
+            case WHITE: return 0;       
+            case ORANGE: return 1;                
+            case MAGENTA: return 2;
+            case LIGHT_BLUE: return 3;            
+            case YELLOW: return 4;            
+            case LIME: return 5;            
+            case PINK: return 6;
+            case GRAY: return 7;
+            case LIGHT_GREY: return 8;
+            case CYAN: return 9;                
+            case PURPLE: return 10;                
+            case BLUE: return 11;
+            case BROWN: return 12;
+            case GREEN: return 13;
+            case RED: return 14;
+            case BLACK: return 15;
+
+            case NONE: return -1;
+            default: return -1;
+        }
+    }
+
+    public void setColor(int color) {
+
+        switch(color) {
+
+            case 0: this.color = EnumColor.WHITE;
+            case 1: this.color = EnumColor.ORANGE;
+            case 2: this.color = EnumColor.MAGENTA;
+            case 3: this.color = EnumColor.LIGHT_BLUE;
+            case 4: this.color = EnumColor.YELLOW;
+            case 5: this.color = EnumColor.LIME;
+            case 6: this.color = EnumColor.PINK;
+            case 7: this.color = EnumColor.GRAY;
+            case 8: this.color = EnumColor.LIGHT_GREY;
+            case 9: this.color = EnumColor.CYAN;
+            case 10: this.color = EnumColor.PURPLE;
+            case 11: this.color = EnumColor.BLUE;
+            case 12: this.color = EnumColor.BROWN;
+            case 13: this.color = EnumColor.GREEN;
+            case 14: this.color = EnumColor.RED;
+            case 15: this.color = EnumColor.BLACK;
+            default: this.color = EnumColor.NONE;
+        }
+    }
+
+    public void setColorEnum(EnumColor color) {
+
+        this.color = color;
+    }
+
+    public static EnumColor getItemColorValue(ItemStack item) {
+
+        if(item != null){
+
+            if(item.getItem() != null) {
+
+                Item itemI = item.getItem();
+
+                if(itemI instanceof ItemDye){
+
+                    switch(item.getItemDamage()) {
+
+                        case 1: return EnumColor.RED;
+                        case 2: return EnumColor.GREEN;
+                        case 3: return EnumColor.BROWN;
+                        case 4: return EnumColor.BLUE;
+                        case 5: return EnumColor.PURPLE;
+                        case 6: return EnumColor.CYAN;
+                        case 7: return EnumColor.LIGHT_GREY;
+                        case 8: return EnumColor.GRAY;
+                        case 9: return EnumColor.PINK;
+                        case 10: return EnumColor.LIME;
+                        case 11: return EnumColor.YELLOW;
+                        case 12: return EnumColor.LIGHT_BLUE;
+                        case 13: return EnumColor.MAGENTA;
+                        case 14: return EnumColor.ORANGE;
+                        case 15: return EnumColor.WHITE;
+                    }
+                }
+            }
+        }
+        return EnumColor.NONE;        
+    }
+
     public void toggleDirection() {
 
         switch(getOrientation()) {
 
             case DOWN: {
-                this.setOrientation(ForgeDirection.UP);
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(getOrientation())), 3);
-                break;
+
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(ForgeDirection.UP), 3);
+                return;
             }
 
             case UP: {
-                this.setOrientation(ForgeDirection.NORTH);
-                break;
+
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(ForgeDirection.NORTH), 3);
+                return;
             }
 
             case NORTH: {
-                this.setOrientation(ForgeDirection.SOUTH);
-                break;
+
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(ForgeDirection.SOUTH), 3);
+                return;
             }
 
             case SOUTH: {
                 this.setOrientation(ForgeDirection.WEST);
-                break;
+                return;
             }
 
             case WEST: {
@@ -405,19 +527,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
         }
     }
 
-    protected long ticks = 0;
-
     public void updateEntity() {
-
-        ticks++;
-        if(ticks == 20){
-            updatePerSecond();
-            ticks = 0;
-        }
-
-    }
-
-    public void updatePerSecond(){
 
     }
 
@@ -428,8 +538,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
             internal = scale;
         }
         return internal;
-    }
-
+    }    
 
     @Override
     public int getPowerStored() {
@@ -520,7 +629,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
         else {
             return false; 
         }
-
     }
 
     @Override
@@ -552,7 +660,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
             case UP: return true;
             case WEST: return true;
             default: return true;
-
         }
     }
 
@@ -567,16 +674,28 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
 
         this.color = color;
     }
-    
+
     @Override
     public void setPowerStored(int power) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setPowerMax(int max) {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        this.setColor(TechCraftTile.translateNumberToColor(tag.getInteger("Color")));
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tag){
+        super.writeToNBT(tag);
+        tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
     }
 }

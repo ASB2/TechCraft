@@ -10,12 +10,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
-import TechCraft.packets.PowerPacket;
-import TechCraft.power.IPowerMisc;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public abstract class TechCraftContainers extends BlockContainer{
 
@@ -39,16 +36,14 @@ public abstract class TechCraftContainers extends BlockContainer{
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) 
     {
-        if(world.getBlockTileEntity(x, y, z) != null) {
-
-            if(world.getBlockTileEntity(x, y, z) instanceof IPowerMisc) {
-
-                IPowerMisc tile = (IPowerMisc)world.getBlockTileEntity(x, y, z);
-
-                //PacketDispatcher.sendPacketToPlayer(new PowerPacket(tile.getPowerStored(), x, y, z).makePacket(), (Player)player);
-            }
-        }
+        
         return false;
+    }
+
+    public void setColor(TileEntity tile, ItemStack stack) { 
+        
+        if(tile instanceof TechCraftTile)            
+        ((TechCraftTile)tile).setColor(TechCraftTile.getItemColorValue(stack));
     }
 
     public void onNeighborBlockChange(World world, int x, int y, int z, int metadata) {

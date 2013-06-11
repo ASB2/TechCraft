@@ -64,11 +64,12 @@ public class TechCraft {
     public static CreativeTabs tabTechno = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechnoCraft");
 
     public static boolean includePowerRecipies = false;
-    public static boolean includeArmorRecipies = false;
+    public static boolean includeArmorRecipies = true;
     public static boolean includeRuneRecipies = false;
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
+        
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
 

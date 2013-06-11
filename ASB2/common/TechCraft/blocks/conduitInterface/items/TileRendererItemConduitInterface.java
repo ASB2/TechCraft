@@ -35,10 +35,48 @@ public class TileRendererItemConduitInterface extends TileEntitySpecialRenderer 
 
         GL11.glPushMatrix();
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
         
         renderByOrientation(x, y, z, tile.getBlockMetadata());
 
+        switch(tile.getColorEnum()) {            
+            
+            case WHITE: FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_WHITE);
+                break;
+            case ORANGE: FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_ORANGE);
+                break;
+            case MAGENTA:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_MAGENTA);
+                break;
+            case LIGHT_BLUE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_LIGHT_BLUE);
+                break;
+            case YELLOW:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_YELLOW);
+                break;
+            case LIME:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_LIME);
+                break;
+            case PINK:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_PINK);
+                break;
+            case GRAY:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_GRAY);
+                break;
+            case LIGHT_GREY:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_LIGHT_GREY);
+                break;
+            case CYAN:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_CYAN);
+                break;
+            case PURPLE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_PURPLE);
+                break;
+            case BLUE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_BLUE);
+                break;
+            case BROWN:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_BROWN);
+                break;
+            case GREEN:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_GREEN);
+                break;
+            case RED:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_RED);
+                break;
+            case BLACK:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_BLACK);
+                break;
+            case NONE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
+                break;                
+        }
+        
         model.renderAll();
 
 

@@ -17,4 +17,6 @@ public class Tips {
      * 
      * Kenitic genorator
      */
+    
+  //PacketDispatcher.sendPacketToPlayer(new PowerPacket(tile.getPowerStored(), x, y, z).makePacket(), (Player)player);
 }

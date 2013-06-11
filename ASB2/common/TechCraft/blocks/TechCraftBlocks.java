@@ -14,6 +14,11 @@ public class TechCraftBlocks extends Block{
         setResistance(1.0F);
     }
     
+    public boolean canCreatureSpawn() {
+
+        return false;
+    }
+    
     @Override
     public void registerIcons(IconRegister iconRegister)
     {

@@ -186,7 +186,7 @@ public class ConduitNetwork {
     }
 
     public List<TileEntity> getTcuInterface() {
-        
+
         for(int i = 0; i < tcuInterface.size(); i++) {
 
             if(tcuInterface.get(i) == null) { 
@@ -208,7 +208,7 @@ public class ConduitNetwork {
     }
 
     public List<TileEntity> getLiquidInterface() {
-        
+
         for(int i = 0; i < liquidInterface.size(); i++) {
 
             if(liquidInterface.get(i) == null) { 
@@ -230,7 +230,7 @@ public class ConduitNetwork {
     }
 
     public List<TileEntity> getBcInterface() {
-        
+
         for(int i = 0; i < bcInterface.size(); i++) {
 
             if(bcInterface.get(i) == null) { 
@@ -252,7 +252,7 @@ public class ConduitNetwork {
     }
 
     public List<TileEntity> getIc2Interface() {
-        
+
         for(int i = 0; i < ic2Interface.size(); i++) {
 
             if(ic2Interface.get(i) == null) { 
@@ -274,7 +274,7 @@ public class ConduitNetwork {
     }
 
     public List<TileEntity> getOtherInterface() {
-        
+
         for(int i = 0; i < otherInterface.size(); i++) {
 
             if(otherInterface.get(i) == null) { 
@@ -323,7 +323,11 @@ public class ConduitNetwork {
                                 ((TileTCConduit)tileI).overrideNetwork(this);
                                 this.addConductor((TileTCConduit) tileI);
                             }
-                            
+                            else if(((IConduitInterface)tileI).getNetwork().getConductorSize() < this.getConductorSize()) {
+
+                                ((TileTCConduit)tileI).overrideNetwork(this);
+                                this.addConductor((TileTCConduit) tileI);
+                            }
                         }                                
                     }
                     else {
@@ -386,10 +390,36 @@ public class ConduitNetwork {
 
                                     default:
                                         break;
-
                                 }
                             }
+                            else if(((IConduitInterface)tileI).getNetwork().getConductorSize() < this.getConductorSize()){
 
+                                ((IConduitInterface)tileI).overrideNetwork(this);
+
+                                switch(((IConduitInterface)tileI).getInterfaceType()) {
+
+                                    case ITEM: itemInterface.add(tileI);
+                                    break;
+
+                                    case TCU: tcuInterface.add(tileI);
+                                    break;
+
+                                    case LIQUID: liquidInterface.add(tileI);
+                                    break;
+
+                                    case BCPOWER: bcInterface.add(tileI);
+                                    break;
+
+                                    case IC2POWER: ic2Interface.add(tileI);
+                                    break;          
+
+                                    case OTHER: otherInterface.add(tile);
+                                    break;
+
+                                    default:
+                                        break;
+                                }
+                            }
                         }                                
                     }
                     else {
@@ -418,7 +448,6 @@ public class ConduitNetwork {
 
                             default:
                                 break;
-
                         }
                     }
                 }

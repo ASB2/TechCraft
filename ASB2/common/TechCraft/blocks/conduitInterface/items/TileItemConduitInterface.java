@@ -29,6 +29,8 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
     public void updateEntity() {
 
+        this.moveFromAjacentInventory();
+        
         if(this.importingToNetwork()) {
 
             this.moveItemsToInventory();
@@ -54,24 +56,27 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
                             IConduitInterface tileC = (IConduitInterface)this.getNetwork().getItemInterface().get(i);
                             IInventory tileI = (IInventory)this.getNetwork().getItemInterface().get(i);
 
-                            if(tileC.getColorEnum() == this.getColorEnum()) {
+                            if(!tileC.importingToNetwork()) {
+                                
+                                if(tileC.getColorEnum() == this.getColorEnum()) {
 
-                                if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
+                                    if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
 
-                                    for(int z = 0; z < tileItemStack.length; z++) {
+                                        for(int z = 0; z < tileItemStack.length; z++) {
 
-                                        if(z != 0 && z != 1) {
+                                            if(z != 0 && z != 1) {
 
-                                            if(tileItemStack[z] != null) {
+                                                if(tileItemStack[z] != null) {
 
-                                                for(int m = 0; m < tileI.getSizeInventory(); m++) {
+                                                    for(int m = 0; m < tileI.getSizeInventory(); m++) {
 
-                                                    if(tileItemStack[z] != null) {
+                                                        if(tileItemStack[z] != null) {
 
-                                                        if(tileC.canMoveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
+                                                            if(tileC.canMoveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
 
-                                                            if(tileC.moveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
-                                                                tileItemStack[z] = null;
+                                                                if(tileC.moveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
+                                                                    tileItemStack[z] = null;
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -156,6 +161,10 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         }
     }
 
+    public void moveFromAjacentInventory() {
+    
+    }
+    
     @Override
     public String getName() {
 
