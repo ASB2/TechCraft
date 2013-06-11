@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockGenorator extends TechCraftContainers {
-    
+
     private TileGenorator tile;
 
     private Icon frontLit;
@@ -28,8 +28,11 @@ public class BlockGenorator extends TechCraftContainers {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
-        player.openGui(TechCraft.instance, 1, world, x, y, z);
+        if(player.isSneaking())
+            return false;
 
+        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        player.openGui(TechCraft.instance, 1, world, x, y, z);
         return true;
     }
 
@@ -49,19 +52,19 @@ public class BlockGenorator extends TechCraftContainers {
             case 1: {
 
                 if(tile != null) {
-                    
+
                     if(tile.isBurning) {
-                        
+
                         return frontLit;
                     }
-                    
+
                     else{
                         return frontUnlit;
                     }
                 }
-                
+
                 else{
-                    
+
                     return frontUnlit;
                 }
             }
@@ -77,9 +80,9 @@ public class BlockGenorator extends TechCraftContainers {
         if(tile != null && tile.isBurning) {
 
             double yMod = (prng.nextDouble());            
-            
+
             yMod += 1;
-            
+
             world.spawnParticle("smoke", x + .5, y + yMod, z + .5, 0, 0, 0);
             world.spawnParticle("flame", x + .5, y + yMod, z + .5, 0, 0, 0);
         }

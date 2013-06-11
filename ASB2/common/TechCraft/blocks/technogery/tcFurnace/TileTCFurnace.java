@@ -90,6 +90,14 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         }
     }
 
+    public void setPowerStored(int power) {
+
+        if(power >= 0) {
+            
+            this.powerStored = power;       
+        }
+    }
+    
     @Override
     public boolean recievePower() {
 

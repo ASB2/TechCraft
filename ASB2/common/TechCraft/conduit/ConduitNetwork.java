@@ -323,12 +323,13 @@ public class ConduitNetwork {
                                 ((TileTCConduit)tileI).overrideNetwork(this);
                                 this.addConductor((TileTCConduit) tileI);
                             }
-                            else {
-
-                                ((TileTCConduit)tileI).overrideNetwork(this);
-                                this.addConductor((TileTCConduit) tileI);
-                            }
+                            
                         }                                
+                    }
+                    else {
+
+                        ((TileTCConduit)tileI).overrideNetwork(this);
+                        this.addConductor((TileTCConduit) tileI);
                     }
                 }
             }

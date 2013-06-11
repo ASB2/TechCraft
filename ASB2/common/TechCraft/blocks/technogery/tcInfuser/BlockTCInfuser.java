@@ -20,6 +20,7 @@ public class BlockTCInfuser extends TechCraftContainers{
         if(player.isSneaking())
             return false;
 
+        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
         player.openGui(TechCraft.instance, 5, world, x, y, z);
         return true;
     }

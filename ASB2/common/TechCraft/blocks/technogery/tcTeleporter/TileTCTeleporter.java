@@ -109,6 +109,14 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
         }
     }
 
+    public void setPowerStored(int power) {
+
+        if(power >= 0) {
+            
+            this.powerStored = power;       
+        }
+    }
+    
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);

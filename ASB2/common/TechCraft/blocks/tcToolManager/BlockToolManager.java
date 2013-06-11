@@ -24,6 +24,8 @@ public class BlockToolManager extends TechCraftContainers {
         if(player.isSneaking())
             return false;
 
+        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        
         player.openGui(TechCraft.instance, 11, world, x, y, z);
         return true;
     }

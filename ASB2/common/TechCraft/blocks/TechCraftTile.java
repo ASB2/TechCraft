@@ -218,9 +218,9 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
         }
     }
 
-    public String translateDirectionToString() {
+    public static String translateDirectionToString(ForgeDirection direction) {
 
-        switch(getOrientation()) {
+        switch(direction) {
 
             case DOWN: {
                 return "Down";
@@ -566,5 +566,17 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
     public void setColor(EnumColor color) {
 
         this.color = color;
+    }
+    
+    @Override
+    public void setPowerStored(int power) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setPowerMax(int max) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -82,15 +82,35 @@ public class CraftRegistry {
             'Z', ItemRegistry.ItemZycrantianIngot
         });
 
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTeleportModule, 2), new Object[] {
+            " Z ",
+            "ZEZ",
+            "DZD",
+            'D', Item.diamond, 
+            'E', ItemRegistry.ItemEnergyCrystalShard,
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
+
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTeleporter, 2), new Object[] {
+            "TNT",
+            "GRG", 
+            "DPD",
+            'R', Item.redstone,
+            'D', Item.diamond,
+            'N', ItemRegistry.ItemGarnet,
+            'G', Item.ingotGold,
+            'P', Item.enderPearl,
+            'T', ItemRegistry.ItemTeleportModule
+        });
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemLinker),new ItemStack(ItemRegistry.ItemLinker));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
         GameRegistry.addShapelessRecipe(new ItemStack(Item.seeds),new ItemStack(Item.wheat));
     }
 
     public static void craftPower() {
-
-        GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
-
+        
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob), new Object[] {
             "ERE",
             "RGR", 
@@ -170,15 +190,6 @@ public class CraftRegistry {
             'E', ItemRegistry.ItemEnergyCrystalShard, 
             'R', ItemRegistry.ItemRealityDifferentiationDrive, 
             'B', ItemRegistry.ItemEnergyBlob
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTeleportModule, 2), new Object[] {
-            " Z ",
-            "ZEZ",
-            "DZD",
-            'D', Item.diamond, 
-            'E', ItemRegistry.ItemEnergyCrystalShard,
-            'Z', ItemRegistry.ItemZycrantianIngot
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCTeleporter), new Object[] {

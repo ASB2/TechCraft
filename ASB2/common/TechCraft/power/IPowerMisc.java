@@ -103,4 +103,14 @@ public interface IPowerMisc {
      * Sets the color of the block
      */
     void setColor(EnumColor color);
+    
+    /**
+     * Forcibly sets the power stored in the block to the value passed. (Used for packets)
+     */
+    void setPowerStored(int power);
+    
+    /**
+     * Forcibly sets the maximum power stored in the block to the value passed.
+     */
+    void setPowerMax(int max);
 }

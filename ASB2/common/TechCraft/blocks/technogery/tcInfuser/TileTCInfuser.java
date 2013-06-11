@@ -25,6 +25,13 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
 
     }
 
+    public void setPowerStored(int power) {
+
+        if(power >= 0) {
+            
+            this.powerStored = power;       
+        }
+    }
     
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        

@@ -3,6 +3,7 @@ package TechCraft.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import cpw.mods.fml.relauncher.Side;
@@ -14,8 +15,7 @@ public class ItemTestItem extends TechCraftItems {
         super(par1);
 
     }
-    int mode = 0;
-
+    
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack)
     {
@@ -39,8 +39,17 @@ public class ItemTestItem extends TechCraftItems {
                 mTile.usePower(power, TechCraftTile.translateNumberToDirection(side));
                 player.sendChatToPlayer("Drew "+power+" Power");
             }
-
-
+        }
+        
+        else {
+            
+            for(int i = 0; i < 5; i++){
+                
+                if(TechCraftTile.translateNumberToDirection(side) == ForgeDirection.UP) {
+                    
+                    world.setBlockToAir(x, y - i, z);
+                }
+            }
         }
 
         return true;        

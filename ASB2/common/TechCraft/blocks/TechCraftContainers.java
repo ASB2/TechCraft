@@ -7,10 +7,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
+import TechCraft.packets.PowerPacket;
+import TechCraft.power.IPowerMisc;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public abstract class TechCraftContainers extends BlockContainer{
 
@@ -31,17 +36,32 @@ public abstract class TechCraftContainers extends BlockContainer{
         blockIcon = iconRegister.registerIcon("TechCraft:GearBlock");
     }
 
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) 
+    {
+        if(world.getBlockTileEntity(x, y, z) != null) {
+
+            if(world.getBlockTileEntity(x, y, z) instanceof IPowerMisc) {
+
+                IPowerMisc tile = (IPowerMisc)world.getBlockTileEntity(x, y, z);
+
+                //PacketDispatcher.sendPacketToPlayer(new PowerPacket(tile.getPowerStored(), x, y, z).makePacket(), (Player)player);
+            }
+        }
+        return false;
+    }
+
     public void onNeighborBlockChange(World world, int x, int y, int z, int metadata) {
-        
+
         //TileEntity tile = world.getBlockTileEntity(x, y, z);
-        
+
     }
 
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metaData) {
 
         //TileEntity tile = world.getBlockTileEntity(x, y, z);
-        
-        
+
+
         this.dropItems(world, x, y, z);
         super.onBlockDestroyedByPlayer(world, x, y, z, metaData);
     }
@@ -58,9 +78,9 @@ public abstract class TechCraftContainers extends BlockContainer{
     }
 
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-        
+
         //TileEntity tile = world.getBlockTileEntity(x, y, z);
-        
+
         this.dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, par5, par6);
     }

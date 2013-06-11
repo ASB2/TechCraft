@@ -126,6 +126,14 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
         }
     }
 
+    public void setPowerStored(int power) {
+
+        if(power >= 0) {
+            
+            this.powerStored = power;       
+        }
+    }
+    
     @Override
     public boolean recievePower() {
 

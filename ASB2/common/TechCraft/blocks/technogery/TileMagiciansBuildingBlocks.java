@@ -1,9 +1,7 @@
 package TechCraft.blocks.technogery;
 
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSource;
 
@@ -21,32 +19,18 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
 
     }
 
+    public void setPowerStored(int power) {
+
+        if(power >= 0) {
+            
+            this.powerStored = power;       
+        }
+    }
+    
     @Override
     public boolean outputPower() {
 
         return true;
-    }
-    
-    public void setColor(Item item) {
-        
-        if(item != null) {
-
-            if(item == ItemRegistry.ItemAirCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 3);
-            }
-            
-            if(item == ItemRegistry.ItemEarthCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
-            }
-            
-            if(item == ItemRegistry.ItemFireCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 3, 3);
-            }
-            
-            if(item == ItemRegistry.ItemWaterCrystalShard) {
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 4, 3);
-            }
-        }
     }
 
     @Override

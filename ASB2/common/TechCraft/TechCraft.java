@@ -10,16 +10,18 @@ import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
-import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
+import TechCraft.packets.TechCraftPacketBase;
+import TechCraft.packets.TechCraftPacketHandler;
 import TechCraft.worldGen.WorldGenBlockAirCrystalOre;
 import TechCraft.worldGen.WorldGenBlockBurningFlower;
 import TechCraft.worldGen.WorldGenBlockEarthCrystalOre;
@@ -43,9 +45,9 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = TechCraft.modid, name = "TechCraft The TechnoMagic Mod", version = "Not a Full Release Yet")
+@Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={"GenericRandom"}, packetHandler = TechCraftPacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={TechCraftPacketBase.CHANNEL}, packetHandler = TechCraftPacketHandler.class)
 
 public class TechCraft {
 

@@ -11,7 +11,7 @@ import TechCraft.power.IPowerItems;
 import TechCraft.power.IPowerSink;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
-    
+
     int powerStored;
     int powerMax = 1000;
     int powerToMove = 1;
@@ -25,7 +25,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
     public void updateEntity() {
         this.managePowerAll(this, powerInput(), false);
         super.updateEntity();
-        
+
         addEnergyToSlot();
         removeEnergySlot();
     }    
@@ -117,6 +117,14 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                     tcItem.usePower(powerToMove, tileItemStacks[5]);
                 }
             }
+        }
+    }
+
+    public void setPowerStored(int power) {
+
+        if(power >= 0) {
+            
+            this.powerStored = power;       
         }
     }
 
