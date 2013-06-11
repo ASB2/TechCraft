@@ -1,5 +1,6 @@
 package TechCraft.conduit;
 
+import TechCraft.EnumColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -49,4 +50,14 @@ public interface IConduitInterface {
      * Actually take an item from the specified slot
      */
     boolean takeItemFromInventory(ItemStack itemStack, int slot, int amount);
+    
+    /**
+     * Used for markings. Does NOT refer to the texture color of the block
+     */
+    EnumColor getColorEnum();
+
+    /**
+     * Sets the color of the block
+     */
+    void setColor(EnumColor color);
 }

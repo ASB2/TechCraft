@@ -2,9 +2,11 @@ package TechCraft.blocks.conduitInterface.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.blocks.tcConduits.TileTCConduit;
@@ -27,15 +29,129 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
     public void updateEntity() {
 
-        this.moveInventory();
+        if(this.importingToNetwork()) {
+
+            this.moveItemsToInventory();
+        }
+        else {
+
+            this.moveSlotToInventory();
+        }
     }
 
-    public void moveInventory() {
+    public void moveItemsToInventory() {
 
         if(this.getNetwork() != null) {
 
-            if(this.getNetwork().getConductorSize() != 0) {
+            if(this.getNetwork().getItemInterfaceSize() >= 1) {
 
+                for(int i = 0; i < this.getNetwork().getItemInterfaceSize(); i++) {
+
+                    if(!(this.getNetwork().getItemInterface().get(i).equals(this))) {
+
+                        if(this.getNetwork().getItemInterface().get(i) instanceof IConduitInterface && this.getNetwork().getItemInterface().get(i) instanceof IInventory) {
+
+                            IConduitInterface tileC = (IConduitInterface)this.getNetwork().getItemInterface().get(i);
+                            IInventory tileI = (IInventory)this.getNetwork().getItemInterface().get(i);
+
+                            if(tileC.getColorEnum() == this.getColorEnum()) {
+
+                                if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
+
+                                    for(int z = 0; z < tileItemStack.length; z++) {
+
+                                        if(z != 0 && z != 1) {
+
+                                            if(tileItemStack[z] != null) {
+
+                                                for(int m = 0; m < tileI.getSizeInventory(); m++) {
+
+                                                    if(tileItemStack[z] != null) {
+
+                                                        if(tileC.canMoveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
+
+                                                            if(tileC.moveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
+                                                                tileItemStack[z] = null;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void moveSlotToInventory() {
+
+        TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(getOrientation(), this)[0], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[1], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[2]);
+
+        if(tile != null) {
+
+            if(tile instanceof IInventory && !(tile instanceof ISidedInventory)) {
+
+                IInventory tileI = (IInventory)tile;
+
+                if(tileI != null) {
+
+                    if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
+
+                        for(int i = 0; i < tileItemStack.length; i++) {
+
+                            if(tileItemStack[i] != null) {
+
+                                if(i != 0) {
+
+                                    for(int z = 0; z < tileI.getSizeInventory(); z++) {
+
+                                        if(tileI.getStackInSlot(z) != null) {
+
+                                            if(tileI.isStackValidForSlot(z, tileItemStack[i])) {
+
+                                                if(tileI.getStackInSlot(z).stackSize <= tileI.getInventoryStackLimit() && tileI.getStackInSlot(z).stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+
+                                                    int size = tileI.getStackInSlot(z).stackSize;
+
+                                                    if(size != tileI.getStackInSlot(z).getItem().getItemStackLimit() && size <= tileI.getInventoryStackLimit()) {
+
+                                                        if(this.tileItemStack[i] != null) {  
+
+                                                            if(size + tileItemStack[i].stackSize <= tileI.getInventoryStackLimit()) {
+
+                                                                if(size + tileItemStack[i].stackSize <= tileI.getStackInSlot(z).getItem().getItemStackLimit()) {
+
+                                                                    ItemStack internalStack = tileItemStack[i].copy();
+
+                                                                    internalStack.stackSize = size + tileItemStack[i].stackSize;
+
+                                                                    tileI.setInventorySlotContents(z,internalStack);
+                                                                    tileItemStack[i] = null;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        }
+
+                                        else {
+                                            tileI.setInventorySlotContents(z, tileItemStack[i]);
+                                            tileItemStack[i] = null;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
