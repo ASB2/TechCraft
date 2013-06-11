@@ -43,7 +43,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
         if(this.getNetwork() != null) {
 
-            if(this.getNetwork().getItemInterfaceSize() >= 1) {
+            if(this.getNetwork().getItemInterfaceSize() >= 2) {
 
                 for(int i = 0; i < this.getNetwork().getItemInterfaceSize(); i++) {
 

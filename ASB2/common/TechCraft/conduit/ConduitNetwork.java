@@ -3,7 +3,6 @@ package TechCraft.conduit;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -91,29 +90,6 @@ public class ConduitNetwork {
 
             this.addConductorsAround(conductors.get(i));
             this.addInterfacesAround(conductors.get(i));
-        }
-
-        for(int i = 0; i < itemInterface.size(); i++) {
-
-            if(itemInterface.get(i) instanceof IConduitInterface && itemInterface.get(i) instanceof IInventory) {
-
-                if(itemInterface.get(i) == null) {
-
-                    itemInterface.remove(i);
-                    return;
-                }
-
-                if(worldObj == null) {
-
-                    worldObj = itemInterface.get(i).worldObj;
-                }
-
-                if(worldObj.getBlockId(itemInterface.get(i).xCoord, itemInterface.get(i).yCoord, itemInterface.get(i).zCoord) == 0) {
-
-                    itemInterface.remove(i);
-                    return;
-                }
-            }
         }
     }
 
