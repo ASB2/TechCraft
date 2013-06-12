@@ -91,9 +91,10 @@ public class ConduitNetwork {
             this.addConductorsAround(conductors.get(i));
             this.addInterfacesAround(conductors.get(i));
         }
+        this.addAdjacentInterfaces();
     }
 
-    public void addAroundInterfaces() {
+    public void addAdjacentInterfaces() {
     
         for(int i = 0; i < itemInterface.size(); i++) {
 
@@ -116,6 +117,120 @@ public class ConduitNetwork {
 
             this.addConductorsAround(itemInterface.get(i));
             this.addInterfacesAround(itemInterface.get(i));
+        }
+        
+        for(int i = 0; i < tcuInterface.size(); i++) {
+
+            if(tcuInterface.get(i) == null) { 
+
+                tcuInterface.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = tcuInterface.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(tcuInterface.get(i).xCoord, tcuInterface.get(i).yCoord, tcuInterface.get(i).zCoord) == 0) {
+
+                tcuInterface.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(tcuInterface.get(i));
+            this.addInterfacesAround(tcuInterface.get(i));
+        }
+        
+        for(int i = 0; i < liquidInterface.size(); i++) {
+
+            if(liquidInterface.get(i) == null) { 
+
+                liquidInterface.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = liquidInterface.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(liquidInterface.get(i).xCoord, liquidInterface.get(i).yCoord, liquidInterface.get(i).zCoord) == 0) {
+
+                liquidInterface.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(liquidInterface.get(i));
+            this.addInterfacesAround(liquidInterface.get(i));
+        }
+        
+        for(int i = 0; i < bcInterface.size(); i++) {
+
+            if(bcInterface.get(i) == null) { 
+
+                bcInterface.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = bcInterface.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(bcInterface.get(i).xCoord, bcInterface.get(i).yCoord, bcInterface.get(i).zCoord) == 0) {
+
+                bcInterface.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(bcInterface.get(i));
+            this.addInterfacesAround(bcInterface.get(i));
+        }
+        for(int i = 0; i < ic2Interface.size(); i++) {
+
+            if(ic2Interface.get(i) == null) { 
+
+                ic2Interface.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = ic2Interface.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(ic2Interface.get(i).xCoord, ic2Interface.get(i).yCoord, ic2Interface.get(i).zCoord) == 0) {
+
+                ic2Interface.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(ic2Interface.get(i));
+            this.addInterfacesAround(ic2Interface.get(i));
+        }
+        
+        for(int i = 0; i < otherInterface.size(); i++) {
+
+            if(otherInterface.get(i) == null) { 
+
+                otherInterface.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = otherInterface.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(otherInterface.get(i).xCoord, otherInterface.get(i).yCoord, otherInterface.get(i).zCoord) == 0) {
+
+                otherInterface.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(otherInterface.get(i));
+            this.addInterfacesAround(otherInterface.get(i));
         }
         
     }

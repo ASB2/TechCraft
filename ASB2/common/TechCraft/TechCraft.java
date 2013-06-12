@@ -45,6 +45,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import TechCraft.blocks.conduitInterface.items.*;
+import TechCraft.blocks.tcConduits.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -123,7 +124,6 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
 
-
         GameRegistry.registerTileEntity(TileBasicFarm.class, "TileBasicFarm");
 
         GameRegistry.registerTileEntity(TileGenorator.class, "TileGenorator");
@@ -151,6 +151,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileItemSorter.class, "TileItemSorter");
 
         GameRegistry.registerTileEntity(TileItemConduitInterface.class, "TileItemConduitInterface");
+        
+        GameRegistry.registerTileEntity(TileTCConduit.class, "TileTCConduit");
         
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

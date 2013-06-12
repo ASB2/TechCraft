@@ -29,7 +29,7 @@ public class BlockItemConduitInterface extends TechCraftContainers {
         }
 
         player.openGui(TechCraft.instance, 14, world, x, y, z);
-        return  super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        return true;
     }
 
     public boolean renderAsNormalBlock() {

@@ -29,8 +29,12 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
     public void updateEntity() {
 
-        this.moveFromAjacentInventory();
-
+        this.moveFromAjacentInventory(ForgeDirection.DOWN);
+        this.moveFromAjacentInventory(ForgeDirection.UP);
+        this.moveFromAjacentInventory(ForgeDirection.NORTH);
+        this.moveFromAjacentInventory(ForgeDirection.SOUTH);
+        this.moveFromAjacentInventory(ForgeDirection.WEST);
+        this.moveFromAjacentInventory(ForgeDirection.EAST);
         if(this.importingToNetwork()) {
 
             this.moveItemsToInventory();
@@ -41,6 +45,9 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         }
     }
 
+    /**
+     * If this conduit is facing a conduit network then it moves it's inventory to a item conduit in the network.
+     */
     public void moveItemsToInventory() {
 
         if(this.getNetwork() != null) {
@@ -93,6 +100,9 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         }
     }
 
+    /**
+     * Moves items from ajacent inventories
+     */
     public void moveSlotToInventory() {
 
         TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(getOrientation(), this)[0], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[1], TechCraftTile.translateDirectionToCoords(getOrientation(), this)[2]);
@@ -246,10 +256,94 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         }
     }
 
+    public void moveFromAjacentInventory( ForgeDirection direction) {
 
+        if(direction != this.getOrientation()) {
 
-    public void moveFromAjacentInventory() {
+            TileEntity tile = TechCraftTile.translateDirectionToTile(this, worldObj, direction);
 
+            if(tile != null) {
+
+                if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterface)) {
+
+                    IInventory tileI = (IInventory)tile;
+
+                    for(int i = 0; i < tileI.getSizeInventory(); i++) {
+
+                        if(tileI.getStackInSlot(i) != null) {
+
+                            for(int z = 0; z < tileItemStack.length; z++) {
+
+                                if(tileI.getStackInSlot(i) != null) {
+                                    if(this.canMoveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize)) {
+
+                                        this.moveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize);
+                                        tileI.setInventorySlotContents(i, null);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(tile instanceof ISidedInventory && !(tile instanceof IConduitInterface)) {
+
+                    ISidedInventory tileS = (ISidedInventory)tile;
+
+                    for(int i = 0; i < tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction))).length; i++) {
+
+                        int side = TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction));
+                        int slot = tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction)))[i];
+
+                        if(tileS.getStackInSlot(slot) != null) {
+
+                            for(int z = 0; z < tileItemStack.length; z++) {
+
+                                if(tileS.getStackInSlot(slot) != null) {
+
+                                    if(this.canMoveItemToInventory(tileS.getStackInSlot(slot), z, tileS.getStackInSlot(slot).stackSize)) {
+
+                                        if(tileS.canExtractItem(slot,tileS.getStackInSlot(slot),side )) {
+
+                                            this.moveItemToInventory(tileS.getStackInSlot(slot), z, tileS.getStackInSlot(slot).stackSize);
+                                            tileS.setInventorySlotContents(i, null);
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(tile instanceof IConduitInterface && tile instanceof IInventory) {
+
+                    IInventory tileI = (IInventory)tile;
+                    IConduitInterface tileS = (IConduitInterface)tile;
+
+                    for(int i = 0; i < tileI.getSizeInventory(); i++) {
+
+                        if(tileI.getStackInSlot(i) != null) {
+
+                            for(int z = 0; z < tileItemStack.length; z++) {
+
+                                if(tileI.getStackInSlot(i) != null) {
+
+                                    if(tileS.canTakeItemFromInventory(tileI.getStackInSlot(i), i, tileI.getStackInSlot(i).stackSize)) {
+
+                                        if(this.canMoveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize)) {
+
+                                            this.moveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize);
+                                            tileS.takeItemFromInventory(tileI.getStackInSlot(i), i, tileI.getStackInSlot(i).stackSize);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
