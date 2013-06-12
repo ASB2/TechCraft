@@ -30,7 +30,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
     public void updateEntity() {
 
         this.moveFromAjacentInventory();
-        
+
         if(this.importingToNetwork()) {
 
             this.moveItemsToInventory();
@@ -57,7 +57,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
                             IInventory tileI = (IInventory)this.getNetwork().getItemInterface().get(i);
 
                             if(!tileC.importingToNetwork()) {
-                                
+
                                 if(tileC.getColorEnum() == this.getColorEnum()) {
 
                                     if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
@@ -99,7 +99,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
         if(tile != null) {
 
-            if(tile instanceof IInventory && !(tile instanceof ISidedInventory)) {
+            if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterface)) {
 
                 IInventory tileI = (IInventory)tile;
 
@@ -157,14 +157,104 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
                         }
                     }
                 }
+            }            
+
+            if(tile instanceof ISidedInventory) {
+
+                ISidedInventory tileS = (ISidedInventory)tile;
+
+                if(tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(getOrientation()))).length > 0) {
+
+                    int side = TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(getOrientation()));
+
+                    if(tileS != null) {
+
+                        for(int i = 0; i < tileItemStack.length; i++) {
+
+                            if(tileItemStack[i] != null) {
+
+                                int[] slots = tileS.getAccessibleSlotsFromSide(side);
+
+                                for(int z = 0; z < slots.length; z++) {
+
+                                    int slotS = slots[z];
+
+                                    if(tileS.canInsertItem(slotS, tileItemStack[i], side)) {
+
+                                        if(tileS.getStackInSlot(slotS) != null) {
+
+                                            int size = tileS.getStackInSlot(slotS).stackSize;
+
+                                            if(size + tileS.getStackInSlot(slotS).stackSize <= tileS.getInventoryStackLimit()) {
+
+                                                if(this.tileItemStack[i] != null) {  
+
+                                                    if(size + tileItemStack[i].stackSize <= tileS.getInventoryStackLimit()) {
+
+                                                        if(size + tileItemStack[i].stackSize <= tileS.getInventoryStackLimit()) {
+
+                                                            ItemStack internalStack = tileItemStack[i].copy();
+
+                                                            internalStack.stackSize = size + tileItemStack[i].stackSize;
+
+                                                            tileS.setInventorySlotContents(slotS,internalStack);
+                                                            tileItemStack[i] = null;
+                                                        }
+                                                    }
+                                                }                                                
+                                            }
+                                        }
+                                        else {
+                                            tileS.setInventorySlotContents(slotS, tileItemStack[i]);
+                                            tileItemStack[i] = null;
+                                        }
+                                    }
+                                }
+                            }
+                        }                        
+                    } 
+                }
+            }
+
+            if(tile instanceof IConduitInterface && tile instanceof IInventory) {
+
+                IConduitInterface tileC = (IConduitInterface)tile;
+                IInventory tileI = (IInventory)tile;
+
+                if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
+
+                    for(int z = 0; z < tileItemStack.length; z++) {
+
+                        if(z != 0 && z != 1) {
+
+                            if(tileItemStack[z] != null) {
+
+                                for(int m = 0; m < tileI.getSizeInventory(); m++) {
+
+                                    if(tileItemStack[z] != null) {
+
+                                        if(tileC.canMoveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
+
+                                            if(tileC.moveItemToInventory(tileItemStack[z], m, tileItemStack[z].stackSize)) {
+                                                tileItemStack[z] = null;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
+
+
     public void moveFromAjacentInventory() {
-    
+
     }
-    
+
     @Override
     public String getName() {
 

@@ -689,13 +689,15 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
+        
         this.setColor(TechCraftTile.translateNumberToColor(tag.getInteger("Color")));
+    super.readFromNBT(tag);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag){
-        super.writeToNBT(tag);
+        
         tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
+    super.writeToNBT(tag);
     }
 }

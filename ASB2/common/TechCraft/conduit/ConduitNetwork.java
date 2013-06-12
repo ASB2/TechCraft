@@ -93,6 +93,33 @@ public class ConduitNetwork {
         }
     }
 
+    public void addAroundInterfaces() {
+    
+        for(int i = 0; i < itemInterface.size(); i++) {
+
+            if(itemInterface.get(i) == null) { 
+
+                itemInterface.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = itemInterface.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(itemInterface.get(i).xCoord, itemInterface.get(i).yCoord, itemInterface.get(i).zCoord) == 0) {
+
+                itemInterface.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(itemInterface.get(i));
+            this.addInterfacesAround(itemInterface.get(i));
+        }
+        
+    }
+    
     public void addConductor(TileTCConduit tile) {
         conductors.add(tile);
     }
