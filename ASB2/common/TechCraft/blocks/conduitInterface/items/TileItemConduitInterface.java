@@ -183,21 +183,18 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
                                         if(tileS.getStackInSlot(slotS) != null) {
 
-                                            int size = tileS.getStackInSlot(slotS).stackSize;
-
-                                            if(size + tileS.getStackInSlot(slotS).stackSize <= tileS.getInventoryStackLimit()) {
+                                            if(tileItemStack[i].stackSize + tileS.getStackInSlot(slotS).stackSize <= tileS.getInventoryStackLimit()) {
 
                                                 if(this.tileItemStack[i] != null) {  
 
-                                                    if(size + tileItemStack[i].stackSize <= tileS.getInventoryStackLimit()) {
+                                                    if(tileS.getStackInSlot(slotS).stackSize + tileItemStack[i].stackSize <= tileS.getInventoryStackLimit()) {
 
-                                                        if(size + tileItemStack[i].stackSize <= tileS.getInventoryStackLimit()) {
+                                                        if(tileS.getStackInSlot(slotS).stackSize + tileItemStack[i].stackSize <= tileS.getInventoryStackLimit()) {
 
-                                                            ItemStack internalStack = tileItemStack[i].copy();
+                                                            ItemStack internalStack = tileS.getStackInSlot(slotS);
+                                                            internalStack.stackSize = tileS.getStackInSlot(slotS).stackSize + tileItemStack[i].stackSize;
 
-                                                            internalStack.stackSize = size + tileItemStack[i].stackSize;
-
-                                                            tileS.setInventorySlotContents(slotS,internalStack);
+                                                            tileS.setInventorySlotContents(slotS, internalStack);
                                                             tileItemStack[i] = null;
                                                         }
                                                     }
