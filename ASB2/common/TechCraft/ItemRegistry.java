@@ -44,6 +44,7 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -88,6 +89,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemRealityDifferentiationDrive;
     public static TechCraftItems ItemLinker;
     public static TechCraftItems ItemTeleportModule;
+    public static TechCraftItems ItemBasicDestructionCatalyst;
     
     public static void init(Configuration config) {
 
@@ -107,7 +109,7 @@ public class ItemRegistry {
         ItemWaterCrystalShard.setUnlocalizedName("ASB2_ItemWaterCrystalShard");
         LanguageRegistry.addName(ItemWaterCrystalShard, "Water Crystal Shard");
 
-        ItemGarnet = new ItemGarnet(config.getItem("ItemAirCrystalShard", 5005).getInt());
+        ItemGarnet = new ItemGarnet(config.getItem("ItemGarnet", 5005).getInt());
         ItemGarnet.setUnlocalizedName("ASB2_ItemGarnet");
         LanguageRegistry.addName(ItemGarnet, "Garnet");
 
@@ -240,6 +242,10 @@ public class ItemRegistry {
         ItemTeleportModule = new TechCraftItems(config.getItem("ItemTeleportModule", 5035).getInt());
         ItemTeleportModule.setUnlocalizedName("ASB2_ItemTeleportModule");
         LanguageRegistry.addName(ItemTeleportModule, "Teleportation Module");
+    
+        ItemBasicDestructionCatalyst = new ItemBasicDestructionCatalyst(config.getItem("ItemContritioSimplexCatalyst", 5036).getInt());
+        ItemBasicDestructionCatalyst.setUnlocalizedName("ASB2_ItemBasicDestructionCatalyst");
+        LanguageRegistry.addName(ItemBasicDestructionCatalyst, "Contritio Simplex Catalyst");
     }
 
 }
