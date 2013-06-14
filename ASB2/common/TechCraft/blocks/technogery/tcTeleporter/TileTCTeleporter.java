@@ -7,7 +7,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
@@ -93,7 +92,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
                                 if (player.dimension != this.dimentionID) {
 
-                                    player.mcServer.getConfigurationManager().transferPlayerToDimension(player, this.dimentionID, new Teleporter(player.mcServer.worldServerForDimension(this.dimentionID)));
+                                    player.travelToDimension(this.dimentionID);
                                 }
 
                                 else {

@@ -12,10 +12,13 @@ import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 import TechCraft.blocks.TechCraftTile;
 
+import net.minecraft.block.*;
+
 public class TileTCTank extends TechCraftTile implements ITankContainer, IInventory {
 
     public LiquidTank tank;
-
+    public int renderOffset;
+    
     public TileTCTank() {
 
         tank = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 16);
@@ -61,80 +64,92 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
     }
 
     @Override
-    public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-
-        if (tankIndex != 0 || resource == null) {
-            return 0;
+    public int fill (int tankIndex, LiquidStack resource, boolean doFill)
+    {
+        /*if (resource != null && resource.amount > 20 && counter == 0)
+        {
+            if (tank.getLiquid() == null)
+            {
+                renderLiquid = new LiquidStack(resource.itemID, 0, resource.itemMeta);
+            }
+            else
+            {
+                renderLiquid = tank.getLiquid();
+            }
+            counter = 24;
+            updateAmount = resource.amount / 24;
+            System.out.println("renderLiquid: "+renderLiquid.amount);           
+        }*/
+        //renderLiquid = tank.getLiquid();
+        int amount = tank.fill(resource, doFill);
+        if (amount > 0 && doFill)
+        {
+            renderOffset = resource.amount;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
 
-        LiquidStack liquid = this.tank.getLiquid();
-
-        if (liquid != null && liquid.amount > 0 && !liquid.isLiquidEqual(resource)) {
-            return 0;
-        }
-
-        int totalUsed = 0;
-
-        while (tank != null && resource.amount > 0) {
-
-            int used = this.tank.fill(resource, doFill);
-            resource.amount -= used;
-            totalUsed += used;
-        }
-        return totalUsed;
+        //System.out.println("tankLiquid: "+tank.getLiquid().amount);   
+        return amount;
+    }
+    @Override
+    public LiquidStack drain (ForgeDirection from, int maxDrain, boolean doDrain)
+    {
+        return drain(0, maxDrain, doDrain);
     }
 
     @Override
-    public LiquidStack drain(ForgeDirection from, int maxEmpty, boolean doDrain) {
+    public LiquidStack drain (int tankIndex, int maxDrain, boolean doDrain)
+    {
+        /*if (maxDrain > 20 && counter == 0)
+        {
+            renderLiquid = tank.getLiquid();
+            counter = 24;
+            updateAmount = -(maxDrain / 24);
+        }*/
 
-        return drain(0, maxEmpty, doDrain);
+
+        LiquidStack amount = tank.drain(maxDrain, doDrain);
+        if (amount != null && doDrain)
+        {
+            renderOffset = -maxDrain;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
+        return amount;
     }
 
     @Override
-    public LiquidStack drain(int tankIndex, int maxEmpty, boolean doDrain) {
-
-        return tank.drain(maxEmpty, doDrain);
+    public ILiquidTank[] getTanks (ForgeDirection direction)
+    {
+        return new ILiquidTank[] { tank };
     }
 
     @Override
-    public ILiquidTank[] getTanks(ForgeDirection direction) {
-
-        LiquidTank compositeTank = new LiquidTank(tank.getCapacity());
-
-        int capacity = tank.getCapacity();
-
-        if (tank.getLiquid() != null) {
-
-            compositeTank.setLiquid(tank.getLiquid().copy());
-        } 
-        else {
-            return new ILiquidTank[]{compositeTank};
-        }
-
-        LiquidStack liquid = tank.getLiquid();
-
-        if (liquid == null || liquid.amount == 0) {
-
-        } 
-        else if (!compositeTank.getLiquid().isLiquidEqual(liquid)) {
-
-        } 
-        else {
-            compositeTank.getLiquid().amount += liquid.amount;
-        }
-
-        capacity += tank.getCapacity();
-
-        compositeTank.setCapacity(capacity);
-
-        return new ILiquidTank[]{compositeTank};
-    }    
-
-
-    @Override
-    public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
-
+    public ILiquidTank getTank (ForgeDirection direction, LiquidStack type)
+    {
         return tank;
+    }
+
+    public float getLiquidAmountScaled ()
+    {
+        return (float) (tank.getLiquid().amount - renderOffset) / (float) (tank.getCapacity() * 1.01F);
+    }
+
+    public boolean containsLiquid ()
+    {
+        return tank.getLiquid() != null;
+    }
+
+    public int getBrightness ()
+    {
+        if (containsLiquid())
+        {
+            int id = tank.getLiquid().itemID;
+            if (id < 4096)
+            {
+                return Block.lightValue[id];
+            }
+        }
+        return 0;
     }
 
     @Override

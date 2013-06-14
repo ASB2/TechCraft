@@ -91,9 +91,9 @@ public class ItemTestItem extends TechCraftItems {
                     this.breakBlock(world,player,x + 1 , coordChanged, z, blockToBreak);
                     this.breakBlock(world, player,x + 1, coordChanged, z - 1, blockToBreak);
                     this.breakBlock(world,player,x + 1,coordChanged, z + 1, blockToBreak);
-                    
+
                     this.breakBlock(world,player,x, coordChanged, z + 1, blockToBreak);
-                    
+
                     this.breakBlock(world,player,x - 1, coordChanged, z + 1, blockToBreak);
                     this.breakBlock(world,player,x - 1, coordChanged, z, blockToBreak);
                     this.breakBlock(world,player,x - 1, coordChanged, z - 1, blockToBreak);
@@ -224,6 +224,4 @@ public class ItemTestItem extends TechCraftItems {
             }
         }
     }
-
-
 }

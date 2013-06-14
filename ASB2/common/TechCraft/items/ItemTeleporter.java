@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 
 public class ItemTeleporter extends TechCraftItems {
@@ -47,7 +46,7 @@ public class ItemTeleporter extends TechCraftItems {
 
                     if (player.dimension != this.getDimentionIDCoord(par1ItemStack)) {
                         par1ItemStack.damageItem(1, player);
-                        ((EntityPlayerMP)player).mcServer.getConfigurationManager().transferPlayerToDimension((EntityPlayerMP)player, this.getDimentionIDCoord(par1ItemStack), new Teleporter(((EntityPlayerMP)player).mcServer.worldServerForDimension(this.getDimentionIDCoord(par1ItemStack))));
+                        player.travelToDimension(this.getDimentionIDCoord(par1ItemStack));
                     }
 
                     else {

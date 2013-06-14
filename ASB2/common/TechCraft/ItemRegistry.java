@@ -10,15 +10,19 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.Configuration;
 import TechCraft.items.ItemAirCrystalShard;
+import TechCraft.items.ItemBasicDestructionCatalyst;
 import TechCraft.items.ItemEarthCrystalShard;
 import TechCraft.items.ItemEnergyCrystalShard;
+import TechCraft.items.ItemEnhancedDestructionCatalyst;
 import TechCraft.items.ItemFireCrystalShard;
 import TechCraft.items.ItemGarnet;
 import TechCraft.items.ItemLinker;
-import TechCraft.items.ItemTechMultiTool;
+import TechCraft.items.ItemOmniTool;
+import TechCraft.items.ItemTCMultiTool;
 import TechCraft.items.ItemTechnoMagicReader;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.items.ItemTestItem;
+import TechCraft.items.ItemTradeStick;
 import TechCraft.items.ItemWaterCrystalShard;
 import TechCraft.items.ItemZycrantianIngot;
 import TechCraft.items.TechCraftItems;
@@ -44,7 +48,6 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -90,6 +93,9 @@ public class ItemRegistry {
     public static TechCraftItems ItemLinker;
     public static TechCraftItems ItemTeleportModule;
     public static TechCraftItems ItemBasicDestructionCatalyst;
+    public static TechCraftItems ItemEnhancedDestructionCatalyst;
+    public static TechCraftItems ItemTradeStick;
+    public static TechCraftItems ItemOmniTool;
     
     public static void init(Configuration config) {
 
@@ -129,7 +135,7 @@ public class ItemRegistry {
         ItemTechnoMagicReader.setUnlocalizedName("ASB2_ItemTechnoMagicReader");
         LanguageRegistry.addName(ItemTechnoMagicReader, "TechnoMagic Reader");
         
-        ItemTechMultiTool = new ItemTechMultiTool(config.getItem("ItemTechMultiTool", 5010).getInt());
+        ItemTechMultiTool = new ItemTCMultiTool(config.getItem("ItemTechMultiTool", 5010).getInt());
         ItemTechMultiTool.setUnlocalizedName("ASB2_ItemTechMultiTool");
         LanguageRegistry.addName(ItemTechMultiTool, "Techergy Multi-Tool");
         
@@ -246,6 +252,18 @@ public class ItemRegistry {
         ItemBasicDestructionCatalyst = new ItemBasicDestructionCatalyst(config.getItem("ItemContritioSimplexCatalyst", 5036).getInt());
         ItemBasicDestructionCatalyst.setUnlocalizedName("ASB2_ItemBasicDestructionCatalyst");
         LanguageRegistry.addName(ItemBasicDestructionCatalyst, "Contritio Simplex Catalyst");
+ 
+        ItemEnhancedDestructionCatalyst = new ItemEnhancedDestructionCatalyst(config.getItem("ItemContritioConsecteturCatalyst", 5037).getInt());
+        ItemEnhancedDestructionCatalyst.setUnlocalizedName("ASB2_ItemEnhancedDestructionCatalyst");
+        LanguageRegistry.addName(ItemEnhancedDestructionCatalyst, "Contritio Consectetur Catalyst");
+
+        ItemTradeStick = new ItemTradeStick(config.getItem("ItemTradeStick", 5038).getInt());
+        ItemTradeStick.setUnlocalizedName("ASB2_ItemTradeStick");
+        LanguageRegistry.addName(ItemTradeStick, "Trade Stick");
+
+        ItemOmniTool = new ItemOmniTool(config.getItem("ItemOmniTool", 5039).getInt());
+        ItemOmniTool.setUnlocalizedName("ASB2_ItemOmniTool");
+        LanguageRegistry.addName(ItemOmniTool, "Omni-Tool");
     }
 
 }

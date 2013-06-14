@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import TechCraft.TechCraft;
-import TechCraft.lib.MiscUtilities;
+import TechCraft.utils.Utilities;
 
 public class BlockFreezingFlower extends BlockFlower {
 
@@ -26,7 +26,7 @@ public class BlockFreezingFlower extends BlockFlower {
        
         if(entity instanceof EntityPlayer) {
 
-            if(!(MiscUtilities.isSpecialPlayer(((EntityPlayer)entity).username))) {
+            if(!(Utilities.isSpecialPlayer(((EntityPlayer)entity).username))) {
 
                 entity.setInWeb();  
             }

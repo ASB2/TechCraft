@@ -1,5 +1,7 @@
 package TechCraft.blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
@@ -10,8 +12,9 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.EnumColor;
 import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
+import TechCraft.*;
 
-public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
+public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IWrenchable {
 
     protected ForgeDirection orientation;    
     protected EnumColor color;
@@ -25,6 +28,18 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
             orientation = ForgeDirection.DOWN;
     }
 
+    public boolean breakBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z) {
+        
+        if(world.getBlockId(x,y,z) != 0) {       
+            
+            world.playAuxSFX(2001, x, y, z, world.getBlockId(x,y,z) + (world.getBlockMetadata(x, y, z) << 12));
+            Block.blocksList[world.getBlockId(x,y,z)].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+            
+            return true;
+        }
+        return false;
+    }
+    
     public ForgeDirection getOrientation() {
 
         if(!(orientation == TechCraftTile.translateNumberToDirection(getBlockMetadata()))) {
@@ -689,15 +704,19 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc {
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        
-        this.setColor(TechCraftTile.translateNumberToColor(tag.getInteger("Color")));
-    super.readFromNBT(tag);
+      super.readFromNBT(tag);
+      
+      if(color == EnumColor.NONE || color == null)
+        color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
+    
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag){
-        
+       super.writeToNBT(tag); 
+       
+       if(color != EnumColor.NONE)
         tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
-    super.writeToNBT(tag);
+    
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.lib.MiscUtilities;
+import TechCraft.utils.Utilities;
 import TechCraft.power.IPowerSink;
 
 public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink, IInventory{
@@ -58,9 +58,9 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
 
             if(TileEntityFurnace.getItemBurnTime(targetFuel) > 0) {
 
-                if(this.getPowerStored() <= TileEntityFurnace.getItemBurnTime(targetFuel) / MiscUtilities.TICKSTOPOWER) {
+                if(this.getPowerStored() <= TileEntityFurnace.getItemBurnTime(targetFuel) / Utilities.TICKSTOPOWER) {
 
-                    if(this.usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ MiscUtilities.TICKSTOPOWER, ForgeDirection.UNKNOWN)) {
+                    if(this.usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ Utilities.TICKSTOPOWER, ForgeDirection.UNKNOWN)) {
 
                         if(tileItemStacks[1] == null) {
 

@@ -3,10 +3,12 @@ package TechCraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import TechCraft.blocks.conduitInterface.items.TileItemConduitInterface;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
 import TechCraft.blocks.item_transfer.tcItemSorter.TileItemSorter;
 import TechCraft.blocks.tanks.TileTCTank;
+import TechCraft.blocks.tcConduits.TileTCConduit;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
@@ -44,8 +46,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import TechCraft.blocks.conduitInterface.items.*;
-import TechCraft.blocks.tcConduits.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -101,6 +101,8 @@ public class TechCraft {
         MinecraftForge.EVENT_BUS.register(new TechCraftForgeEvents());
         GameRegistry.registerFuelHandler(new TechCraftFuelHandler());
 
+        GameRegistry.registerPlayerTracker(new TechCraftPlayerTracker ());
+        
         //MinecraftForge.addGrassSeed(new ItemStack(ItemRegistry.ItemLifeCrystal), 10);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockBurningFlower,0,20);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockFreezingFlower,0,20);

@@ -42,6 +42,8 @@ import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import TechCraft.blocks.conduitInterface.items.*;
+import TechCraft.blocks.*;
+import TechCraft.blocks.tcPersonalGlass.*;
 
 public class BlockRegistry {
 
@@ -88,7 +90,10 @@ public class BlockRegistry {
     public static TechCraftContainers BlockTCEnergyConstructor;
     
     public static TechCraftContainers BlockItemConduitInterface;
-
+    public static TechCraftBlocks BlockSpeedyRoad;
+    
+    public static TechCraftContainers BlockTCPersonalGlass;
+    
     public static void init(Configuration config) {
 
         BlockAirCrystalOre = new BlockAirCrystalOre(config.getBlock("BlockAirCrystalOre", 500).getInt(), Material.rock);
@@ -288,6 +293,18 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockItemConduitInterface, "ASB2_BlockItemConduitInterface");
         LanguageRegistry.addName(BlockItemConduitInterface, "Item Interface");
         MinecraftForge.setBlockHarvestLevel(BlockItemConduitInterface, "pickaxe", 2);
+    
+        BlockSpeedyRoad = new BlockSpeedyRoad(config.getBlock("BlockSpeedyRoad", 533).getInt(), Material.rock);
+        BlockSpeedyRoad.setUnlocalizedName("ASB2_BlockSpeedyRoad");
+        GameRegistry.registerBlock(BlockSpeedyRoad, "ASB2_BlockSpeedyRoad");
+        LanguageRegistry.addName(BlockSpeedyRoad, "Speedy Road");
+        MinecraftForge.setBlockHarvestLevel(BlockSpeedyRoad, "pickaxe", 2);
+        
+        BlockTCPersonalGlass = new BlockTCPersonalGlass(config.getBlock("BlockTCPersonalGlass", 534).getInt(), Material.rock);
+        BlockTCPersonalGlass.setUnlocalizedName("ASB2_BlockTCPersonalGlass");
+        GameRegistry.registerBlock(BlockTCPersonalGlass, "ASB2_BlockTCPersonalGlass");
+        LanguageRegistry.addName(BlockTCPersonalGlass, "Personal Glass");
+        MinecraftForge.setBlockHarvestLevel(BlockTCPersonalGlass, "pickaxe", 2);
     }
 
 }

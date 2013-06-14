@@ -61,6 +61,7 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import TechCraft.blocks.conduitInterface.items.*;
+import TechCraft.items.gui.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -95,7 +96,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemReciever.blockID, (IItemRenderer)new ItemRendererTileItemReciever()); 
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCTank.class, new TileEntityRendererTileTank());
-        
+
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemConduitInterface.class, new TileRendererItemConduitInterface());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemConduitInterface.blockID, (IItemRenderer)new ItemRendererItemConduitInterface()); 
     }
@@ -107,27 +108,37 @@ public class ClientProxy extends CommonProxy {
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        if(tileEntity != null) {
+        if(ID >= 0) {
+            
+            if(tileEntity != null) {
 
-            switch(ID){
-                case 0: return new GuiBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
-                case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
-                case 2: return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
-                case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
-                case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
-                case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
-                case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-                case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
-                case 8: return new GuiTCTank(player.inventory, (TileTCTank)tileEntity);
-                case 9: return new GuiItemReciever(player.inventory, (TileItemReciever)tileEntity);
-                case 10: return new GuiItemSender(player.inventory, (TileItemSender)tileEntity);
-                case 11: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
-                case 12: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
-                case 13: return new GuiItemSorter(player.inventory, (TileItemSorter)tileEntity);                
-                case 14: return new GuiItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);  
-                //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
+                switch(ID) {
+                    case 0: return new GuiBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
+                    case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
+                    case 2: return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
+                    case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
+                    case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
+                    case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
+                    case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
+                    case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
+                    case 8: return new GuiTCTank(player.inventory, (TileTCTank)tileEntity);
+                    case 9: return new GuiItemReciever(player.inventory, (TileItemReciever)tileEntity);
+                    case 10: return new GuiItemSender(player.inventory, (TileItemSender)tileEntity);
+                    case 11: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
+                    case 12: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
+                    case 13: return new GuiItemSorter(player.inventory, (TileItemSorter)tileEntity);                
+                    case 14: return new GuiItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);  
+                    //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
 
-                //case 4: return new GuiMagicGauntlet(player);
+                    //case 4: return new GuiMagicGauntlet(player);
+                }
+            }
+        }
+        
+        else {
+            switch(ID) {
+                
+                case -1: return new GuiEnchancedDestructionCatalyst(player);
             }
         }
         return null;

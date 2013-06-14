@@ -3,6 +3,8 @@ package TechCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import TechCraft.blocks.conduitInterface.items.ContainerItemConduitInterface;
+import TechCraft.blocks.conduitInterface.items.TileItemConduitInterface;
 import TechCraft.blocks.item_transfer.item_SenderReciever.ContainerItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.ContainerItemSender;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
@@ -31,16 +33,16 @@ import TechCraft.blocks.technogery.tcInfuser.ContainerTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcTeleporter.ContainerTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
+import TechCraft.items.gui.ContainerEnchancedDestructionCatalyst;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import TechCraft.blocks.conduitInterface.items.*;
 
 public class CommonProxy implements IGuiHandler {
 
     public void registerServerTickHandler(){
         TickRegistry.registerTickHandler(new TechCraftTickHandlerServer(), Side.SERVER);
- }
+    }
 
     // Client stuff
     public void register() {
@@ -55,26 +57,38 @@ public class CommonProxy implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
+
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        if(tileEntity != null) {
+        if(ID >= 0) {
 
-            switch(ID){
-                case 0: return new ContainerBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
-                case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
-                case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
-                case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
-                case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity); 
-                case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
-                case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-                case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
-                case 8:return new ContainerTCTank(player.inventory, (TileTCTank)tileEntity);
-                case 9:return new ContainerItemReciever(player.inventory, (TileItemReciever)tileEntity);
-                case 10:return new ContainerItemSender(player.inventory, (TileItemSender)tileEntity);
-                case 11:return new ContainerToolManager(player.inventory, (TileToolManager)tileEntity);
-                case 12:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
-                case 13:return new ContainerItemSorter(player.inventory, (TileItemSorter)tileEntity);
-                case 14:return new ContainerItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);
+            if(tileEntity != null) {
+
+                switch(ID){
+                    case 0: return new ContainerBasicFarm(player.inventory, (TileBasicFarm) tileEntity);
+                    case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
+                    case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
+                    case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
+                    case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity); 
+                    case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
+                    case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
+                    case 7:return new ContainerTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
+                    case 8:return new ContainerTCTank(player.inventory, (TileTCTank)tileEntity);
+                    case 9:return new ContainerItemReciever(player.inventory, (TileItemReciever)tileEntity);
+                    case 10:return new ContainerItemSender(player.inventory, (TileItemSender)tileEntity);
+                    case 11:return new ContainerToolManager(player.inventory, (TileToolManager)tileEntity);
+                    case 12:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
+                    case 13:return new ContainerItemSorter(player.inventory, (TileItemSorter)tileEntity);
+                    case 14:return new ContainerItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);
+                }
+            }
+        }
+
+        else {
+
+            switch(ID) {
+
+                case -1: return new ContainerEnchancedDestructionCatalyst(player);
             }
         }
         return null;
