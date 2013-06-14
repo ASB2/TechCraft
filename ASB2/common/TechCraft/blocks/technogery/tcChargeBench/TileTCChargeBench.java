@@ -18,7 +18,8 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
 
     ItemStack[] tileItemStacks;
 
-    public TileTCChargeBench(){
+    public TileTCChargeBench() {
+
         tileItemStacks = new ItemStack[6];
     }
 
@@ -83,10 +84,12 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
 
                 IPowerItems tcItem = (IPowerItems) tileItemStacks[3].getItem();
 
-                if(this.getPowerMax() - this.getPowerStored() >= powerToMove && tcItem.getPowerStored(tileItemStacks[3]) >= powerToMove){
+                if(tcItem.canUsePower(powerToMove, tileItemStacks[3]) && this.canGainPower(powerToMove)){
 
-                    this.gainPower(powerToMove, ForgeDirection.UNKNOWN);
-                    tcItem.usePower(powerToMove, tileItemStacks[3]);
+                    if(tcItem.usePower(powerToMove, tileItemStacks[3])) {
+
+                        this.gainPower(powerToMove, ForgeDirection.UNKNOWN);                    
+                    }
                 }
             }
         }
@@ -97,10 +100,12 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
 
                 IPowerItems tcItem = (IPowerItems) tileItemStacks[4].getItem();
 
-                if(this.getPowerMax() - this.getPowerStored() >= powerToMove && tcItem.getPowerStored(tileItemStacks[4]) >= powerToMove){
+                if(tcItem.canUsePower(powerToMove, tileItemStacks[4]) && this.canGainPower(powerToMove)){
 
-                    this.gainPower(powerToMove, ForgeDirection.UNKNOWN);
-                    tcItem.usePower(powerToMove, tileItemStacks[4]);
+                    if(tcItem.usePower(powerToMove, tileItemStacks[4])) {
+                        
+                        this.gainPower(powerToMove, ForgeDirection.UNKNOWN);                        
+                    }
                 }
             }
         }
@@ -111,20 +116,14 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
 
                 IPowerItems tcItem = (IPowerItems) tileItemStacks[5].getItem();
 
-                if(this.getPowerMax() - this.getPowerStored() >= powerToMove && tcItem.getPowerStored(tileItemStacks[5]) >= powerToMove){
+                if(tcItem.canUsePower(powerToMove, tileItemStacks[5]) && this.canGainPower(powerToMove)){
 
-                    this.gainPower(powerToMove, ForgeDirection.UNKNOWN);
-                    tcItem.usePower(powerToMove, tileItemStacks[5]);
+                    if(tcItem.usePower(powerToMove, tileItemStacks[5])) {
+                        
+                        this.gainPower(powerToMove, ForgeDirection.UNKNOWN);
+                    }
                 }
             }
-        }
-    }
-
-    public void setPowerStored(int power) {
-
-        if(power >= 0) {
-            
-            this.powerStored = power;       
         }
     }
 

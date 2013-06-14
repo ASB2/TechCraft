@@ -69,20 +69,25 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     }
 
     @Override
-    public void usePower(int PowerUsed, ItemStack item) {
-        if(this.getPowerStored(item) > PowerUsed) {
+    public boolean usePower(int PowerUsed, ItemStack item) {
+        
+        if(this.getPowerStored(item) >= PowerUsed) {
 
             this.setPowerStored(item, this.getPowerStored(item) - PowerUsed);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void gainPower(int PowerGained, ItemStack item) {
+    public boolean gainPower(int PowerGained, ItemStack item) {
 
         if(this.getPowerMax(item) - this.getPowerStored(item) >= PowerGained){            
 
             this.setPowerStored(item, this.getPowerStored(item) + PowerGained);
+            return true;
         }
+        return false;
     }
 
     private void setPowerStored(ItemStack item,int power) {
@@ -105,6 +110,26 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
         super.addInformation(itemStack, player, info, var1);
         info.add("Power stored: " + this.getPowerStored(itemStack) +" / " + this.getPowerMax(itemStack));
         info.add("A basic device for storing power.");
+    }
+
+    @Override
+    public boolean canUsePower(int PowerUsed, ItemStack item) {
+        
+        if(this.getPowerStored(item) > PowerUsed) {
+            
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canGainPower(int PowerGained, ItemStack item) {
+        
+        if(this.getPowerMax(item) - this.getPowerStored(item) >= PowerGained) {
+            
+            return true;
+        }
+        return false;
     }
 
 }

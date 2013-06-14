@@ -35,6 +35,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         this.moveFromAjacentInventory(ForgeDirection.SOUTH);
         this.moveFromAjacentInventory(ForgeDirection.WEST);
         this.moveFromAjacentInventory(ForgeDirection.EAST);
+        
         if(this.importingToNetwork()) {
 
             this.moveItemsToInventory();
@@ -256,7 +257,11 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         }
     }
 
-    public void moveFromAjacentInventory( ForgeDirection direction) {
+    /**
+     * Moves an item from the epecified direction into the tile
+     * @param ForgeDirection
+     */
+    public void moveFromAjacentInventory(ForgeDirection direction) {
 
         if(direction != this.getOrientation()) {
 

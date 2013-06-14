@@ -55,7 +55,7 @@ public class PowerPacket extends TechCraftPacketBase {
                 if(player.worldObj.getBlockTileEntity(this.x, this.y, this.z) instanceof IPowerMisc) {
 
                     IPowerMisc tile = (IPowerMisc) player.worldObj.getBlockTileEntity(this.x, this.y, this.z);
-                    tile.setPowerStored(power);
+                    //tile.setPowerStored(power);
                     player.addChatMessage("Power packet sent to client power changed to " + power);
                 }
             }

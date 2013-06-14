@@ -46,6 +46,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import TechCraft.blocks.tcPersonalGlass.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -155,6 +156,8 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileItemConduitInterface.class, "TileItemConduitInterface");
         
         GameRegistry.registerTileEntity(TileTCConduit.class, "TileTCConduit");
+        
+        GameRegistry.registerTileEntity(TilePersonalGlass.class, "TilePersonalGlass");
         
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

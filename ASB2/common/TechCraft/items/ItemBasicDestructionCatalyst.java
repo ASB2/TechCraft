@@ -15,6 +15,7 @@ public class ItemBasicDestructionCatalyst extends TechCraftItems {
     public ItemBasicDestructionCatalyst(int par1) {
         super(par1);
         this.setMaxDamage(150);
+        this.setMaxStackSize(1);
     }
 
     @SideOnly(Side.CLIENT)

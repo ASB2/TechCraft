@@ -16,6 +16,7 @@ public class ItemEnhancedDestructionCatalyst extends TechCraftItems {
     public ItemEnhancedDestructionCatalyst(int par1) {
         super(par1);
         this.setMaxDamage(300);
+        this.setMaxStackSize(1);
     }
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)

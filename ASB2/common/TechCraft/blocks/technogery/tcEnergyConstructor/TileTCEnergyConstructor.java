@@ -21,12 +21,12 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
 
     ItemStack[] tileItemStacks;
 
-    public TileTCEnergyConstructor(){
+    public TileTCEnergyConstructor() {
+        
         tileItemStacks = new ItemStack[5];
     }
 
     public void updateEntity() {
-
         this.managePowerAll(this, powerInput(), false);
         super.updateEntity();
 
@@ -58,7 +58,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
 
             if(TileEntityFurnace.getItemBurnTime(targetFuel) > 0) {
 
-                if(this.getPowerStored() <= TileEntityFurnace.getItemBurnTime(targetFuel) / Utilities.TICKSTOPOWER) {
+                if(this.getPowerStored() >= TileEntityFurnace.getItemBurnTime(targetFuel) / Utilities.TICKSTOPOWER) {
 
                     if(this.usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ Utilities.TICKSTOPOWER, ForgeDirection.UNKNOWN)) {
 
@@ -126,14 +126,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
         }
     }
 
-    public void setPowerStored(int power) {
-
-        if(power >= 0) {
-            
-            this.powerStored = power;       
-        }
-    }
-    
     @Override
     public boolean recievePower() {
 
@@ -162,7 +154,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
 
-        powerStored = nbtTagCompound.getInteger("powerStored");
+        this.powerStored = nbtTagCompound.getInteger("powerStored");
 
         NBTTagList nbttaglist = nbtTagCompound.getTagList("Items");
         tileItemStacks = new ItemStack[getSizeInventory()];
@@ -177,28 +169,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
                 tileItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound);
             }
         }
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
-        super.writeToNBT(nbtTagCompound);
-
-        nbtTagCompound.setInteger("powerStored", powerStored);
-
-        NBTTagList nbttaglist = new NBTTagList();
-
-        for (int i = 0; i < tileItemStacks.length; i++)
-        {
-            if (tileItemStacks[i] != null)
-            {
-                NBTTagCompound nbttagcompound = new NBTTagCompound();
-                nbttagcompound.setByte("Slot", (byte)i);
-                tileItemStacks[i].writeToNBT(nbttagcompound);
-                nbttaglist.appendTag(nbttagcompound);
-            }
-        }
-
-        nbtTagCompound.setTag("Items", nbttaglist);
     }
 
     @Override
@@ -221,6 +191,29 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
             return true;
         }
         return false;
+    }
+
+    
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+        super.writeToNBT(nbtTagCompound);
+
+        nbtTagCompound.setInteger("powerStored", powerStored);
+
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < tileItemStacks.length; i++)
+        {
+            if (tileItemStacks[i] != null)
+            {
+                NBTTagCompound nbttagcompound = new NBTTagCompound();
+                nbttagcompound.setByte("Slot", (byte)i);
+                tileItemStacks[i].writeToNBT(nbttagcompound);
+                nbttaglist.appendTag(nbttagcompound);
+            }
+        }
+
+        nbtTagCompound.setTag("Items", nbttaglist);
     }
 
     @Override

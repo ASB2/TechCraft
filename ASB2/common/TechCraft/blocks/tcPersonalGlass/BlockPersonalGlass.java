@@ -9,9 +9,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftContainers;
 
-public class BlockTCPersonalGlass extends TechCraftContainers {
+public class BlockPersonalGlass extends TechCraftContainers {
 
-    public BlockTCPersonalGlass(int par1, Material par2Material) {
+    public BlockPersonalGlass(int par1, Material par2Material) {
         super(par1, par2Material);
         setBlockUnbreakable();
     }
@@ -46,6 +46,6 @@ public class BlockTCPersonalGlass extends TechCraftContainers {
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TileTCPersonalGlass(playerName);
+        return new TilePersonalGlass(playerName);
     }
 }

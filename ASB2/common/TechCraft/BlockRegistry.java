@@ -92,7 +92,7 @@ public class BlockRegistry {
     public static TechCraftContainers BlockItemConduitInterface;
     public static TechCraftBlocks BlockSpeedyRoad;
     
-    public static TechCraftContainers BlockTCPersonalGlass;
+    public static TechCraftContainers BlockPersonalGlass;
     
     public static void init(Configuration config) {
 
@@ -300,11 +300,11 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockSpeedyRoad, "Speedy Road");
         MinecraftForge.setBlockHarvestLevel(BlockSpeedyRoad, "pickaxe", 2);
         
-        BlockTCPersonalGlass = new BlockTCPersonalGlass(config.getBlock("BlockTCPersonalGlass", 534).getInt(), Material.rock);
-        BlockTCPersonalGlass.setUnlocalizedName("ASB2_BlockTCPersonalGlass");
-        GameRegistry.registerBlock(BlockTCPersonalGlass, "ASB2_BlockTCPersonalGlass");
-        LanguageRegistry.addName(BlockTCPersonalGlass, "Personal Glass");
-        MinecraftForge.setBlockHarvestLevel(BlockTCPersonalGlass, "pickaxe", 2);
+        BlockPersonalGlass = new BlockPersonalGlass(config.getBlock("BlockPersonalGlass", 534).getInt(), Material.rock);
+        BlockPersonalGlass.setUnlocalizedName("ASB2_BlockPersonalGlass");
+        GameRegistry.registerBlock(BlockPersonalGlass, "ASB2_BlockPersonalGlass");
+        LanguageRegistry.addName(BlockPersonalGlass, "Personal Glass");
+        MinecraftForge.setBlockHarvestLevel(BlockPersonalGlass, "pickaxe", 2);
     }
 
 }

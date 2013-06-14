@@ -103,6 +103,36 @@ public class CraftRegistry {
             'T', ItemRegistry.ItemTeleportModule
         });
         
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemBasicDestructionCatalyst), new Object[] {
+            "PBS",
+            "TET", 
+            "DPD",
+            'P', ItemRegistry.ItemZycrantianPickaxe,
+            'P', ItemRegistry.ItemZycrantianShovel,
+            'T', Block.tnt,
+            'E', ItemRegistry.ItemEnergyCrystalShard,
+            'D', Item.diamond,
+            'B', Block.blockDiamond
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockSpeedyRoad, 8), new Object[] {
+            "MMM",
+            "QZQ",
+            "QQQ",
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'Q', Block.blockNetherQuartz,
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPersonalGlass, 8), new Object[] {
+            "QGQ",
+            "GZG",
+            "QGQ",
+            'G', Block.glass,
+            'Q', Block.blockNetherQuartz,
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
+        
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemLinker),new ItemStack(ItemRegistry.ItemLinker));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));

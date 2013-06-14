@@ -19,6 +19,9 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     protected ForgeDirection orientation;    
     protected EnumColor color;
 
+    int powerStored = 0;
+    int powerMax = 0;
+    
     public TechCraftTile() {
 
         if(color == null)
@@ -29,17 +32,17 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     }
 
     public boolean breakBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z) {
-        
+
         if(world.getBlockId(x,y,z) != 0) {       
-            
+
             world.playAuxSFX(2001, x, y, z, world.getBlockId(x,y,z) + (world.getBlockMetadata(x, y, z) << 12));
             Block.blocksList[world.getBlockId(x,y,z)].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-            
+
             return true;
         }
         return false;
     }
-    
+
     public ForgeDirection getOrientation() {
 
         if(!(orientation == TechCraftTile.translateNumberToDirection(getBlockMetadata()))) {
@@ -484,11 +487,12 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
     public void managePowerAll(TileEntity tile, int amountOfPower, boolean addPower) {
 
-        if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
+        if(addPower) {
+            if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
 
-            amountOfPower = amountOfPower / TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
-        }        
-
+                amountOfPower = amountOfPower / TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
+            }        
+        }
         transferPower(ForgeDirection.DOWN, tile, amountOfPower, addPower);
         transferPower(ForgeDirection.UP, tile, amountOfPower, addPower);
         transferPower(ForgeDirection.NORTH, tile, amountOfPower, addPower);
@@ -504,37 +508,34 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         if(worldObj.blockExists(coords[0], coords[1], coords[2])) {
 
             if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
+
                 IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
                 IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
                 if(addPower) {
-
-                    if(tileCallingMeathod.canGainPower(amountOfPower)&& tileToChange.canUsePower(amountOfPower))
+                    
+                    if(tileCallingMeathod.canGainPower(amountOfPower) && tileToChange.canUsePower(amountOfPower))
                     {
                         if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
 
                             if(tileToChange.gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
 
-                                tileCallingMeathod.usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
+                                tileCallingMeathod.usePower(amountOfPower, direction);
                             }
-
-
                         }
                     }        
                 }
 
                 else {
 
-                    if(tileToChange.canGainPower(amountOfPower) && tileCallingMeathod.canUsePower(amountOfPower))
+                    if(tileToChange.canUsePower(amountOfPower) && tileCallingMeathod.canGainPower(amountOfPower))
                     {
                         if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
 
-                            if(tileCallingMeathod.gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
+                            if(tileCallingMeathod.gainPower(amountOfPower, direction)) {
 
                                 tileToChange.usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
                             }
-
-
                         }
                     }
                 }
@@ -558,13 +559,13 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     @Override
     public int getPowerStored() {
         // TODO Auto-generated method stub
-        return 0;
+        return powerStored;
     }
 
     @Override
     public int getPowerMax() {
         // TODO Auto-generated method stub
-        return 0;
+        return powerMax;
     }
 
     @Override
@@ -592,14 +593,24 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     }
 
     @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-        // TODO Auto-generated method stub
+    public boolean gainPower(int PowerGained, ForgeDirection direction) {
+
+        if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
+
+            this.powerStored = this.getPowerStored() + PowerGained;
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-        // TODO Auto-generated method stub
+    public boolean usePower(int PowerUsed, ForgeDirection direction) {
+
+        if(this.getPowerStored() >= PowerUsed) {
+
+            powerStored = this.getPowerStored() - PowerUsed;
+            return true;
+        }
         return false;
     }
 
@@ -654,6 +665,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
             return true;
         }
         else {
+            
             return false;
         }
     }
@@ -691,32 +703,20 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     }
 
     @Override
-    public void setPowerStored(int power) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setPowerMax(int max) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound tag) {
-      super.readFromNBT(tag);
-      
-      if(color == EnumColor.NONE || color == null)
-        color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
-    
+        super.readFromNBT(tag);
+
+        if(color == EnumColor.NONE || color == null)
+            color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
+
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag){
-       super.writeToNBT(tag); 
-       
-       if(color != EnumColor.NONE)
-        tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
-    
+        super.writeToNBT(tag); 
+
+        if(color != EnumColor.NONE)
+            tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
+
     }
 }

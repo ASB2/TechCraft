@@ -7,12 +7,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 
-public class TileTCPersonalGlass extends TechCraftTile {
+public class TilePersonalGlass extends TechCraftTile {
 
     boolean playerSet;
     String playerName = "";
 
-    public TileTCPersonalGlass(String player) {
+    public TilePersonalGlass(String player) {
 
         if(player.length() > 0) {
 

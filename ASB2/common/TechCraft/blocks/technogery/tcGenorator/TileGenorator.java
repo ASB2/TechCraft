@@ -9,8 +9,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.utils.*;
+import TechCraft.power.*;
 
-public class TileGenorator extends TechCraftTile implements IInventory,ISidedInventory {
+public class TileGenorator extends TechCraftTile implements IInventory, ISidedInventory, IPowerSource {
 
     private int powerStored = 0;
     private int powerMax = 1000;
@@ -28,42 +30,35 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
     int ticks = 0;
 
     public void updateEntity() {
+        super.managePowerAll(this,  powerOutput(), true);
 
-        ticks++;
-        super.managePowerAll(this,powerOutput(),true);
-        super.updateEntity();
+        ticks++;        
 
-        if(!(powerStored == powerMax)){
+        if(!(powerStored == powerMax)) {            
 
-            manageBurning();
+            if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0) {            
+                
+                fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);             
+                currentFuelID = tileItemStacks[9].itemID;                            
+                decrStackSize(9,1);
+            } 
+            
+            if(fuelBurnTime > 0) {
+
+                isBurning = true;
+                fuelBurnTime--;
+            }
         }
 
         if(fuelBurnTime > 0) {
 
-            if(ticks == 10) {
+            if(ticks >= Utilities.TICKSTOPOWER) {
+
                 ticks = 0;
                 this.gainPower(1, ForgeDirection.UNKNOWN);
             }
-
         }
-
         moveSlots();
-    }
-
-    public void manageBurning() {
-
-        if(fuelBurnTime > 0) {
-
-            isBurning = true;
-            fuelBurnTime--;
-        }
-
-        if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0) {            
-
-            fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);
-            currentFuelID = tileItemStacks[9].itemID;            
-            decrStackSize(9,1);
-        }  
     }
 
     public void moveSlots() {
@@ -108,14 +103,6 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         }
     }
 
-    public void setPowerStored(int power) {
-
-        if(power >= 0) {
-            
-            this.powerStored = power;       
-        }
-    }
-    
     @Override
     public boolean outputPower() {
 
@@ -130,15 +117,6 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         }
         return internal;
 
-    }
-
-    public int getMagicScaled(int scale) {
-
-        int internal = (int)this.powerStored * scale / (int)powerMax;
-        if(internal > scale){
-            internal = scale;
-        }
-        return internal;
     }
 
     public int getOutput(){
@@ -159,6 +137,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         if(this.powerStored>=PowerUsed) {
 
             this.powerStored = powerStored - PowerUsed;
+
             return true;
         }
         return false;
@@ -170,6 +149,7 @@ public class TileGenorator extends TechCraftTile implements IInventory,ISidedInv
         if(this.powerMax - this.powerStored >= PowerGained) {
 
             this.powerStored = powerStored + PowerGained;
+
             return true;
         }
         return false;

@@ -60,7 +60,7 @@ public class GuiGenorator extends GuiContainer {
             drawTexturedModalRect(posX+146,posY+41,176,0,14,i1);
 
             int i3;
-            i3 = tileEntity.getMagicScaled(69);
+            i3 = tileEntity.getPowerScaled(69);
             drawTexturedModalRect(posX+99 + 69 - i3, posY + 7, 55, 169, i3, 30);
     }
 
