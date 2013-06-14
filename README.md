@@ -38,7 +38,10 @@ Textures to be done
 	-(Block, MultiSided)TC Infuser
 	-(Item)Linker
 	-(Block, Multi-Sided)Item Sender
-
+	-(Model)Item Conduit Interface
+	-(Block)Personal Glass
+	-Many more. Texture FASTER NATE	
+	
 Models to be done
 
 	-Nothing at the moment

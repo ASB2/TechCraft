@@ -33,7 +33,7 @@ public class ItemOmniTool extends TechCraftItems {
 
     public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
 
-        par1ItemStack.damageItem(damageVsEntity, par3EntityLiving);
+        par1ItemStack.damageItem(0, par3EntityLiving);
         return true;
     }
 

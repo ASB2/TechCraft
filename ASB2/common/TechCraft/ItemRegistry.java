@@ -48,6 +48,7 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -96,6 +97,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemEnhancedDestructionCatalyst;
     public static TechCraftItems ItemTradeStick;
     public static TechCraftItems ItemOmniTool;
+    public static TechCraftItems ItemLifeStealingBludgeoningStick;
     
     public static void init(Configuration config) {
 
@@ -264,6 +266,11 @@ public class ItemRegistry {
         ItemOmniTool = new ItemOmniTool(config.getItem("ItemOmniTool", 5039).getInt());
         ItemOmniTool.setUnlocalizedName("ASB2_ItemOmniTool");
         LanguageRegistry.addName(ItemOmniTool, "Omni-Tool");
+
+        ItemLifeStealingBludgeoningStick = new ItemLifeStealingBludgeoningStick(config.getItem("ItemLifeStealingBludgeoningStick", 5040).getInt());
+        ItemLifeStealingBludgeoningStick.setUnlocalizedName("ASB2_ItemLifeStealingBludgeoningStick");
+        LanguageRegistry.addName(ItemLifeStealingBludgeoningStick, "Life Stealing Bludgeoning Stick");
+        
     }
 
 }
