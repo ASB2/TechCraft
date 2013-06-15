@@ -12,10 +12,10 @@ import TechCraft.blocks.TechCraftTile;
 import TechCraft.blocks.tcConduits.TileTCConduit;
 import TechCraft.conduit.ConduitInterfaceType;
 import TechCraft.conduit.ConduitNetwork;
-import TechCraft.conduit.IConduitInterface;
+import TechCraft.conduit.IConduitInterfaceItem;
 import TechCraft.items.ItemLinker;
 
-public class TileItemConduitInterface extends TechCraftTile implements IInventory, IConduitInterface {
+public class TileItemConduitInterface extends TechCraftTile implements IInventory, IConduitInterfaceItem {
 
     private ItemStack[] tileItemStack;
 
@@ -59,9 +59,9 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
                     if(!(this.getNetwork().getItemInterface().get(i).equals(this))) {
 
-                        if(this.getNetwork().getItemInterface().get(i) instanceof IConduitInterface && this.getNetwork().getItemInterface().get(i) instanceof IInventory) {
+                        if(this.getNetwork().getItemInterface().get(i) instanceof IConduitInterfaceItem && this.getNetwork().getItemInterface().get(i) instanceof IInventory) {
 
-                            IConduitInterface tileC = (IConduitInterface)this.getNetwork().getItemInterface().get(i);
+                            IConduitInterfaceItem tileC = (IConduitInterfaceItem)this.getNetwork().getItemInterface().get(i);
                             IInventory tileI = (IInventory)this.getNetwork().getItemInterface().get(i);
 
                             if(!tileC.importingToNetwork()) {
@@ -110,7 +110,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
         if(tile != null) {
 
-            if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterface)) {
+            if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterfaceItem)) {
 
                 IInventory tileI = (IInventory)tile;
 
@@ -224,9 +224,9 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
                 }
             }
 
-            if(tile instanceof IConduitInterface && tile instanceof IInventory) {
+            if(tile instanceof IConduitInterfaceItem && tile instanceof IInventory) {
 
-                IConduitInterface tileC = (IConduitInterface)tile;
+                IConduitInterfaceItem tileC = (IConduitInterfaceItem)tile;
                 IInventory tileI = (IInventory)tile;
 
                 if(tileI.getInventoryStackLimit() > 0 && tileI.getSizeInventory() > 0) {
@@ -269,7 +269,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
             if(tile != null) {
 
-                if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterface)) {
+                if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterfaceItem)) {
 
                     IInventory tileI = (IInventory)tile;
 
@@ -291,7 +291,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
                     }
                 }
 
-                if(tile instanceof ISidedInventory && !(tile instanceof IConduitInterface)) {
+                if(tile instanceof ISidedInventory && !(tile instanceof IConduitInterfaceItem)) {
 
                     ISidedInventory tileS = (ISidedInventory)tile;
 
@@ -321,10 +321,10 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
                     }
                 }
 
-                if(tile instanceof IConduitInterface && tile instanceof IInventory) {
+                if(tile instanceof IConduitInterfaceItem && tile instanceof IInventory) {
 
                     IInventory tileI = (IInventory)tile;
-                    IConduitInterface tileS = (IConduitInterface)tile;
+                    IConduitInterfaceItem tileS = (IConduitInterfaceItem)tile;
 
                     for(int i = 0; i < tileI.getSizeInventory(); i++) {
 

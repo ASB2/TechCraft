@@ -39,9 +39,12 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
         super.readFromNBT(data);
 
         if (data.hasKey("stored") && data.hasKey("liquidId")) {
+            
             LiquidStack liquid = new LiquidStack(data.getInteger("liquidId"), data.getInteger("stored"), 0);
             tank.setLiquid(liquid);
-        } else {
+        } 
+        else {
+            
             LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(data.getCompoundTag("tank"));
             if (liquid != null) {
                 tank.setLiquid(liquid);
@@ -52,7 +55,9 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
     @Override
     public void writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
+        
         if (tank.containsValidLiquid()) {
+            
             data.setTag("tank", tank.getLiquid().writeToNBT(new NBTTagCompound()));
         }
     }

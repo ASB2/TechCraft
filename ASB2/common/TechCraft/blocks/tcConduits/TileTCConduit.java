@@ -149,28 +149,4 @@ public class TileTCConduit extends TechCraftTile implements IConduitInterface {
         // TODO Auto-generated method stub
         return false;
     }
-
-    @Override
-    public boolean canMoveItemToInventory(ItemStack itemStack, int slot, int amount) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean moveItemToInventory(ItemStack itemStack, int slot, int amount) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean canTakeItemFromInventory(ItemStack itemStack, int slot, int amount) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean takeItemFromInventory(ItemStack itemStack, int slot, int amount) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 }
