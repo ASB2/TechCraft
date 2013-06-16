@@ -7,9 +7,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.conduit.IConduitNetwork;
+import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelPowerConduit;
+import TechCraft.power.IPowerMisc;
 
 public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
@@ -27,32 +31,58 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
         GL11.glScalef(1.0F, -1F, -1F);
         GL11.glRotatef(0F, 0F, 0F, 0F);
 
-        modelMoving.renderAll();
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING_ITEM);
+        modelMoving.renderCenter();
 
-        if(decideRender(ForgeDirection.DOWN, tile)){
-            modelMoving.renderDOWN();
+        if(decideRenderWire(ForgeDirection.DOWN, tile)) {
+            modelMoving.renderWireDOWN();
         }
 
-        if(decideRender(ForgeDirection.UP, tile)){
-            modelMoving.renderUP();
+        if(decideRenderWire(ForgeDirection.UP, tile)) {
+            modelMoving.renderWireUP();
         }
 
-        if(decideRender(ForgeDirection.WEST, tile)){
-            modelMoving.renderWEST();
+        if(decideRenderWire(ForgeDirection.WEST, tile)) {
+            modelMoving.renderWireWEST();
         }
 
-        if(decideRender(ForgeDirection.EAST, tile)){
-            modelMoving.renderEAST();
+        if(decideRenderWire(ForgeDirection.EAST, tile)) {
+            modelMoving.renderWireEAST();
         }
 
-        if(decideRender(ForgeDirection.SOUTH, tile)){
-            modelMoving.renderSOUTH();
+        if(decideRenderWire(ForgeDirection.SOUTH, tile)) {
+            modelMoving.renderWireSOUTH();
         }
 
-        if(decideRender(ForgeDirection.NORTH, tile)){
-            modelMoving.renderNORTH();
+        if(decideRenderWire(ForgeDirection.NORTH, tile)) {
+            modelMoving.renderWireNORTH();
         }
-        
+
+
+        if(decideRenderRing(ForgeDirection.DOWN, tile)) {
+            modelMoving.renderRingDOWN();
+        }
+
+        if(decideRenderRing(ForgeDirection.UP, tile)) {
+            modelMoving.renderRingUP();
+        }
+
+        if(decideRenderRing(ForgeDirection.WEST, tile)) {
+            modelMoving.renderRingWEST();
+        }
+
+        if(decideRenderRing(ForgeDirection.EAST, tile)) {
+            modelMoving.renderRingEAST();
+        }
+
+        if(decideRenderRing(ForgeDirection.SOUTH, tile)) {
+            modelMoving.renderRingSOUTH();
+        }
+
+        if(decideRenderRing(ForgeDirection.NORTH, tile)) {
+            modelMoving.renderRingNORTH();
+        }
+
         GL11.glPopMatrix();
     }
 
@@ -61,7 +91,7 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
         this.renderAModelAt((TileTCItemConduit)par1TileEntity, par2, par4, par6, par8);
     }    
 
-    public boolean decideRender(ForgeDirection direction, TileEntity tileT) {
+    public boolean decideRenderWire(ForgeDirection direction, TileEntity tileT) {
 
         World world = tileT.worldObj;
 
@@ -69,10 +99,38 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
         if(tile != null){
 
-            if(tile instanceof IConduitNetwork) { 
+            if(tile instanceof IConduitNetwork) {
 
 
                 return ((IConduitNetwork)tile).renderByDirection(direction);
+            }
+
+            if(tile instanceof IPowerMisc) {
+
+                if(((IPowerMisc)tile).outputPower() || ((IPowerMisc)tile).recievePower()) {
+
+                    return ((IPowerMisc)tile).renderByDirection(direction);
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public boolean decideRenderRing(ForgeDirection direction, TileEntity tileT) {
+
+        World world = tileT.worldObj;
+
+        TileEntity tile = world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tileT)[0], TechCraftTile.translateDirectionToCoords(direction, tileT)[1], TechCraftTile.translateDirectionToCoords(direction, tileT)[2]);
+
+        if(tile != null) {
+
+            if(tile instanceof IPowerMisc) {
+
+                if(((IPowerMisc)tile).outputPower() || ((IPowerMisc)tile).recievePower()) {
+
+                    return ((IPowerMisc)tile).renderByDirection(direction);
+                }
             }
             return false;
         }
