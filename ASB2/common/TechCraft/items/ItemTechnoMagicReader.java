@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.conduit.IConduitInterface;
+import TechCraft.conduit.IConduitNetwork;
 import TechCraft.power.IPowerMisc;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
@@ -43,9 +43,9 @@ public class ItemTechnoMagicReader extends TechCraftItems{
             }
 
 
-            if(world.getBlockTileEntity(x,y,z) instanceof IConduitInterface){
+            if(world.getBlockTileEntity(x,y,z) instanceof IConduitNetwork){
 
-                IConduitInterface mTile = (IConduitInterface) world.getBlockTileEntity(x, y, z);
+                IConduitNetwork mTile = (IConduitNetwork) world.getBlockTileEntity(x, y, z);
 
                 if(mTile.getNetwork() != null) {
 
@@ -53,10 +53,6 @@ public class ItemTechnoMagicReader extends TechCraftItems{
                     player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getItemInterfaceSize() + " item interfaces");
                     player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getTcuInterfaceSize() + " tcu interfaces");
                     player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getLiquidInterfaceSize() + " liquid interfaces");
-                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getBcInterfaceSize() + " buildcraft interfaces");
-                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getIc2InterfaceSize() + " ic2 interfaces");
-                    
-                    player.sendChatToPlayer("Conduit Network has " + mTile.getNetwork().getAge() + " ticks old");
                 }
                 else {
                     

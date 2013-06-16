@@ -42,8 +42,8 @@ public class BlockTCTank extends TechCraftContainers{
     @Override
     public void registerIcons(IconRegister iconRegister)
     {
-        top = iconRegister.registerIcon("TechCraft:BlockTankTop");
-        sides = iconRegister.registerIcon("TechCraft:BlockTankSide");
+        top = iconRegister.registerIcon("TechCraft:ColoredBlack");
+        sides = iconRegister.registerIcon("TechCraft:ColoredBlack");
         bottom = iconRegister.registerIcon("TechCraft:ColoredBlack");
     }
     

@@ -1,4 +1,4 @@
-package TechCraft.blocks.tcConduits;
+package TechCraft.blocks.tcConduits.tcItemConduits;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -8,19 +8,19 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.conduit.IConduitInterface;
+import TechCraft.conduit.IConduitNetwork;
 import TechCraft.models.ModelPowerConduit;
 
-public class TileRendererTCConduit extends TileEntitySpecialRenderer {
+public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
     private ModelPowerConduit modelMoving;
 
-    public TileRendererTCConduit() {
+    public TileRendererTCItemConduit() {
 
         modelMoving = new ModelPowerConduit();
     }
 
-    public void renderAModelAt(TileTCConduit tile, double d, double d1, double d2, float f) {
+    public void renderAModelAt(TileTCItemConduit tile, double d, double d1, double d2, float f) {
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F);
@@ -58,7 +58,7 @@ public class TileRendererTCConduit extends TileEntitySpecialRenderer {
 
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8){
 
-        this.renderAModelAt((TileTCConduit)par1TileEntity, par2, par4, par6, par8);
+        this.renderAModelAt((TileTCItemConduit)par1TileEntity, par2, par4, par6, par8);
     }    
 
     public boolean decideRender(ForgeDirection direction, TileEntity tileT) {
@@ -69,10 +69,10 @@ public class TileRendererTCConduit extends TileEntitySpecialRenderer {
 
         if(tile != null){
 
-            if(tile instanceof IConduitInterface) { 
+            if(tile instanceof IConduitNetwork) { 
 
 
-                return ((IConduitInterface)tile).renderByDirection(direction);
+                return ((IConduitNetwork)tile).renderByDirection(direction);
             }
             return false;
         }

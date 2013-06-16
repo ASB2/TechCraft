@@ -140,37 +140,37 @@ public class ModelPowerConduit extends ModelBase {
   public void renderUP() {
       FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
       WireTop.render(0.0625F);
-      RingTop.render(0.0625F);
+      //RingTop.render(0.0625F);
   }
 
   public void renderDOWN() {
       FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
       WireBottom.render(0.0625F);
-      RingBottom.render(0.0625F);
+      //RingBottom.render(0.0625F);
   }
 
   public void renderWEST() {
       FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
       WireLeft.render(0.0625F);
-      RingRight.render(0.0625F);
+      //RingRight.render(0.0625F);
   }
 
   public void renderEAST() {
       FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
       WireRight.render(0.0625F);
-      RingLeft.render(0.0625F);
+      //RingLeft.render(0.0625F);
   }
 
   public void renderSOUTH() {
       FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
       WireFront.render(0.0625F);
-      RingFront.render(0.0625F);
+      //RingFront.render(0.0625F);
   }
 
   public void renderNORTH() {
       FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
       WireBack.render(0.0625F);
-      RingBack.render(0.0625F);
+      //RingBack.render(0.0625F);
   }
 
   public void renderAll() {

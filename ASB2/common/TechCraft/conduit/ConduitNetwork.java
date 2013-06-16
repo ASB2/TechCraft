@@ -2,100 +2,50 @@ package TechCraft.conduit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.blocks.tcConduits.TileTCConduit;
 
 public class ConduitNetwork {
 
-    private List <TileTCConduit> conductors = new ArrayList<TileTCConduit>();
+    private List <TileEntity> conductors = new ArrayList<TileEntity>();
     private List <TileEntity> itemInterface = new ArrayList<TileEntity>();
     private List <TileEntity> tcuInterface = new ArrayList<TileEntity>();
     private List <TileEntity> liquidInterface = new ArrayList<TileEntity>();
-    private List <TileEntity> bcInterface = new ArrayList<TileEntity>();
-    private List <TileEntity> ic2Interface = new ArrayList<TileEntity>();
     private List <TileEntity> otherInterface = new ArrayList<TileEntity>();
 
     private World worldObj;
+    private EnumContuitType networkType;
 
-    private int age = 0;
+    /**
+     * 
+     * @param World
+     * @param TileEntity
+     * @param EnumContuitType
+     */
+    public ConduitNetwork(World world, TileEntity tile, EnumContuitType networkType) {
 
-    public ConduitNetwork(World world, TileEntity tile) {
-
+        this.networkType = networkType;
         worldObj = world;
 
-        if(tile instanceof IConduitInterface) {
+        if(tile instanceof IConduitConductor) {
 
-            if(tile instanceof TileTCConduit) {
-
-                TileTCConduit tileI = (TileTCConduit)tile;
-
-                this.addConductor(tileI);
-            }
-
-            if(((IConduitInterface)tile).getInterfaceType() != null) {
-
-                switch(((IConduitInterface)tile).getInterfaceType()) {
-
-                    case ITEM: itemInterface.add(tile);
-                    break;
-
-                    case TCU: tcuInterface.add(tile);
-                    break;
-
-                    case LIQUID: liquidInterface.add(tile);
-                    break;
-
-                    case BCPOWER: bcInterface.add(tile);
-                    break;
-
-                    case IC2POWER: ic2Interface.add(tile);
-                    break;          
-
-                    case OTHER: otherInterface.add(tile);
-                    break;
-
-                    default:
-                        break;
-
-                }
-            }
+            this.addConductor(tile);
         }
+
     }
 
     public void updateNetwork() {
-        age++;
 
-        for(int i = 0; i < conductors.size(); i++) {
-
-            if(conductors.get(i) == null) { 
-
-                conductors.remove(i);
-                return;
-            }
-
-            if(worldObj == null){
-
-                worldObj = conductors.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(conductors.get(i).xCoord, conductors.get(i).yCoord, conductors.get(i).zCoord) == 0) {
-
-                conductors.remove(i);
-                return;
-            }
-
-            this.addConductorsAround(conductors.get(i));
-            this.addInterfacesAround(conductors.get(i));
-        }
+        this.getConductors();
         this.addAdjacentInterfaces();
     }
 
     public void addAdjacentInterfaces() {
-    
+
         for(int i = 0; i < itemInterface.size(); i++) {
 
             if(itemInterface.get(i) == null) { 
@@ -116,9 +66,9 @@ public class ConduitNetwork {
             }
 
             this.addConductorsAround(itemInterface.get(i));
-            this.addInterfacesAround(itemInterface.get(i));
+            this.addInterfacesAround(itemInterface.get(i), networkType);
         }
-        
+
         for(int i = 0; i < tcuInterface.size(); i++) {
 
             if(tcuInterface.get(i) == null) { 
@@ -139,9 +89,9 @@ public class ConduitNetwork {
             }
 
             this.addConductorsAround(tcuInterface.get(i));
-            this.addInterfacesAround(tcuInterface.get(i));
+            this.addInterfacesAround(tcuInterface.get(i), networkType);
         }
-        
+
         for(int i = 0; i < liquidInterface.size(); i++) {
 
             if(liquidInterface.get(i) == null) { 
@@ -162,54 +112,9 @@ public class ConduitNetwork {
             }
 
             this.addConductorsAround(liquidInterface.get(i));
-            this.addInterfacesAround(liquidInterface.get(i));
+            this.addInterfacesAround(liquidInterface.get(i), networkType);
         }
-        
-        for(int i = 0; i < bcInterface.size(); i++) {
 
-            if(bcInterface.get(i) == null) { 
-
-                bcInterface.remove(i);
-                return;
-            }
-
-            if(worldObj == null){
-
-                worldObj = bcInterface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(bcInterface.get(i).xCoord, bcInterface.get(i).yCoord, bcInterface.get(i).zCoord) == 0) {
-
-                bcInterface.remove(i);
-                return;
-            }
-
-            this.addConductorsAround(bcInterface.get(i));
-            this.addInterfacesAround(bcInterface.get(i));
-        }
-        for(int i = 0; i < ic2Interface.size(); i++) {
-
-            if(ic2Interface.get(i) == null) { 
-
-                ic2Interface.remove(i);
-                return;
-            }
-
-            if(worldObj == null){
-
-                worldObj = ic2Interface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(ic2Interface.get(i).xCoord, ic2Interface.get(i).yCoord, ic2Interface.get(i).zCoord) == 0) {
-
-                ic2Interface.remove(i);
-                return;
-            }
-
-            this.addConductorsAround(ic2Interface.get(i));
-            this.addInterfacesAround(ic2Interface.get(i));
-        }
-        
         for(int i = 0; i < otherInterface.size(); i++) {
 
             if(otherInterface.get(i) == null) { 
@@ -230,22 +135,19 @@ public class ConduitNetwork {
             }
 
             this.addConductorsAround(otherInterface.get(i));
-            this.addInterfacesAround(otherInterface.get(i));
+            this.addInterfacesAround(otherInterface.get(i), networkType);
         }
-        
+
     }
-    
-    public void addConductor(TileTCConduit tile) {
+
+    public void addConductor(TileEntity tile) {
+
         conductors.add(tile);
     }
 
-    public void removeConductor(TileTCConduit tile) {
+    public void removeConductor(TileEntity tile) {
+
         conductors.remove(tile);
-    }
-
-    public int getAge() {
-
-        return age;
     }
 
     public int getConductorSize() {
@@ -268,173 +170,69 @@ public class ConduitNetwork {
         return liquidInterface.size();
     }
 
-    public int getBcInterfaceSize() {
-
-        return bcInterface.size();
-    }
-
-    public int getIc2InterfaceSize() {
-
-        return ic2Interface.size();
-    }
-
     public int getOtherInterfaceSize() {
 
         return otherInterface.size();
     }
 
-    public List<TileTCConduit> getConductors() {
+    public List<TileEntity> getConductors() {
 
-        for(int i = 0; i < conductors.size(); i++) {
+        this.checkNetwork(conductors);
 
-            if(conductors.get(i) == null) { 
-
-                conductors.remove(i);
-            }
-
-            if(worldObj == null){
-
-                worldObj = conductors.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(conductors.get(i).xCoord, conductors.get(i).yCoord, conductors.get(i).zCoord) == 0) {
-
-                conductors.remove(i);
-            }
-        }
         return conductors;
     }
 
     public List<TileEntity> getItemInterface() {
 
-        for(int i = 0; i < itemInterface.size(); i++) {
+        this.checkNetwork(itemInterface);
 
-            if(itemInterface.get(i) == null) { 
-
-                itemInterface.remove(i);
-            }
-
-            if(worldObj == null){
-
-                worldObj = itemInterface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(itemInterface.get(i).xCoord, itemInterface.get(i).yCoord, itemInterface.get(i).zCoord) == 0) {
-
-                itemInterface.remove(i);
-            }
-        }
         return itemInterface;
     }
 
     public List<TileEntity> getTcuInterface() {
 
-        for(int i = 0; i < tcuInterface.size(); i++) {
+        this.checkNetwork(tcuInterface);
 
-            if(tcuInterface.get(i) == null) { 
-
-                tcuInterface.remove(i);
-            }
-
-            if(worldObj == null){
-
-                worldObj = tcuInterface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(tcuInterface.get(i).xCoord, tcuInterface.get(i).yCoord, tcuInterface.get(i).zCoord) == 0) {
-
-                tcuInterface.remove(i);
-            }
-        }
         return tcuInterface;
     }
 
     public List<TileEntity> getLiquidInterface() {
 
-        for(int i = 0; i < liquidInterface.size(); i++) {
+        this.checkNetwork(liquidInterface);
 
-            if(liquidInterface.get(i) == null) { 
-
-                liquidInterface.remove(i);
-            }
-
-            if(worldObj == null){
-
-                worldObj = liquidInterface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(liquidInterface.get(i).xCoord, liquidInterface.get(i).yCoord, liquidInterface.get(i).zCoord) == 0) {
-
-                liquidInterface.remove(i);
-            }
-        }
         return liquidInterface;
-    }
-
-    public List<TileEntity> getBcInterface() {
-
-        for(int i = 0; i < bcInterface.size(); i++) {
-
-            if(bcInterface.get(i) == null) { 
-
-                bcInterface.remove(i);
-            }
-
-            if(worldObj == null){
-
-                worldObj = bcInterface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(bcInterface.get(i).xCoord, bcInterface.get(i).yCoord, bcInterface.get(i).zCoord) == 0) {
-
-                bcInterface.remove(i);
-            }
-        }
-        return bcInterface;
-    }
-
-    public List<TileEntity> getIc2Interface() {
-
-        for(int i = 0; i < ic2Interface.size(); i++) {
-
-            if(ic2Interface.get(i) == null) { 
-
-                ic2Interface.remove(i);
-            }
-
-            if(worldObj == null){
-
-                worldObj = ic2Interface.get(i).worldObj;
-            }
-
-            if(worldObj.getBlockId(ic2Interface.get(i).xCoord, ic2Interface.get(i).yCoord, ic2Interface.get(i).zCoord) == 0) {
-
-                ic2Interface.remove(i);
-            }
-        }
-        return ic2Interface;
     }
 
     public List<TileEntity> getOtherInterface() {
 
-        for(int i = 0; i < otherInterface.size(); i++) {
+        this.checkNetwork(otherInterface);
 
-            if(otherInterface.get(i) == null) { 
+        return otherInterface;
+    }
 
-                otherInterface.remove(i);
+    @SuppressWarnings("rawtypes")
+    public void checkNetwork(List list) {
+
+        for(int i = 0; i < list.size(); i++) {
+
+            if(list.get(i) == null) { 
+
+                list.remove(i);
             }
 
-            if(worldObj == null){
+            if(list.get(i) instanceof TileEntity) {
 
-                worldObj = otherInterface.get(i).worldObj;
-            }
+                if(worldObj == null) {
 
-            if(worldObj.getBlockId(otherInterface.get(i).xCoord, otherInterface.get(i).yCoord, otherInterface.get(i).zCoord) == 0) {
+                    worldObj = ((TileEntity)list.get(i)).worldObj;
+                }
 
-                otherInterface.remove(i);
+                if(worldObj.getBlockId(((TileEntity)list.get(i)).xCoord, ((TileEntity)list.get(i)).yCoord, ((TileEntity)list.get(i)).zCoord) == 0) {
+
+                    list.remove(i);
+                }
             }
         }
-        return otherInterface;
     }
 
     public void addConductorsAround(TileEntity tile) {
@@ -454,142 +252,135 @@ public class ConduitNetwork {
 
             if(tileI != null) {
 
-                if(tileI instanceof TileTCConduit) {
+                if(tileI instanceof IConduitConductor) {
+                    IConduitConductor tileA = (IConduitConductor)tileI;
 
-                    if(((TileTCConduit) tileI).getNetwork() != null) {
+                    if(tileA.getConductorType() == this.networkType) {
 
-                        if(((TileTCConduit)tileI).getNetwork() != this) {
+                        if(tileA.getNetwork() != null) {
 
-                            if(((TileTCConduit)tileI).getNetwork().getAge() < this.getAge()) {
+                            if(tileA.getNetwork() != this) {
 
-                                ((TileTCConduit)tileI).overrideNetwork(this);
-                                this.addConductor((TileTCConduit) tileI);
-                            }
-                            else if(((IConduitInterface)tileI).getNetwork().getConductorSize() < this.getConductorSize()) {
+                                if(tileA.getNetwork().getConductorSize() < this.getConductorSize()) {
 
-                                ((TileTCConduit)tileI).overrideNetwork(this);
-                                this.addConductor((TileTCConduit) tileI);
-                            }
-                        }                                
-                    }
-                    else {
+                                    for(int i = 0; i < tileA.getNetwork().getConductorSize(); i++) {
 
-                        ((TileTCConduit)tileI).overrideNetwork(this);
-                        this.addConductor((TileTCConduit) tileI);
+                                        TileEntity tileB = tileA.getNetwork().getConductors().get(i);
+
+                                        if(tileB instanceof IConduitConductor) {
+
+                                            IConduitConductor tileC = (IConduitConductor)tileB;
+
+                                            if(tileC.getConductorType() == this.networkType) {
+
+                                                tileC.overrideNetwork(this);
+                                                this.addConductor(tileB);
+                                            }
+                                        }
+                                    }
+                                    ((IConduitInterface)tileI).overrideNetwork(this);
+                                    this.addConductor(tileI);
+
+                                }
+                                else {
+
+                                    Random rand1 = new Random();
+                                    Random rand2 = new Random();
+
+                                    if(rand1.nextInt() < rand2.nextInt()) {
+
+                                        for(int i = 0; i < tileA.getNetwork().getConductorSize(); i++) {
+
+                                            TileEntity tileB = tileA.getNetwork().getConductors().get(i);
+
+                                            if(tileB instanceof IConduitConductor) {
+
+                                                IConduitConductor tileC = (IConduitConductor)tileB;
+
+                                                if(tileC.getConductorType() == this.networkType) {
+
+                                                    tileC.overrideNetwork(this);
+                                                    this.addConductor(tileB);
+                                                }
+                                            }
+                                        }
+                                        ((IConduitInterface)tileI).overrideNetwork(this);
+                                        this.addConductor(tileI);
+                                    }
+                                }
+                            }                                
+                        }
+
                     }
                 }
             }
         }
     }
 
-    public void addInterfacesAround(TileEntity tile) {
+    public void addInterfacesAround(TileEntity tile, EnumContuitType netType) {
 
-        addInterfacesAround(ForgeDirection.DOWN, tile);
-        addInterfacesAround(ForgeDirection.UP, tile);
-        addInterfacesAround(ForgeDirection.NORTH, tile);
-        addInterfacesAround(ForgeDirection.SOUTH, tile);
-        addInterfacesAround(ForgeDirection.WEST, tile);
-        addInterfacesAround(ForgeDirection.EAST, tile);  
+        addInterfacesAround(ForgeDirection.DOWN, tile, netType);
+        addInterfacesAround(ForgeDirection.UP, tile, netType);
+        addInterfacesAround(ForgeDirection.NORTH, tile, netType);
+        addInterfacesAround(ForgeDirection.SOUTH, tile, netType);
+        addInterfacesAround(ForgeDirection.WEST, tile, netType);
+        addInterfacesAround(ForgeDirection.EAST, tile, netType);  
     }
 
-    public void addInterfacesAround(ForgeDirection direction, TileEntity tile) {
+    public void addInterfacesAround(ForgeDirection direction, TileEntity tile, EnumContuitType netType) {
 
         if(worldObj != null) {
 
-            TileEntity tileI = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
+            TileEntity tileA = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
 
-            if(tileI != null) {
+            if(tileA != null) {
 
-                if(tileI instanceof IConduitInterface) {
+                if(tileA instanceof IConduitInterface) {
 
-                    if(((IConduitInterface) tileI).getNetwork() != null) {
+                    IConduitInterface tileB = (IConduitInterface)tileA;
 
-                        if(((IConduitInterface)tileI).getNetwork() != this) {
+                    if(tileB.getNetwork() != null) {
 
-                            if(((IConduitInterface)tileI).getNetwork().getAge() < this.getAge()) {
+                        if(tileB.getNetwork() != this) {
 
-                                ((IConduitInterface)tileI).overrideNetwork(this);
+                            if(TechCraftTile.translateInterfaceTypeToConduitType(tileB.getInterfaceType()) == this.networkType) {
 
-                                switch(((IConduitInterface)tileI).getInterfaceType()) {
-
-                                    case ITEM: itemInterface.add(tileI);
-                                    break;
-
-                                    case TCU: tcuInterface.add(tileI);
-                                    break;
-
-                                    case LIQUID: liquidInterface.add(tileI);
-                                    break;
-
-                                    case BCPOWER: bcInterface.add(tileI);
-                                    break;
-
-                                    case IC2POWER: ic2Interface.add(tileI);
-                                    break;          
-
-                                    case OTHER: otherInterface.add(tile);
-                                    break;
-
+                                switch(tileB.getInterfaceType()) {
+                                    
+                                    case ITEM: this.itemInterface.add(tileA);
+                                        break;
+                                    case LIQUID: this.liquidInterface.add(tileA);
+                                        break;
+                                    case OTHER: this.otherInterface.add(tileA);
+                                        break;
+                                    case TCU: this.tcuInterface.add(tileA);
+                                        break;
+                                        
                                     default:
                                         break;
-                                }
-                            }
-                            else if(((IConduitInterface)tileI).getNetwork().getConductorSize() < this.getConductorSize()){
 
-                                ((IConduitInterface)tileI).overrideNetwork(this);
-
-                                switch(((IConduitInterface)tileI).getInterfaceType()) {
-
-                                    case ITEM: itemInterface.add(tileI);
-                                    break;
-
-                                    case TCU: tcuInterface.add(tileI);
-                                    break;
-
-                                    case LIQUID: liquidInterface.add(tileI);
-                                    break;
-
-                                    case BCPOWER: bcInterface.add(tileI);
-                                    break;
-
-                                    case IC2POWER: ic2Interface.add(tileI);
-                                    break;          
-
-                                    case OTHER: otherInterface.add(tile);
-                                    break;
-
-                                    default:
-                                        break;
                                 }
                             }
                         }                                
                     }
+
                     else {
+                        tileB.overrideNetwork(this);
 
-                        ((IConduitInterface)tileI).overrideNetwork(this);
-
-                        switch(((IConduitInterface)tileI).getInterfaceType()) {
-
-                            case ITEM: itemInterface.add(tileI);
-                            break;
-
-                            case TCU: tcuInterface.add(tileI);
-                            break;
-
-                            case LIQUID: liquidInterface.add(tileI);
-                            break;
-
-                            case BCPOWER: bcInterface.add(tileI);
-                            break;
-
-                            case IC2POWER: ic2Interface.add(tileI);
-                            break;          
-
-                            case OTHER: otherInterface.add(tile);
-                            break;
-
+                        switch(tileB.getInterfaceType()) {
+                            
+                            case ITEM: this.itemInterface.add(tileA);
+                                break;
+                            case LIQUID: this.liquidInterface.add(tileA);
+                                break;
+                            case OTHER: this.otherInterface.add(tileA);
+                                break;
+                            case TCU: this.tcuInterface.add(tileA);
+                                break;
+                                
                             default:
                                 break;
+
                         }
                     }
                 }

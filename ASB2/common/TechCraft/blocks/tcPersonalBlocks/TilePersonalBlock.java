@@ -1,4 +1,4 @@
-package TechCraft.blocks.tcPersonalGlass;
+package TechCraft.blocks.tcPersonalBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,12 +7,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 
-public class TilePersonalGlass extends TechCraftTile {
+public class TilePersonalBlock extends TechCraftTile {
 
     boolean playerSet;
     String playerName = "";
 
-    public TilePersonalGlass(String player) {
+    public TilePersonalBlock(String player) {
 
         if(player.length() > 0) {
 

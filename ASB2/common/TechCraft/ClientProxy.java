@@ -16,9 +16,9 @@ import TechCraft.blocks.item_transfer.tcItemSorter.TileItemSorter;
 import TechCraft.blocks.tanks.GuiTCTank;
 import TechCraft.blocks.tanks.TileEntityRendererTileTank;
 import TechCraft.blocks.tanks.TileTCTank;
-import TechCraft.blocks.tcConduits.ItemRendererTCConduit;
-import TechCraft.blocks.tcConduits.TileRendererTCConduit;
-import TechCraft.blocks.tcConduits.TileTCConduit;
+import TechCraft.blocks.tcConduits.tcItemConduits.ItemRendererTCItemConduit;
+import TechCraft.blocks.tcConduits.tcItemConduits.TileRendererTCItemConduit;
+import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
 import TechCraft.blocks.tcRunes.GuiRune;
 import TechCraft.blocks.tcRunes.ItemRendererTileBasicRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
@@ -27,8 +27,8 @@ import TechCraft.blocks.tcToolManager.GuiToolManager;
 import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileEntityRendererTileTest;
 import TechCraft.blocks.technogery.TileTestBlock;
-import TechCraft.blocks.technogery.farms.BasicFarm.GuiBasicFarm;
-import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
+import TechCraft.blocks.technogery.tcFarms.BasicFarm.GuiBasicFarm;
+import TechCraft.blocks.technogery.tcFarms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.power_Conduit.ItemRendererMagicConduitExporting;
 import TechCraft.blocks.technogery.power_Conduit.ItemRendererMagicConduitImporting;
 import TechCraft.blocks.technogery.power_Conduit.TileEntityRendererMagicConduitExporting;
@@ -77,8 +77,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TilePowerConduitExporting.class, new TileEntityRendererMagicConduitExporting());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockPowerConduitExporting.blockID, (IItemRenderer)new ItemRendererMagicConduitExporting());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileTCConduit.class, new TileRendererTCConduit());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCConduit.blockID, (IItemRenderer)new ItemRendererTCConduit());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileTCItemConduit.class, new TileRendererTCItemConduit());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCItemConduit.blockID, (IItemRenderer)new ItemRendererTCItemConduit());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCEnergySphere.class, new TileEntityRendererMagicEnergySphere());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCEnergySphere.blockID, (IItemRenderer)new ItemRendererMagicEnergySphere());

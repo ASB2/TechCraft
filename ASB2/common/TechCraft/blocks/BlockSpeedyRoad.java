@@ -23,7 +23,7 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
     public void registerIcons(IconRegister par1IconRegister) {
 
         top = par1IconRegister.registerIcon("TechCraft:BlockSpeedyRoadTop");  
-        side = par1IconRegister.registerIcon("TechCraft:BlockSpeedyRoadSide");
+        side = par1IconRegister.registerIcon("TechCraft:BlockSpeedyRoadSide2");
     }
 
     @Override
@@ -43,22 +43,12 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
 
         if(entity instanceof EntityLiving) {
 
-            ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 4));
-            ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.jump.id, 100, 4));
-            
-            if(((EntityLiving)entity).isSneaking()) {
-
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.invisibility.id, 100, 4));
-            }
-
-            if(((EntityLiving)entity).isSneaking()) {
-
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.invisibility.id, 100, 4));
-            }
+            ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 10, 3));
+            ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.jump.id, 10, 3));
             
             if(((EntityLiving)entity).isBurning()) {
 
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.fireResistance.id, 100, 4));
+                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.fireResistance.id, 10, 4));
             }
 
             if(((EntityLiving)entity).isBlocking()) {
@@ -69,7 +59,7 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
 
             if(((EntityLiving)entity).isInWater()) {
 
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 100, 4));
+                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 10, 4));
             }
         }
     }

@@ -8,12 +8,12 @@ import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
 import TechCraft.blocks.item_transfer.tcItemSorter.TileItemSorter;
 import TechCraft.blocks.tanks.TileTCTank;
-import TechCraft.blocks.tcConduits.TileTCConduit;
+import TechCraft.blocks.tcConduits.tcItemConduits.*;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTestBlock;
-import TechCraft.blocks.technogery.farms.BasicFarm.TileBasicFarm;
+import TechCraft.blocks.technogery.tcFarms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
@@ -46,7 +46,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import TechCraft.blocks.tcPersonalGlass.*;
+import TechCraft.blocks.tcPersonalBlocks.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -69,18 +69,21 @@ public class TechCraft {
     public static boolean includePowerRecipies = false;
     public static boolean includeArmorRecipies = true;
     public static boolean includeRuneRecipies = false;
+    public static boolean modCreatorAndHelperPerks = false;
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
-        
+
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
 
         ItemRegistry.init(config);
+
         BlockRegistry.init(config);
+
         CraftRegistry.init();
         CraftRegistry.craftSmelting();
-        
+
         if(includePowerRecipies)
             CraftRegistry.craftPower();
 
@@ -103,7 +106,7 @@ public class TechCraft {
         GameRegistry.registerFuelHandler(new TechCraftFuelHandler());
 
         GameRegistry.registerPlayerTracker(new TechCraftPlayerTracker ());
-        
+
         //MinecraftForge.addGrassSeed(new ItemStack(ItemRegistry.ItemLifeCrystal), 10);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockBurningFlower,0,20);
         MinecraftForge.addGrassPlant(BlockRegistry.BlockFreezingFlower,0,20);
@@ -154,11 +157,11 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileItemSorter.class, "TileItemSorter");
 
         GameRegistry.registerTileEntity(TileItemConduitInterface.class, "TileItemConduitInterface");
-        
-        GameRegistry.registerTileEntity(TileTCConduit.class, "TileTCConduit");
-        
-        GameRegistry.registerTileEntity(TilePersonalGlass.class, "TilePersonalGlass");
-        
+
+        GameRegistry.registerTileEntity(TileTCItemConduit.class, "TileTCItemConduit");
+
+        GameRegistry.registerTileEntity(TilePersonalBlock.class, "TilePersonalBlock");
+
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

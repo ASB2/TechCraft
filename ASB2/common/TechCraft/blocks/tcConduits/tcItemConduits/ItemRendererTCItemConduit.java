@@ -1,4 +1,4 @@
-package TechCraft.blocks.tcConduits;
+package TechCraft.blocks.tcConduits.tcItemConduits;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -7,11 +7,11 @@ import org.lwjgl.opengl.GL11;
 
 import TechCraft.models.ModelPowerConduitMovingv2;
 
-public class ItemRendererTCConduit implements IItemRenderer{
+public class ItemRendererTCItemConduit implements IItemRenderer{
 
     private ModelPowerConduitMovingv2 modelTutBox;
 
-    public ItemRendererTCConduit()
+    public ItemRendererTCItemConduit()
     {
         modelTutBox = new ModelPowerConduitMovingv2();
     }

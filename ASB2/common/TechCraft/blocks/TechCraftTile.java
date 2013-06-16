@@ -10,9 +10,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.EnumColor;
+import TechCraft.conduit.EnumInterfaceType;
 import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
 import TechCraft.*;
+import TechCraft.conduit.*;
 
 public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IWrenchable {
 
@@ -41,6 +43,38 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
             return true;
         }
         return false;
+    }
+
+    public static EnumInterfaceType translateConduitTypeToInterfaceType(EnumContuitType cType){
+        
+        switch(cType){
+            
+            case ITEM: return EnumInterfaceType.ITEM;
+                
+            case LIQUID: return EnumInterfaceType.LIQUID;
+            
+            case OTHER: return EnumInterfaceType.OTHER;
+            
+            case TCU: return EnumInterfaceType.TCU;
+            
+            default: return EnumInterfaceType.OTHER;            
+        }
+    }
+    
+public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterfaceType cType){
+        
+        switch(cType){
+            
+            case ITEM: return EnumContuitType.ITEM;
+                
+            case LIQUID: return EnumContuitType.LIQUID;
+            
+            case OTHER: return EnumContuitType.OTHER;
+            
+            case TCU: return EnumContuitType.TCU;
+            
+            default: return EnumContuitType.OTHER;            
+        }
     }
 
     public ForgeDirection getOrientation() {
@@ -556,6 +590,16 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         return internal;
     }    
 
+    public int getAmountScaled(int scale, int amount, int max) {
+
+        int internal = amount * scale / max;
+        
+        if(internal > scale) {
+            
+            internal = scale;
+        }
+        return internal;
+    }  
     @Override
     public int getPowerStored() {
         // TODO Auto-generated method stub
@@ -708,7 +752,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
         if(color == EnumColor.NONE || color == null)
             color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
-
     }
 
     @Override

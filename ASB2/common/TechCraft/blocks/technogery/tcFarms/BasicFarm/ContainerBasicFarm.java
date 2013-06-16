@@ -1,4 +1,4 @@
-package TechCraft.blocks.technogery.farms.BasicFarm;
+package TechCraft.blocks.technogery.tcFarms.BasicFarm;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

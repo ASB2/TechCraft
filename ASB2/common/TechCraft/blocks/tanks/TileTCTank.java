@@ -12,12 +12,10 @@ import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 import TechCraft.blocks.TechCraftTile;
 
-import net.minecraft.block.*;
-
 public class TileTCTank extends TechCraftTile implements ITankContainer, IInventory {
 
     public LiquidTank tank;
-    public int renderOffset;
+    LiquidStack liquid;
     
     public TileTCTank() {
 
@@ -27,8 +25,22 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
 
     public void updateEntity() {
 
+        if(tank.getLiquid() != null) {
+            
+            liquid = tank.getLiquid();
+        }
+        
+        else {
+            
+            liquid = null;
+        }
     }
 
+    public LiquidTank getTank() {
+        
+        return tank;
+    }
+    
     public String getName() {
 
         return "TC Tank";
@@ -37,7 +49,7 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-
+        
         if (data.hasKey("stored") && data.hasKey("liquidId")) {
             
             LiquidStack liquid = new LiquidStack(data.getInteger("liquidId"), data.getInteger("stored"), 0);
@@ -54,7 +66,7 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
 
     @Override
     public void writeToNBT(NBTTagCompound data) {
-        super.writeToNBT(data);
+        super.writeToNBT(data);        
         
         if (tank.containsValidLiquid()) {
             
@@ -69,31 +81,14 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
     }
 
     @Override
-    public int fill (int tankIndex, LiquidStack resource, boolean doFill)
-    {
-        /*if (resource != null && resource.amount > 20 && counter == 0)
-        {
-            if (tank.getLiquid() == null)
-            {
-                renderLiquid = new LiquidStack(resource.itemID, 0, resource.itemMeta);
-            }
-            else
-            {
-                renderLiquid = tank.getLiquid();
-            }
-            counter = 24;
-            updateAmount = resource.amount / 24;
-            System.out.println("renderLiquid: "+renderLiquid.amount);           
-        }*/
-        //renderLiquid = tank.getLiquid();
-        int amount = tank.fill(resource, doFill);
-        if (amount > 0 && doFill)
-        {
-            renderOffset = resource.amount;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
+    public int fill (int tankIndex, LiquidStack resource, boolean doFill) {
 
-        //System.out.println("tankLiquid: "+tank.getLiquid().amount);   
+        int amount = tank.fill(resource, doFill);
+        
+        if (amount > 0 && doFill) {
+            
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }  
         return amount;
     }
     @Override
@@ -114,9 +109,8 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
 
 
         LiquidStack amount = tank.drain(maxDrain, doDrain);
-        if (amount != null && doDrain)
-        {
-            renderOffset = -maxDrain;
+        if (amount != null && doDrain) {
+
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
         return amount;
@@ -132,29 +126,6 @@ public class TileTCTank extends TechCraftTile implements ITankContainer, IInvent
     public ILiquidTank getTank (ForgeDirection direction, LiquidStack type)
     {
         return tank;
-    }
-
-    public float getLiquidAmountScaled ()
-    {
-        return (float) (tank.getLiquid().amount - renderOffset) / (float) (tank.getCapacity() * 1.01F);
-    }
-
-    public boolean containsLiquid ()
-    {
-        return tank.getLiquid() != null;
-    }
-
-    public int getBrightness ()
-    {
-        if (containsLiquid())
-        {
-            int id = tank.getLiquid().itemID;
-            if (id < 4096)
-            {
-                return Block.lightValue[id];
-            }
-        }
-        return 0;
     }
 
     @Override

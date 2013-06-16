@@ -1,15 +1,13 @@
-package TechCraft.blocks.tcConduits;
+package TechCraft.blocks.tcConduits.tcItemConduits;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftContainers;
 
-public class BlockTCConduit extends TechCraftContainers {
+public class BlockTCItemConduit extends TechCraftContainers {
 
-    TileTCConduit tile;
-
-    public BlockTCConduit(int par1, Material par2Material) {
+    public BlockTCItemConduit(int par1, Material par2Material) {
         super(par1, par2Material);
     }
 
@@ -31,7 +29,6 @@ public class BlockTCConduit extends TechCraftContainers {
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        tile = new TileTCConduit();        
-        return tile;
+        return new TileTCItemConduit();
     }
 }

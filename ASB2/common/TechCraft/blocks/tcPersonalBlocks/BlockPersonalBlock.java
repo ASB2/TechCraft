@@ -1,7 +1,6 @@
-package TechCraft.blocks.tcPersonalGlass;
+package TechCraft.blocks.tcPersonalBlocks;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,9 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftContainers;
 
-public class BlockPersonalGlass extends TechCraftContainers {
+public class BlockPersonalBlock extends TechCraftContainers {
 
-    public BlockPersonalGlass(int par1, Material par2Material) {
+    public BlockPersonalBlock(int par1, Material par2Material) {
         super(par1, par2Material);
         setBlockUnbreakable();
     }
@@ -26,26 +25,10 @@ public class BlockPersonalGlass extends TechCraftContainers {
             playerName =  ((EntityPlayer)entityLiving).username;
         }
     }
-    
-    @Override
-    public void registerIcons(IconRegister iconRegister)
-    {
-        blockIcon = iconRegister.registerIcon("TechCraft:BlockPersonalGlass");
-    }
-    
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
-
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TilePersonalGlass(playerName);
+        return new TilePersonalBlock(playerName);
     }
 }

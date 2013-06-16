@@ -9,9 +9,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.blocks.tcConduits.TileTCConduit;
-import TechCraft.conduit.ConduitInterfaceType;
 import TechCraft.conduit.ConduitNetwork;
+import TechCraft.conduit.EnumInterfaceType;
+import TechCraft.conduit.IConduitConductor;
 import TechCraft.conduit.IConduitInterfaceItem;
 import TechCraft.items.ItemLinker;
 
@@ -466,9 +466,9 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
     }
 
     @Override
-    public ConduitInterfaceType getInterfaceType() {
+    public EnumInterfaceType getInterfaceType() {
 
-        return ConduitInterfaceType.ITEM;
+        return EnumInterfaceType.ITEM;
     }
 
     @Override
@@ -521,7 +521,7 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
     @Override
     public boolean importingToNetwork() {
 
-        if(TechCraftTile.translateDirectionToTile(this, worldObj, this.getOrientation()) instanceof TileTCConduit) {
+        if(TechCraftTile.translateDirectionToTile(this, worldObj, this.getOrientation()) instanceof IConduitConductor) {
 
             return true;
         }
