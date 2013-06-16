@@ -123,11 +123,20 @@ public class CraftRegistry {
             'Z', ItemRegistry.ItemZycrantianIngot
         });
         
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPersonalGlass, 8), new Object[] {
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPersonalBlock, 8, 0), new Object[] {
             "QGQ",
             "GZG",
             "QGQ",
             'G', Block.glass,
+            'Q', Block.blockNetherQuartz,
+            'Z', ItemRegistry.ItemZycrantianIngot
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPersonalBlock, 8, 1), new Object[] {
+            "QGQ",
+            "GZG",
+            "QGQ",
+            'G', Block.stone,
             'Q', Block.blockNetherQuartz,
             'Z', ItemRegistry.ItemZycrantianIngot
         });

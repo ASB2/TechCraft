@@ -1,6 +1,7 @@
 package TechCraft.blocks.tcConduits.tcItemConduits;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -125,12 +126,9 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
         if(tile != null) {
 
-            if(tile instanceof IPowerMisc) {
-
-                if(((IPowerMisc)tile).outputPower() || ((IPowerMisc)tile).recievePower()) {
-
-                    return ((IPowerMisc)tile).renderByDirection(direction);
-                }
+            if(tile instanceof IInventory) {
+                
+                    return true;
             }
             return false;
         }

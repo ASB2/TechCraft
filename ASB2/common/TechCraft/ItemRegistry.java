@@ -97,7 +97,8 @@ public class ItemRegistry {
     public static TechCraftItems ItemEnhancedDestructionCatalyst;
     public static TechCraftItems ItemTradeStick;
     public static TechCraftItems ItemOmniTool;
-    public static TechCraftItems ItemLifeStealingBludgeoningStick;
+    public static TechCraftItems ItemLifeStealingBludgeoningStick;    
+    public static TechCraftItems ItemBlankCircuit;
     
     public static void init(Configuration config) {
 
@@ -271,6 +272,9 @@ public class ItemRegistry {
         ItemLifeStealingBludgeoningStick.setUnlocalizedName("ASB2_ItemLifeStealingBludgeoningStick");
         LanguageRegistry.addName(ItemLifeStealingBludgeoningStick, "Life Stealing Bludgeoning Stick");
         
+        ItemBlankCircuit = new ItemBlankCircuit(config.getItem("ItemBlankCircuit", 5041).getInt());
+        ItemBlankCircuit.setUnlocalizedName("ASB2_ItemBlankCircuit");
+        LanguageRegistry.addName(ItemBlankCircuit, "Blank Circuit");
     }
 
 }

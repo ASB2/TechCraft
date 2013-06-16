@@ -42,34 +42,37 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
         super.managePowerAll(this, powerInput(), false);
         super.updateEntity();
 
-        if(tileItemStacks[0] == null) {
-            teleporterSet = false;
-            coordsSet = false;
-            teleporter = null;
-        }
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
-        if(!teleporterSet && tileItemStacks[0] != null) {
-
-            if(tileItemStacks[0].getItem() instanceof ItemTeleporter) {
-
-                teleporter = (ItemTeleporter) tileItemStacks[0].getItem();
-                teleporterSet = true;
+            if(tileItemStacks[0] == null) {
+                teleporterSet = false;
+                coordsSet = false;
+                teleporter = null;
             }
-        }
 
-        if(teleporterSet && teleporter != null && !coordsSet) {
+            if(!teleporterSet && tileItemStacks[0] != null) {
 
-            if(teleporter.isCoodsSet(tileItemStacks[0])) {
+                if(tileItemStacks[0].getItem() instanceof ItemTeleporter) {
 
-                x = (int)teleporter.getXCoord(tileItemStacks[0]);
-                y = (int)teleporter.getYCoord(tileItemStacks[0]);
-                z = (int)teleporter.getZCoord(tileItemStacks[0]);
-                dimentionID = (int)teleporter.getDimentionIDCoord(tileItemStacks[0]);   
+                    teleporter = (ItemTeleporter) tileItemStacks[0].getItem();
+                    teleporterSet = true;
+                }
+            }
 
-                x = x + .5;
-                z = z + .5;
+            if(teleporterSet && teleporter != null && !coordsSet) {
 
-                coordsSet = true;
+                if(teleporter.isCoodsSet(tileItemStacks[0])) {
+
+                    x = (int)teleporter.getXCoord(tileItemStacks[0]);
+                    y = (int)teleporter.getYCoord(tileItemStacks[0]);
+                    z = (int)teleporter.getZCoord(tileItemStacks[0]);
+                    dimentionID = (int)teleporter.getDimentionIDCoord(tileItemStacks[0]);   
+
+                    x = x + .5;
+                    z = z + .5;
+
+                    coordsSet = true;
+                }
             }
         }
     }
@@ -111,11 +114,11 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     public void setPowerStored(int power) {
 
         if(power >= 0) {
-            
+
             this.powerStored = power;       
         }
     }
-    
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);

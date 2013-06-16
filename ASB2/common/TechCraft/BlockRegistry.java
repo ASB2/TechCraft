@@ -2,6 +2,7 @@ package TechCraft;
 
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TechCraft.blocks.BlockAirCrystalOre;
@@ -13,26 +14,30 @@ import TechCraft.blocks.BlockFireCrystalOre;
 import TechCraft.blocks.BlockFreezingFlower;
 import TechCraft.blocks.BlockGarnetBlock;
 import TechCraft.blocks.BlockGarnetOre;
+import TechCraft.blocks.BlockSpeedyRoad;
 import TechCraft.blocks.BlockWaterCrystalOre;
 import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
+import TechCraft.blocks.conduitInterface.items.BlockItemConduitInterface;
 import TechCraft.blocks.item_transfer.item_SenderReciever.BlockItemReciever;
 import TechCraft.blocks.item_transfer.item_SenderReciever.BlockItemSender;
 import TechCraft.blocks.tanks.BlockTCTank;
+import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
+import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
+import TechCraft.blocks.tcPersonalBlocks.PersonalBlockPlacer;
 import TechCraft.blocks.tcRunes.BlockBasicRune;
 import TechCraft.blocks.tcRunes.BlockRuneBase;
 import TechCraft.blocks.tcToolManager.BlockToolManager;
 import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
-import TechCraft.blocks.technogery.tcFocus.BlockTechnogryFocus;
 import TechCraft.blocks.technogery.BlockTestBlock;
-import TechCraft.blocks.technogery.tcFarms.BasicFarm.BlockBasicFarm;
 import TechCraft.blocks.technogery.power_Conduit.BlockPowerConduitExporting;
 import TechCraft.blocks.technogery.power_Conduit.BlockPowerConduitImporting;
-import TechCraft.blocks.tcConduits.tcItemConduits.*;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.BlockTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcFarms.BasicFarm.BlockBasicFarm;
+import TechCraft.blocks.technogery.tcFocus.BlockTechnogryFocus;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.BlockGenorator;
 import TechCraft.blocks.technogery.tcGrinder.BlockTCGrinder;
@@ -41,9 +46,6 @@ import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.blocks.conduitInterface.items.*;
-import TechCraft.blocks.*;
-import TechCraft.blocks.tcPersonalBlocks.*;
 
 public class BlockRegistry {
 
@@ -93,8 +95,7 @@ public class BlockRegistry {
     
     public static TechCraftBlocks BlockSpeedyRoad;
     
-    public static TechCraftContainers BlockPersonalGlass;
-    public static TechCraftContainers BlockPersonalStone;
+    public static TechCraftContainers BlockPersonalBlock;
     
     public static void init(Configuration config) {
 
@@ -302,17 +303,12 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockSpeedyRoad, "Speedy Road");
         MinecraftForge.setBlockHarvestLevel(BlockSpeedyRoad, "pickaxe", 2);
         
-        BlockPersonalGlass = new BlockPersonalGlass(config.getBlock("BlockPersonalGlass", 534).getInt(), Material.rock);
-        BlockPersonalGlass.setUnlocalizedName("ASB2_BlockPersonalGlass");
-        GameRegistry.registerBlock(BlockPersonalGlass, "ASB2_BlockPersonalGlass");
-        LanguageRegistry.addName(BlockPersonalGlass, "Personal Glass");
-        MinecraftForge.setBlockHarvestLevel(BlockPersonalGlass, "pickaxe", 2);
-        
-        BlockPersonalStone = new BlockPersonalStone(config.getBlock("BlockPersonalStone", 535).getInt(), Material.rock);
-        BlockPersonalStone.setUnlocalizedName("ASB2_BlockPersonalStone");
-        GameRegistry.registerBlock(BlockPersonalStone, "ASB2_BlockPersonalStone");
-        LanguageRegistry.addName(BlockPersonalStone, "Personal Stone");
-        MinecraftForge.setBlockHarvestLevel(BlockPersonalStone, "pickaxe", 2);
+        BlockPersonalBlock = new BlockPersonalBlock(config.getBlock("BlockPersonalBlock", 534).getInt(), Material.rock);
+        BlockPersonalBlock.setUnlocalizedName("ASB2_BlockPersonalBlock");
+        GameRegistry.registerBlock(BlockPersonalBlock, PersonalBlockPlacer.class, "ASB2_BlockPersonalBlock");
+        LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 0), "Personal Glass");
+        LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 1), "Personal Stone");
+        MinecraftForge.setBlockHarvestLevel(BlockPersonalBlock, "pickaxe", 2);
     }
 
 }

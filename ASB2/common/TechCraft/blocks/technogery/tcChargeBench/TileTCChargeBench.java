@@ -27,9 +27,11 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
         this.managePowerAll(this, powerInput(), false);
         super.updateEntity();
 
-        addEnergyToSlot();
-        removeEnergySlot();
-    }    
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            addEnergyToSlot();
+            removeEnergySlot();
+        }
+    }
 
     public void addEnergyToSlot() {        
 
@@ -103,7 +105,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                 if(tcItem.canUsePower(powerToMove, tileItemStacks[4]) && this.canGainPower(powerToMove)){
 
                     if(tcItem.usePower(powerToMove, tileItemStacks[4])) {
-                        
+
                         this.gainPower(powerToMove, ForgeDirection.UNKNOWN);                        
                     }
                 }
@@ -119,7 +121,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
                 if(tcItem.canUsePower(powerToMove, tileItemStacks[5]) && this.canGainPower(powerToMove)){
 
                     if(tcItem.usePower(powerToMove, tileItemStacks[5])) {
-                        
+
                         this.gainPower(powerToMove, ForgeDirection.UNKNOWN);
                     }
                 }

@@ -32,33 +32,35 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
     public void updateEntity() {
         super.managePowerAll(this,  powerOutput(), true);
 
-        ticks++;        
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            ticks++;        
 
-        if(!(powerStored == powerMax)) {            
+            if(!(powerStored == powerMax)) {            
 
-            if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0) {            
-                
-                fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);             
-                currentFuelID = tileItemStacks[9].itemID;                            
-                decrStackSize(9,1);
-            } 
-            
+                if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0) {            
+
+                    fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);             
+                    currentFuelID = tileItemStacks[9].itemID;                            
+                    decrStackSize(9,1);
+                } 
+
+                if(fuelBurnTime > 0) {
+
+                    isBurning = true;
+                    fuelBurnTime--;
+                }
+            }
+
             if(fuelBurnTime > 0) {
 
-                isBurning = true;
-                fuelBurnTime--;
+                if(ticks >= Utilities.TICKSTOPOWER) {
+
+                    ticks = 0;
+                    this.gainPower(1, ForgeDirection.UNKNOWN);
+                }
             }
+            moveSlots();
         }
-
-        if(fuelBurnTime > 0) {
-
-            if(ticks >= Utilities.TICKSTOPOWER) {
-
-                ticks = 0;
-                this.gainPower(1, ForgeDirection.UNKNOWN);
-            }
-        }
-        moveSlots();
     }
 
     public void moveSlots() {

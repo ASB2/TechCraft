@@ -33,20 +33,24 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
         this.managePowerAll(this, powerInput(),false);
         super.updateEntity();
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            
+            if(this.getPowerStored() > 0) {
+                
+                isBurning = true;
+            }
 
-        if(this.getPowerStored() > 0){
-            isBurning = true;
+            if(this.getPowerStored() == 0) {
+                
+                isBurning = false;
+            }
+
+            if (this.isBurning && this.canSmelt() && this.getPowerStored() >= this.powerForProcess) {            
+                
+                this.smeltItem();    
+                this.usePower(powerForProcess, ForgeDirection.UNKNOWN);
+            }
         }
-
-        if(this.getPowerStored() == 0){
-            isBurning = false;
-        }
-
-        if (this.isBurning && this.canSmelt() && this.getPowerStored() >= this.powerForProcess) {            
-            this.smeltItem();    
-            this.usePower(powerForProcess, ForgeDirection.UNKNOWN);
-        }
-
     }
 
     public void smeltItem()
@@ -93,11 +97,11 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     public void setPowerStored(int power) {
 
         if(power >= 0) {
-            
+
             this.powerStored = power;       
         }
     }
-    
+
     @Override
     public boolean recievePower() {
 
@@ -150,22 +154,22 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
     @Override
     public int getSizeInventory() {
-        
+
         return tileItemStacks.length;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-        
+
         return tileItemStacks[slot];
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
-        
+
         tileItemStacks[slot] = stack;
         if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-            
+
             stack.stackSize = getInventoryStackLimit();
         }               
     }

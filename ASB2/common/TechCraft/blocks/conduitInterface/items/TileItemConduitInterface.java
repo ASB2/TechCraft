@@ -29,20 +29,23 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
 
     public void updateEntity() {
 
-        this.moveFromAjacentInventory(ForgeDirection.DOWN);
-        this.moveFromAjacentInventory(ForgeDirection.UP);
-        this.moveFromAjacentInventory(ForgeDirection.NORTH);
-        this.moveFromAjacentInventory(ForgeDirection.SOUTH);
-        this.moveFromAjacentInventory(ForgeDirection.WEST);
-        this.moveFromAjacentInventory(ForgeDirection.EAST);
-        
-        if(this.importingToNetwork()) {
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            
+            this.moveFromAjacentInventory(ForgeDirection.DOWN);
+            this.moveFromAjacentInventory(ForgeDirection.UP);
+            this.moveFromAjacentInventory(ForgeDirection.NORTH);
+            this.moveFromAjacentInventory(ForgeDirection.SOUTH);
+            this.moveFromAjacentInventory(ForgeDirection.WEST);
+            this.moveFromAjacentInventory(ForgeDirection.EAST);
 
-            this.moveItemsToInventory();
-        }
-        else {
+            if(this.importingToNetwork()) {
 
-            this.moveSlotToInventory();
+                this.moveItemsToInventory();
+            }
+            else {
+
+                this.moveSlotToInventory();
+            }
         }
     }
 

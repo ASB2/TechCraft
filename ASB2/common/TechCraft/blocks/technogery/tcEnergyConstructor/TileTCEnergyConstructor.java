@@ -22,7 +22,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
     ItemStack[] tileItemStacks;
 
     public TileTCEnergyConstructor() {
-        
+
         tileItemStacks = new ItemStack[5];
     }
 
@@ -30,25 +30,27 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
         this.managePowerAll(this, powerInput(), false);
         super.updateEntity();
 
-        this.moveSlots();
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            this.moveSlots();
 
-        if(tileItemStacks[0] != null) {
+            if(tileItemStacks[0] != null) {
 
-            if(!targetFuelSet){
+                if(!targetFuelSet){
 
-                targetFuel = tileItemStacks[0];
-                targetFuelSet = true;
+                    targetFuel = tileItemStacks[0];
+                    targetFuelSet = true;
+                }
+
+                if(targetFuel != null && targetFuelSet) {
+
+                    this.formItem(); 
+                }
+
             }
+            else {
 
-            if(targetFuel != null && targetFuelSet) {
-
-                this.formItem(); 
+                targetFuelSet = false;
             }
-
-        }
-        else {
-
-            targetFuelSet = false;
         }
     }    
 
@@ -193,7 +195,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
         return false;
     }
 
-    
+
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
