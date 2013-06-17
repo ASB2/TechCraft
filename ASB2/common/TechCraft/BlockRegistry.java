@@ -46,6 +46,7 @@ import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.blocks.tcDeepStorageCell.*;
 
 public class BlockRegistry {
 
@@ -96,6 +97,8 @@ public class BlockRegistry {
     public static TechCraftBlocks BlockSpeedyRoad;
     
     public static TechCraftContainers BlockPersonalBlock;
+    public static TechCraftContainers BlockDeepStorageCell;
+    
     
     public static void init(Configuration config) {
 
@@ -309,6 +312,12 @@ public class BlockRegistry {
         LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 0), "Personal Glass");
         LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 1), "Personal Stone");
         MinecraftForge.setBlockHarvestLevel(BlockPersonalBlock, "pickaxe", 2);
+    
+        BlockDeepStorageCell = new BlockDeepStorageCell(config.getBlock("BlockDeepStorageCell", 535).getInt(), Material.rock);
+        BlockDeepStorageCell.setUnlocalizedName("ASB2_BlockDeepStorageCell");
+        GameRegistry.registerBlock(BlockDeepStorageCell, "ASB2_BlockDeepStorageCell");
+        LanguageRegistry.addName(BlockDeepStorageCell, "Deep Storage Cell");
+        MinecraftForge.setBlockHarvestLevel(BlockDeepStorageCell, "pickaxe", 2);
     }
 
 }

@@ -48,6 +48,7 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.items.circuits.*;
 import TechCraft.items.*;
 
 public class ItemRegistry {
@@ -99,6 +100,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemOmniTool;
     public static TechCraftItems ItemLifeStealingBludgeoningStick;    
     public static TechCraftItems ItemBlankCircuit;
+    public static TechCraftItems ItemDataCircuit;
     
     public static void init(Configuration config) {
 
@@ -275,6 +277,10 @@ public class ItemRegistry {
         ItemBlankCircuit = new ItemBlankCircuit(config.getItem("ItemBlankCircuit", 5041).getInt());
         ItemBlankCircuit.setUnlocalizedName("ASB2_ItemBlankCircuit");
         LanguageRegistry.addName(ItemBlankCircuit, "Blank Circuit");
+        
+        ItemDataCircuit = new ItemDataCircuit(config.getItem("ItemDataCircuit", 5042).getInt());
+        ItemDataCircuit.setUnlocalizedName("ASB2_ItemDataCircuit");
+        LanguageRegistry.addName(ItemDataCircuit, "Simple Data Circuit");
     }
 
 }

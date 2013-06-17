@@ -1,5 +1,6 @@
-package TechCraft.items;
+package TechCraft.items.circuits;
 
+import TechCraft.items.TechCraftItems;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -45,6 +45,10 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         return false;
     }
 
+    public void triggerBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z ) {
+        
+    }
+    
     public static EnumInterfaceType translateConduitTypeToInterfaceType(EnumContuitType cType){
         
         switch(cType){

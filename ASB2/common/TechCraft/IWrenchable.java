@@ -7,4 +7,6 @@ import net.minecraft.world.*;
 public interface IWrenchable {
 
     boolean breakBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z);
+
+    void triggerBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z);
 }

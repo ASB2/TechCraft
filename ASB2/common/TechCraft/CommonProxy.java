@@ -37,6 +37,7 @@ import TechCraft.items.gui.ContainerEnchancedDestructionCatalyst;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import TechCraft.blocks.tcDeepStorageCell.*;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -80,6 +81,7 @@ public class CommonProxy implements IGuiHandler {
                     case 12:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
                     case 13:return new ContainerItemSorter(player.inventory, (TileItemSorter)tileEntity);
                     case 14:return new ContainerItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);
+                    case 15: return new ContainerDeepStorageCell(player.inventory, (TileDeepStorageCell)tileEntity);
                 }
             }
         }

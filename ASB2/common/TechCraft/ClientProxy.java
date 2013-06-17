@@ -62,6 +62,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import TechCraft.blocks.conduitInterface.items.*;
 import TechCraft.items.gui.*;
+import TechCraft.blocks.tcDeepStorageCell.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -128,6 +129,7 @@ public class ClientProxy extends CommonProxy {
                     case 12: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
                     case 13: return new GuiItemSorter(player.inventory, (TileItemSorter)tileEntity);                
                     case 14: return new GuiItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);  
+                    case 15: return new GuiDeepStorageCell(player.inventory, (TileDeepStorageCell)tileEntity);  
                     //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
 
                     //case 4: return new GuiMagicGauntlet(player);

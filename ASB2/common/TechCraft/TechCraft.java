@@ -69,7 +69,7 @@ public class TechCraft {
     public static boolean includePowerRecipies = false;
     public static boolean includeArmorRecipies = true;
     public static boolean includeRuneRecipies = false;
-    public static boolean modCreatorAndHelperPerks = false;
+    public static boolean modCreatorAndHelperPerks = true;
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
@@ -93,6 +93,8 @@ public class TechCraft {
         if(includePowerRecipies)
             CraftRegistry.craftRunes();
 
+        modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "").getBoolean(true);
+        
         config.save();
     }
 
