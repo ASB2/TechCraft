@@ -10,22 +10,19 @@ public class ContainerTCInfuser extends Container {
 
     public ContainerTCInfuser(InventoryPlayer par1InventoryPlayer, TileTCInfuser tileEntity) {
         
-        this.addSlotToContainer(new Slot(tileEntity, 0, 15,12));        
-        this.addSlotToContainer(new Slot(tileEntity, 1, 33,12)); 
-        this.addSlotToContainer(new Slot(tileEntity, 2, 51,12)); 
+        this.addSlotToContainer(new Slot(tileEntity, 0, 28, 64));
         
-        this.addSlotToContainer(new Slot(tileEntity, 3, 107,12));        
-        this.addSlotToContainer(new Slot(tileEntity, 4, 125,12)); 
-        this.addSlotToContainer(new Slot(tileEntity, 5, 143,12));
+        this.addSlotToContainer(new Slot(tileEntity, 1, 32 + 15, 14)); 
+        this.addSlotToContainer(new Slot(tileEntity, 2, 65 + 15, 14));         
+        this.addSlotToContainer(new Slot(tileEntity, 3, 83 + 15, 14));
         
-        this.addSlotToContainer(new Slot(tileEntity, 6, 33,37));        
-        this.addSlotToContainer(new Slot(tileEntity, 7, 80,39));
-
-        this.addSlotToContainer(new Slot(tileEntity, 8, 126,37));
+        this.addSlotToContainer(new Slot(tileEntity, 4, 47 + 15, 32)); 
+        this.addSlotToContainer(new Slot(tileEntity, 5, 65 + 15, 32));        
+        this.addSlotToContainer(new Slot(tileEntity, 6, 83 + 15, 32)); 
         
-        this.addSlotToContainer(new Slot(tileEntity, 9, 62,38));        
-        this.addSlotToContainer(new Slot(tileEntity, 10, 80,59)); 
-        this.addSlotToContainer(new Slot(tileEntity, 11, 98,59));
+        this.addSlotToContainer(new Slot(tileEntity, 7, 47 + 15, 50));
+        this.addSlotToContainer(new Slot(tileEntity, 8, 65 + 15, 50));        
+        this.addSlotToContainer(new Slot(tileEntity, 9, 83 + 15,50));
         
         for (int i = 0; i < 3; i++)
         {

@@ -249,7 +249,7 @@ public class BlockRegistry {
         BlockTCInfuser = new BlockTCInfuser(config.getBlock("BlockTCInfuser", 524).getInt(),Material.rock);
         BlockTCInfuser.setUnlocalizedName("ASB2_BlockTCInfuser");
         GameRegistry.registerBlock(BlockTCInfuser, "ASB2_BlockTCInfuser");
-        LanguageRegistry.addName(BlockTCInfuser, "TC Infuser");
+        LanguageRegistry.addName(BlockTCInfuser, "TC Energy Infuser");
         MinecraftForge.setBlockHarvestLevel(BlockTCInfuser, "pickaxe", 2);
         
         BlockTCTeleporter = new BlockTCTeleporter(config.getBlock("BlockTCTeleporter", 525).getInt(),Material.rock);

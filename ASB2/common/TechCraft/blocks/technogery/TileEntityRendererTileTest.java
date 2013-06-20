@@ -16,7 +16,7 @@ public class TileEntityRendererTileTest extends TileEntitySpecialRenderer{
     
     public void renderAModelAt(TileEntity tile, double x, double y, double z, float frame) {
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.ENERGY_RELEASER);
         
         model.renderAll(tile, x, y, z);
     }

@@ -11,42 +11,42 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelEnergyReleaser extends ModelBase {
     
-    ModelRenderer Shape1;
-    ModelRenderer Shape2;
-    ModelRenderer Shape3;
+    ModelRenderer Center;
+    ModelRenderer Base;
+    ModelRenderer Top;
   
   public ModelEnergyReleaser() {
       
-    textureWidth = 64;
-    textureHeight = 32;
+    textureWidth = 128;
+    textureHeight = 64;
     
-      Shape1 = new ModelRenderer(this, 0, 0);
-      Shape1.addBox(-5F, 0F, -5F, 10, 16, 10);
-      Shape1.setRotationPoint(0F, 8F, 0F);
-      Shape1.setTextureSize(64, 32);
-      Shape1.mirror = true;
-      setRotation(Shape1, 0F, 0F, 0F);
-      Shape2 = new ModelRenderer(this, 0, 0);
-      Shape2.addBox(-8F, 0F, -8F, 16, 4, 16);
-      Shape2.setRotationPoint(0F, 20F, 0F);
-      Shape2.setTextureSize(64, 32);
-      Shape2.mirror = true;
-      setRotation(Shape2, 0F, 0F, 0F);
-      Shape3 = new ModelRenderer(this, 0, 0);
-      Shape3.addBox(-7.5F, 0F, -7.5F, 15, 2, 15);
-      Shape3.setRotationPoint(0F, 10F, 0F);
-      Shape3.setTextureSize(64, 32);
-      Shape3.mirror = true;
-      setRotation(Shape3, 0F, 0F, 0F);
+      Center = new ModelRenderer(this, 0, 19);
+      Center.addBox(-5F, 0F, -5F, 10, 16, 10);
+      Center.setRotationPoint(0F, 8F, 0F);
+      Center.setTextureSize(128, 64);
+      Center.mirror = true;
+      setRotation(Center, 0F, 0F, 0F);
+      Base = new ModelRenderer(this, 42, 44);
+      Base.addBox(-8F, 0F, -8F, 16, 4, 16);
+      Base.setRotationPoint(0F, 20F, 0F);
+      Base.setTextureSize(128, 64);
+      Base.mirror = true;
+      setRotation(Base, 0F, 0F, 0F);
+      Top = new ModelRenderer(this, 0, 1);
+      Top.addBox(-7.5F, 0F, -7.5F, 15, 2, 15);
+      Top.setRotationPoint(0F, 10F, 0F);
+      Top.setTextureSize(128, 64);
+      Top.mirror = true;
+      setRotation(Top, 0F, 0F, 0F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    Shape1.render(f5);
-    Shape2.render(f5);
-    Shape3.render(f5);
+    Center.render(f5);
+    Base.render(f5);
+    Top.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -61,7 +61,8 @@ public class ModelEnergyReleaser extends ModelBase {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
   }
 
-  boolean finishProduct = false;
+  
+boolean finishProduct = false;
   
   int ticks;
   public void renderAll(TileEntity box, double x, double y, double z) {
@@ -74,8 +75,8 @@ public class ModelEnergyReleaser extends ModelBase {
       
       GL11.glRotatef(180, 180, 1, 1);
       
-      Shape1.render(0.0625F);
-      Shape2.render(0.0625F);
+      Center.render(0.0625F);
+      Base.render(0.0625F);
       
      
       
@@ -93,7 +94,7 @@ public class ModelEnergyReleaser extends ModelBase {
       else {
           GL11.glRotatef(180, 180, 1, ticks);
       }
-      Shape3.render(0.0625F);
+      Top.render(0.0625F);
       
       if(ticks > 180)
           ticks = 0;

@@ -13,11 +13,12 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
 
     int powerStored;
     int powerMax = 100;
+    
     ItemStack[] tileItemStacks;
 
     public TileTCInfuser() {
         
-        tileItemStacks = new ItemStack[9];
+        tileItemStacks = new ItemStack[10];
     }
 
     public void updateEntity() {
@@ -71,7 +72,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     @Override
     public boolean usePower(int PowerUsed, ForgeDirection direction) {
 
-        if(this.powerStored>=PowerUsed) {
+        if(this.powerStored >= PowerUsed) {
 
             this.powerStored = powerStored - PowerUsed;
             return true;
@@ -85,6 +86,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
         if(this.powerMax - this.powerStored >= PowerGained) {
 
             this.powerStored = powerStored + PowerGained;
+            
             return true;
         }
         return false;
@@ -99,7 +101,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     @Override
     public String getName() {
 
-        return "TC Infuser";
+        return "TC Energy Infuser";
     }
 
     public int getPowerStored(){
