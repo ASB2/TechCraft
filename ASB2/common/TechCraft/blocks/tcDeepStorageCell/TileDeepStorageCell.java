@@ -1,17 +1,16 @@
 package TechCraft.blocks.tcDeepStorageCell;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.circuits.*;
+import TechCraft.circuits.ISimpleDataCircuit;
 
-public class TileDeepStorageCell extends TechCraftTile implements IInventory{
+public class TileDeepStorageCell extends TechCraftTile implements ISidedInventory{
 
     private ItemStack[] tileItemStack;
-
     ISimpleDataCircuit circuit;
     boolean circuitSet = false;
 
@@ -21,6 +20,7 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
     }
 
     public void updateEntity() {
+        ticks++;
 
         if(tileItemStack[0] != null) {
 
@@ -36,8 +36,11 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
             circuitSet = false;
         }
 
-        moveItemStackToCircuit();
-        //moveItemFromCircuit();
+        if(ticks >= 20) {
+            moveItemStackToCircuit();
+            moveItemFromCircuit();
+            ticks = 0;
+        }
     }
 
     public void moveItemStackToCircuit() {
@@ -46,7 +49,7 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
 
             for(int i = 0; i < tileItemStack.length; i++) {
 
-                if(i != 0 && i != 0) {
+                if(i != 0 && i != 2) {
 
                     if(tileItemStack[i] != null) {
 
@@ -57,22 +60,20 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
                                 if(circuit.getType(tileItemStack[0]) == 0) 
                                     circuit.setType(tileItemStack[0], tileItemStack[i].itemID);
 
-                                if(circuit.getMaximumData(tileItemStack[0]) != circuit.getStoredData(tileItemStack[0])) {
+                                if(circuit.getMaximumData(tileItemStack[0]) > circuit.getStoredData(tileItemStack[0])) {
 
-                                    circuit.setStoredData(tileItemStack[0], tileItemStack[i].itemID, circuit.getStoredData(tileItemStack[0]) + 1);
+                                    if(circuit.setStoredData(tileItemStack[0], circuit.getStoredData(tileItemStack[0]) + 1, true)) {
 
-                                    if(this.tileItemStack[i].stackSize == 1) {
+                                        if(this.tileItemStack[i].stackSize == 1) {
 
-                                        this.tileItemStack[i] = null;
-                                    }
-                                    else {
+                                            this.tileItemStack[i] = null;
+                                        }
+                                        else {
 
-                                        this.decrStackSize(i, 1);
+                                            this.decrStackSize(i, 1);
+                                        }
                                     }
                                 }
-                            }
-                            else {
-
                             }
                         }
                     }
@@ -85,30 +86,44 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
 
         if(circuitSet) {
 
-            if(circuit.getType(tileItemStack[0]) != 0) {
+            if(circuit.getStoredData(tileItemStack[0]) > 0) {
 
-                if(this.tileItemStack[2] == null) {
-                        if(circuit.setStoredData(tileItemStack[0], 0 , 1)) {
+                if(circuit.getType(tileItemStack[0]) != 0) {
 
-                            tileItemStack[2] = new ItemStack(circuit.getType(tileItemStack[0]), this.getInventoryStackLimit(),0);
+                    if(this.tileItemStack[2] == null) {
+
+                        if(circuit.getStoredData(tileItemStack[0]) >= this.getInventoryStackLimit()) {
+
+                            if(circuit.setStoredData(tileItemStack[0], this.getInventoryStackLimit(), false)) {
+
+                                tileItemStack[2] = new ItemStack(circuit.getType(tileItemStack[0]), this.getInventoryStackLimit() , 0);
+                            }
+                        }
+
+                        else {
+
+                            if(circuit.setStoredData(tileItemStack[0], 0, false)) {
+
+                                tileItemStack[2] = new ItemStack(circuit.getType(tileItemStack[0]), circuit.getStoredData(tileItemStack[0]),0);
+                            }
+                        }
+                    }
+
+                    else if (circuit.getType(tileItemStack[0]) == tileItemStack[2].itemID) {
+
+                        if((tileItemStack[2].stackSize + 1 <= this.getInventoryStackLimit())) {
+
+                            if(circuit.setStoredData(tileItemStack[0], circuit.getStoredData(tileItemStack[0]) - 1, false)) {
+
+                                ItemStack stack = tileItemStack[2];
+                                stack.stackSize = stack.stackSize + 1;
+                                tileItemStack[2] = stack;
+                            }
                         }
                     }
                 }
-
-                else if (circuit.getType(tileItemStack[0]) == tileItemStack[2].itemID) {
-
-                    if(!(tileItemStack[2].stackSize + 1 > this.getInventoryStackLimit())) {
-
-                        if(circuit.setStoredData(tileItemStack[0],tileItemStack[2].itemID ,circuit.getStoredData(tileItemStack[0]) - 1)) {
-
-                            ItemStack stack = tileItemStack[2];
-                            stack.stackSize = stack.stackSize + 1;
-                            tileItemStack[2]= stack;
-                        }
-                    }
-
-            }
-        }         
+            }         
+        }
     }
 
     @Override
@@ -167,11 +182,17 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
 
         ItemStack stack = getStackInSlot(slot);
         if (stack != null) {
+
             if (stack.stackSize <= amt) {
+
                 setInventorySlotContents(slot, null);
-            } else {
+            } 
+            else {
+
                 stack = stack.splitStack(amt);
+
                 if (stack.stackSize == 0) {
+
                     setInventorySlotContents(slot, null);
                 }
             }
@@ -247,6 +268,44 @@ public class TileDeepStorageCell extends TechCraftTile implements IInventory{
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
+
+        return new int[]{1,2};
+    }
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack itemstack, int side) {
+
+        if(slot == 0) {
+
+            if(itemstack.getItem() instanceof ISimpleDataCircuit) {
+
+                return true;
+            }
+        }
+        else if(this.tileItemStack[slot] == null){
+
+            return true;
+        }
+
+        else if(tileItemStack[slot].stackSize + itemstack.stackSize <= this.getInventoryStackLimit()) {
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack itemstack, int side) {
+
+        if(tileItemStack[slot] != null) {
+
+            return true;
+        }
         return false;
     }
 }

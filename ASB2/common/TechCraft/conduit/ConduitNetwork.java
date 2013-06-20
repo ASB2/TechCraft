@@ -2,7 +2,6 @@ package TechCraft.conduit;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -20,6 +19,7 @@ public class ConduitNetwork {
     private World worldObj;
     private EnumContuitType networkType;
 
+    int age = 0;
     /**
      * 
      * @param World
@@ -39,13 +39,42 @@ public class ConduitNetwork {
     }
 
     public void updateNetwork() {
-
+        age++;
+        
         this.getConductors();
+        this.getItemInterface();
+        this.getTcuInterface();
+        this.getLiquidInterface();
+        this.getOtherInterface();
+
         this.addAdjacentInterfaces();
     }
 
     public void addAdjacentInterfaces() {
 
+        for(int i = 0; i < conductors.size(); i++) {
+
+            if(conductors.get(i) == null) { 
+
+                conductors.remove(i);
+                return;
+            }
+
+            if(worldObj == null){
+
+                worldObj = conductors.get(i).worldObj;
+            }
+
+            if(worldObj.getBlockId(conductors.get(i).xCoord, conductors.get(i).yCoord, conductors.get(i).zCoord) == 0) {
+
+                conductors.remove(i);
+                return;
+            }
+
+            this.addConductorsAround(conductors.get(i));
+            this.addInterfacesAround(conductors.get(i), networkType);
+        }
+        
         for(int i = 0; i < itemInterface.size(); i++) {
 
             if(itemInterface.get(i) == null) { 
@@ -175,6 +204,11 @@ public class ConduitNetwork {
         return otherInterface.size();
     }
 
+    public int getAge() {
+        
+        return age;
+    }
+    
     public List<TileEntity> getConductors() {
 
         this.checkNetwork(conductors);
@@ -282,31 +316,10 @@ public class ConduitNetwork {
                                     this.addConductor(tileI);
 
                                 }
-                                else {
+                                else if (tileA.getNetwork().getAge() < this.getAge()){
 
-                                    Random rand1 = new Random();
-                                    Random rand2 = new Random();
-
-                                    if(rand1.nextInt() < rand2.nextInt()) {
-
-                                        for(int i = 0; i < tileA.getNetwork().getConductorSize(); i++) {
-
-                                            TileEntity tileB = tileA.getNetwork().getConductors().get(i);
-
-                                            if(tileB instanceof IConduitConductor) {
-
-                                                IConduitConductor tileC = (IConduitConductor)tileB;
-
-                                                if(tileC.getConductorType() == this.networkType) {
-
-                                                    tileC.overrideNetwork(this);
-                                                    this.addConductor(tileB);
-                                                }
-                                            }
-                                        }
-                                        ((IConduitInterface)tileI).overrideNetwork(this);
-                                        this.addConductor(tileI);
-                                    }
+                                    tileA.overrideNetwork(this);
+                                    this.addConductor((TileEntity) tileA);
                                 }
                             }                                
                         }
@@ -346,16 +359,16 @@ public class ConduitNetwork {
                             if(TechCraftTile.translateInterfaceTypeToConduitType(tileB.getInterfaceType()) == this.networkType) {
 
                                 switch(tileB.getInterfaceType()) {
-                                    
+
                                     case ITEM: this.itemInterface.add(tileA);
-                                        break;
+                                    break;
                                     case LIQUID: this.liquidInterface.add(tileA);
-                                        break;
+                                    break;
                                     case OTHER: this.otherInterface.add(tileA);
-                                        break;
+                                    break;
                                     case TCU: this.tcuInterface.add(tileA);
-                                        break;
-                                        
+                                    break;
+
                                     default:
                                         break;
 
@@ -365,19 +378,20 @@ public class ConduitNetwork {
                     }
 
                     else {
+
                         tileB.overrideNetwork(this);
 
                         switch(tileB.getInterfaceType()) {
-                            
+
                             case ITEM: this.itemInterface.add(tileA);
-                                break;
+                            break;
                             case LIQUID: this.liquidInterface.add(tileA);
-                                break;
+                            break;
                             case OTHER: this.otherInterface.add(tileA);
-                                break;
+                            break;
                             case TCU: this.tcuInterface.add(tileA);
-                                break;
-                                
+                            break;
+
                             default:
                                 break;
 

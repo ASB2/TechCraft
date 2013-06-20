@@ -27,7 +27,7 @@ public class BlockTCInfuser extends TechCraftContainers{
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        // TODO Auto-generated method stub
+
         return new TileTCInfuser();
     }
 

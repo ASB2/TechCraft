@@ -11,15 +11,15 @@ public class ItemTCMultiTool extends TechCraftItems {
 
     public ItemTCMultiTool(int par1) {
         super(par1);
-        
+
     }
-   
+
     @Override
     public void registerIcons(IconRegister iconRegister){
         itemIcon = iconRegister.registerIcon("TechCraft:ItemTechMultiTool");
-        
+
     }
-    
+
     int mode = 3;
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -39,23 +39,23 @@ public class ItemTCMultiTool extends TechCraftItems {
         return par1ItemStack;
     }
 
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz)
     {
-        if(!world.isRemote){
 
-            if(player.isSneaking()) {
-                
-                if(world.getBlockTileEntity(x,y,z) != null) {
+        if(world.getBlockTileEntity(x,y,z) != null) {
+
+            if(world.getBlockTileEntity(x,y,z) instanceof IWrenchable) {
+
+                IWrenchable tile = (IWrenchable)world.getBlockTileEntity(x,y,z);
+
+                if(player.isSneaking()) {
                     
-                    if(world.getBlockTileEntity(x,y,z) instanceof IWrenchable) {
-                        
-                        IWrenchable tile = (IWrenchable)world.getBlockTileEntity(x,y,z);
-                        
-                        tile.breakBlock(world, player, itemStack, x, y, z);
-                        world.setBlockToAir(x, y, z);
-                    }
+                    tile.breakBlock(world, player, itemStack, x, y, z, side);
                 }
-            }    
+                else {
+                    tile.triggerBlock(world, player, itemStack, x, y, z, side);
+                }
+            }
         }
         return true;
     }

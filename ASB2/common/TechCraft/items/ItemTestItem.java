@@ -1,10 +1,14 @@
 package TechCraft.items;
 
-import net.minecraft.block.Block;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import cpw.mods.fml.relauncher.Side;
@@ -16,6 +20,8 @@ public class ItemTestItem extends TechCraftItems {
         super(par1);
 
     }
+
+    int mode = 1;
 
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack)
@@ -38,190 +44,81 @@ public class ItemTestItem extends TechCraftItems {
             return itemStack;
         }        
 
-        length++;
+        if(!world.isRemote) {
+            
+            switch(this.mode) {
 
-        if(!world.isRemote)
-            player.sendChatToPlayer("Length = " + length);
+                case 0: {
 
-        return itemStack;
-    }
+                    Vec3 look = player.getLookVec();
+                    EntityLargeFireball fireball2 = new EntityLargeFireball(world, player, 1, 2, 1);
+                    fireball2.setPosition(
+                            player.posX + look.xCoord * 1,
+                            player.posY + look.yCoord * 2,
+                            player.posZ + look.zCoord * 1);
+                    fireball2.accelerationX = look.xCoord * .1;
+                    fireball2.accelerationY = look.yCoord * .1;
+                    fireball2.accelerationZ = look.zCoord * .1;
+                    world.spawnEntityInWorld(fireball2);
 
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
-
-        int power = 10;
-
-        if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
-
-            IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
-
-            if(!player.isSneaking()){
-
-                mTile.gainPower(power, TechCraftTile.translateNumberToDirection(side));
-                player.sendChatToPlayer("Applied "+power+" Power");
-
-            }
-            else{   
-                mTile.usePower(power, TechCraftTile.translateNumberToDirection(side));
-                player.sendChatToPlayer("Drew "+power+" Power");
-            }
-        }
-        else {
-            ForgeDirection sideF = TechCraftTile.translateNumberToDirection(side);
-            this.cycle2DBlock(player, world, sideF, x, y, z, 3, 5,world.getBlockId(x, y, z) );
-        }
-
-        return true;        
-    }
-
-    public void cycle2DBlock(EntityPlayer player, World world, ForgeDirection side, int x, int y, int z, int radius, int debth, int blockIdToBreak)
-    {
-
-        int blockToBreak = world.getBlockId(x, y, z);
-
-        for(int r = 0; r < radius; r++) {
-
-            for(int i = 0; i < length; i++) {
-
-                if(side == ForgeDirection.UP) {
-
-                    int coordChanged = y - i;
-
-                    this.breakBlock(world,player, x, coordChanged, z, blockToBreak);
-
-                    this.breakBlock(world,player,x + 1 , coordChanged, z, blockToBreak);
-                    this.breakBlock(world, player,x + 1, coordChanged, z - 1, blockToBreak);
-                    this.breakBlock(world,player,x + 1,coordChanged, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player,x, coordChanged, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player,x - 1, coordChanged, z + 1, blockToBreak);
-                    this.breakBlock(world,player,x - 1, coordChanged, z, blockToBreak);
-                    this.breakBlock(world,player,x - 1, coordChanged, z - 1, blockToBreak);
-
-                    this.breakBlock(world,player,x, coordChanged, z - 1, blockToBreak);
+                    return itemStack;
                 }
 
-                if(side == ForgeDirection.DOWN) {
+                case 1: {
 
-                    int coordChanged = y + i;
-
-                    this.breakBlock(world, player,x, coordChanged, z, blockToBreak);
-
-                    this.breakBlock(world,player,x + 1, coordChanged, z, blockToBreak);
-                    this.breakBlock(world,player, x + 1, coordChanged, z + 1, blockToBreak);
-                    this.breakBlock(world,player, x + 1, coordChanged, z - 1, blockToBreak);
-
-                    this.breakBlock(world,player,x, coordChanged, z + 1, blockToBreak);
-                    this.breakBlock(world,player,x + 1,coordChanged, z + 1, blockToBreak);
-                    this.breakBlock(world,player,x - 1, coordChanged, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player,x - 1, coordChanged, z, blockToBreak);
-                    this.breakBlock(world,player,x - 1, coordChanged, z - 1, blockToBreak);
-                    this.breakBlock(world,player,x - 1, coordChanged, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player,x, coordChanged, z - 1, blockToBreak);
-                    this.breakBlock(world,player,x + 1, coordChanged, z - 1, blockToBreak);
-                    this.breakBlock(world,player,x - 1, coordChanged, z - 1, blockToBreak);
-                }
-
-                if(side == ForgeDirection.NORTH) {
-
-                    int coordChanged = z + i;
-
-                    this.breakBlock(world,player, x, y, coordChanged, blockToBreak);
-
-                    this.breakBlock(world,player, x + 1, y, coordChanged, blockToBreak);
-                    this.breakBlock(world,player, x + 1, y - 1, coordChanged, blockToBreak);
-                    this.breakBlock(world,player, x + 1, y + 1, coordChanged, blockToBreak);
-
-                    this.breakBlock(world,player,x - 1, y , coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x - 1, y - 1, coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x - 1, y + 1, coordChanged, blockToBreak);
-
-                    this.breakBlock(world,player,x, y + 1, coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x, y - 1, coordChanged, blockToBreak);
-                }
-
-                if(side == ForgeDirection.SOUTH) {
-
-                    int coordChanged = z - i;
-
-                    this.breakBlock(world,player,x, y, coordChanged, blockToBreak);
-
-                    this.breakBlock(world,player,x + 1, y, coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x + 1, y - 1, coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x + 1, y + 1, coordChanged, blockToBreak);
-
-                    this.breakBlock(world,player,x - 1, y , coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x - 1, y - 1, coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x - 1, y + 1, coordChanged, blockToBreak);
-
-                    this.breakBlock(world,player,x, y + 1, coordChanged, blockToBreak);
-                    this.breakBlock(world,player,x, y - 1, coordChanged, blockToBreak);
-                }
-
-                if(side == ForgeDirection.WEST) {
-
-                    int coordChanged = x - i;
-
-                    this.breakBlock(world,player, coordChanged, y, z, blockToBreak);
-
-                    this.breakBlock(world,player, coordChanged, y + 1, z, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y + 1, z - 1, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y + 1, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player, coordChanged, y - 1, z, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y - 1, z - 1, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y - 1, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player, coordChanged, y, z + 1, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y, z - 1, blockToBreak);
-                }
-
-                if(side == ForgeDirection.EAST) {
-
-                    int coordChanged = x + i;
-
-                    this.breakBlock(world,player, coordChanged, y, z, blockToBreak);
-
-                    this.breakBlock(world,player, coordChanged, y + 1, z, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y + 1, z - 1, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y + 1, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player, coordChanged, y - 1, z, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y - 1, z - 1, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y - 1, z + 1, blockToBreak);
-
-                    this.breakBlock(world,player, coordChanged, y, z + 1, blockToBreak);
-                    this.breakBlock(world,player, coordChanged, y, z - 1, blockToBreak);
-                }
-            }
-        }
-    }
-
-    public void breakBlock(World world, EntityPlayer entity, int x, int y, int z, int blockToBreak) {
-
-        if(world.blockExists(x, y, z)) {
-
-            if(blockToBreak != Block.bedrock.blockID) { 
-
-                if(world.getBlockTileEntity(x, y,  z) == null) {
-
-                    if(world.getBlockId(x, y, z) == blockToBreak) {
-
-                        int id = world.getBlockId(x, y, z);
-
-                        if (id > 0) {
-
-                            int meta = world.getBlockMetadata(x, y, z);
-
-                            world.playAuxSFX(2001, x, y, z, id + (meta << 12));
-                            Block.blocksList[id].dropBlockAsItem(world, (int)entity.posX, (int)entity.posY, (int)entity.posZ, meta, 0);
-                            world.setBlockToAir(x, y, z);
-                        }
+                    float f = 1.0F;
+                    float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
+                    float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
+                    double d = player.prevPosX + (player.posX - player.prevPosX) * (double)f;
+                    double d1 = (player.prevPosY + (player.posY - player.prevPosY) * (double)f + 1.6200000000000001D) - (double)player.yOffset;
+                    double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double)f;
+                    Vec3 vec3d = Vec3.createVectorHelper(d, d1, d2);
+                    float f3 = MathHelper.cos(-f2 * 0.01745329F - (float)Math.PI);
+                    float f4 = MathHelper.sin(-f2 * 0.01745329F - (float)Math.PI);
+                    float f5 = -MathHelper.cos(-f1 * 0.01745329F);
+                    float f6 = MathHelper.sin(-f1 * 0.01745329F);
+                    float f7 = f4 * f5;
+                    float f8 = f6;
+                    float f9 = f3 * f5;
+                    double d3 = 5000D;
+                    Vec3 vec3d1 = vec3d.addVector((double)f7 * d3, (double)f8 * d3, (double)f9 * d3);
+                    MovingObjectPosition movingobjectposition = world.rayTraceBlocks_do_do(vec3d, vec3d1, false, true);
+                    if (movingobjectposition == null)
+                    {
                     }
+                    if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE)
+                    {
+                        int i = movingobjectposition.blockX;
+                        int j = movingobjectposition.blockY;
+                        int k = movingobjectposition.blockZ;
+                        world.spawnEntityInWorld(new EntityLightningBolt(world, i, j, k));
+                    }
+                    return itemStack;
                 }
             }
+    }
+    return itemStack;
+}
+
+public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
+
+    int power = 10;
+
+    if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
+
+        IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
+
+        if(!player.isSneaking()){
+
+            mTile.gainPower(power, TechCraftTile.translateNumberToDirection(side));
+            player.sendChatToPlayer("Applied "+power+" Power");
+
+        }
+        else{   
+            mTile.usePower(power, TechCraftTile.translateNumberToDirection(side));
+            player.sendChatToPlayer("Drew "+power+" Power");
         }
     }
+    return true;        
+}
 }

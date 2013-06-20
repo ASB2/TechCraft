@@ -19,10 +19,10 @@ public class ItemDataCircuit extends TechCraftItems implements ISimpleDataCircui
 
     @Override
     public void registerIcons(IconRegister iconRegister){
-        
+
         itemIcon = iconRegister.registerIcon("TechCraft:ItemCircuitData");
     }
-    
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, java.util.List info, boolean var1) 
@@ -31,7 +31,7 @@ public class ItemDataCircuit extends TechCraftItems implements ISimpleDataCircui
         info.add("Type ID: " + getType(itemStack));
         info.add("Stored Data: " + getStoredData(itemStack) + " / " + getMaximumData(itemStack));
     }
-    
+
     @Override
     public boolean setType(ItemStack itemStack, int blockOrItemID) {
 
@@ -58,29 +58,29 @@ public class ItemDataCircuit extends TechCraftItems implements ISimpleDataCircui
     }
 
     @Override
-    public int getMaxiumTypes(ItemStack itemStack) {
+    public int getMaxTypes(ItemStack itemStack) {
 
         return maxTypes;
     }
 
     @Override
-    public boolean setStoredData(ItemStack itemStack, int blockOrItemID, int amount) {
+    public boolean setStoredData(ItemStack itemStack, int amount, boolean adding) {
 
         NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(itemStack);
 
-        if(blockOrItemID == this.getType(itemStack) || this.getType(itemStack) == 0) {
+        if(adding) {
 
-            nbtTagCompound.setInteger("typeAmount", amount);
-            
-            return true;
+            if(this.getMaximumData(itemStack) - this.getStoredData(itemStack) >= amount) {
+
+                nbtTagCompound.setInteger("typeAmount", amount);
+                return true;
+            }
         }
-        
-        if(blockOrItemID == 0) {
-            
-            if((this.getStoredData(itemStack) - amount >+ 0)) {
-                
-                nbtTagCompound.setInteger("typeAmount", amount);  
-                
+        else {
+
+            if(this.getStoredData(itemStack) >= amount) {
+
+                nbtTagCompound.setInteger("typeAmount", amount);
                 return true;
             }
         }
@@ -89,9 +89,9 @@ public class ItemDataCircuit extends TechCraftItems implements ISimpleDataCircui
 
     @Override
     public int getStoredData(ItemStack itemStack) {
-        
+
         NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(itemStack);
-        
+
         return nbtTagCompound.getInteger("typeAmount");
     }
 

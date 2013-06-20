@@ -38,46 +38,45 @@ public class ItemTradeStick extends TechCraftItems {
         super.addInformation(itemStack, player, info, var1);
         info.add("Idea Source: Thaumcraft 3");
     }
-    
-    public void setBlockID(ItemStack item, int id) {
+
+    public void setBlockIDAndMeta(ItemStack item, int id, int meta) {
 
         NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
         nbtTagCompound.setInteger("id", id);
+        nbtTagCompound.setInteger("meta", meta);
     }
 
-    public int getBlockID(ItemStack item) {
+    public int[] getBlockID(ItemStack item) {
 
         NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
 
-        if (nbtTagCompound != null) {
-
-            return nbtTagCompound.getInteger("id");
-        }
-        return 0;
+        return new int[] {nbtTagCompound.getInteger("id"), nbtTagCompound.getInteger("meta")};
     }
 
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
 
         if(player.isSneaking()) {
-            
+
             player.sendChatToPlayer("Block ID set to: " + world.getBlockId(x,y,z));
-            this.setBlockID(itemStack, world.getBlockId(x,y,z));
-            
+            this.setBlockIDAndMeta(itemStack, world.getBlockId(x,y,z), world.getBlockMetadata(x, y, z));
+
             return true;
         }
 
         else {
 
-            if(this.getBlockID(itemStack) > 0) {
-                
+            if(this.getBlockID(itemStack)[0] > 0) {
+
                 //this.cycle2DBlock(player, world, sideF, x, y, z, 1, 1, this.getBlockID(itemStack));            
-                this.breakBlock(world, player, x, y, z, this.getBlockID(itemStack));
+                this.breakBlock(world, player, x, y, z, this.getBlockID(itemStack)[0], this.getBlockID(itemStack)[1]);
             }
         }
         return true;        
     }
-    
-    public void breakBlock(World world, EntityPlayer player, int x, int y, int z, int blockToBreak) {
+
+    public void breakBlock(World world, EntityPlayer player, int x, int y, int z, int blockToBreak, int blockmeta) {
+
+        boolean hasItem = false;
 
         if(world.blockExists(x, y, z)) {
 
@@ -91,45 +90,18 @@ public class ItemTradeStick extends TechCraftItems {
 
                         int meta = world.getBlockMetadata(x, y, z);
 
-                        for(int i = 0; i < player.inventory.getSizeInventory(); i++) {
+                        ItemStack blockToSet = new ItemStack(blockToBreak, 1, blockmeta);
+                        
+                        if(player.inventory.hasItemStack(blockToSet)) {
+                            
+                            //player.inventory.
+                                player.inventory.getCurrentItem().damageItem(1, player);
+                                world.playAuxSFX(2001, x, y, z, id + (meta << 12));
 
-                            if(player.inventory.getStackInSlot(i) != null) {
-
-                                ItemStack stack = player.inventory.getStackInSlot(i);
-
-                                if(stack.getItem() instanceof ItemBlock) {
-
-                                    if(stack.itemID == blockToBreak) {
-
-                                        if(player.capabilities.isCreativeMode == false) {
-
-                                            if(world.isRemote) {
-
-                                                if(stack.stackSize > 1) {
-
-                                                    stack.stackSize = stack.stackSize - 1;
-                                                    player.inventory.setInventorySlotContents(i, stack);
-                                                }
-                                                else {
-
-                                                    player.inventory.setInventorySlotContents(i, null);
-                                                }
-                                            }
-                                        }
-
-                                        //player.sendChatToPlayer("Block equation has completed");
-
-                                        player.inventory.getCurrentItem().damageItem(1, player);
-                                        world.playAuxSFX(2001, x, y, z, id + (meta << 12));
-
-                                        Block.blocksList[id].dropBlockAsItem(world, (int)player.posX, (int)player.posY, (int)player.posZ, meta, 0);
-                                        world.setBlockToAir(x, y, z);
-                                        world.setBlock(x, y, z, blockToBreak); 
-                                        //break;
-                                    }
-                                }
-                            }
-                        }  
+                                Block.blocksList[id].dropBlockAsItem(world, (int)player.posX, (int)player.posY, (int)player.posZ, meta, 0);
+                                world.setBlockToAir(x, y, z);
+                                world.setBlock(x, y, z, blockToBreak);
+                        }
                     }
                 }
             }

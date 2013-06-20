@@ -3,22 +3,22 @@ package TechCraft.blocks.technogery;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import TechCraft.lib.TEXTURES;
-import TechCraft.models.ModelGrinder;
+import TechCraft.models.ModelEnergyReleaser;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererTileTest extends TileEntitySpecialRenderer{
 
-    private ModelGrinder model;
+    private ModelEnergyReleaser model;
 
     public TileEntityRendererTileTest(){
-        model = new ModelGrinder();
+        model = new ModelEnergyReleaser();
     }
     
     public void renderAModelAt(TileEntity tile, double x, double y, double z, float frame) {
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
         
-        model.render(tile, x, y, z);
+        model.renderAll(tile, x, y, z);
     }
 
 

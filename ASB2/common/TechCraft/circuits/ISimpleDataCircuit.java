@@ -8,9 +8,9 @@ public interface ISimpleDataCircuit {
     
     int getType(ItemStack itemStack);
     
-    int getMaxiumTypes(ItemStack itemStack);
+    int getMaxTypes(ItemStack itemStack);
 
-    boolean setStoredData(ItemStack itemStack, int blockOrItemID, int amount);
+    boolean setStoredData(ItemStack itemStack, int amount, boolean adding);
     
     int getStoredData(ItemStack itemStack);
     

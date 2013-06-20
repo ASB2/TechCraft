@@ -24,6 +24,8 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     int powerStored = 0;
     int powerMax = 0;
     
+    protected int ticks = 0;
+    
     public TechCraftTile() {
 
         if(color == null)
@@ -33,19 +35,20 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
             orientation = ForgeDirection.DOWN;
     }
 
-    public boolean breakBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z) {
+    public boolean breakBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z,int side) {
 
         if(world.getBlockId(x,y,z) != 0) {       
 
             world.playAuxSFX(2001, x, y, z, world.getBlockId(x,y,z) + (world.getBlockMetadata(x, y, z) << 12));
             Block.blocksList[world.getBlockId(x,y,z)].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-
+            world.setBlockToAir(x, y, z);
+            
             return true;
         }
         return false;
     }
 
-    public void triggerBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z ) {
+    public void triggerBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z, int side ) {
         
     }
     
@@ -56,8 +59,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
             case ITEM: return EnumInterfaceType.ITEM;
                 
             case LIQUID: return EnumInterfaceType.LIQUID;
-            
-            case OTHER: return EnumInterfaceType.OTHER;
             
             case TCU: return EnumInterfaceType.TCU;
             
@@ -72,8 +73,6 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
             case ITEM: return EnumContuitType.ITEM;
                 
             case LIQUID: return EnumContuitType.LIQUID;
-            
-            case OTHER: return EnumContuitType.OTHER;
             
             case TCU: return EnumContuitType.TCU;
             

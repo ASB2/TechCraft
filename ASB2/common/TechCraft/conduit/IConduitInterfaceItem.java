@@ -1,27 +1,26 @@
 package TechCraft.conduit;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeDirection;
 
 
 public interface IConduitInterfaceItem  extends IConduitInterface {
 
     /**
-     * If an item can be added to the specified slot
+     * Get the inventories this interface wiil manage
      */
-    boolean canMoveItemToInventory(ItemStack itemStack, int slot, int amount);
+    IInventory getAccessibleInventoryByDirection(ForgeDirection direction); 
 
     /**
      * Actually move and item into the specified slot
+     * @return What is left of the itemstack
      */
-    boolean moveItemToInventory(ItemStack itemStack, int slot, int amount);
-
-    /**
-     * If an item can be taken from the specified slot
-     */
-    boolean canTakeItemFromInventory(ItemStack itemStack, int slot, int amount);
+    ItemStack moveItemToInventory(ItemStack itemStack, int slot, int amount);
 
     /**
      * Actually take an item from the specified slot
+     * @return What is left of the itemstack
      */
-    boolean takeItemFromInventory(ItemStack itemStack, int slot, int amount);
+    ItemStack takeItemFromInventory(ItemStack itemStack, int slot, int amount);
 }
