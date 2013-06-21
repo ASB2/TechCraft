@@ -24,6 +24,8 @@ public class ContainerTCInfuser extends Container {
         this.addSlotToContainer(new Slot(tileEntity, 8, 65 + 15, 50));        
         this.addSlotToContainer(new Slot(tileEntity, 9, 83 + 15 ,50));
         
+        this.addSlotToContainer(new Slot(tileEntity, 10, 83 + 60, 32));
+        
         for (int i = 0; i < 3; i++)
         {
             for (int k = 0; k < 9; k++)

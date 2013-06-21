@@ -23,11 +23,6 @@ public interface IPowerMisc {
     int getPowerMax();
 
     /**
-     * Get the power class of the block
-     */
-    EnumPowerClass getPowerClass();
-
-    /**
      * If the block is a power sink
      */
     boolean recievePower();

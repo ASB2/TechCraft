@@ -10,11 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.EnumColor;
+import TechCraft.IWrenchable;
+import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.EnumInterfaceType;
-import TechCraft.power.EnumPowerClass;
 import TechCraft.power.IPowerMisc;
-import TechCraft.*;
-import TechCraft.conduit.*;
 
 public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IWrenchable {
 
@@ -631,12 +630,6 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
     public String getName() {
         // TODO Auto-generated method stub
         return "Not Set";
-    }
-
-    @Override
-    public EnumPowerClass getPowerClass() {
-
-        return EnumPowerClass.LOW;
     }
 
     @Override

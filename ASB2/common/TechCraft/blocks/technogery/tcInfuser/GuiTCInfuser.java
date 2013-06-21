@@ -50,6 +50,8 @@ public class GuiTCInfuser extends GuiContainer {
         drawTexturedModalRect(posX + 47 + 15 - 1, posY + 50 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 65 + 15 - 1, posY + 50 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 83 + 15 - 1, posY + 50 - 1, 176, 32, 18, 18);
+        
+        drawTexturedModalRect(posX + 83 + 60 - 1, posY + 32 - 1, 176, 32, 18, 18);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
 
         drawTexturedModalRect(posX + 8, posY + 6, 178, 127, 48, 75);

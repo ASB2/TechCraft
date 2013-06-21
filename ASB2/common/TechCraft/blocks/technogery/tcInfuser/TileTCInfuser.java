@@ -18,7 +18,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
 
     public TileTCInfuser() {
         
-        tileItemStacks = new ItemStack[10];
+        tileItemStacks = new ItemStack[11];
     }
 
     public void updateEntity() {
