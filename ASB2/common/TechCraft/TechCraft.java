@@ -4,16 +4,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TechCraft.blocks.conduitInterface.items.TileItemConduitInterface;
-import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemReciever;
-import TechCraft.blocks.item_transfer.item_SenderReciever.TileItemSender;
-import TechCraft.blocks.item_transfer.tcItemSorter.TileItemSorter;
 import TechCraft.blocks.tanks.TileTCTank;
-import TechCraft.blocks.tcConduits.tcItemConduits.*;
+import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
+import TechCraft.blocks.tcPersonalBlocks.TilePersonalBlock;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTestBlock;
-import TechCraft.blocks.technogery.tcFarms.BasicFarm.TileBasicFarm;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
@@ -46,7 +43,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import TechCraft.blocks.tcPersonalBlocks.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -119,8 +115,6 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
 
-        GameRegistry.registerTileEntity(TileBasicFarm.class, "TileBasicFarm");
-
         GameRegistry.registerTileEntity(TileGenorator.class, "TileGenorator");
 
         GameRegistry.registerTileEntity(TileTCFurnace.class, "TileTCFurnace");
@@ -135,15 +129,9 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTCTank.class, "TileTCTank");
 
-        GameRegistry.registerTileEntity(TileItemReciever.class, "TileItemReciever");
-
-        GameRegistry.registerTileEntity(TileItemSender.class, "TileItemSender");
-
         GameRegistry.registerTileEntity(TileToolManager.class, "TileToolManager");
 
         GameRegistry.registerTileEntity(TileTCEnergyConstructor.class, "TileTCEnergyConstructor");
-
-        GameRegistry.registerTileEntity(TileItemSorter.class, "TileItemSorter");
 
         GameRegistry.registerTileEntity(TileItemConduitInterface.class, "TileItemConduitInterface");
 
@@ -154,8 +142,6 @@ public class TechCraft {
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }
-
-
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {

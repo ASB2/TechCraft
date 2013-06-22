@@ -28,7 +28,7 @@ public class BlockItemConduitInterface extends TechCraftContainers {
             return true;
         }
 
-        player.openGui(TechCraft.instance, 14, world, x, y, z);
+        player.openGui(TechCraft.instance, 11, world, x, y, z);
         return true;
     }
 

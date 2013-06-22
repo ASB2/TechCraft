@@ -26,7 +26,7 @@ public class BlockDeepStorageCell extends TechCraftContainers {
 
         super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
         
-        player.openGui(TechCraft.instance, 15, world, x, y, z);
+        player.openGui(TechCraft.instance, 12, world, x, y, z);
         return true;
     }
     

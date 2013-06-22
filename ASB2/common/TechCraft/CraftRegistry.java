@@ -40,28 +40,6 @@ public class CraftRegistry {
             'P', Item.enderPearl
         });
 
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemSender), new Object[] {
-            "AGA",
-            "MLM",
-            "GRG",
-            'A', ItemRegistry.ItemAirCrystalShard,
-            'G', ItemRegistry.ItemGarnet,
-            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'L', ItemRegistry.ItemLinker,
-            'R', Item.redstone
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemReciever), new Object[] {
-            "GMG",
-            "LGL",
-            "AAA",
-            'A', ItemRegistry.ItemAirCrystalShard,
-            'G', ItemRegistry.ItemGarnet,
-            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
-            'L', ItemRegistry.ItemLinker,
-            'R', Item.redstone
-        });
-
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCItemConduit), new Object[] {
             "GAG",
             "GZG",
