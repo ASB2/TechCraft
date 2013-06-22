@@ -7,9 +7,9 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerProvider;
 
 public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInventory, ISidedInventory {    
 
@@ -18,7 +18,9 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
 
     ItemStack[] tileItemStack;
 
-    public TileBasicFarm(){
+    public TileBasicFarm() {
+        
+        this.powerProvider = new PowerProvider(this, 25, 1, 1, false, true);
         tileItemStack = new ItemStack[14];
     }
 
@@ -26,19 +28,13 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     public void updateEntity() {
 
         super.updateEntity();
-        this.managePowerAll(this, powerInput(),false);
+        this.managePowerAll(this, false);
 
         if(manageGround()) {
-            
+
             //harvest();
             plant();
         }
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return true;
     }
 
     public boolean manageGround(){
@@ -196,40 +192,6 @@ public class TileBasicFarm extends TechCraftTile implements IPowerSink, IInvento
     public String getName() {
 
         return "Basic TechCraft Farm";
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored= powerStored + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(powerStored > PowerUsed) {
-
-            powerStored = powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
     }
 
     @Override

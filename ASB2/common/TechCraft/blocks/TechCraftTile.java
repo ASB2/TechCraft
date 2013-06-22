@@ -14,17 +14,19 @@ import TechCraft.IWrenchable;
 import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.EnumInterfaceType;
 import TechCraft.power.IPowerMisc;
+import TechCraft.power.*;
 
 public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IWrenchable {
 
+    protected PowerProvider powerProvider;
     protected ForgeDirection orientation;    
     protected EnumColor color;
 
     int powerStored = 0;
     int powerMax = 0;
-    
+
     protected int ticks = 0;
-    
+
     public TechCraftTile() {
 
         if(color == null)
@@ -41,40 +43,45 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
             world.playAuxSFX(2001, x, y, z, world.getBlockId(x,y,z) + (world.getBlockMetadata(x, y, z) << 12));
             Block.blocksList[world.getBlockId(x,y,z)].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
             world.setBlockToAir(x, y, z);
-            
+
             return true;
         }
         return false;
     }
 
     public void triggerBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z, int side ) {
-        
+
     }
-    
+
+    public TechCraft.power.PowerProvider getPowerProvider() {
+
+        return powerProvider;
+    }
+
     public static EnumInterfaceType translateConduitTypeToInterfaceType(EnumContuitType cType){
-        
+
         switch(cType){
-            
+
             case ITEM: return EnumInterfaceType.ITEM;
-                
+
             case LIQUID: return EnumInterfaceType.LIQUID;
-            
+
             case TCU: return EnumInterfaceType.TCU;
-            
+
             default: return EnumInterfaceType.OTHER;            
         }
     }
-    
-public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterfaceType cType){
-        
+
+    public static EnumContuitType translateInterfaceTypeToConduitType(EnumInterfaceType cType){
+
         switch(cType){
-            
+
             case ITEM: return EnumContuitType.ITEM;
-                
+
             case LIQUID: return EnumContuitType.LIQUID;
-            
+
             case TCU: return EnumContuitType.TCU;
-            
+
             default: return EnumContuitType.OTHER;            
         }
     }
@@ -521,20 +528,36 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
         return null;
     }
 
-    public void managePowerAll(TileEntity tile, int amountOfPower, boolean addPower) {
+    public void managePowerAll(TileEntity tile, boolean addPower) {
 
-        if(addPower) {
-            if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
+        int amountOfPower;
 
-                amountOfPower = amountOfPower / TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
-            }        
+        if(tile instanceof IPowerMisc) {
+
+            if(((IPowerMisc)tile).getPowerProvider() != null) {
+
+                if(addPower) {
+
+                    amountOfPower = ((IPowerMisc)tile).getPowerProvider().getOutput();
+
+                    if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
+
+                        amountOfPower = amountOfPower / TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
+                    }        
+                }
+
+                else {
+
+                    amountOfPower = ((IPowerMisc)tile).getPowerProvider().getInput();
+                }
+                transferPower(ForgeDirection.DOWN, tile, amountOfPower, addPower);
+                transferPower(ForgeDirection.UP, tile, amountOfPower, addPower);
+                transferPower(ForgeDirection.NORTH, tile, amountOfPower, addPower);
+                transferPower(ForgeDirection.SOUTH, tile, amountOfPower, addPower);
+                transferPower(ForgeDirection.WEST, tile, amountOfPower, addPower);
+                transferPower(ForgeDirection.EAST, tile, amountOfPower, addPower);
+            }
         }
-        transferPower(ForgeDirection.DOWN, tile, amountOfPower, addPower);
-        transferPower(ForgeDirection.UP, tile, amountOfPower, addPower);
-        transferPower(ForgeDirection.NORTH, tile, amountOfPower, addPower);
-        transferPower(ForgeDirection.SOUTH, tile, amountOfPower, addPower);
-        transferPower(ForgeDirection.WEST, tile, amountOfPower, addPower);
-        transferPower(ForgeDirection.EAST, tile, amountOfPower, addPower);
     }
 
     public void transferPower(ForgeDirection direction, TileEntity tile, int amountOfPower, boolean addPower){
@@ -548,29 +571,32 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
                 IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
                 IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
-                if(addPower) {
-                    
-                    if(tileCallingMeathod.canGainPower(amountOfPower) && tileToChange.canUsePower(amountOfPower))
-                    {
-                        if(tileCallingMeathod.outputPower() && tileToChange.recievePower()){
+                if(tileCallingMeathod.getPowerProvider() != null) {
 
-                            if(tileToChange.gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
+                    if(addPower) {
 
-                                tileCallingMeathod.usePower(amountOfPower, direction);
+                        if(tileCallingMeathod.getPowerProvider().canGainPower(amountOfPower) && tileToChange.getPowerProvider().canUsePower(amountOfPower))
+                        {
+                            if(tileCallingMeathod.getPowerProvider().outputPower() && tileToChange.getPowerProvider().recievePower()){
+
+                                if(tileToChange.getPowerProvider().gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
+
+                                    tileCallingMeathod.getPowerProvider().usePower(amountOfPower, direction);
+                                }
                             }
-                        }
-                    }        
-                }
+                        }        
+                    }
 
-                else {
+                    else {
 
-                    if(tileToChange.canUsePower(amountOfPower) && tileCallingMeathod.canGainPower(amountOfPower))
-                    {
-                        if(tileToChange.outputPower() && tileCallingMeathod.recievePower()){
+                        if(tileToChange.getPowerProvider().canUsePower(amountOfPower) && tileCallingMeathod.getPowerProvider().canGainPower(amountOfPower))
+                        {
+                            if(tileToChange.getPowerProvider().outputPower() && tileCallingMeathod.getPowerProvider().recievePower()){
 
-                            if(tileCallingMeathod.gainPower(amountOfPower, direction)) {
+                                if(tileCallingMeathod.getPowerProvider().gainPower(amountOfPower, direction)) {
 
-                                tileToChange.usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
+                                    tileToChange.getPowerProvider().usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
+                                }
                             }
                         }
                     }
@@ -579,13 +605,9 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
         }
     }
 
-    public void updateEntity() {
-
-    }
-
     public int getPowerScaled(int scale) {
 
-        int internal = (int)this.getPowerStored() * scale / (int)getPowerMax();
+        int internal = (int)this.getPowerProvider().getPowerStored() * scale / (int)this.getPowerProvider().getPowerMax();
         if(internal > scale){
             internal = scale;
         }
@@ -595,119 +617,18 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
     public int getAmountScaled(int scale, int amount, int max) {
 
         int internal = amount * scale / max;
-        
+
         if(internal > scale) {
-            
+
             internal = scale;
         }
         return internal;
-    }  
-    @Override
-    public int getPowerStored() {
-        // TODO Auto-generated method stub
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-        // TODO Auto-generated method stub
-        return powerMax;
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return false;
-    }
-
-    @Override
-    public boolean outputPower() {
-
-        return false;
     }
 
     @Override
     public String getName() {
         // TODO Auto-generated method stub
         return "Not Set";
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
-
-            this.powerStored = this.getPowerStored() + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.getPowerStored() >= PowerUsed) {
-
-            powerStored = this.getPowerStored() - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int powerOutput() {
-        // TODO Auto-generated method stub
-        return 1;
-    }
-
-    @Override
-    public int powerInput() {
-        // TODO Auto-generated method stub
-        return 1;
-    }
-
-    @Override
-    public boolean requestingPower(ForgeDirection direction) {
-
-        if(getPowerStored() < getPowerMax())
-            return true;
-
-        return false;
-    }
-
-    @Override
-    public boolean outputtingPower(ForgeDirection direction) {
-
-        if(getPowerStored() > 0)
-            return true;
-
-        return false;
-    }
-
-    @Override
-    public boolean canGainPower(int power) {
-
-        if(getPowerMax() - getPowerStored() >= power) {
-
-            return true;
-        }
-
-        else {
-            return false; 
-        }
-    }
-
-    @Override
-    public boolean canUsePower(int power) {
-
-        if(getPowerStored() >= power) {
-
-            return true;
-        }
-        else {
-            
-            return false;
-        }
     }
 
     @Override
@@ -748,6 +669,9 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
 
         if(color == EnumColor.NONE || color == null)
             color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
+        
+        if(this.getPowerProvider() != null)
+            this.getPowerProvider().setPower(tag.getInteger("power"));
     }
 
     @Override
@@ -757,5 +681,7 @@ public static EnumContuitType  translateInterfaceTypeToConduitType(EnumInterface
         if(color != EnumColor.NONE)
             tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
 
+        if(this.getPowerProvider() != null)
+            tag.setInteger("power", this.getPowerProvider().getPowerStored());
     }
 }

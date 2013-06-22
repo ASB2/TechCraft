@@ -5,9 +5,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerProvider;
 
 public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -17,12 +17,14 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
 
     ItemStack[] tileItemStacks;
 
-    public TileTCGrinder(){
+    public TileTCGrinder() {
+        
+        this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
         tileItemStacks = new ItemStack[9];
     }
 
     public void updateEntity() {
-        super.managePowerAll(this, powerInput(), false);
+        super.managePowerAll(this, false);
         super.updateEntity();
     }    
 
@@ -32,24 +34,6 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
             
             this.powerStored = power;       
         }
-    }
-    
-    @Override
-    public boolean recievePower() {
-
-        return true;
-    }
-
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
     }
 
     @Override
@@ -98,28 +82,6 @@ public class TileTCGrinder extends TechCraftTile implements IPowerSink, IInvento
         }
 
         nbtTagCompound.setTag("Items", nbttaglist);
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored>=PowerUsed) {
-
-            this.powerStored = powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = powerStored + PowerGained;
-            return true;
-        }
-        return false;
     }
 
     @Override

@@ -8,19 +8,30 @@ public class InfuserRecipieBase {
     ItemStack[] input;
     int power;
 
-    public InfuserRecipieBase(ItemStack output, ItemStack[] input, int power){
+    public InfuserRecipieBase(ItemStack output, ItemStack[] input, int power) {
 
-        this.output = output;
         this.input = input;
+        this.output = output;
         this.power = power;
     }
 
     public boolean isRecipeValid(ItemStack[] stack) {
 
-        if(stack == input) {   
+        int equalStacks = 0;
 
-            return true;
+        for(int i = 0; i < stack.length; i++) {
+
+            if(stack[i] != null) 
+                
+                
+            if( (stack[i] != null && input[i]  == null) || (stack[i] == null && input[i]  != null)) {
+                
+                if(input[i].isItemEqual(stack[i])) {
+
+                    equalStacks++;
+                }
+            }
         }
-        return false;
+        return equalStacks == 9;
     }
 }

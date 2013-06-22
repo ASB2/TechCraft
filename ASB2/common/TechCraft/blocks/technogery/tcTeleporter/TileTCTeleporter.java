@@ -12,6 +12,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerProvider;
 
 public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -33,13 +34,13 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
     public TileTCTeleporter() {        
 
+        this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
         tileItemStacks = new ItemStack[1];
-
     }
 
     public void updateEntity() {
 
-        super.managePowerAll(this, powerInput(), false);
+        super.managePowerAll(this, false);
         super.updateEntity();
 
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
@@ -87,7 +88,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
                     if(entity instanceof EntityPlayerMP) {
 
-                        if(this.usePower(powerForProcess, ForgeDirection.UNKNOWN)) {
+                        if(this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN)) {
 
                             EntityPlayerMP player = (EntityPlayerMP) entity;     
 
@@ -159,34 +160,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
         }
 
         nbtTagCompound.setTag("Items", nbttaglist);
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored>=PowerUsed) {
-
-            this.powerStored = powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = powerStored + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return true;
     }
 
     @Override

@@ -1,74 +1,24 @@
 package TechCraft.blocks.technogery;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSource;
+import TechCraft.power.PowerProvider;
 
 public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPowerSource {
     
-    int powerStored = 0;
-    int powerMax = 25;
-
+    public TileMagiciansBuildingBlocks() {
+    
+        this.powerProvider = new PowerProvider(this, 25, 1, 1, true, false);
+    }
+    
     @Override
     public void updateEntity() {
-        if(this.getPowerStored() > 0) {
-
-            super.managePowerAll(this, powerOutput(),true);
-        }
-
+        super.managePowerAll(this,true);
     }
 
-    public void setPowerStored(int power) {
+    public TechCraft.power.PowerProvider getPowerProvider() {
 
-        if(power >= 0) {
-            
-            this.powerStored = power;       
-        }
-    }
-    
-    @Override
-    public boolean outputPower() {
-
-        return true;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored>=PowerUsed){
-            this.powerStored= powerStored-PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained){
-            this.powerStored= powerStored + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int powerOutput() {
-
-        return 1;
-    }
-    
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
+        return powerProvider;
     }
 
     @Override
@@ -76,15 +26,5 @@ public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPower
 
         return "Magician's Building Block";
     }
-    @Override
-    public void readFromNBT(NBTTagCompound tagCompound) {
-        super.readFromNBT(tagCompound);
-        powerStored = tagCompound.getInteger("powerStored");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tagCompound) {
-        super.writeToNBT(tagCompound);
-        tagCompound.setInteger("powerStored", powerStored);
-    }
+    
 }

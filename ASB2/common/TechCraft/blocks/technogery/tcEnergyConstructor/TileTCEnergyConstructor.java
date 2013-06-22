@@ -10,6 +10,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.utils.Utilities;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerProvider;
 
 public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -23,11 +24,12 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
 
     public TileTCEnergyConstructor() {
 
+        this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
         tileItemStacks = new ItemStack[5];
     }
 
     public void updateEntity() {
-        this.managePowerAll(this, powerInput(), false);
+        this.managePowerAll(this, false);
         super.updateEntity();
 
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
@@ -60,9 +62,9 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
 
             if(TileEntityFurnace.getItemBurnTime(targetFuel) > 0) {
 
-                if(this.getPowerStored() >= TileEntityFurnace.getItemBurnTime(targetFuel) / Utilities.TICKSTOPOWER) {
+                if(this.getPowerProvider().getPowerStored() >= TileEntityFurnace.getItemBurnTime(targetFuel) / Utilities.TICKSTOPOWER) {
 
-                    if(this.usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ Utilities.TICKSTOPOWER, ForgeDirection.UNKNOWN)) {
+                    if(this.getPowerProvider().usePower(TileEntityFurnace.getItemBurnTime(targetFuel)/ Utilities.TICKSTOPOWER, ForgeDirection.UNKNOWN)) {
 
                         if(tileItemStacks[1] == null) {
 
@@ -129,24 +131,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
     }
 
     @Override
-    public boolean recievePower() {
-
-        return true;
-    }
-
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
-    }
-
-    @Override
     public String getName() {
 
         return "TC energy Constructor";
@@ -172,29 +156,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerSink
             }
         }
     }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
-
-            this.powerStored = this.getPowerStored() + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.getPowerStored() >= PowerUsed) {
-
-            powerStored = this.getPowerStored() - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
 
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {

@@ -110,12 +110,12 @@ public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World wor
 
         if(!player.isSneaking()){
 
-            mTile.gainPower(power, TechCraftTile.translateNumberToDirection(side));
+            mTile.getPowerProvider().gainPower(power, TechCraftTile.translateNumberToDirection(side));
             player.sendChatToPlayer("Applied "+power+" Power");
 
         }
         else{   
-            mTile.usePower(power, TechCraftTile.translateNumberToDirection(side));
+            mTile.getPowerProvider().usePower(power, TechCraftTile.translateNumberToDirection(side));
             player.sendChatToPlayer("Drew "+power+" Power");
         }
     }

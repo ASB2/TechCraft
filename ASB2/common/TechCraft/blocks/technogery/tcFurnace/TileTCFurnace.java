@@ -10,8 +10,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerProvider;
 
-public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInventory,IPowerSink{
+public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedInventory, IPowerSink{
 
     int powerStored = 0;
     int powerMax = 1000;
@@ -24,31 +25,32 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
 
     ItemStack currentItem;
 
-    public TileTCFurnace(){
+    public TileTCFurnace() {
 
+        this.powerProvider = new PowerProvider(this, 25, 1, 1, false, true);
         tileItemStacks = new ItemStack[2];
     }
 
     public void updateEntity() {
 
-        this.managePowerAll(this, powerInput(),false);
+        this.managePowerAll(this, false);
         super.updateEntity();
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
             
-            if(this.getPowerStored() > 0) {
+            if(this.getPowerProvider().getPowerStored() > 0) {
                 
                 isBurning = true;
             }
 
-            if(this.getPowerStored() == 0) {
+            if(this.getPowerProvider().getPowerStored() == 0) {
                 
                 isBurning = false;
             }
 
-            if (this.isBurning && this.canSmelt() && this.getPowerStored() >= this.powerForProcess) {            
+            if (this.isBurning && this.canSmelt() && this.getPowerProvider().getPowerStored() >= this.powerForProcess) {            
                 
                 this.smeltItem();    
-                this.usePower(powerForProcess, ForgeDirection.UNKNOWN);
+                this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN);
             }
         }
     }
@@ -102,16 +104,9 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
         }
     }
 
-    @Override
-    public boolean recievePower() {
-
-        return true;
-    }
-
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
-
-        powerStored = par1NBTTagCompound.getInteger("powerStored");
+        
         isBurning = par1NBTTagCompound.getBoolean("isBurning");
 
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
@@ -132,8 +127,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     }
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeToNBT(par1NBTTagCompound);
-
-        par1NBTTagCompound.setInteger("powerStored", powerStored);
+        
         par1NBTTagCompound.setBoolean("isBurning", isBurning);
 
         NBTTagList nbttaglist = new NBTTagList();
@@ -204,40 +198,6 @@ public class TileTCFurnace extends TechCraftTile implements IInventory,ISidedInv
     public boolean isUseableByPlayer(EntityPlayer player) {
 
         return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
-    }
-
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored>=PowerUsed) {
-
-            this.powerStored = powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = powerStored + PowerGained;
-            return true;
-        }
-        return false;
     }
 
     @Override

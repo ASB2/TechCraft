@@ -1,6 +1,5 @@
 package TechCraft.blocks.technogery.power_Conduit;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
@@ -8,89 +7,16 @@ import TechCraft.power.IPowerSink;
 import TechCraft.power.IPowerStorage;
 
 public class TilePowerConduitExporting extends TechCraftTile {
-    
-    
-    int powerStored;
-    int powerMax = 10;
-    
+
     @Override
     public void updateEntity() {
-        super.updateEntity();
-        this.managePowerAll(this, powerOutput(), true);
+        
     }
-
-    @Override
-    public boolean outputPower() {
-
-        return true;
-    }
-
-    public int powerOutput(){
-
-        return 10;
-    }
-
-    public int powerInput(){
-
-        return 10;
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound var1) {
-        super.readFromNBT(var1);
-        powerStored = var1.getInteger("powerStored");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound var1) {
-        super.writeToNBT(var1);
-        var1.setInteger("powerStored", powerStored);
-    }
-
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-        if(this.powerStored >= PowerUsed) {
-
-            this.powerStored = this.powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = this.powerStored + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-
+    
     @Override
     public String getName() {
 
         return "TechCraft Conduit(Exporting)";
-    }
-
-    @Override
-    public int[] getPosition() {
-
-        return new int[]{this.xCoord,this.yCoord,this.zCoord};
     }
 
     public boolean decideRender(ForgeDirection direction) {

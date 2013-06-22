@@ -75,7 +75,7 @@ public class GuiGenorator extends GuiContainer {
 
         if(isPointInRegion(99, 6, 71, 32, mouseX, mouseY)) {
 
-            drawBarTooltip("Energy", "TCU", tileEntity.getPowerStored(), tileEntity.getPowerMax(), mouseX, mouseY);
+            drawBarTooltip("Energy", "TCU", tileEntity.getPowerProvider().getPowerStored(), tileEntity.getPowerProvider().getPowerMax(), mouseX, mouseY);
         }
     }
     

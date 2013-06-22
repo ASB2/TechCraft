@@ -205,21 +205,68 @@ public class TileItemConduitInterface extends TechCraftTile implements IInventor
         }
     }
 
-/**
- * Moves an item from the epecified direction into the tile
- * @param ForgeDirection
- */
-public void moveFromAjacentInventory(ForgeDirection direction) {
+    /**
+     * Moves an item from the epecified direction into the tile
+     * @param ForgeDirection
+     */
+    public void moveFromAjacentInventory(ForgeDirection direction) {
 
-    if(direction == this.getOrientation()) {
+        if(direction == this.getOrientation()) {
 
-        TileEntity tile = TechCraftTile.translateDirectionToTile(this, worldObj, direction);
+            TileEntity tile = TechCraftTile.translateDirectionToTile(this, worldObj, direction);
 
-        if(tile != null) {
+            if(tile != null) {
 
-            if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterfaceItem)) {
+                if(tile instanceof IInventory && !(tile instanceof ISidedInventory) && !(tile instanceof IConduitInterfaceItem)) {
+
+                    IInventory tileI = (IInventory)tile;
+
+                    for(int i = 0; i < tileI.getSizeInventory(); i++) {
+
+                        if(tileI.getStackInSlot(i) != null) {
+
+                            for(int z = 0; z < tileItemStack.length; z++) {
+
+                                if(tileI.getStackInSlot(i) != null) {
+
+                                    tileI.setInventorySlotContents(i, this.moveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(tile instanceof ISidedInventory && !(tile instanceof IConduitInterfaceItem)) {
+
+                ISidedInventory tileS = (ISidedInventory)tile;
+
+                for(int i = 0; i < tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction))).length; i++) {
+
+                    int side = TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction));
+                    int slot = tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction)))[i];
+
+                    if(tileS.getStackInSlot(slot) != null) {
+
+                        for(int z = 0; z < tileItemStack.length; z++) {
+
+                            if(tileS.getStackInSlot(slot) != null) {
+
+                                if(tileS.canExtractItem(slot, tileS.getStackInSlot(slot), side)) {
+
+                                    tileS.setInventorySlotContents(i, this.moveItemToInventory(tileS.getStackInSlot(slot), z, tileS.getStackInSlot(slot).stackSize));
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(tile instanceof IConduitInterfaceItem && tile instanceof IInventory) {
 
                 IInventory tileI = (IInventory)tile;
+                IConduitInterfaceItem tileS = (IConduitInterfaceItem)tile;
 
                 for(int i = 0; i < tileI.getSizeInventory(); i++) {
 
@@ -229,302 +276,255 @@ public void moveFromAjacentInventory(ForgeDirection direction) {
 
                             if(tileI.getStackInSlot(i) != null) {
 
-                                tileI.setInventorySlotContents(i, this.moveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize));
+                                tileItemStack[z] = this.moveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize);
+                                tileI.setInventorySlotContents(i, tileS.takeItemFromInventory(tileI.getStackInSlot(i), i, tileI.getStackInSlot(i).stackSize));
                             }
-                        }
-                    }
-                }
-            }
-        }
-
-        if(tile instanceof ISidedInventory && !(tile instanceof IConduitInterfaceItem)) {
-
-            ISidedInventory tileS = (ISidedInventory)tile;
-
-            for(int i = 0; i < tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction))).length; i++) {
-
-                int side = TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction));
-                int slot = tileS.getAccessibleSlotsFromSide(TechCraftTile.translateDirectionToNumber(TechCraftTile.translateDirectionToOpposite(direction)))[i];
-
-                if(tileS.getStackInSlot(slot) != null) {
-
-                    for(int z = 0; z < tileItemStack.length; z++) {
-
-                        if(tileS.getStackInSlot(slot) != null) {
-
-                            if(tileS.canExtractItem(slot, tileS.getStackInSlot(slot), side)) {
-
-                                tileS.setInventorySlotContents(i, this.moveItemToInventory(tileS.getStackInSlot(slot), z, tileS.getStackInSlot(slot).stackSize));
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-
-        if(tile instanceof IConduitInterfaceItem && tile instanceof IInventory) {
-
-            IInventory tileI = (IInventory)tile;
-            IConduitInterfaceItem tileS = (IConduitInterfaceItem)tile;
-
-            for(int i = 0; i < tileI.getSizeInventory(); i++) {
-
-                if(tileI.getStackInSlot(i) != null) {
-
-                    for(int z = 0; z < tileItemStack.length; z++) {
-
-                        if(tileI.getStackInSlot(i) != null) {
-
-                            tileItemStack[z] = this.moveItemToInventory(tileI.getStackInSlot(i), z, tileI.getStackInSlot(i).stackSize);
-                            tileI.setInventorySlotContents(i, tileS.takeItemFromInventory(tileI.getStackInSlot(i), i, tileI.getStackInSlot(i).stackSize));
                         }
                     }
                 }
             }
         }
     }
-}
 
-@Override
-public String getName() {
+    @Override
+    public String getName() {
 
-    return "Item Conduit Interface";
-}
+        return "Item Conduit Interface";
+    }
 
-@Override
-public ConduitNetwork getNetwork() {
+    @Override
+    public ConduitNetwork getNetwork() {
 
-    return network;
-}
+        return network;
+    }
 
-@Override
-public void overrideNetwork(ConduitNetwork network) {
+    @Override
+    public void overrideNetwork(ConduitNetwork network) {
 
-    this.network = network;        
-}
+        this.network = network;        
+    }
 
-@Override
-public int getSizeInventory() {
-    return tileItemStack.length;
-}
+    @Override
+    public int getSizeInventory() {
+        return tileItemStack.length;
+    }
 
-@Override
-public ItemStack getStackInSlot(int slot) {
-    return tileItemStack[slot];
-}
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return tileItemStack[slot];
+    }
 
-@Override
-public ItemStack decrStackSize(int slot, int amt) {
+    @Override
+    public ItemStack decrStackSize(int slot, int amt) {
 
-    ItemStack stack = getStackInSlot(slot);
-    if (stack != null) {
-        if (stack.stackSize <= amt) {
-            setInventorySlotContents(slot, null);
-        } else {
-            stack = stack.splitStack(amt);
-            if (stack.stackSize == 0) {
+        ItemStack stack = getStackInSlot(slot);
+        if (stack != null) {
+            if (stack.stackSize <= amt) {
                 setInventorySlotContents(slot, null);
+            } else {
+                stack = stack.splitStack(amt);
+                if (stack.stackSize == 0) {
+                    setInventorySlotContents(slot, null);
+                }
             }
         }
+        return stack;
     }
-    return stack;
-}
 
-@Override
-public ItemStack getStackInSlotOnClosing(int slot) {
-    ItemStack stack = getStackInSlot(slot);
-    if (stack != null) {
-        setInventorySlotContents(slot, null);
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        ItemStack stack = getStackInSlot(slot);
+        if (stack != null) {
+            setInventorySlotContents(slot, null);
+        }
+        return stack;
     }
-    return stack;
-}
 
-@Override
-public void setInventorySlotContents(int slot, ItemStack stack) {
-    tileItemStack[slot] = stack;
-    if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-        stack.stackSize = getInventoryStackLimit();
-    }               
-}
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        tileItemStack[slot] = stack;
+        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+            stack.stackSize = getInventoryStackLimit();
+        }               
+    }
 
-@Override
-public String getInvName() {
+    @Override
+    public String getInvName() {
 
-    return "Item Reciever";
-}
+        return "Item Reciever";
+    }
 
-@Override
-public boolean isInvNameLocalized() {
-
-    return true;
-}
-
-@Override
-public int getInventoryStackLimit() {
-
-    return 64;
-}
-
-@Override
-public boolean isUseableByPlayer(EntityPlayer player) {
-    return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this &&
-            player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
-}
-
-@Override
-public void openChest() {
-    // TODO Auto-generated method stub
-
-}
-
-@Override
-public void closeChest() {
-    // TODO Auto-generated method stub
-
-}
-
-@Override
-public boolean isStackValidForSlot(int slot, ItemStack itemStack) {
-
-    if(slot == 0 && itemStack.getItem() instanceof ItemLinker) {
+    @Override
+    public boolean isInvNameLocalized() {
 
         return true;
     }
 
-    else if(slot > 0) {
+    @Override
+    public int getInventoryStackLimit() {
+
+        return 64;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this &&
+                player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
+    }
+
+    @Override
+    public void openChest() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void closeChest() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isStackValidForSlot(int slot, ItemStack itemStack) {
+
+        if(slot == 0 && itemStack.getItem() instanceof ItemLinker) {
+
+            return true;
+        }
+
+        else if(slot > 0) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public EnumInterfaceType getInterfaceType() {
+
+        return EnumInterfaceType.ITEM;
+    }
+
+    @Override
+    public boolean renderByDirection(ForgeDirection direction) {
 
         return true;
     }
 
-    return false;
-}
+    @Override
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readFromNBT(par1NBTTagCompound);
 
-@Override
-public EnumInterfaceType getInterfaceType() {
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
 
-    return EnumInterfaceType.ITEM;
-}
+        tileItemStack = new ItemStack[getSizeInventory()];
 
-@Override
-public boolean renderByDirection(ForgeDirection direction) {
-
-    return true;
-}
-
-@Override
-public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-    super.readFromNBT(par1NBTTagCompound);
-
-    NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-
-    tileItemStack = new ItemStack[getSizeInventory()];
-
-    for (int i = 0; i < nbttaglist.tagCount(); i++)
-    {
-        NBTTagCompound nbttagcompound = (NBTTagCompound)nbttaglist.tagAt(i);
-        byte byte0 = nbttagcompound.getByte("Slot");
-
-        if (byte0 >= 0 && byte0 < tileItemStack.length)
+        for (int i = 0; i < nbttaglist.tagCount(); i++)
         {
-            tileItemStack[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+            NBTTagCompound nbttagcompound = (NBTTagCompound)nbttaglist.tagAt(i);
+            byte byte0 = nbttagcompound.getByte("Slot");
+
+            if (byte0 >= 0 && byte0 < tileItemStack.length)
+            {
+                tileItemStack[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+            }
         }
+
     }
 
-}
+    @Override
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound){
+        super.writeToNBT(par1NBTTagCompound);
 
-@Override
-public void writeToNBT(NBTTagCompound par1NBTTagCompound){
-    super.writeToNBT(par1NBTTagCompound);
+        NBTTagList nbttaglist = new NBTTagList();
 
-    NBTTagList nbttaglist = new NBTTagList();
-
-    for (int i = 0; i < tileItemStack.length; i++)
-    {
-        if (tileItemStack[i] != null)
+        for (int i = 0; i < tileItemStack.length; i++)
         {
-            NBTTagCompound nbttagcompound = new NBTTagCompound();
-            nbttagcompound.setByte("Slot", (byte)i);
-            tileItemStack[i].writeToNBT(nbttagcompound);
-            nbttaglist.appendTag(nbttagcompound);
-        }
-    }
-
-    par1NBTTagCompound.setTag("Items", nbttaglist);
-}
-
-@Override
-public boolean importingToNetwork() {
-
-    if(TechCraftTile.translateDirectionToTile(this, worldObj, this.getOrientation()) instanceof IConduitConductor) {
-
-        return true;
-    }
-    return false;
-}
-
-@Override
-public ItemStack moveItemToInventory(ItemStack itemStack, int slot, int amount) {
-
-    if(slot != 0 && slot != 1) {
-
-        if(tileItemStack[slot] == null) {
-
-            tileItemStack[slot] = itemStack;
-
-            return null;
+            if (tileItemStack[i] != null)
+            {
+                NBTTagCompound nbttagcompound = new NBTTagCompound();
+                nbttagcompound.setByte("Slot", (byte)i);
+                tileItemStack[i].writeToNBT(nbttagcompound);
+                nbttaglist.appendTag(nbttagcompound);
+            }
         }
 
-        else if(tileItemStack[slot].equals(itemStack)) {
+        par1NBTTagCompound.setTag("Items", nbttaglist);
+    }
 
-            if(tileItemStack[slot].stackSize + itemStack.stackSize <= this.getInventoryStackLimit() && tileItemStack[slot].stackSize + itemStack.stackSize <= tileItemStack[slot].getItem().getItemStackLimit()) {
+    @Override
+    public boolean importingToNetwork() {
 
-                tileItemStack[slot].stackSize = tileItemStack[slot].stackSize + itemStack.stackSize;
+        if(TechCraftTile.translateDirectionToTile(this, worldObj, this.getOrientation()) instanceof IConduitConductor) {
 
-                itemStack = null;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public ItemStack moveItemToInventory(ItemStack itemStack, int slot, int amount) {
+
+        if(slot != 0 && slot != 1) {
+
+            if(tileItemStack[slot] == null) {
+
+                tileItemStack[slot] = itemStack;
 
                 return null;
             }
+
+            else if(tileItemStack[slot].equals(itemStack)) {
+
+                if(tileItemStack[slot].stackSize + itemStack.stackSize <= this.getInventoryStackLimit() && tileItemStack[slot].stackSize + itemStack.stackSize <= tileItemStack[slot].getItem().getItemStackLimit()) {
+
+                    tileItemStack[slot].stackSize = tileItemStack[slot].stackSize + itemStack.stackSize;
+
+                    itemStack = null;
+
+                    return null;
+                }
+            }
         }
+        return itemStack;
     }
-    return itemStack;
-}
 
-@Override
-public ItemStack takeItemFromInventory(ItemStack itemStack, int slot, int amount) {
+    @Override
+    public ItemStack takeItemFromInventory(ItemStack itemStack, int slot, int amount) {
 
-    if(slot != 0 && slot != 1) {
+        if(slot != 0 && slot != 1) {
 
-        if(tileItemStack[slot] == null) {
+            if(tileItemStack[slot] == null) {
 
-            return itemStack    ;
-        }
-
-        else if(tileItemStack[slot].stackSize >= amount) {
-
-            if(tileItemStack[slot].stackSize - amount >= 0) {
-
-                tileItemStack[slot].stackSize = tileItemStack[slot].stackSize - amount;
-
-                return tileItemStack[slot]; 
+                return itemStack    ;
             }
 
-            return itemStack;
+            else if(tileItemStack[slot].stackSize >= amount) {
+
+                if(tileItemStack[slot].stackSize - amount >= 0) {
+
+                    tileItemStack[slot].stackSize = tileItemStack[slot].stackSize - amount;
+
+                    return tileItemStack[slot]; 
+                }
+
+                return itemStack;
+            }
         }
+        return itemStack;
     }
-    return itemStack;
-}
 
-@Override
-public IInventory getAccessibleInventoryByDirection(ForgeDirection direction) {
+    @Override
+    public IInventory getAccessibleInventoryByDirection(ForgeDirection direction) {
 
-    if(direction == this.getOrientation()) {
+        if(direction == this.getOrientation()) {
 
-        if(TechCraftTile.translateDirectionToTile(this, worldObj, direction) instanceof IInventory) {
+            if(TechCraftTile.translateDirectionToTile(this, worldObj, direction) instanceof IInventory) {
 
-            return (IInventory) TechCraftTile.translateDirectionToTile(this, worldObj, direction);
+                return (IInventory) TechCraftTile.translateDirectionToTile(this, worldObj, direction);
+            }
         }
+        return null;
     }
-    return null;
-}
 }

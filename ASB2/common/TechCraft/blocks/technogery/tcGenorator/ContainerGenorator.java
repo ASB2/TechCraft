@@ -11,16 +11,16 @@ public class ContainerGenorator extends Container{
 
     public ContainerGenorator(InventoryPlayer par1InventoryPlayer, TileGenorator tileEntity) {
         
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 0, 30,17));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 1, 48,17));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 2, 66,17));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 3, 30,35));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 4, 48,35));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 5, 66,35));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 6, 30,53));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 7, 48,53));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 8, 66,53));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 9, 145,60));
+        this.addSlotToContainer(new Slot(tileEntity, 0, 30,17));
+        this.addSlotToContainer(new Slot(tileEntity, 1, 48,17));
+        this.addSlotToContainer(new Slot(tileEntity, 2, 66,17));
+        this.addSlotToContainer(new Slot(tileEntity, 3, 30,35));
+        this.addSlotToContainer(new Slot(tileEntity, 4, 48,35));
+        this.addSlotToContainer(new Slot(tileEntity, 5, 66,35));
+        this.addSlotToContainer(new Slot(tileEntity, 6, 30,53));
+        this.addSlotToContainer(new Slot(tileEntity, 7, 48,53));
+        this.addSlotToContainer(new Slot(tileEntity, 8, 66,53));
+        this.addSlotToContainer(new Slot(tileEntity, 9, 145,60));
 
         for (int i = 0; i < 3; i++)
         {

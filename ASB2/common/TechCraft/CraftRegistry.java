@@ -63,12 +63,12 @@ public class CraftRegistry {
         });
 
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCItemConduit), new Object[] {
-            "GGG",
-            "ZEZ",
-            "GGG",
+            "GAG",
+            "GZG",
+            "GAG",
             'G', Block.glass,
             'Z', ItemRegistry.ItemZycrantianIngot,
-            'E', ItemRegistry.ItemEnergyCrystalShard
+            'A', ItemRegistry.ItemAirCrystalShard
         });        
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader), new Object[] {
@@ -147,6 +147,54 @@ public class CraftRegistry {
         GameRegistry.addShapelessRecipe(new ItemStack(Item.seeds),new ItemStack(Item.wheat));
     }
 
+    public static void placeHolderRecipes() {
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemCrystalCasing), new Object[] {
+            " G ",
+            "GRG", 
+            " G ",
+            'R', Item.redstone,
+            'G', Block.glass
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemAirCrystalShard), new Object[] {
+            "GFG",
+            "FCF", 
+            "GFG",
+            
+            'C', ItemRegistry.ItemCrystalCasing,
+            'F', Item.feather,
+            'G', Block.glass
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemFireCrystalShard), new Object[] {
+            "OBO",
+            "BCB", 
+            "OBO",
+            'C', ItemRegistry.ItemCrystalCasing,
+            'O', Item.coal,
+            'B', Item.blazeRod
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEarthCrystalShard), new Object[] {
+            "DSD",
+            "SCS", 
+            "DSD",
+            'C', ItemRegistry.ItemCrystalCasing,
+            'D', Block.dirt,
+            'D', Block.cobblestone
+        });
+        
+        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemWaterCrystalShard), new Object[] {
+            "BWB",
+            "WCW", 
+            "BWB",
+            'C', ItemRegistry.ItemCrystalCasing,
+            'B', Item.bucketWater,
+            'W', Block.glass
+        });
+    }
+    
     public static void craftPower() {
         
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob), new Object[] {

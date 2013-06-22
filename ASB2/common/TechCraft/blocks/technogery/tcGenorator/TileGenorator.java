@@ -24,13 +24,15 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
     private ItemStack[] tileItemStacks;
 
     public TileGenorator() {
+        
+        this.powerProvider = new PowerProvider(this, 1000, 1, 1, true, false);
         tileItemStacks = new ItemStack[10];
     }
 
     int ticks = 0;
 
     public void updateEntity() {
-        super.managePowerAll(this,  powerOutput(), true);
+        super.managePowerAll(this, true);
 
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
             ticks++;        
@@ -56,7 +58,7 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
                 if(ticks >= Utilities.TICKSTOPOWER) {
 
                     ticks = 0;
-                    this.gainPower(1, ForgeDirection.UNKNOWN);
+                    this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);
                 }
             }
             moveSlots();
@@ -105,12 +107,6 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
         }
     }
 
-    @Override
-    public boolean outputPower() {
-
-        return true;
-    }
-
     public int getBurnTimeScaled(int scale){        
 
         int internal = this.fuelBurnTime * scale / 100;
@@ -119,42 +115,6 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
         }
         return internal;
 
-    }
-
-    public int getOutput(){
-        return 5;
-    }
-
-    public int getPowerStored() {
-        return powerStored;
-    }
-
-    public int getPowerMax() {
-        return powerMax;
-    }
-
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored>=PowerUsed) {
-
-            this.powerStored = powerStored - PowerUsed;
-
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = powerStored + PowerGained;
-
-            return true;
-        }
-        return false;
     }
 
     public String getName(){

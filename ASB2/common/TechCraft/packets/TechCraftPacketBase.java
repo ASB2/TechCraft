@@ -22,7 +22,6 @@ public abstract class TechCraftPacketBase {
         ImmutableBiMap.Builder<Integer, Class<? extends TechCraftPacketBase>> builder = ImmutableBiMap.builder();
 
         builder.put(Integer.valueOf(0), TestPacket.class);
-        builder.put(Integer.valueOf(1), PowerPacket.class);
         // we add all our packets here later
 
         idMap = builder.build();
@@ -40,25 +39,6 @@ public abstract class TechCraftPacketBase {
         else {
 
             return clazz.newInstance();
-        }
-    }
-
-    @SuppressWarnings("serial")
-    public static class ProtocolException extends Exception {
-
-        public ProtocolException() {
-        }
-
-        public ProtocolException(String message, Throwable cause) {
-            super(message, cause);
-        }
-
-        public ProtocolException(String message) {
-            super(message);
-        }
-
-        public ProtocolException(Throwable cause) {
-            super(cause);
         }
     }
 
@@ -81,6 +61,25 @@ public abstract class TechCraftPacketBase {
         return PacketDispatcher.getPacket(CHANNEL, out.toByteArray());
     }
 
+
+    @SuppressWarnings("serial")
+    public static class ProtocolException extends Exception {
+
+        public ProtocolException() {
+        }
+
+        public ProtocolException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public ProtocolException(String message) {
+            super(message);
+        }
+
+        public ProtocolException(Throwable cause) {
+            super(cause);
+        }
+    }
     protected abstract void write(ByteArrayDataOutput out);
 
     protected abstract void read(ByteArrayDataInput in) throws ProtocolException;

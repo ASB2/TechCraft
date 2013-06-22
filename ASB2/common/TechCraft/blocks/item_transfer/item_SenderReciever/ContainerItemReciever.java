@@ -5,7 +5,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import TechCraft.blocks.technogery.tcGenorator.SlotGenorator;
 
 public class ContainerItemReciever extends Container {
 
@@ -13,15 +12,15 @@ public class ContainerItemReciever extends Container {
         
         this.addSlotToContainer(new Slot(tileEntity, 0, 121, 38));
 
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 1, 30,17));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 2, 48,17));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 3, 66,17));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 4, 30,35));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 5, 48,35));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 6, 66,35));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 7, 30,53));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 8, 48,53));
-        this.addSlotToContainer(new SlotGenorator(tileEntity, 9, 66,53));
+        this.addSlotToContainer(new Slot(tileEntity, 1, 30,17));
+        this.addSlotToContainer(new Slot(tileEntity, 2, 48,17));
+        this.addSlotToContainer(new Slot(tileEntity, 3, 66,17));
+        this.addSlotToContainer(new Slot(tileEntity, 4, 30,35));
+        this.addSlotToContainer(new Slot(tileEntity, 5, 48,35));
+        this.addSlotToContainer(new Slot(tileEntity, 6, 66,35));
+        this.addSlotToContainer(new Slot(tileEntity, 7, 30,53));
+        this.addSlotToContainer(new Slot(tileEntity, 8, 48,53));
+        this.addSlotToContainer(new Slot(tileEntity, 9, 66,53));
 
 
         for (int i = 0; i < 3; i++)

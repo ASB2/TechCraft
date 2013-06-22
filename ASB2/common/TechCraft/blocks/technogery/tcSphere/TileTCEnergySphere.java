@@ -2,28 +2,24 @@ package TechCraft.blocks.technogery.tcSphere;
 
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.ItemRegistry;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerStorage;
+import TechCraft.power.PowerProvider;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     
-    int powerStored;
-    int powerMax = 1000;
     int color = 0;
 
+    public TileTCEnergySphere() {
+    
+        this.powerProvider = new PowerProvider(this, 1000, 1, 1, true, true);
+    }
+    
     public void updateEntity() {
-        this.managePowerAll(this, powerInput(), false);
+        
+        this.managePowerAll(this, false);
         super.updateEntity();
-    }    
-
-    public void setPowerStored(int power) {
-
-        if(power >= 0) {
-            
-            this.powerStored = power;       
-        }
     }
     
     public void setColor(Item item) {
@@ -49,33 +45,9 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     }
 
     @Override
-    public boolean outputPower() {
-
-        return true;
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return true;
-    }
-
-    @Override
     public String getName() {
 
         return "Energy Sphere";
-    }
-
-    @Override
-    public int getPowerStored() {
-
-        return powerStored;
-    }
-
-    @Override
-    public int getPowerMax() {
-
-        return powerMax;
     }
 
     public int getColor(){
@@ -84,38 +56,16 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerStorage {
     }
 
     @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored>=PowerUsed) {
-
-            this.powerStored = powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = powerStored + PowerGained;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
-        powerStored = par1NBTTagCompound.getInteger("powerStored");
+        
         color = par1NBTTagCompound.getInteger("color");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("powerStored", powerStored);
+
         par1NBTTagCompound.setInteger("color", color);        
     }
 }

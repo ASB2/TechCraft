@@ -5,28 +5,44 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
+import TechCraft.Message;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
+import TechCraft.power.PowerProvider;
 
 public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInventory{
 
     int powerStored;
     int powerMax = 100;
-    
+
     ItemStack[] tileItemStacks;
 
+    ItemStack[] craftingSlots;
+
     public TileTCInfuser() {
-        
+
+        this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
         tileItemStacks = new ItemStack[11];
     }
 
     public void updateEntity() {
-        super.managePowerAll(this, powerInput(), false);
+        super.managePowerAll(this, false);
         super.updateEntity();
 
+        if(InfuserRecipeList.getInstance().isValidRecipe(getCraftingSlots())) {
+
+            Message.sendToClient("HI");
+        }
     }
-    
+
+    public ItemStack[] getCraftingSlots() {
+
+        return new ItemStack[] {
+                tileItemStacks[1], tileItemStacks[2],tileItemStacks[3],
+                tileItemStacks[4],tileItemStacks[5],tileItemStacks[6],
+                tileItemStacks[7],tileItemStacks[8],tileItemStacks[9]};
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
@@ -67,35 +83,6 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
         }
 
         nbtTagCompound.setTag("Items", nbttaglist);
-    }
-    
-    @Override
-    public boolean usePower(int PowerUsed, ForgeDirection direction) {
-
-        if(this.powerStored >= PowerUsed) {
-
-            this.powerStored = powerStored - PowerUsed;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean gainPower(int PowerGained, ForgeDirection direction) {
-
-        if(this.powerMax - this.powerStored >= PowerGained) {
-
-            this.powerStored = powerStored + PowerGained;
-            
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean recievePower() {
-
-        return true;
     }
 
     @Override

@@ -101,6 +101,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemLifeStealingBludgeoningStick;    
     public static TechCraftItems ItemBlankCircuit;
     public static TechCraftItems ItemDataCircuit;
+    public static TechCraftItems ItemCrystalCasing;
     
     public static void init(Configuration config) {
 
@@ -281,6 +282,9 @@ public class ItemRegistry {
         ItemDataCircuit = new ItemDataCircuit(config.getItem("ItemDataCircuit", 5042).getInt());
         ItemDataCircuit.setUnlocalizedName("ASB2_ItemDataCircuit");
         LanguageRegistry.addName(ItemDataCircuit, "Simple Data Circuit");
+ 
+        ItemCrystalCasing = new ItemCrystalCasing(config.getItem("ItemCrystalCasing", 5043).getInt());
+        ItemCrystalCasing.setUnlocalizedName("ASB2_ItemCrystalCasing");
+        LanguageRegistry.addName(ItemCrystalCasing, "Crystal Casing");
     }
-
 }

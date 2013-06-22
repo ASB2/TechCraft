@@ -1,43 +1,56 @@
 package TechCraft.blocks.technogery.tcInfuser;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 public class InfuserRecipeList {
 
-    InfuserRecipeList instance = new InfuserRecipeList();
-    
-    public static LinkedList<InfuserRecipieBase> recipes = new LinkedList<InfuserRecipieBase>();
+    private static final InfuserRecipeList instance = new InfuserRecipeList();
 
-    public static void addReciper(InfuserRecipieBase recipe) {
-        
-        recipes.add(recipe);
+    public List<InfuserRecipieBase> recipes = new ArrayList <InfuserRecipieBase>();
+
+    private InfuserRecipeList() {
+
+        this.addRecipe(new InfuserRecipieBase(new ItemStack(Block.bedrock), new ItemStack[] {
+            new ItemStack(Block.bedrock),new ItemStack(Block.bedrock),new ItemStack(Block.bedrock),
+            new ItemStack(Block.bedrock),new ItemStack(Block.bedrock),new ItemStack(Block.bedrock),
+            new ItemStack(Block.bedrock),new ItemStack(Block.bedrock),new ItemStack(Block.bedrock)}, 0));
+
     }
-    
-    public static boolean isValidRecipe(ItemStack[] stack) {
-        
+
+    public void addRecipe(InfuserRecipieBase recipe) {
+
+        if(recipe != null) {
+
+            recipes.add(recipe);
+        }
+    }
+
+    public boolean isValidRecipe(ItemStack[] stack) {
+
         for(int i = 0; i < recipes.size(); i++) {
-            
+
             if(recipes.get(i).isRecipeValid(stack)) {
-                
-               return true;
+
+                return true;
             }
         }
         return false;
     }
-            
+
     @SuppressWarnings("rawtypes")
-    public static List getRecipeList()
+    public List getRecipeList()
     {
-        return InfuserRecipeList.recipes;
+        return recipes;
     }
-    
-    public InfuserRecipeList getInstance(){
-        
+
+    public static final InfuserRecipeList getInstance() {
+
         return instance;
     }
-            
-            
+
+
 }

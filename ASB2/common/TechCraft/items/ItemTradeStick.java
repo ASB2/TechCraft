@@ -3,7 +3,6 @@ package TechCraft.items;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -75,8 +74,6 @@ public class ItemTradeStick extends TechCraftItems {
     }
 
     public void breakBlock(World world, EntityPlayer player, int x, int y, int z, int blockToBreak, int blockmeta) {
-
-        boolean hasItem = false;
 
         if(world.blockExists(x, y, z)) {
 

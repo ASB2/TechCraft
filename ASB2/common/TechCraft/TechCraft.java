@@ -78,20 +78,7 @@ public class TechCraft {
         config.load();
 
         ItemRegistry.init(config);
-
         BlockRegistry.init(config);
-
-        CraftRegistry.init();
-        CraftRegistry.craftSmelting();
-
-        if(includePowerRecipies)
-            CraftRegistry.craftPower();
-
-        if(includeArmorRecipies)
-            CraftRegistry.craftTool_Armor();
-
-        if(includePowerRecipies)
-            CraftRegistry.craftRunes();
 
         modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "").getBoolean(true);
         
@@ -172,6 +159,20 @@ public class TechCraft {
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
+
+        CraftRegistry.init();
+        CraftRegistry.placeHolderRecipes();
+        
+        CraftRegistry.craftSmelting();
+
+        if(includePowerRecipies)
+            CraftRegistry.craftPower();
+
+        if(includeArmorRecipies)
+            CraftRegistry.craftTool_Armor();
+
+        if(includePowerRecipies)
+            CraftRegistry.craftRunes();
     }
 
 }

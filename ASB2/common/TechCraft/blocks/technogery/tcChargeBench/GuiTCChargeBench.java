@@ -69,7 +69,7 @@ public class GuiTCChargeBench extends GuiContainer {
 
         if(isPointInRegion(45, 7, 18, 71, mouseX, mouseY)) {
 
-            drawBarTooltip("Energy", "TCU", tileEntity.getPowerStored(), tileEntity.getPowerMax(), mouseX, mouseY);
+            drawBarTooltip("Energy", "TCU", tileEntity.getPowerProvider().getPowerStored(), tileEntity.getPowerProvider().getPowerMax(), mouseX, mouseY);
         }
     }
     

@@ -108,7 +108,7 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
             if(tile instanceof IPowerMisc) {
 
-                if(((IPowerMisc)tile).outputPower() || ((IPowerMisc)tile).recievePower()) {
+                if(((IPowerMisc)tile).getPowerProvider().outputPower() || ((IPowerMisc)tile).getPowerProvider().recievePower()) {
 
                     return ((IPowerMisc)tile).renderByDirection(direction);
                 }
