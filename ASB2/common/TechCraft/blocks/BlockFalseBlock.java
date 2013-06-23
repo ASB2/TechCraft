@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import TechCraft.utils.Utilities;
+import TechCraft.utils.UtilPlayers;
 
 public class BlockFalseBlock extends TechCraftBlocks {
 
@@ -41,7 +41,7 @@ public class BlockFalseBlock extends TechCraftBlocks {
 
         if(entity instanceof EntityPlayer) {
 
-            if((Utilities.isSpecialPlayer(((EntityPlayer)entity).username))) {
+            if((UtilPlayers.isSpecialPlayer(((EntityPlayer)entity).username))) {
 
                 entity.extinguish();
             }

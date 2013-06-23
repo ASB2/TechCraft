@@ -11,11 +11,13 @@ import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.Configuration;
 import TechCraft.items.ItemAirCrystalShard;
 import TechCraft.items.ItemBasicDestructionCatalyst;
+import TechCraft.items.ItemCrystalCasing;
 import TechCraft.items.ItemEarthCrystalShard;
 import TechCraft.items.ItemEnergyCrystalShard;
 import TechCraft.items.ItemEnhancedDestructionCatalyst;
 import TechCraft.items.ItemFireCrystalShard;
 import TechCraft.items.ItemGarnet;
+import TechCraft.items.ItemLifeStealingBludgeoningStick;
 import TechCraft.items.ItemLinker;
 import TechCraft.items.ItemOmniTool;
 import TechCraft.items.ItemTCMultiTool;
@@ -48,8 +50,6 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.items.circuits.*;
-import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -276,14 +276,6 @@ public class ItemRegistry {
         ItemLifeStealingBludgeoningStick = new ItemLifeStealingBludgeoningStick(config.getItem("ItemLifeStealingBludgeoningStick", getNextBaseID()).getInt());
         ItemLifeStealingBludgeoningStick.setUnlocalizedName("ASB2_ItemLifeStealingBludgeoningStick");
         LanguageRegistry.addName(ItemLifeStealingBludgeoningStick, "Life Stealing Bludgeoning Stick");
-
-        ItemBlankCircuit = new ItemBlankCircuit(config.getItem("ItemBlankCircuit", getNextBaseID()).getInt());
-        ItemBlankCircuit.setUnlocalizedName("ASB2_ItemBlankCircuit");
-        LanguageRegistry.addName(ItemBlankCircuit, "Blank Circuit");
-
-        ItemDataCircuit = new ItemDataCircuit(config.getItem("ItemDataCircuit", getNextBaseID()).getInt());
-        ItemDataCircuit.setUnlocalizedName("ASB2_ItemDataCircuit");
-        LanguageRegistry.addName(ItemDataCircuit, "Simple Data Circuit");
 
         ItemCrystalCasing = new ItemCrystalCasing(config.getItem("ItemCrystalCasing", getNextBaseID()).getInt());
         ItemCrystalCasing.setUnlocalizedName("ASB2_ItemCrystalCasing");

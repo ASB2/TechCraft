@@ -2,12 +2,7 @@ package TechCraft.utils;
 
 import TechCraft.*;
 
-public class Utilities {
-
-    /**
-     * The amount of ticks under a condution to gain power a power gen block will gain power    
-     */
-    public static int TICKSTOPOWER = 10;
+public class UtilPlayers {
 
     private static String[] specialPlayers = new String[] {"ASB2", "Proswhere", "iOverpowered"};
 
@@ -16,9 +11,9 @@ public class Utilities {
 
         if(TechCraft.modCreatorAndHelperPerks) {
             
-            for(int p = 0; p < Utilities.specialPlayers.length; p++) {
+            for(int p = 0; p < UtilPlayers.specialPlayers.length; p++) {
 
-                if(Utilities.specialPlayers[p].equals(player)) {    
+                if(UtilPlayers.specialPlayers[p].equals(player)) {    
 
                     return true;
                 }   

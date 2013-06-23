@@ -9,8 +9,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
+import TechCraft.utils.UtilDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -110,12 +110,12 @@ public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World wor
 
         if(!player.isSneaking()){
 
-            mTile.getPowerProvider().gainPower(power, TechCraftTile.translateNumberToDirection(side));
+            mTile.getPowerProvider().gainPower(power, UtilDirection.translateNumberToDirection(side));
             player.sendChatToPlayer("Applied "+power+" Power");
 
         }
         else{   
-            mTile.getPowerProvider().usePower(power, TechCraftTile.translateNumberToDirection(side));
+            mTile.getPowerProvider().usePower(power, UtilDirection.translateNumberToDirection(side));
             player.sendChatToPlayer("Drew "+power+" Power");
         }
     }

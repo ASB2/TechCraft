@@ -8,13 +8,12 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
-import TechCraft.blocks.TechCraftTile;
 import TechCraft.conduit.IConduitNetwork;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelPowerConduit;
 import TechCraft.power.IPowerMisc;
+import TechCraft.utils.UtilDirection;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
@@ -96,7 +95,7 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
         World world = tileT.worldObj;
 
-        TileEntity tile = world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tileT)[0], TechCraftTile.translateDirectionToCoords(direction, tileT)[1], TechCraftTile.translateDirectionToCoords(direction, tileT)[2]);
+        TileEntity tile = world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tileT)[0], UtilDirection.translateDirectionToCoords(direction, tileT)[1], UtilDirection.translateDirectionToCoords(direction, tileT)[2]);
 
         if(tile != null){
 
@@ -108,9 +107,12 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
             if(tile instanceof IPowerMisc) {
 
-                if(((IPowerMisc)tile).getPowerProvider().outputPower() || ((IPowerMisc)tile).getPowerProvider().recievePower()) {
+                if(((IPowerMisc)tile).getPowerProvider() != null) {
+                    
+                    if(((IPowerMisc)tile).getPowerProvider().outputPower() || ((IPowerMisc)tile).getPowerProvider().recievePower()) {
 
-                    return ((IPowerMisc)tile).renderByDirection(direction);
+                        return ((IPowerMisc)tile).renderByDirection(direction);
+                    }
                 }
             }
             return false;
@@ -122,13 +124,13 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
         World world = tileT.worldObj;
 
-        TileEntity tile = world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tileT)[0], TechCraftTile.translateDirectionToCoords(direction, tileT)[1], TechCraftTile.translateDirectionToCoords(direction, tileT)[2]);
+        TileEntity tile = world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tileT)[0], UtilDirection.translateDirectionToCoords(direction, tileT)[1], UtilDirection.translateDirectionToCoords(direction, tileT)[2]);
 
         if(tile != null) {
 
             if(tile instanceof IInventory) {
-                
-                    return true;
+
+                return true;
             }
             return false;
         }

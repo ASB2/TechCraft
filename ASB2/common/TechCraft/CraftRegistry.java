@@ -79,7 +79,7 @@ public class CraftRegistry {
             'P', Item.enderPearl,
             'T', ItemRegistry.ItemTeleportModule
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemBasicDestructionCatalyst), new Object[] {
             "PBS",
             "TET", 
@@ -91,7 +91,7 @@ public class CraftRegistry {
             'D', Item.diamond,
             'B', Block.blockDiamond
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockSpeedyRoad, 8), new Object[] {
             "MMM",
             "QZQ",
@@ -100,7 +100,7 @@ public class CraftRegistry {
             'Q', Block.blockNetherQuartz,
             'Z', ItemRegistry.ItemZycrantianIngot
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPersonalBlock, 8, 0), new Object[] {
             "QGQ",
             "GZG",
@@ -109,7 +109,7 @@ public class CraftRegistry {
             'Q', Block.blockNetherQuartz,
             'Z', ItemRegistry.ItemZycrantianIngot
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockPersonalBlock, 8, 1), new Object[] {
             "QGQ",
             "GZG",
@@ -118,7 +118,7 @@ public class CraftRegistry {
             'Q', Block.blockNetherQuartz,
             'Z', ItemRegistry.ItemZycrantianIngot
         });
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemTeleporter),new ItemStack(ItemRegistry.ItemTeleporter));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemLinker),new ItemStack(ItemRegistry.ItemLinker));
         GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.ItemGarnet,9),new ItemStack(BlockRegistry.BlockGarnetBlock));
@@ -126,7 +126,7 @@ public class CraftRegistry {
     }
 
     public static void placeHolderRecipes() {
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemCrystalCasing), new Object[] {
             " G ",
             "GRG", 
@@ -134,17 +134,17 @@ public class CraftRegistry {
             'R', Item.redstone,
             'G', Block.glass
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemAirCrystalShard), new Object[] {
             "GFG",
             "FCF", 
             "GFG",
-            
+
             'C', ItemRegistry.ItemCrystalCasing,
             'F', Item.feather,
             'G', Block.glass
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemFireCrystalShard), new Object[] {
             "OBO",
             "BCB", 
@@ -153,7 +153,7 @@ public class CraftRegistry {
             'O', Item.coal,
             'B', Item.blazeRod
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEarthCrystalShard), new Object[] {
             "DSD",
             "SCS", 
@@ -162,7 +162,7 @@ public class CraftRegistry {
             'D', Block.dirt,
             'D', Block.cobblestone
         });
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemWaterCrystalShard), new Object[] {
             "BWB",
             "WCW", 
@@ -172,9 +172,9 @@ public class CraftRegistry {
             'W', Block.glass
         });
     }
-    
+
     public static void craftPower() {
-        
+
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEnergyBlob), new Object[] {
             "ERE",
             "RGR", 
@@ -506,4 +506,19 @@ public class CraftRegistry {
         GameRegistry.addSmelting(Item.swordWood.itemID, new ItemStack(
                 ItemRegistry.ItemCharcoalSword), 1.F);
     }
+
+    public static void teiredCrafting() {
+
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockItemExtractor), new Object[] {
+            "GIG",
+            "IMI",
+            "ARA",
+            'G', Block.glass,
+            'I', Item.ingotIron,
+            'M', BlockRegistry.BlockMagiciansBuildingBlocks,
+            'A', ItemRegistry.ItemAirCrystalShard,
+            'R', Item.redstone
+        });
+    }
+
 }

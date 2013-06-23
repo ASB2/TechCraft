@@ -84,7 +84,7 @@ public class BlockPersonalBlock extends TechCraftContainers {
 
         switch(world.getBlockMetadata(x, y, z)) {
             
-            case 0 : return false;
+            case 0 : return true;
             case 1: return true;
         }
         return false;

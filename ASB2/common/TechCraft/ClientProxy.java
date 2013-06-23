@@ -5,18 +5,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import TechCraft.blocks.conduitInterface.items.GuiItemConduitInterface;
-import TechCraft.blocks.conduitInterface.items.ItemRendererItemConduitInterface;
-import TechCraft.blocks.conduitInterface.items.TileItemConduitInterface;
-import TechCraft.blocks.conduitInterface.items.TileRendererItemConduitInterface;
-import TechCraft.blocks.tanks.GuiTCTank;
-import TechCraft.blocks.tanks.TileEntityRendererTileTank;
-import TechCraft.blocks.tanks.TileTCTank;
+import TechCraft.blocks.tcItemExtractor.*;
 import TechCraft.blocks.tcConduits.tcItemConduits.ItemRendererTCItemConduit;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileRendererTCItemConduit;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
-import TechCraft.blocks.tcDeepStorageCell.GuiDeepStorageCell;
-import TechCraft.blocks.tcDeepStorageCell.TileDeepStorageCell;
 import TechCraft.blocks.tcRunes.GuiRune;
 import TechCraft.blocks.tcRunes.ItemRendererTileBasicRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
@@ -74,10 +66,9 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileTCTank.class, new TileEntityRendererTileTank());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileItemConduitInterface.class, new TileRendererItemConduitInterface());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemConduitInterface.blockID, (IItemRenderer)new ItemRendererItemConduitInterface()); 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileItemExtractor.class, new TileRendererItemExtractor());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemExtractor.blockID, (IItemRenderer)new ItemRendererItemExtractor()); 
     }
 
 
@@ -99,14 +90,9 @@ public class ClientProxy extends CommonProxy {
                     case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
                     case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
                     case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
-                    case 8: return new GuiTCTank(player.inventory, (TileTCTank)tileEntity);
                     case 9: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
                     case 10: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
-                    case 11: return new GuiItemConduitInterface(player.inventory, (TileItemConduitInterface)tileEntity);  
-                    case 12: return new GuiDeepStorageCell(player.inventory, (TileDeepStorageCell)tileEntity);  
-                    //case 1: return new GuiCrafting(player.inventory, world, x, y, z);            
-
-                    //case 4: return new GuiMagicGauntlet(player);
+                    case 11: return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
                 }
             }
         }

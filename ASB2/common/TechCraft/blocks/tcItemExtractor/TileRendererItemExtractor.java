@@ -1,4 +1,4 @@
-package TechCraft.blocks.conduitInterface.items;
+package TechCraft.blocks.tcItemExtractor;
 
 import java.util.Random;
 
@@ -11,24 +11,24 @@ import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelConduitInterface;
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class TileRendererItemConduitInterface extends TileEntitySpecialRenderer {
+public class TileRendererItemExtractor extends TileEntitySpecialRenderer {
 
     private ModelConduitInterface model;
 
-    public TileRendererItemConduitInterface() {
+    public TileRendererItemExtractor() {
         
         model = new ModelConduitInterface();
     }
 
     public void renderTileEntityAt(TileEntity par1TileEntity, double x, double y, double z, float frames){
 
-        if(par1TileEntity instanceof TileItemConduitInterface) {
+        if(par1TileEntity instanceof TileItemExtractor) {
 
-            this.renderAModelAt((TileItemConduitInterface)par1TileEntity, x, y, z, frames);
+            this.renderAModelAt((TileItemExtractor)par1TileEntity, x, y, z, frames);
         }
     } 
 
-    public void renderAModelAt(TileItemConduitInterface tile, double x, double y, double z, float frames) {
+    public void renderAModelAt(TileItemExtractor tile, double x, double y, double z, float frames) {
 
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_CULL_FACE);

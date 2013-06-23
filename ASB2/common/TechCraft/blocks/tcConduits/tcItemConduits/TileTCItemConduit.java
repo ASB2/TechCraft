@@ -13,6 +13,7 @@ import TechCraft.conduit.ConduitNetwork;
 import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.IConduitConductor;
 import TechCraft.conduit.IConduitInterfaceItem;
+import TechCraft.utils.*;
 
 public class TileTCItemConduit extends TechCraftTile implements IConduitConductor {
 
@@ -53,7 +54,7 @@ public class TileTCItemConduit extends TechCraftTile implements IConduitConducto
      */
     public void moveItemsToInventory(ForgeDirection direction) {
 
-        TileEntity tileA = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, this)[0], TechCraftTile.translateDirectionToCoords(direction, this)[1], TechCraftTile.translateDirectionToCoords(direction, this)[2]);
+        TileEntity tileA = worldObj.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, this)[0], UtilDirection.translateDirectionToCoords(direction, this)[1], UtilDirection.translateDirectionToCoords(direction, this)[2]);
 
         if(this.getNetwork() != null) {
 

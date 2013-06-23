@@ -19,10 +19,8 @@ import TechCraft.blocks.BlockWaterCrystalOre;
 import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
-import TechCraft.blocks.conduitInterface.items.BlockItemConduitInterface;
-import TechCraft.blocks.tanks.BlockTCTank;
+import TechCraft.blocks.tcItemExtractor.*;
 import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
-import TechCraft.blocks.tcDeepStorageCell.BlockDeepStorageCell;
 import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
 import TechCraft.blocks.tcPersonalBlocks.PersonalBlockPlacer;
 import TechCraft.blocks.tcRunes.BlockBasicRune;
@@ -81,7 +79,7 @@ public class BlockRegistry {
     public static TechCraftContainers BlockTCGrinder;    
     public static TechCraftContainers BlockToolManager;
     public static TechCraftContainers BlockTCEnergyConstructor;    
-    public static TechCraftContainers BlockItemConduitInterface;
+    public static TechCraftContainers BlockItemExtractor;
     
     public static TechCraftBlocks BlockSpeedyRoad;
     
@@ -230,12 +228,6 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockTCTeleporter, "TC Teleporter");
         MinecraftForge.setBlockHarvestLevel(BlockTCTeleporter, "pickaxe", 2);
         
-        BlockTCTank = new BlockTCTank(config.getBlock("BlockTCTank", getNextBaseID()).getInt(), Material.rock);
-        BlockTCTank.setUnlocalizedName("ASB2_BlockTCTank");
-        GameRegistry.registerBlock(BlockTCTank, "ASB2_BlockTCTank");
-        LanguageRegistry.addName(BlockTCTank, "TC Tank");
-        MinecraftForge.setBlockHarvestLevel(BlockTCTank, "pickaxe", 2);
-        
         BlockTCGrinder = new BlockTCGrinder(config.getBlock("BlockTCGrinder", getNextBaseID()).getInt(), Material.rock);
         BlockTCGrinder.setUnlocalizedName("ASB2_BlockTCGrinder");
         GameRegistry.registerBlock(BlockTCGrinder, "ASB2_BlockTCGrinder");
@@ -254,11 +246,11 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockTCEnergyConstructor, "Energy Constructor");
         MinecraftForge.setBlockHarvestLevel(BlockTCEnergyConstructor, "pickaxe", 2);
         
-        BlockItemConduitInterface = new BlockItemConduitInterface(config.getBlock("BlockItemConduitInterface", getNextBaseID()).getInt(), Material.rock);
-        BlockItemConduitInterface.setUnlocalizedName("ASB2_BlockItemConduitInterface");
-        GameRegistry.registerBlock(BlockItemConduitInterface, "ASB2_BlockItemConduitInterface");
-        LanguageRegistry.addName(BlockItemConduitInterface, "Item Interface");
-        MinecraftForge.setBlockHarvestLevel(BlockItemConduitInterface, "pickaxe", 2);
+        BlockItemExtractor = new BlockItemExtractor(config.getBlock("BlockItemExtractor", getNextBaseID()).getInt(), Material.rock);
+        BlockItemExtractor.setUnlocalizedName("ASB2_BlockItemExtractor");
+        GameRegistry.registerBlock(BlockItemExtractor, "ASB2_BlockItemExtractor");
+        LanguageRegistry.addName(BlockItemExtractor, "Item Extractor");
+        MinecraftForge.setBlockHarvestLevel(BlockItemExtractor, "pickaxe", 2);
     
         BlockSpeedyRoad = new BlockSpeedyRoad(config.getBlock("BlockSpeedyRoad", getNextBaseID()).getInt(), Material.rock);
         BlockSpeedyRoad.setUnlocalizedName("ASB2_BlockSpeedyRoad");
@@ -272,12 +264,6 @@ public class BlockRegistry {
         LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 0), "Personal Glass");
         LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 1), "Personal Stone");
         MinecraftForge.setBlockHarvestLevel(BlockPersonalBlock, "pickaxe", 2);
-    
-        BlockDeepStorageCell = new BlockDeepStorageCell(config.getBlock("BlockDeepStorageCell", getNextBaseID()).getInt(), Material.rock);
-        BlockDeepStorageCell.setUnlocalizedName("ASB2_BlockDeepStorageCell");
-        GameRegistry.registerBlock(BlockDeepStorageCell, "ASB2_BlockDeepStorageCell");
-        LanguageRegistry.addName(BlockDeepStorageCell, "Deep Storage Cell");
-        MinecraftForge.setBlockHarvestLevel(BlockDeepStorageCell, "pickaxe", 2);
     }
 
     public static int getNextBaseID() {

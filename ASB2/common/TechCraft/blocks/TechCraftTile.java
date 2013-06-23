@@ -15,6 +15,7 @@ import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.EnumInterfaceType;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.*;
+import TechCraft.utils.*;
 
 public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IWrenchable {
 
@@ -88,22 +89,22 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
     public ForgeDirection getOrientation() {
 
-        if(!(orientation == TechCraftTile.translateNumberToDirection(getBlockMetadata()))) {
+        if(!(orientation == UtilDirection.translateNumberToDirection(getBlockMetadata()))) {
 
-            this.orientation = TechCraftTile.translateNumberToDirection(getBlockMetadata());
+            this.orientation = UtilDirection.translateNumberToDirection(getBlockMetadata());
         }
 
         if(orientation == ForgeDirection.SOUTH) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
+            return UtilDirection.translateDirectionToOpposite(orientation);
         }
         if(orientation == ForgeDirection.NORTH) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
+            return UtilDirection.translateDirectionToOpposite(orientation);
         }
         if(orientation == ForgeDirection.UP) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
+            return UtilDirection.translateDirectionToOpposite(orientation);
         }
         if(orientation == ForgeDirection.DOWN) {
-            return TechCraftTile.translateDirectionToOpposite(orientation);
+            return UtilDirection.translateDirectionToOpposite(orientation);
         }
         return orientation;
     }
@@ -142,7 +143,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         }
     }
 
-    public static int translateColorToInt(EnumColor color) {
+    public static int translateColorToNumber(EnumColor color) {
 
         switch(color) {
 
@@ -237,19 +238,19 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
             case DOWN: {
 
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(ForgeDirection.UP), 3);
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.UP), 3);
                 return;
             }
 
             case UP: {
 
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(ForgeDirection.NORTH), 3);
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.NORTH), 3);
                 return;
             }
 
             case NORTH: {
 
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, TechCraftTile.translateDirectionToNumber(ForgeDirection.SOUTH), 3);
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.SOUTH), 3);
                 return;
             }
 
@@ -274,260 +275,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         }
     }
 
-    public static int[] translateDirectionToCoords(ForgeDirection direction, TileEntity tile) {
-
-        switch(direction) {
-
-            case DOWN: {
-                return new int[]{tile.xCoord,tile.yCoord-1,tile.zCoord};
-            }
-            case UP: {
-                return new int[]{tile.xCoord,tile.yCoord+1,tile.zCoord};
-            }
-            case NORTH: {
-                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord-1};
-            }
-            case SOUTH: {
-                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord+1};
-            }
-            case WEST: {
-                return new int[]{tile.xCoord-1,tile.yCoord,tile.zCoord};
-            }
-            case EAST: {
-                return new int[]{tile.xCoord+1,tile.yCoord,tile.zCoord};
-            }
-            case UNKNOWN:{
-                return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
-            }
-        }
-
-        return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
-    }
-
-    public static ForgeDirection translateDirectionToOpposite(ForgeDirection direction) {
-
-        switch(direction) {
-
-            case DOWN: {
-                return ForgeDirection.UP;
-            }
-            case UP: {
-                return ForgeDirection.DOWN;
-            }
-            case NORTH: {
-                return ForgeDirection.SOUTH;
-            }
-            case SOUTH: {
-                return ForgeDirection.NORTH;
-            }
-            case WEST: {
-                return ForgeDirection.EAST;
-            }
-            case EAST: {
-                return ForgeDirection.WEST;
-            }
-            case UNKNOWN:{
-                return ForgeDirection.UNKNOWN;
-            }
-        }
-
-        return ForgeDirection.UNKNOWN;
-    }
-
-    public static int translateDirectionToNumber(ForgeDirection direction) {
-
-        int var1 = -1;
-
-        switch(direction) {
-
-            case DOWN: {
-                var1 = 0;
-                return var1;
-            }
-            case UP: {
-                var1 = 1;
-                return var1;
-            }
-            case NORTH: {
-                var1 = 2;
-                return var1;
-            }                       
-            case SOUTH: {
-                var1 = 3;
-                return var1;
-            }
-            case WEST: {
-                var1 = 5;
-                return var1;
-            }
-            case EAST: {
-                var1 = 4;
-                return var1;
-            }
-            default:{
-                return var1;
-            }
-        }
-    }
-
-    public static ForgeDirection translateNumberToDirection(int direction) {
-
-        switch(direction) {
-
-            case 0: {
-                return ForgeDirection.DOWN;
-            }
-            case 1: {
-                return ForgeDirection.UP;
-            }
-            case 2: {
-                return ForgeDirection.NORTH;
-            }
-            case 3: {
-                return ForgeDirection.SOUTH;
-            }
-            case 5: {
-                return ForgeDirection.WEST;
-            }
-            case 4: {
-                return ForgeDirection.EAST;
-            }
-            case -1: {
-                return ForgeDirection.UNKNOWN;
-            }
-            default: {
-                return ForgeDirection.UNKNOWN;
-            }
-        }
-    }
-
-    public static String translateDirectionToString(ForgeDirection direction) {
-
-        switch(direction) {
-
-            case DOWN: {
-                return "Down";
-            }
-            case UP: {
-                return "Up";
-            }
-            case NORTH: {
-                return "North";
-            }
-            case SOUTH: {
-                return "South";
-            }
-            case WEST: {
-                return "West";
-            }
-            case EAST: {
-                return "East";
-            }
-            default:{
-                return "Unknown";
-            }
-        }
-    }
-
-    public static TileEntity[] getArrayTilesAround(World world, TileEntity tile) {
-
-        return new TileEntity[] {
-                TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.DOWN),
-                TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.UP),
-                TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.NORTH),
-                TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.SOUTH),
-                TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.WEST),
-                TechCraftTile.translateDirectionToTile(tile, world, ForgeDirection.EAST)};
-    }
-
-    public static int getTilesNextTo(int x, int y, int z, World worldObj) {
-        int numberNextTo = 0;
-        //Bottom of Tile
-        if(worldObj.getBlockTileEntity(x, y-1, z) instanceof IPowerMisc){
-            numberNextTo++;
-        }
-        //top of Tile
-        if(worldObj.getBlockTileEntity(x, y+1, z) instanceof IPowerMisc){
-            numberNextTo++;
-        }        
-        //left
-        if(worldObj.getBlockTileEntity(x, y, z-1) instanceof IPowerMisc){
-            numberNextTo++;
-        }
-        //right
-        if(worldObj.getBlockTileEntity(x, y, z+1) instanceof IPowerMisc){
-            numberNextTo++;
-        }
-        //front
-        if(worldObj.getBlockTileEntity(x+1, y, z) instanceof IPowerMisc){
-            numberNextTo++;
-        }
-        //back
-        if(worldObj.getBlockTileEntity(x-1, y, z) instanceof IPowerMisc){
-            numberNextTo++;
-        }
-        return numberNextTo;
-    }
-
-    public static int getTilesNextTo(TileEntity tile, World worldObj) {
-        int numberNextTo = 0;
-        //Bottom of Tile
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord-1, tile.zCoord) instanceof TileEntity){
-            numberNextTo++;
-        }
-        //top of Tile
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord+1, tile.zCoord) instanceof TileEntity){
-            numberNextTo++;
-        }        
-        //left
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord-1) instanceof TileEntity){
-            numberNextTo++;
-        }
-        //right
-        if(worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord+1) instanceof TileEntity){
-            numberNextTo++;
-        }
-        //front
-        if(worldObj.getBlockTileEntity(tile.xCoord+1, tile.yCoord, tile.zCoord) instanceof TileEntity){
-            numberNextTo++;
-        }
-        //back
-        if(worldObj.getBlockTileEntity(tile.xCoord-1, tile.yCoord, tile.zCoord) instanceof TileEntity){
-            numberNextTo++;
-        }
-        return numberNextTo;
-    }
-
-    public static TileEntity translateDirectionToTile(TileEntity tile, World world, ForgeDirection direction) {
-
-        switch(direction) {
-
-            case DOWN: {
-                return world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case UP: {
-                return world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case NORTH: {
-                return world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case SOUTH: {
-                return world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case WEST: {
-                return world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case EAST: {
-                return world.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, tile)[0], TechCraftTile.translateDirectionToCoords(direction, tile)[1], TechCraftTile.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case UNKNOWN:{
-                return null;
-            }
-        }
-
-        return null;
-    }
-
     public void managePowerAll(TileEntity tile, boolean addPower) {
 
         int amountOfPower;
@@ -540,9 +287,9 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
                     amountOfPower = ((IPowerMisc)tile).getPowerProvider().getOutput();
 
-                    if(TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
+                    if(UtilDirection.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
 
-                        amountOfPower = amountOfPower / TechCraftTile.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
+                        amountOfPower = amountOfPower / UtilDirection.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
                     }        
                 }
 
@@ -562,7 +309,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
     public void transferPower(ForgeDirection direction, TileEntity tile, int amountOfPower, boolean addPower){
 
-        int[] coords = TechCraftTile.translateDirectionToCoords(direction, this);
+        int[] coords = UtilDirection.translateDirectionToCoords(direction, this);
 
         if(worldObj.blockExists(coords[0], coords[1], coords[2])) {
 
@@ -571,7 +318,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
                 IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
                 IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
 
-                if(tileCallingMeathod.getPowerProvider() != null) {
+                if(tileCallingMeathod.getPowerProvider() != null && tileToChange.getPowerProvider() != null) {
 
                     if(addPower) {
 
@@ -579,7 +326,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
                         {
                             if(tileCallingMeathod.getPowerProvider().outputPower() && tileToChange.getPowerProvider().recievePower()){
 
-                                if(tileToChange.getPowerProvider().gainPower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction))) {
+                                if(tileToChange.getPowerProvider().gainPower(amountOfPower, UtilDirection.translateDirectionToOpposite(direction))) {
 
                                     tileCallingMeathod.getPowerProvider().usePower(amountOfPower, direction);
                                 }
@@ -595,7 +342,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
                                 if(tileCallingMeathod.getPowerProvider().gainPower(amountOfPower, direction)) {
 
-                                    tileToChange.getPowerProvider().usePower(amountOfPower, TechCraftTile.translateDirectionToOpposite(direction));
+                                    tileToChange.getPowerProvider().usePower(amountOfPower, UtilDirection.translateDirectionToOpposite(direction));
                                 }
                             }
                         }
@@ -669,7 +416,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
         if(color == EnumColor.NONE || color == null)
             color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
-        
+
         if(this.getPowerProvider() != null)
             this.getPowerProvider().setPower(tag.getInteger("power"));
     }
@@ -679,7 +426,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         super.writeToNBT(tag); 
 
         if(color != EnumColor.NONE)
-            tag.setInteger("Color", TechCraftTile.translateColorToInt(this.getColorEnum()));
+            tag.setInteger("Color", TechCraftTile.translateColorToNumber(this.getColorEnum()));
 
         if(this.getPowerProvider() != null)
             tag.setInteger("power", this.getPowerProvider().getPowerStored());

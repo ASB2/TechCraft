@@ -2,14 +2,14 @@ package TechCraft;
 
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.*;
-import TechCraft.utils.Utilities;
+import TechCraft.utils.UtilPlayers;
 
 public class TechCraftPlayerTracker implements IPlayerTracker {
 
     @Override
     public void onPlayerLogin(EntityPlayer player) {
 
-        if(Utilities.isSpecialPlayer(player.username)) {
+        if(UtilPlayers.isSpecialPlayer(player.username)) {
             
             player.sendChatToPlayer("Welcome " + player.username);
         }

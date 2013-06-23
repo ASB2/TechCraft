@@ -55,7 +55,7 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
             if(fuelBurnTime > 0) {
 
-                if(ticks >= Utilities.TICKSTOPOWER) {
+                if(ticks >= UtilPower.TICKSTOPOWER) {
 
                     ticks = 0;
                     this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);

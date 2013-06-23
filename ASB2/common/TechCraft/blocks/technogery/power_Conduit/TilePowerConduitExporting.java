@@ -5,6 +5,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 import TechCraft.power.IPowerStorage;
+import TechCraft.utils.UtilDirection;
 
 public class TilePowerConduitExporting extends TechCraftTile {
 
@@ -21,7 +22,7 @@ public class TilePowerConduitExporting extends TechCraftTile {
 
     public boolean decideRender(ForgeDirection direction) {
 
-        TileEntity tile = worldObj.getBlockTileEntity(TechCraftTile.translateDirectionToCoords(direction, this)[0], TechCraftTile.translateDirectionToCoords(direction, this)[1], TechCraftTile.translateDirectionToCoords(direction, this)[2]);
+        TileEntity tile = worldObj.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, this)[0], UtilDirection.translateDirectionToCoords(direction, this)[1], UtilDirection.translateDirectionToCoords(direction, this)[2]);
         if(tile != null) {
 
             switch(direction) {

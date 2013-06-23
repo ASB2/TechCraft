@@ -1,4 +1,4 @@
-package TechCraft.blocks.conduitInterface.items;
+package TechCraft.blocks.tcItemExtractor;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,9 +9,9 @@ import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftContainers;
 import TechCraft.blocks.*;
 
-public class BlockItemConduitInterface extends TechCraftContainers {
+public class BlockItemExtractor extends TechCraftContainers {
 
-    public BlockItemConduitInterface(int par1, Material par2Material) {
+    public BlockItemExtractor(int par1, Material par2Material) {
         super(par1, par2Material);        
     }
 
@@ -50,6 +50,6 @@ public class BlockItemConduitInterface extends TechCraftContainers {
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TileItemConduitInterface();
+        return new TileItemExtractor();
     }
 }

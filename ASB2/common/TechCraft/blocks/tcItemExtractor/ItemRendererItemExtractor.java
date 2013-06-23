@@ -1,4 +1,4 @@
-package TechCraft.blocks.conduitInterface.items;
+package TechCraft.blocks.tcItemExtractor;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -9,11 +9,11 @@ import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelConduitInterface;
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemRendererItemConduitInterface implements IItemRenderer {
+public class ItemRendererItemExtractor implements IItemRenderer {
 
     private ModelConduitInterface model;
 
-    public ItemRendererItemConduitInterface()
+    public ItemRendererItemExtractor()
     {
         model = new ModelConduitInterface();
     }

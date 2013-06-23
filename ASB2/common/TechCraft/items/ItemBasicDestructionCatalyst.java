@@ -6,9 +6,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import TechCraft.blocks.TechCraftTile;
+import TechCraft.utils.UtilDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 
 public class ItemBasicDestructionCatalyst extends TechCraftItems {
 
@@ -41,7 +42,7 @@ public class ItemBasicDestructionCatalyst extends TechCraftItems {
 
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
 
-        ForgeDirection sideF = TechCraftTile.translateNumberToDirection(side);            
+        ForgeDirection sideF = UtilDirection.translateNumberToDirection(side);            
         this.cycle2DBlock(player, world, sideF, x, y, z, 3, 1, world.getBlockId(x, y, z));        
         return true;        
     }

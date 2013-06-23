@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.conduit.IConduitNetwork;
 import TechCraft.power.IPowerMisc;
+import TechCraft.utils.*;
 
 public class ItemTechnoMagicReader extends TechCraftItems{
 
@@ -32,14 +33,14 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
                 TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
 
-                player.sendChatToPlayer(mTile.getName()+ " is at orientation: " + TechCraftTile.translateDirectionToString(mTile.getOrientation()));
+                player.sendChatToPlayer(mTile.getName()+ " is at orientation: " + UtilDirection.translateDirectionToString(mTile.getOrientation()));
                 player.sendChatToPlayer(mTile.getName()+ " has metadata: "+world.getBlockMetadata(x, y, z));
                 player.sendChatToPlayer(mTile.getName()+ " output power: "+mTile.getPowerProvider().outputPower());
                 player.sendChatToPlayer(mTile.getName()+ " recieve power: "+mTile.getPowerProvider().recievePower());
             }    
             else {
                 player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));
-                player.sendChatToPlayer("Block metadata equates to forge direction " + TechCraftTile.translateDirectionToString( TechCraftTile.translateNumberToDirection(world.getBlockMetadata(x, y, z))));
+                player.sendChatToPlayer("Block metadata equates to forge direction " + UtilDirection.translateDirectionToString( UtilDirection.translateNumberToDirection(world.getBlockMetadata(x, y, z))));
             }
 
 
@@ -66,7 +67,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
             if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile) {
                 TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
                 mTile.toggleDirection();
-                player.sendChatToPlayer(mTile.getName()+ " is now at orientation: " + TechCraftTile.translateDirectionToString(mTile.getOrientation()));
+                player.sendChatToPlayer(mTile.getName()+ " is now at orientation: " + UtilDirection.translateDirectionToString(mTile.getOrientation()));
             }
 
         }

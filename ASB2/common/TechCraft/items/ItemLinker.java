@@ -47,7 +47,6 @@ public class ItemLinker extends TechCraftItems {
         else{
             info.add("Coordinates not set.");
         }
-        
     }
 
     public int getDimentionIDCoord(ItemStack item) {

@@ -3,8 +3,6 @@ package TechCraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import TechCraft.blocks.conduitInterface.items.TileItemConduitInterface;
-import TechCraft.blocks.tanks.TileTCTank;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
 import TechCraft.blocks.tcPersonalBlocks.TilePersonalBlock;
 import TechCraft.blocks.tcRunes.TileBasicRune;
@@ -43,6 +41,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import TechCraft.blocks.tcItemExtractor.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -127,13 +126,11 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTCTeleporter.class, "TileTCTeleporter");
 
-        GameRegistry.registerTileEntity(TileTCTank.class, "TileTCTank");
-
         GameRegistry.registerTileEntity(TileToolManager.class, "TileToolManager");
 
         GameRegistry.registerTileEntity(TileTCEnergyConstructor.class, "TileTCEnergyConstructor");
 
-        GameRegistry.registerTileEntity(TileItemConduitInterface.class, "TileItemConduitInterface");
+        GameRegistry.registerTileEntity(TileItemExtractor.class, "TileItemExtractor");
 
         GameRegistry.registerTileEntity(TileTCItemConduit.class, "TileTCItemConduit");
 
@@ -148,6 +145,7 @@ public class TechCraft {
 
         CraftRegistry.init();
         CraftRegistry.placeHolderRecipes();
+        CraftRegistry.teiredCrafting();
         
         CraftRegistry.craftSmelting();
 
