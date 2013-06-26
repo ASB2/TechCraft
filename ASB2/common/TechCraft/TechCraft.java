@@ -67,6 +67,8 @@ public class TechCraft {
     public static boolean includeRuneRecipies = false;
     public static boolean modCreatorAndHelperPerks = true;
 
+    public static int crystilineTreeHight = 10;
+    
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
@@ -76,8 +78,8 @@ public class TechCraft {
         ItemRegistry.init(config);
         BlockRegistry.init(config);
         
-        modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "").getBoolean(true);
-        
+        modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "A few little things to show you care. Nothing game changing. Will have no affect on any one but us.").getBoolean(true);
+        crystilineTreeHight = config.get("Misc", "crystilineTreeHight", 10, "Play with the value. Its fun. Can get over/under powered if you set the value too high/low").getInt(10);
         config.save();
     }
 
