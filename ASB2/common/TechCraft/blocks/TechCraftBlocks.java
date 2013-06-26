@@ -9,7 +9,7 @@ public class TechCraftBlocks extends Block{
 
     public TechCraftBlocks(int par1, Material par2Material) {
         super(par1, par2Material);
-        this.setCreativeTab(TechCraft.tabTechno);
+        this.setCreativeTab(TechCraft.tabTCBlocks);
         setHardness(3.5f);
         setResistance(1.0F);
     }

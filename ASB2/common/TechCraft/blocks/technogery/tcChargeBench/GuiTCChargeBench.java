@@ -62,11 +62,6 @@ public class GuiTCChargeBench extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float gameTicks) {
         super.drawScreen(mouseX, mouseY, gameTicks);
 
-        drawTooltips(mouseX, mouseY);
-    }
-
-    protected void drawTooltips(int mouseX, int mouseY) {
-
         if(isPointInRegion(45, 7, 18, 71, mouseX, mouseY)) {
 
             drawBarTooltip("Energy", "TCU", tileEntity.getPowerProvider().getPowerStored(), tileEntity.getPowerProvider().getPowerMax(), mouseX, mouseY);

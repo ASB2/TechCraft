@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
+import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.TilePersonalBlock;
 import TechCraft.blocks.tcRunes.TileBasicRune;
 import TechCraft.blocks.tcToolManager.TileToolManager;
@@ -11,12 +12,12 @@ import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
-import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
+import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.packets.TechCraftPacketBase;
 import TechCraft.packets.TechCraftPacketHandler;
 import TechCraft.worldGen.WorldGenBlockAirCrystalOre;
@@ -41,7 +42,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import TechCraft.blocks.tcItemExtractor.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -59,8 +59,9 @@ public class TechCraft {
 
     public static CommonProxy proxy;
 
-    public static CreativeTabs tabTechno = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechnoCraft");
-
+    public static CreativeTabs tabTCBlocks = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Blocks", "TechCraft Blocks");
+    public static CreativeTabs tabTCItems = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Items", "TechCraft Blocks");
+    
     public static boolean includePowerRecipies = false;
     public static boolean includeArmorRecipies = true;
     public static boolean includeRuneRecipies = false;
@@ -74,7 +75,7 @@ public class TechCraft {
 
         ItemRegistry.init(config);
         BlockRegistry.init(config);
-
+        
         modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "").getBoolean(true);
         
         config.save();
@@ -108,8 +109,6 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTCEnergySphere.class, "TileTCEnergySphere");
 
-        GameRegistry.registerTileEntity(TileTechnogryFocus.class, "TileTechnogryFocus");
-
         GameRegistry.registerTileEntity(TileMagiciansBuildingBlocks.class, "TileMagiciansBuildingBlocks");
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
@@ -136,6 +135,8 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TilePersonalBlock.class, "TilePersonalBlock");
 
+        GameRegistry.registerTileEntity(TileWirelessEnergyManager.class, "TileWirelessEnergyManager");
+        
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

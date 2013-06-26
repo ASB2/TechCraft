@@ -10,7 +10,7 @@ public class TechCraftItems extends Item {
     
     public TechCraftItems(int par1) {
         super(par1);
-        this.setCreativeTab(TechCraft.tabTechno);
+        this.setCreativeTab(TechCraft.tabTCItems);
         
     }
 

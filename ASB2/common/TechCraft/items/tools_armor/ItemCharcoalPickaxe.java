@@ -9,7 +9,7 @@ public class ItemCharcoalPickaxe extends ItemPickaxe{
 
     public ItemCharcoalPickaxe(int itemID, EnumToolMaterial toolMaterial) {
         super(itemID, toolMaterial);
-        setCreativeTab(TechCraft.tabTechno);
+        setCreativeTab(TechCraft.tabTCItems);
     }
     
     @Override

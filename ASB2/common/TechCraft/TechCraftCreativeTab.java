@@ -5,8 +5,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TechCraftCreativeTab extends net.minecraft.creativetab.CreativeTabs {
     
-    public TechCraftCreativeTab(int par1, String par2Str) {
+    String name;
+    
+    public TechCraftCreativeTab(int par1, String par2Str, String name) {
         super(par1, par2Str);
+        this.name = name;
     }
     
     @Override
@@ -19,6 +22,6 @@ public class TechCraftCreativeTab extends net.minecraft.creativetab.CreativeTabs
     @Override
     public String getTranslatedTabLabel()
     {
-        return "TechnoCraft"; //The name of the tab ingame
+        return name;
     }
 }

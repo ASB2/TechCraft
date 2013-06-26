@@ -18,7 +18,7 @@ public abstract class TechCraftContainers extends BlockContainer {
 
     public TechCraftContainers(int par1, Material par2Material) {
         super(par1, par2Material);
-        this.setCreativeTab(TechCraft.tabTechno);
+        this.setCreativeTab(TechCraft.tabTCBlocks);
         setHardness(100f);
         setResistance(100F);
     }

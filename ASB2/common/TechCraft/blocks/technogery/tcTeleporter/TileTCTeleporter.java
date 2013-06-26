@@ -42,7 +42,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
         super.managePowerAll(this, false);
         super.updateEntity();
-
+        
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
             if(tileItemStacks[0] == null) {
@@ -82,7 +82,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
         if(worldObj.getBlockPowerInput(x, y, z) > 0) {
 
-            if(teleporterSet && coordsSet && this.getPowerStored() >= powerForProcess) {
+            if(teleporterSet && coordsSet && this.getPowerProvider().getPowerStored() >= powerForProcess) {
 
                 if(teleporter != null) {
 
@@ -166,16 +166,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     public String getName() {
 
         return "TC Teleporter";
-    }
-
-    public int getPowerStored(){
-
-        return powerStored;        
-    }
-
-    public int getPowerMax(){
-
-        return powerMax;
     }
 
     @Override

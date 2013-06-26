@@ -15,7 +15,7 @@ public class BlockBurningFlower extends BlockFlower {
 
     public BlockBurningFlower(int par1, Material par3Material) {
         super(par1, par3Material);
-        this.setCreativeTab(TechCraft.tabTechno);
+        this.setCreativeTab(TechCraft.tabTCBlocks);
     }
 
     @Override

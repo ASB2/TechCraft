@@ -9,6 +9,7 @@ public class BlockTCItemConduit extends TechCraftContainers {
 
     public BlockTCItemConduit(int par1, Material par2Material) {
         super(par1, par2Material);
+        //this.setBlockBounds(blockHardness, blockHardness, blockHardness, blockHardness, blockHardness, blockHardness);
     }
 
     @Override

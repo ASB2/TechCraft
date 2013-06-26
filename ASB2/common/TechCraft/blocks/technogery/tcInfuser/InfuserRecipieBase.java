@@ -24,7 +24,7 @@ public class InfuserRecipieBase {
             if(stack[i] != null) 
                 
                 
-            if( (stack[i] != null && input[i]  == null) || (stack[i] == null && input[i]  != null)) {
+            if(!((stack[i] != null && input[i]  == null) || (stack[i] == null && input[i]  != null))) {
                 
                 if(input[i].isItemEqual(stack[i])) {
 
@@ -33,5 +33,16 @@ public class InfuserRecipieBase {
             }
         }
         return equalStacks == 9;
+    }
+
+
+    public int getPowerCost() {
+        
+        return power;
+    }
+    
+    public ItemStack getOutput() {
+        
+        return this.output;
     }
 }

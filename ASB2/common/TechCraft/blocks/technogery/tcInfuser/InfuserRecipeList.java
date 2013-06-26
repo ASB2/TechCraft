@@ -41,6 +41,18 @@ public class InfuserRecipeList {
         return false;
     }
 
+    public InfuserRecipieBase getRecipeClass(ItemStack[] stack) {
+
+        for(int i = 0; i < recipes.size(); i++) {
+
+            if(recipes.get(i).isRecipeValid(stack)) {
+
+                return recipes.get(i);
+            }
+        }
+        return null;
+    }
+    
     @SuppressWarnings("rawtypes")
     public List getRecipeList()
     {

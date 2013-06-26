@@ -9,7 +9,7 @@ public class ItemZycrantianPickaxe extends ItemPickaxe{
 
     public ItemZycrantianPickaxe(int itemID, EnumToolMaterial toolMaterial) {
         super(itemID, toolMaterial);
-        setCreativeTab(TechCraft.tabTechno);
+        setCreativeTab(TechCraft.tabTCItems);
 
     }
 

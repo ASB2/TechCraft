@@ -354,11 +354,17 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
     public int getPowerScaled(int scale) {
 
-        int internal = (int)this.getPowerProvider().getPowerStored() * scale / (int)this.getPowerProvider().getPowerMax();
-        if(internal > scale){
-            internal = scale;
-        }
-        return internal;
+        if(this.getPowerProvider() != null) {
+            
+            int internal = (int)this.getPowerProvider().getPowerStored() * scale / (int)this.getPowerProvider().getPowerMax();
+            
+            if(internal > scale) {
+                
+                internal = scale;
+            }
+            return internal;
+        }        
+        return scale;
     }    
 
     public int getAmountScaled(int scale, int amount, int max) {

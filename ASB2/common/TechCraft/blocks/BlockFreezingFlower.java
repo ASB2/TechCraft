@@ -13,7 +13,7 @@ public class BlockFreezingFlower extends BlockFlower {
 
     public BlockFreezingFlower(int par1, Material par3Material) {
         super(par1, par3Material);
-        this.setCreativeTab(TechCraft.tabTechno);
+        this.setCreativeTab(TechCraft.tabTCBlocks);
     }
     
     @Override

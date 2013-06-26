@@ -26,44 +26,42 @@ public class BlockPersonalBlock extends TechCraftContainers {
     Icon personalStone;
     Icon personalGlass;
 
-    String playerName = "";
-
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {
-        
-            subItems.add(new ItemStack(this, 1, 0));
-            subItems.add(new ItemStack(this, 1, 1));
+
+        subItems.add(new ItemStack(this, 1, 0));
+        subItems.add(new ItemStack(this, 1, 1));
     }
-    
+
     @Override
     public int damageDropped (int metadata) {
-        
+
         return metadata;
     }
 
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData) {
-        
+
         return metaData;
     }
 
     @Override
     public boolean isOpaqueCube() {
-        
+
         return false;
     }
 
     @Override
     public boolean renderAsNormalBlock() {
-        
+
         return false;
     }
-    
+
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
         super.registerIcons(iconRegister);
-        
+
         personalGlass = iconRegister.registerIcon("TechCraft:BlockPersonalGlass");
         personalStone = iconRegister.registerIcon("TechCraft:BlockSpeedyRoadTop");
     }
@@ -83,7 +81,7 @@ public class BlockPersonalBlock extends TechCraftContainers {
     public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side) {
 
         switch(world.getBlockMetadata(x, y, z)) {
-            
+
             case 0 : return true;
             case 1: return true;
         }
@@ -92,16 +90,20 @@ public class BlockPersonalBlock extends TechCraftContainers {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
-
+        
+        String playerName = "";
+        
         if(entityLiving instanceof EntityPlayer) {
 
             playerName =  ((EntityPlayer)entityLiving).username;
+
+            world.setBlockTileEntity(x, y, z, new TilePersonalBlock(playerName));
         }
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        return new TilePersonalBlock(playerName);
+        return null;
     }
 }

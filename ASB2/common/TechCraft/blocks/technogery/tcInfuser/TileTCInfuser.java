@@ -5,7 +5,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import TechCraft.Message;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 import TechCraft.power.PowerProvider;
@@ -26,12 +25,43 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     }
 
     public void updateEntity() {
+        ticks++;
+
         super.managePowerAll(this, false);
         super.updateEntity();
 
+        this.craftItem();
+    }
+
+    public void craftItem() {
+
         if(InfuserRecipeList.getInstance().isValidRecipe(getCraftingSlots())) {
 
-            Message.sendToClient("HI");
+            if(InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getOutput() == getOutputSlot() || getOutputSlot() == null) {
+
+                if(this.getPowerProvider().getPowerStored() >= InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getPowerCost()) {
+
+                    if(getOutputSlot() == null) {
+
+                        this.setInventorySlotContents(10, InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getOutput()); 
+
+                        decreaseCraftingSlots();
+                    }
+
+                    else {
+
+                        ItemStack temp = getOutputSlot();
+                        temp.stackSize = temp.stackSize + 1;
+
+                        if(temp.stackSize <= this.getInventoryStackLimit()) {
+                            
+                            this.setInventorySlotContents(10, temp); 
+
+                            decreaseCraftingSlots();
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -40,7 +70,28 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
         return new ItemStack[] {
                 tileItemStacks[1], tileItemStacks[2],tileItemStacks[3],
                 tileItemStacks[4],tileItemStacks[5],tileItemStacks[6],
-                tileItemStacks[7],tileItemStacks[8],tileItemStacks[9]};
+                tileItemStacks[7],tileItemStacks[8],tileItemStacks[9]
+        };
+    }
+
+    public ItemStack getOutputSlot() {
+
+        return tileItemStacks[10];
+    }
+
+    public void decreaseCraftingSlots() {
+
+        this.decrStackSize(1, 1) ;
+        this.decrStackSize(2, 1) ;
+        this.decrStackSize(3, 1) ;
+        
+        this.decrStackSize(4, 1) ;
+        this.decrStackSize(5, 1) ;
+        this.decrStackSize(6, 1) ;
+        
+        this.decrStackSize(7, 1) ;
+        this.decrStackSize(8, 1) ;
+        this.decrStackSize(9, 1) ;
     }
 
     @Override
@@ -88,7 +139,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     @Override
     public String getName() {
 
-        return "TC Energy Infuser";
+        return "Energy Infuser";
     }
 
     public int getPowerStored(){

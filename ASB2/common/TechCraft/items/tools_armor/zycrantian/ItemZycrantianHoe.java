@@ -9,7 +9,7 @@ public class ItemZycrantianHoe extends ItemHoe {
 
     public ItemZycrantianHoe(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, par2EnumToolMaterial);
-        setCreativeTab(TechCraft.tabTechno);
+        setCreativeTab(TechCraft.tabTCItems);
         
     }
 

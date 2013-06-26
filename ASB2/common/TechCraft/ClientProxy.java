@@ -5,10 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import TechCraft.blocks.tcItemExtractor.*;
 import TechCraft.blocks.tcConduits.tcItemConduits.ItemRendererTCItemConduit;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileRendererTCItemConduit;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
+import TechCraft.blocks.tcItemExtractor.GuiItemExtractor;
+import TechCraft.blocks.tcItemExtractor.ItemRendererItemExtractor;
+import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
+import TechCraft.blocks.tcItemExtractor.TileRendererItemExtractor;
 import TechCraft.blocks.tcRunes.GuiRune;
 import TechCraft.blocks.tcRunes.ItemRendererTileBasicRune;
 import TechCraft.blocks.tcRunes.TileBasicRune;
@@ -21,15 +24,10 @@ import TechCraft.blocks.technogery.tcChargeBench.GuiTCChargeBench;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.GuiTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
-import TechCraft.blocks.technogery.tcFocus.ItemRendererTileTechnogryFocus;
-import TechCraft.blocks.technogery.tcFocus.TileEntityRendererTileTechnogryFocus;
-import TechCraft.blocks.technogery.tcFocus.TileTechnogryFocus;
 import TechCraft.blocks.technogery.tcFurnace.GuiTCFurnace;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.GuiGenorator;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
-import TechCraft.blocks.technogery.tcGrinder.GuiTCGrinder;
-import TechCraft.blocks.technogery.tcGrinder.TileTCGrinder;
 import TechCraft.blocks.technogery.tcInfuser.GuiTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.ItemRendererMagicEnergySphere;
@@ -37,6 +35,8 @@ import TechCraft.blocks.technogery.tcSphere.TileEntityRendererMagicEnergySphere;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.GuiTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
+import TechCraft.blocks.technogery.tcWirelessEnergyManger.GuiWirelessEnergyManager;
+import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.items.gui.GuiEnchancedDestructionCatalyst;
 import TechCraft.keybindings.TCKeyBindingM;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -51,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 
         KeyBindingRegistry.registerKeyBinding(new TCKeyBindingM());
         TickRegistry.registerTickHandler(new TechCraftTickHandlerClient(), Side.CLIENT);
-        
+
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCItemConduit.class, new TileRendererTCItemConduit());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCItemConduit.blockID, (IItemRenderer)new ItemRendererTCItemConduit());
 
@@ -60,9 +60,6 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileTestBlock.class, new TileEntityRendererTileTest());
         //MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTestBlock.blockID, (IItemRenderer)new ItemRendererTestItem());
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileTechnogryFocus.class, new TileEntityRendererTileTechnogryFocus());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTechnogryFocus.blockID, (IItemRenderer)new ItemRendererTileTechnogryFocus());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
@@ -89,10 +86,10 @@ public class ClientProxy extends CommonProxy {
                     case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
                     case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
                     case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-                    case 7: return new GuiTCGrinder(player.inventory, (TileTCGrinder)tileEntity);
                     case 9: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
                     case 10: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
                     case 11: return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
+                    case 12: return new GuiWirelessEnergyManager(player.inventory, (TileWirelessEnergyManager)tileEntity);  
                 }
             }
         }

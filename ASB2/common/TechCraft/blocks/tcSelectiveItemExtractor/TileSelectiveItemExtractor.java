@@ -1,4 +1,4 @@
-package TechCraft.blocks.tcItemExtractor;
+package TechCraft.blocks.tcSelectiveItemExtractor;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,13 +14,13 @@ import TechCraft.items.ItemLinker;
 import TechCraft.utils.UtilDirection;
 import TechCraft.utils.UtilInventory;
 
-public class TileItemExtractor extends TechCraftTile implements IInventory {
+public class TileSelectiveItemExtractor extends TechCraftTile implements IInventory {
 
     private ItemStack[] tileItemStack;
 
     ConduitNetwork network;
 
-    public TileItemExtractor() {
+    public TileSelectiveItemExtractor() {
 
         tileItemStack = new ItemStack[8];
     }
@@ -69,6 +69,7 @@ public class TileItemExtractor extends TechCraftTile implements IInventory {
                 }
             }
         }
+        
         else if(direction == UtilDirection.translateDirectionToOpposite(this.getOrientation())) {
          
             TileEntity tile = UtilDirection.translateDirectionToTile(this, worldObj, direction);
@@ -92,6 +93,12 @@ public class TileItemExtractor extends TechCraftTile implements IInventory {
         }
     }
 
+    public ItemStack[] getSelectiveSlots() {
+        
+        return new ItemStack[] {
+                
+        };
+    }
     @Override
     public String getName() {
 
