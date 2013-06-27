@@ -1,5 +1,6 @@
 package TechCraft.blocks.technogery.tcTeleporter;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,9 +11,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.fx.FXBeam;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.power.IPowerSink;
 import TechCraft.power.PowerProvider;
+import TechCraft.vector.Vector3;
 
 public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -32,6 +35,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     double z;
     int dimentionID = 0;
 
+    FXBeam beam;
     public TileTCTeleporter() {        
 
         this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
@@ -42,7 +46,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
         super.managePowerAll(this, false);
         super.updateEntity();
-        
+
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
             if(tileItemStacks[0] == null) {
@@ -74,6 +78,15 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
                     coordsSet = true;
                 }
+            }
+        }
+
+        if(teleporterSet) {
+
+            if(worldObj.blockExists((int)x,(int) y,(int) z)) {
+
+                beam = new FXBeam(worldObj, new Vector3(this.xCoord + .5, this.yCoord +.5, this.zCoord +.5), new Vector3(x, y, z),0, 1, 0 ,20);
+                Minecraft.getMinecraft().effectRenderer.addEffect(beam);
             }
         }
     }

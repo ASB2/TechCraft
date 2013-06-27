@@ -21,10 +21,12 @@ public class WorldGenBlockFreezingFlower implements IWorldGenerator {
 
 	  private void generateSurface(World world, Random random, int blockX, int blockZ)
 	 {
-		  for(int j=0;j<1;j++){
+		  for(int j = 0; j < 1; j++) {
+		      
 		        int XCoordinate=blockX + random.nextInt(16);
 		        int ZCoordinate=blockZ + random.nextInt(16);
 		        int YCoordinate=random.nextInt(256);
+		        
 		        (new WorldGenFlowers(BlockRegistry.BlockFreezingFlower.blockID)).generate(world, random, XCoordinate,YCoordinate,ZCoordinate);
 		}
 	 }

@@ -24,6 +24,7 @@ import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.ContainerWirelessEnergyManager;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.items.gui.ContainerEnchancedDestructionCatalyst;
+import TechCraft.vector.Vector3;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -45,6 +46,11 @@ public class CommonProxy implements IGuiHandler {
         return 0;
     }
 
+    public void renderBeam(World world, Vector3 position, Vector3 target, float red, float green, float blue, int age)
+    {
+
+    }
+    
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
 
