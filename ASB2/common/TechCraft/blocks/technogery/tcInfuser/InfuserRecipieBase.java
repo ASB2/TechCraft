@@ -21,15 +21,16 @@ public class InfuserRecipieBase {
 
         for(int i = 0; i < stack.length; i++) {
 
-            if(stack[i] != null) 
+            if(stack[i] == null && input[i] == null) {
                 
+                equalStacks++;
+                continue;
+            }
+            
+            if(!(stack[i] == null && input[i] != null || stack[i] != null && input[i] == null)) {
                 
-            if(!((stack[i] != null && input[i]  == null) || (stack[i] == null && input[i]  != null))) {
-                
-                if(input[i].isItemEqual(stack[i])) {
-
+                if(stack[i].isItemEqual(input[i]))
                     equalStacks++;
-                }
             }
         }
         return equalStacks == 9;
@@ -37,12 +38,12 @@ public class InfuserRecipieBase {
 
 
     public int getPowerCost() {
-        
+
         return power;
     }
-    
+
     public ItemStack getOutput() {
-        
+
         return this.output;
     }
 }

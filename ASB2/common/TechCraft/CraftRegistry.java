@@ -126,51 +126,7 @@ public class CraftRegistry {
     }
 
     public static void placeHolderRecipes() {
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemCrystalCasing), new Object[] {
-            " G ",
-            "GRG", 
-            " G ",
-            'R', Item.redstone,
-            'G', Block.glass
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemAirCrystalShard), new Object[] {
-            "GFG",
-            "FCF", 
-            "GFG",
-
-            'C', ItemRegistry.ItemCrystalCasing,
-            'F', Item.feather,
-            'G', Block.glass
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemFireCrystalShard), new Object[] {
-            "OBO",
-            "BCB", 
-            "OBO",
-            'C', ItemRegistry.ItemCrystalCasing,
-            'O', Item.coal,
-            'B', Item.blazeRod
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemEarthCrystalShard), new Object[] {
-            "DSD",
-            "SCS", 
-            "DSD",
-            'C', ItemRegistry.ItemCrystalCasing,
-            'D', Block.dirt,
-            'D', Block.cobblestone
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemWaterCrystalShard), new Object[] {
-            "BWB",
-            "WCW", 
-            "BWB",
-            'C', ItemRegistry.ItemCrystalCasing,
-            'B', Item.bucketWater,
-            'W', Block.glass
-        });
+        
     }
 
     public static void craftPower() {

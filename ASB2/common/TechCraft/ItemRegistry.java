@@ -50,6 +50,7 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -102,6 +103,7 @@ public class ItemRegistry {
     public static TechCraftItems ItemBlankCircuit;
     public static TechCraftItems ItemDataCircuit;
     public static TechCraftItems ItemCrystalCasing;
+    public static TechCraftItems ItemCrystillineShard;
 
     private static int id = 5000;
 
@@ -280,10 +282,14 @@ public class ItemRegistry {
         ItemCrystalCasing = new ItemCrystalCasing(config.getItem("ItemCrystalCasing", ItemRegistry.getNextBaseID()).getInt());
         ItemCrystalCasing.setUnlocalizedName("ASB2_ItemCrystalCasing");
         LanguageRegistry.addName(ItemCrystalCasing, "Crystal Casing");
+        
+        ItemCrystillineShard = new ItemCrystillineShard(config.getItem("ItemCrystillineShard", ItemRegistry.getNextBaseID()).getInt());
+        ItemCrystillineShard.setUnlocalizedName("ASB2_ItemCrystillineShard");
+        LanguageRegistry.addName(ItemCrystillineShard, "Crystilline Shard");
     }
 
     public static int getNextBaseID() {
-        
+
         return id++;
     }
 }

@@ -7,6 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import TechCraft.BlockRegistry;
 import TechCraft.Message;
 import TechCraft.TechCraft;
@@ -18,6 +20,12 @@ public class BlockCrystallineTreeSapling extends TechCraftBlocks implements IPla
     public BlockCrystallineTreeSapling(int par1, Material par2Material) {
         super(par1, par2Material);
         this.setTickRandomly(true);
+    }
+
+    @ForgeSubscribe
+    public void onUseBonemeal(BonemealEvent event) {
+
+        this.managGrowth(event.world, event.X, event.Y, event.Z, new Random());
     }
 
     @Override
@@ -42,18 +50,26 @@ public class BlockCrystallineTreeSapling extends TechCraftBlocks implements IPla
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) 
     {        
         if(player.isSneaking()) {
-            
+
             this.updateTick(world, x, y, z, new Random());
             if(!world.isRemote)
-            Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
+                Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
             return true;
         }
+
         this.growTree(world, x, y, z);
         return true;
     }
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random random) {
+
+        this.managGrowth(world, x, y, z, random);
+    }
+
+    public void managGrowth(World world, int x, int y, int z, Random random) {
+
+        Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
 
         if(world.getBlockMetadata(x, y, z) >= 5) {
 
@@ -85,7 +101,7 @@ public class BlockCrystallineTreeSapling extends TechCraftBlocks implements IPla
 
             if( i >= 4) {
 
-                for(int a = -5; a < 6   ; a++) {
+                for(int a = -5; a <= 5   ; a++) {
 
                     for (int m = -1; m <= 1; m++) {
 

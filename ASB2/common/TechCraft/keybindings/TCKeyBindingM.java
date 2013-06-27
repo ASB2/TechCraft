@@ -32,7 +32,7 @@ public class TCKeyBindingM extends KeyHandler {
     @Override
     public void keyUp(EnumSet<TickType> types, KeyBinding key, boolean tickEnd) {
         
-        Message.sendToClient("Test Key");
+        //Message.sendToClient("Test Key");
     }
 
     @Override

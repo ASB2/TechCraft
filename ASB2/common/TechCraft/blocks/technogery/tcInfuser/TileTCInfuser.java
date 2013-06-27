@@ -5,9 +5,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerSink;
 import TechCraft.power.PowerProvider;
+import TechCraft.utils.UtilInventory;
 
 public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInventory{
 
@@ -37,31 +39,36 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
 
         if(InfuserRecipeList.getInstance().isValidRecipe(getCraftingSlots())) {
 
-            if(InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getOutput() == getOutputSlot() || getOutputSlot() == null) {
+            ItemStack outPut = InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getOutput();
+            int cost = InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getPowerCost();
+                    
+                    if(this.getPowerProvider().usePower(cost, ForgeDirection.UNKNOWN)) {
 
-                if(this.getPowerProvider().getPowerStored() >= InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getPowerCost()) {
+                        if(this.getOutputSlot() == null) {
 
-                    if(getOutputSlot() == null) {
+                            if(this.decreaseCraftingSlots()) {
 
-                        this.setInventorySlotContents(10, InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getOutput()); 
+                                this.setInventorySlotContents(10, outPut);
+                                return;
+                            }
+                        }
 
-                        decreaseCraftingSlots();
-                    }
+                        if(this.getOutputSlot().stackSize < this.getInventoryStackLimit()) {
 
-                    else {
+                            if(this.decreaseCraftingSlots()) {
 
-                        ItemStack temp = getOutputSlot();
-                        temp.stackSize = temp.stackSize + 1;
+                                ItemStack temp = tileItemStacks[10];
+                                
+                                temp.stackSize = temp.stackSize + outPut.stackSize;
 
-                        if(temp.stackSize <= this.getInventoryStackLimit()) {
-                            
-                            this.setInventorySlotContents(10, temp); 
+                                if(temp.stackSize <= this.getInventoryStackLimit()) {
 
-                            decreaseCraftingSlots();
+                                    this.setInventorySlotContents(10, temp);
+                                    return;
+                                }
+                            }
                         }
                     }
-                }
-            }
         }
     }
 
@@ -79,19 +86,16 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
         return tileItemStacks[10];
     }
 
-    public void decreaseCraftingSlots() {
+    public boolean decreaseCraftingSlots() {
 
-        this.decrStackSize(1, 1) ;
-        this.decrStackSize(2, 1) ;
-        this.decrStackSize(3, 1) ;
-        
-        this.decrStackSize(4, 1) ;
-        this.decrStackSize(5, 1) ;
-        this.decrStackSize(6, 1) ;
-        
-        this.decrStackSize(7, 1) ;
-        this.decrStackSize(8, 1) ;
-        this.decrStackSize(9, 1) ;
+        int sucessful = 0;
+
+        for(int i = 1; i <= 9; i++) {
+
+            if(UtilInventory.decreaseSlotContents(this, i, 1))
+                sucessful++;
+        }
+        return sucessful == 9;
     }
 
     @Override

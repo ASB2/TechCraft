@@ -41,25 +41,28 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
 
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 
-        if(entity instanceof EntityLiving) {
-
-            ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 10, 3));
-            ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.jump.id, 10, 3));
+        if(!world.isBlockIndirectlyGettingPowered(x, y, z)) {
             
-            if(((EntityLiving)entity).isBurning()) {
+            if(entity instanceof EntityLiving) {
 
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.fireResistance.id, 10, 4));
-            }
+                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 10, 3));
+                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.jump.id, 10, 3));
 
-            if(((EntityLiving)entity).isBlocking()) {
+                if(((EntityLiving)entity).isBurning()) {
 
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, 4));
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.resistance.id, 100, 4));
-            }
+                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.fireResistance.id, 10, 4));
+                }
 
-            if(((EntityLiving)entity).isInWater()) {
+                if(((EntityLiving)entity).isBlocking()) {
 
-                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 10, 4));
+                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, 4));
+                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.resistance.id, 100, 4));
+                }
+
+                if(((EntityLiving)entity).isInWater()) {
+
+                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 10, 4));
+                }
             }
         }
     }
