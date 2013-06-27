@@ -222,6 +222,18 @@ public class CraftRegistry {
             'S', BlockRegistry.BlockTCEnergySphere,
             'M', BlockRegistry.BlockMagiciansBuildingBlocks
         });
+        
+        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCInfuser), new Object[] {
+            "EIE",
+            "GCG",
+            "ISI",
+            
+            'E', ItemRegistry.ItemEnergyCrystalShard,
+            'I', Item.ingotIron, 
+            'C', Block.workbench,
+            'G', Block.glass,
+            'S', BlockRegistry.BlockTCEnergySphere
+        });
     }
 
     public static void craftTool_Armor() {
