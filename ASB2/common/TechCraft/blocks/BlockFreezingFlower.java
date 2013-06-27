@@ -1,19 +1,16 @@
 package TechCraft.blocks;
 
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import TechCraft.TechCraft;
 import TechCraft.utils.UtilPlayers;
 
-public class BlockFreezingFlower extends BlockFlower {
+public class BlockFreezingFlower extends TechCraftFlower {
 
     public BlockFreezingFlower(int par1, Material par3Material) {
         super(par1, par3Material);
-        this.setCreativeTab(TechCraft.tabTCBlocks);
     }
     
     @Override

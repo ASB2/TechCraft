@@ -1,25 +1,22 @@
 package TechCraft.blocks;
 
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import TechCraft.TechCraft;
 import TechCraft.utils.UtilPlayers;
 
-public class BlockBurningFlower extends BlockFlower {
-
+public class BlockBurningFlower extends TechCraftFlower {
 
     public BlockBurningFlower(int par1, Material par3Material) {
         super(par1, par3Material);
-        this.setCreativeTab(TechCraft.tabTCBlocks);
     }
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
+        
         this.blockIcon = par1IconRegister.registerIcon("TechCraft:BlockBurningFlower");
     }	
 

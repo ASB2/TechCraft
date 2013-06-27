@@ -3,29 +3,26 @@ package TechCraft.blocks.plants.crystallineTree;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.player.BonemealEvent;
 import TechCraft.BlockRegistry;
 import TechCraft.Message;
 import TechCraft.TechCraft;
-import TechCraft.blocks.TechCraftBlocks;
+import TechCraft.blocks.TechCraftFlower;
 import TechCraft.utils.UtilBlock;
 
-public class BlockCrystallineTreeSapling extends TechCraftBlocks implements IPlantable {
+public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPlantable {
 
     public BlockCrystallineTreeSapling(int par1, Material par2Material) {
         super(par1, par2Material);
-        this.setTickRandomly(true);
     }
-
-    @ForgeSubscribe
-    public void onUseBonemeal(BonemealEvent event) {
-
-        this.managGrowth(event.world, event.X, event.Y, event.Z, new Random());
+    
+    public void registerIcons(IconRegister par1IconRegister) {
+        
+        this.blockIcon = par1IconRegister.registerIcon("TechCraft:BlockCrystillineSapling");
     }
 
     @Override
@@ -52,6 +49,7 @@ public class BlockCrystallineTreeSapling extends TechCraftBlocks implements IPla
         if(player.isSneaking()) {
 
             this.updateTick(world, x, y, z, new Random());
+            
             if(!world.isRemote)
                 Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
             return true;

@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 public class InfuserRecipeList {
 
     private static final InfuserRecipeList instance = new InfuserRecipeList();
+    private final static int standardPowerCost = 20;
 
     public List<InfuserRecipieBase> recipes = new ArrayList <InfuserRecipieBase>();
 
@@ -21,31 +22,37 @@ public class InfuserRecipeList {
             null,new ItemStack(Block.glass),null,
             new ItemStack(Block.glass),new ItemStack(Item.redstone),new ItemStack(Block.glass),
             null, new ItemStack(Block.glass), null},
-            20));
-        
+            standardPowerCost));
+
         this.addRecipe(new InfuserRecipieBase(new ItemStack(ItemRegistry.ItemAirCrystalShard), new ItemStack[] {
             new ItemStack(Block.glass),new ItemStack(Item.feather),new ItemStack(Block.glass),
             new ItemStack(Item.feather),new ItemStack(ItemRegistry.ItemCrystalCasing),new ItemStack(Item.feather),
             new ItemStack(Block.glass), new ItemStack(Item.feather), new ItemStack(Block.glass)},
-            20));
+            standardPowerCost));
 
         this.addRecipe(new InfuserRecipieBase(new ItemStack(ItemRegistry.ItemFireCrystalShard), new ItemStack[] {
             new ItemStack(Item.coal),new ItemStack(Item.blazeRod),new ItemStack(Item.coal),
             new ItemStack(Item.blazeRod),new ItemStack(ItemRegistry.ItemCrystalCasing),new ItemStack(Item.blazeRod),
             new ItemStack(Item.coal), new ItemStack(Item.blazeRod), new ItemStack(Item.coal)},
-            20));
-        
+            standardPowerCost));
+
         this.addRecipe(new InfuserRecipieBase(new ItemStack(ItemRegistry.ItemEarthCrystalShard), new ItemStack[] {
             new ItemStack(Block.dirt),new ItemStack(Block.cobblestone),new ItemStack(Block.dirt),
             new ItemStack(Block.cobblestone),new ItemStack(ItemRegistry.ItemCrystalCasing),new ItemStack(Block.cobblestone),
             new ItemStack(Block.dirt), new ItemStack(Block.cobblestone), new ItemStack(Block.dirt)},
-            20));
+            standardPowerCost));
 
         this.addRecipe(new InfuserRecipieBase(new ItemStack(ItemRegistry.ItemWaterCrystalShard), new ItemStack[] {
             new ItemStack(Item.bucketWater),new ItemStack(Block.glass),new ItemStack(Item.bucketWater),
             new ItemStack(Block.glass),new ItemStack(ItemRegistry.ItemCrystalCasing),new ItemStack(Block.glass),
             new ItemStack(Item.bucketWater), new ItemStack(Block.glass), new ItemStack(Item.bucketWater)},
-            20));
+            standardPowerCost));
+        
+        this.addRecipe(new InfuserRecipieBase(new ItemStack(ItemRegistry.ItemTradeStick), new ItemStack[] {
+            new ItemStack(Item.diamond),new ItemStack(Item.emerald),new ItemStack(Item.emerald),
+            null,new ItemStack(Item.stick),new ItemStack(Item.emerald),
+            new ItemStack(Item.stick), null, new ItemStack(Item.diamond)},
+            standardPowerCost));
     }
 
     public void addRecipe(InfuserRecipieBase recipe) {

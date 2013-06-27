@@ -1,6 +1,5 @@
 package TechCraft;
 
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -19,6 +18,10 @@ import TechCraft.blocks.BlockWaterCrystalOre;
 import TechCraft.blocks.BlockZycrantianOre;
 import TechCraft.blocks.TechCraftBlocks;
 import TechCraft.blocks.TechCraftContainers;
+import TechCraft.blocks.TechCraftFlower;
+import TechCraft.blocks.plants.crystallineTree.BlockCrystallineTreeLeaves;
+import TechCraft.blocks.plants.crystallineTree.BlockCrystallineTreeLog;
+import TechCraft.blocks.plants.crystallineTree.BlockCrystallineTreeSapling;
 import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.BlockItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
@@ -39,7 +42,6 @@ import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.BlockWirelessEnergyManager;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import  TechCraft.blocks.plants.crystallineTree.*;
 
 public class BlockRegistry {
 
@@ -48,8 +50,8 @@ public class BlockRegistry {
     public static TechCraftBlocks BlockFireCrystalOre;
     public static TechCraftBlocks BlockWaterCrystalOre;
 
-    public static BlockFlower BlockFreezingFlower;
-    public static BlockFlower BlockBurningFlower;
+    public static TechCraftFlower BlockFreezingFlower;
+    public static TechCraftFlower BlockBurningFlower;
 
     public static TechCraftBlocks BlockFalseBlock;
     public static TechCraftBlocks BlockEnergyCrystalOre;
@@ -259,19 +261,19 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockWirelessEnergyManager, "Wireless Energy Manager");
         MinecraftForge.setBlockHarvestLevel(BlockWirelessEnergyManager, "pickaxe", 2);
     
-        BlockCrystallineTreeSapling = new BlockCrystallineTreeSapling(config.getBlock("BlockCrystallineTreeSapling",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
+        BlockCrystallineTreeSapling = new BlockCrystallineTreeSapling(config.getBlock("BlockCrystallineTreeSapling",  BlockRegistry.getNextBaseID()).getInt(), Material.plants);
         BlockCrystallineTreeSapling.setUnlocalizedName("ASB2_BlockCrystallineTreeSapling");
         GameRegistry.registerBlock(BlockCrystallineTreeSapling, TehCraftItemBlock.class, "ASB2_BlockCrystallineTreeSapling");
         LanguageRegistry.addName(BlockCrystallineTreeSapling, "Crystiline Sapling");
         MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeSapling, "pickaxe", 2);
 
-        BlockCrystallineTreeLog = new BlockCrystallineTreeLog(config.getBlock("BlockCrystallineTreeLog",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
+        BlockCrystallineTreeLog = new BlockCrystallineTreeLog(config.getBlock("BlockCrystallineTreeLog",  BlockRegistry.getNextBaseID()).getInt(), Material.wood);
         BlockCrystallineTreeLog.setUnlocalizedName("ASB2_BlockCrystallineTreeLog");
         GameRegistry.registerBlock(BlockCrystallineTreeLog, TehCraftItemBlock.class, "ASB2_BlockCrystallineTreeLog");
         LanguageRegistry.addName(BlockCrystallineTreeLog, "Crystiline Logs");
         MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeLog, "pickaxe", 2);
         
-        BlockCrystallineTreeLeaves = new BlockCrystallineTreeLeaves(config.getBlock("BlockCrystallineTreeLeaves",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
+        BlockCrystallineTreeLeaves = new BlockCrystallineTreeLeaves(config.getBlock("BlockCrystallineTreeLeaves",  BlockRegistry.getNextBaseID()).getInt(), Material.plants);
         BlockCrystallineTreeLeaves.setUnlocalizedName("ASB2_BlockCrystallineTreeLeaves");
         GameRegistry.registerBlock(BlockCrystallineTreeLeaves, TehCraftItemBlock.class, "ASB2_BlockCrystallineTreeLeaves");
         LanguageRegistry.addName(BlockCrystallineTreeLeaves, "Crystiline Leaves");

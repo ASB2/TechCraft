@@ -17,6 +17,7 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
 
     public BlockSpeedyRoad(int par1, Material par2Material) {
         super(par1, par2Material);
+        this.setLightValue(15);
     }
 
     @SideOnly(Side.CLIENT)
