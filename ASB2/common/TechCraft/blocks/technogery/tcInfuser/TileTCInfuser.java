@@ -7,11 +7,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerProvider;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerClass;
+import TechCraft.power.TCPowerProvider;
 import TechCraft.utils.UtilInventory;
 
-public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInventory{
+public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInventory {
 
     int powerStored;
     int powerMax = 100;
@@ -21,16 +22,13 @@ public class TileTCInfuser extends TechCraftTile implements IPowerSink, IInvento
     ItemStack[] craftingSlots;
 
     public TileTCInfuser() {
-
-        this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
+        
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
         tileItemStacks = new ItemStack[11];
     }
 
     public void updateEntity() {
         ticks++;
-
-        super.managePowerAll(this, false);
-        super.updateEntity();
 
         this.craftItem();
     }

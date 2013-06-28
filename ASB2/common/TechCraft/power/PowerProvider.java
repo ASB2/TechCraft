@@ -2,27 +2,88 @@ package TechCraft.power;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.utils.UtilDirection;
+import TechCraft.utils.UtilPower;
+import TechCraft.*;
 
-public class PowerProvider {
+public abstract class PowerProvider {
+
+    TransferMode transferMode;
+    PowerClass powerClass;
 
     TileEntity tile;
 
-    protected int powerStored;
+    protected int powerStored = 0;
     protected int powerMax;
-    protected int powerInput;
-    protected int powerOutput;
-    protected boolean recievePower;
-    protected boolean outputPower;
 
-    public PowerProvider(TileEntity tile, int powerMax, int powerInput, int powerOutput, boolean outputPower, boolean recevePower) {
+    public PowerProvider(TileEntity tile, int powerMax, PowerClass pClass) {
 
+        powerClass = pClass;
         this.tile = tile;
         this.powerMax = powerMax;
-        this.powerInput = powerInput;
-        this.powerOutput = powerOutput;
-        this.recievePower = recevePower;
-        this.outputPower = outputPower;
+        PowerManager.getInstance().addPowerProvider(this);
+    }
+
+    public void updateProvider() {
+
+        this.movePowerByDirection(ForgeDirection.DOWN);
+        this.movePowerByDirection(ForgeDirection.UP);
+
+        this.movePowerByDirection(ForgeDirection.EAST);
+        this.movePowerByDirection(ForgeDirection.WEST);
+
+        this.movePowerByDirection(ForgeDirection.NORTH);
+        this.movePowerByDirection(ForgeDirection.SOUTH);
+    }
+
+    public void movePowerByDirection(ForgeDirection direction) {
+
+        World worldObj = tile.worldObj;
+
+        int[] coords = UtilDirection.translateDirectionToCoords(direction, tile);
+
+        if(worldObj.blockExists(coords[0], coords[1], coords[2])) {
+
+            TileEntity tileToAffect = UtilDirection.translateDirectionToTile(tile, tile.worldObj, direction);
+
+            if(tileToAffect != null) {
+
+                if(tileToAffect instanceof IPowerMisc) {
+
+                    IPowerMisc tileToAffectCasted = ((IPowerMisc)tileToAffect);
+
+                    if(tileToAffectCasted.getPowerProvider() != null) {
+
+                        switch(this.getTransferMode()) {
+
+                            case SINK: {
+
+                                if(tileToAffectCasted.getPowerProvider().getTransferMode() == TransferMode.SOURCE) {
+
+                                    if(UtilPower.transferPower(tileToAffectCasted, (IPowerMisc)tile))
+                                        Message.sendToClient("Im a power sink");
+                                }
+                            }
+                            break;
+
+                            case SOURCE: {
+
+                                if(tileToAffectCasted.getPowerProvider().getTransferMode() == TransferMode.SINK) {
+
+                                    if(UtilPower.transferPower((IPowerMisc)tile, tileToAffectCasted))
+                                        Message.sendToClient("Im a power source");
+                                }
+                            }
+                            break;
+
+                            case OTHER: break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -42,14 +103,31 @@ public class PowerProvider {
         return powerMax;
     }
 
-    public boolean recievePower() {
+    public PowerClass getPowerClass() {
 
-        return this.recievePower;
+        return this.powerClass;
     }
 
-    public boolean outputPower() {
+    public TransferMode getTransferMode() {
 
-        return this.outputPower;
+        if(transferMode == null) {
+
+            if(this.outputtingPower()) {
+
+                transferMode = TransferMode.SOURCE;
+            }
+
+            else if(this.requestingPower()) {
+
+                transferMode = TransferMode.SINK;
+            }
+
+            else {
+
+                transferMode = TransferMode.OTHER;
+            }
+        }
+        return transferMode;
     }
 
     public boolean gainPower(int PowerGained, ForgeDirection direction) {
@@ -57,7 +135,7 @@ public class PowerProvider {
         if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
 
             this.powerStored = this.getPowerStored() + PowerGained;
-            
+
             return true;
         }
         return false;
@@ -77,22 +155,12 @@ public class PowerProvider {
     public void setPower(int newPower) {
 
         if(newPower >= 0) {
-            
-            this.powerStored = newPower;
+
+            //  this.powerStored = newPower;
         }
     }
-    
-    public int getOutput() {
 
-        return powerOutput;
-    }
-
-    public int getInput() {
-
-        return powerInput;
-    }
-
-    public boolean requestingPower(ForgeDirection direction) {
+    public boolean requestingPower() {
 
         if(getPowerStored() < getPowerMax())
             return true;
@@ -100,7 +168,7 @@ public class PowerProvider {
         return false;
     }
 
-    public boolean outputtingPower(ForgeDirection direction) {
+    public boolean outputtingPower() {
 
         if(getPowerStored() > 0)
             return true;
@@ -110,37 +178,27 @@ public class PowerProvider {
 
     public boolean canGainPower(int power) {
 
-        if(getPowerMax() - getPowerStored() >= power) {
+        if(this.getPowerMax() - this.getPowerStored() >= power) {
 
             return true;
         }
-
-        else {
-            return false; 
-        }
+        return false; 
     }
 
     public boolean canUsePower(int power) {
 
-        if(getPowerStored() >= power) {
+        if(this.getPowerStored() >= power) {
 
             return true;
         }
-        else {
-
-            return false;
-        }
+        return false;
     }
 
     public void readFromNBT(NBTTagCompound tagCompound) {
 
         powerStored = tagCompound.getInteger("powerStored");
-        
+
         powerMax = tagCompound.getInteger("powerMax");
-        powerInput = tagCompound.getInteger("powerInput");
-        powerOutput = tagCompound.getInteger("powerOutput");
-        recievePower = tagCompound.getBoolean("recievePower");
-        outputPower = tagCompound.getBoolean("outputPower");
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {
@@ -148,12 +206,8 @@ public class PowerProvider {
         tagCompound.setInteger("x", tile.xCoord);
         tagCompound.setInteger("y", tile.yCoord);
         tagCompound.setInteger("z", tile.zCoord);
-        
+
         tagCompound.setInteger("powerStored", powerStored);
         tagCompound.setInteger("powerMax", powerMax);
-        tagCompound.setInteger("powerInput", powerInput);
-        tagCompound.setInteger("powerOutput", powerOutput);
-        tagCompound.setBoolean("recievePower", recievePower);
-        tagCompound.setBoolean("outputPower", outputPower);
     }
 }

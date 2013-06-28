@@ -1,19 +1,19 @@
 package TechCraft.blocks.technogery;
 
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerSource;
-import TechCraft.power.PowerProvider;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.*;
 
-public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPowerSource {
+public class TileMagiciansBuildingBlocks extends TechCraftTile implements IPowerMisc {
     
     public TileMagiciansBuildingBlocks() {
     
-        this.powerProvider = new PowerProvider(this, 25, 1, 1, true, false);
+        this.powerProvider = new TCPowerProvider(this, 25, PowerClass.LOW);
     }
     
     @Override
     public void updateEntity() {
-        super.managePowerAll(this,true);
+        
     }
 
     public TechCraft.power.PowerProvider getPowerProvider() {

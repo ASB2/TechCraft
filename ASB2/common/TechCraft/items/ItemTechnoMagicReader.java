@@ -35,8 +35,7 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
                 player.sendChatToPlayer(mTile.getName()+ " is at orientation: " + UtilDirection.translateDirectionToString(mTile.getOrientation()));
                 player.sendChatToPlayer(mTile.getName()+ " has metadata: "+world.getBlockMetadata(x, y, z));
-                player.sendChatToPlayer(mTile.getName()+ " output power: "+mTile.getPowerProvider().outputPower());
-                player.sendChatToPlayer(mTile.getName()+ " recieve power: "+mTile.getPowerProvider().recievePower());
+                player.sendChatToPlayer(mTile.getName()+ " transfer mode: "+mTile.getPowerProvider().getTransferMode()); 
             }    
             else {
                 player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));

@@ -15,11 +15,12 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.fx.FXBeam;
 import TechCraft.items.ItemTeleporter;
-import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerProvider;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerClass;
+import TechCraft.power.TCPowerProvider;
 import TechCraft.vector.Vector3;
 
-public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInventory{
+public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInventory {
 
     int powerStored;
     int powerMax = 1000;
@@ -38,16 +39,14 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
     int dimentionID = 0;
 
     FXBeam beam;
+    
     public TileTCTeleporter() {        
 
-        this.powerProvider = new PowerProvider(this, 1000, 1, 1, false, true);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
         tileItemStacks = new ItemStack[1];
     }
 
     public void updateEntity() {
-
-        super.managePowerAll(this, false);
-        super.updateEntity();
 
             if(tileItemStacks[0] == null) {
                 teleporterSet = false;

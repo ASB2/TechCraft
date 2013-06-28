@@ -8,10 +8,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerItems;
-import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerProvider;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerClass;
+import TechCraft.power.TCPowerProvider;
 
-public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInventory{
+public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInventory {
 
     int powerStored;
     int powerMax = 1000;
@@ -21,15 +22,14 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerSink, IInv
 
     public TileTCChargeBench() {
 
-        this.powerProvider = new PowerProvider(this, 1000, 1, 1, true, true);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
         tileItemStacks = new ItemStack[6];
     }
 
     public void updateEntity() {
-        this.managePowerAll(this, false);
-        super.updateEntity();
 
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            
             addEnergyToSlot();
             removeEnergySlot();
         }

@@ -75,9 +75,13 @@ public class FXBeam extends EntityFX
         {
             visibleDistance = 25;
         }
-        if (renderentity.getDistance(this.posX, this.posY, this.posZ) > visibleDistance)
-        {
-            this.particleMaxAge = 0;
+        
+        if(renderentity != null) {
+            
+            if (renderentity.getDistance(this.posX, this.posY, this.posZ) > visibleDistance)
+            {
+                this.particleMaxAge = 0;
+            }
         }
     }
 
@@ -104,7 +108,7 @@ public class FXBeam extends EntityFX
 
         if (this.particleAge++ >= this.particleMaxAge)
         {
-           //setDead();
+            //setDead();
         }
     }
 
@@ -125,7 +129,7 @@ public class FXBeam extends EntityFX
         float slide = this.worldObj.getTotalWorldTime();
         float rot = this.worldObj.provider.getWorldTime() % (360 / this.rotationSpeed) * this.rotationSpeed + this.rotationSpeed * f;
         float size = this.size;
-        
+
         if (this.pulse)
         {
             size = Math.min(this.particleAge / 4.0F, 1.0F);

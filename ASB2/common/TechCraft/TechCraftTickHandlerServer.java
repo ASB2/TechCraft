@@ -4,19 +4,19 @@ import java.util.EnumSet;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-
+import TechCraft.power.*;
 
 public class TechCraftTickHandlerServer implements ITickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-        //TODO
+
+        PowerManager.getInstance().updatePowerProviders();
     }
 
     @Override

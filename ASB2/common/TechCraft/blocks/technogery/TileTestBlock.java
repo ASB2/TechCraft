@@ -9,9 +9,7 @@ public class TileTestBlock extends TechCraftTile {
     int powerStored = 1000;
     int powerMax = 1000;
 
-    public void updateEntity(){
-        this.managePowerAll(this, true);
-        
+    public void updateEntity(){        
 
         Random rand = new Random();
         

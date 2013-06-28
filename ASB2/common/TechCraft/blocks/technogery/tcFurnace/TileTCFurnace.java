@@ -9,10 +9,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerSink;
-import TechCraft.power.PowerProvider;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerClass;
+import TechCraft.power.TCPowerProvider;
 
-public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedInventory, IPowerSink{
+public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedInventory, IPowerMisc {
 
     int powerStored = 0;
     int powerMax = 1000;
@@ -27,28 +28,25 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
     public TileTCFurnace() {
 
-        this.powerProvider = new PowerProvider(this, 25, 1, 1, false, true);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
         tileItemStacks = new ItemStack[2];
     }
 
     public void updateEntity() {
-
-        this.managePowerAll(this, false);
-        super.updateEntity();
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-            
+
             if(this.getPowerProvider().getPowerStored() > 0) {
-                
+
                 isBurning = true;
             }
 
             if(this.getPowerProvider().getPowerStored() == 0) {
-                
+
                 isBurning = false;
             }
 
             if (this.isBurning && this.canSmelt() && this.getPowerProvider().getPowerStored() >= this.powerForProcess) {            
-                
+
                 this.smeltItem();    
                 this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN);
             }
@@ -106,7 +104,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
-        
+
         isBurning = par1NBTTagCompound.getBoolean("isBurning");
 
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
@@ -127,7 +125,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
     }
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeToNBT(par1NBTTagCompound);
-        
+
         par1NBTTagCompound.setBoolean("isBurning", isBurning);
 
         NBTTagList nbttaglist = new NBTTagList();

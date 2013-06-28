@@ -9,10 +9,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.utils.*;
-import TechCraft.power.*;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerClass;
+import TechCraft.power.TCPowerProvider;
+import TechCraft.utils.UtilPower;
 
-public class TileGenorator extends TechCraftTile implements IInventory, ISidedInventory, IPowerSource {
+public class TileGenorator extends TechCraftTile implements IInventory, ISidedInventory, IPowerMisc {
 
     private int powerStored = 0;
     private int powerMax = 1000;
@@ -24,41 +26,58 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
     private ItemStack[] tileItemStacks;
 
     public TileGenorator() {
-        
-        this.powerProvider = new PowerProvider(this, 1000, 1, 1, true, false);
+
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
         tileItemStacks = new ItemStack[10];
     }
 
     int ticks = 0;
 
     public void updateEntity() {
-        super.managePowerAll(this, true);
 
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
             ticks++;        
 
-            if(!(powerStored == powerMax)) {            
-
-                if(fuelBurnTime == 0 && TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) != 0) {            
-
-                    fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);             
-                    currentFuelID = tileItemStacks[9].itemID;                            
-                    decrStackSize(9,1);
-                } 
+            if(!(powerStored == powerMax)) {
 
                 if(fuelBurnTime > 0) {
 
-                    isBurning = true;
+                    if(!isBurning)
+                        isBurning = true;
+
                     fuelBurnTime--;
+
+                    if(!(this.getBlockMetadata() == 2)) {
+
+                        worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
+                    }
                 }
-            }
 
-            if(fuelBurnTime > 0) {
+                if(fuelBurnTime == 0) {            
 
-                if(ticks >= UtilPower.TICKSTOPOWER) {
+                    isBurning = false;
+                    currentFuelID = 0;
 
-                    ticks = 0;
-                    this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);
+                    if(!(this.getBlockMetadata() == 1))
+                        worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 3);
+
+
+                    if(TileEntityFurnace.getItemBurnTime(tileItemStacks[9]) > 0) {
+
+                        fuelBurnTime = TileEntityFurnace.getItemBurnTime(tileItemStacks[9]);             
+                        currentFuelID = tileItemStacks[9].itemID;                            
+                        decrStackSize(9,1);
+                    }
+                }
+
+
+                if(fuelBurnTime > 0) {
+
+                    if(ticks >= UtilPower.TICKSTOPOWER) {
+
+                        ticks = 0;
+                        this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);
+                    }
                 }
             }
             moveSlots();
@@ -66,6 +85,7 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
     }
 
     public void moveSlots() {
+
         //If there is no item in the slot or the number of items in the slot is less than the name number of items for the slot
         if(tileItemStacks[9] == null || tileItemStacks[9].stackSize < this.getInventoryStackLimit()) {
 
@@ -78,30 +98,18 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
                     //if that item is equal to the burning slot or the b urning slot if equal to null
                     if(tileItemStacks[9] == null) {
 
-                        if(tileItemStacks[i].stackSize > 1) {
-
-                            tileItemStacks[9] = tileItemStacks[i].copy();
-
-                            tileItemStacks[9].stackSize = tileItemStacks[i].stackSize - tileItemStacks[i].stackSize - 1;
-                            decrStackSize(i,1);
-                        }
-
-                        if(tileItemStacks[i].stackSize == 1) {
-                            tileItemStacks[9] = tileItemStacks[i].copy();
-                            decrStackSize(i,1);
-                        }
-
-                        if(tileItemStacks[9].stackSize > 1) {
-
-                            if(tileItemStacks[i]==(tileItemStacks[9])) {
-
-                                tileItemStacks[9].stackSize = tileItemStacks[9].stackSize +1 ;
-                                decrStackSize(i,1);
-                            }
-                        }
+                        tileItemStacks[9] = tileItemStacks[i].copy();
+                        tileItemStacks[i] = null;
                     }
 
+                    else if(tileItemStacks[9].stackSize > 1) {
 
+                        if(tileItemStacks[i].isItemEqual((tileItemStacks[9]))) {
+
+                            tileItemStacks[9].stackSize = tileItemStacks[9].stackSize +1 ;
+                            decrStackSize(i,1);
+                        }
+                    }
                 }
             }
         }

@@ -23,9 +23,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     protected ForgeDirection orientation;    
     protected EnumColor color;
 
-    int powerStored = 0;
-    int powerMax = 0;
-
     protected int ticks = 0;
 
     public TechCraftTile() {
@@ -272,83 +269,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
             default: //this.setOrientation(ForgeDirection.DOWN);
                 break;
 
-        }
-    }
-
-    public void managePowerAll(TileEntity tile, boolean addPower) {
-
-        int amountOfPower;
-
-        if(tile instanceof IPowerMisc) {
-
-            if(((IPowerMisc)tile).getPowerProvider() != null) {
-
-                if(addPower) {
-
-                    amountOfPower = ((IPowerMisc)tile).getPowerProvider().getOutput();
-
-                    if(UtilDirection.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj) > 0){
-
-                        amountOfPower = amountOfPower / UtilDirection.getTilesNextTo(tile.xCoord, tile.yCoord, tile.zCoord, worldObj);
-                    }        
-                }
-
-                else {
-
-                    amountOfPower = ((IPowerMisc)tile).getPowerProvider().getInput();
-                }
-                transferPower(ForgeDirection.DOWN, tile, amountOfPower, addPower);
-                transferPower(ForgeDirection.UP, tile, amountOfPower, addPower);
-                transferPower(ForgeDirection.NORTH, tile, amountOfPower, addPower);
-                transferPower(ForgeDirection.SOUTH, tile, amountOfPower, addPower);
-                transferPower(ForgeDirection.WEST, tile, amountOfPower, addPower);
-                transferPower(ForgeDirection.EAST, tile, amountOfPower, addPower);
-            }
-        }
-    }
-
-    public void transferPower(ForgeDirection direction, TileEntity tile, int amountOfPower, boolean addPower){
-
-        int[] coords = UtilDirection.translateDirectionToCoords(direction, this);
-
-        if(worldObj.blockExists(coords[0], coords[1], coords[2])) {
-
-            if(worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]) instanceof IPowerMisc && tile instanceof IPowerMisc) {
-
-                IPowerMisc tileToChange = (IPowerMisc) worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
-                IPowerMisc tileCallingMeathod = (IPowerMisc) tile;
-
-                if(tileCallingMeathod.getPowerProvider() != null && tileToChange.getPowerProvider() != null) {
-
-                    if(addPower) {
-
-                        if(tileCallingMeathod.getPowerProvider().canGainPower(amountOfPower) && tileToChange.getPowerProvider().canUsePower(amountOfPower))
-                        {
-                            if(tileCallingMeathod.getPowerProvider().outputPower() && tileToChange.getPowerProvider().recievePower()){
-
-                                if(tileToChange.getPowerProvider().gainPower(amountOfPower, UtilDirection.translateDirectionToOpposite(direction))) {
-
-                                    tileCallingMeathod.getPowerProvider().usePower(amountOfPower, direction);
-                                }
-                            }
-                        }        
-                    }
-
-                    else {
-
-                        if(tileToChange.getPowerProvider().canUsePower(amountOfPower) && tileCallingMeathod.getPowerProvider().canGainPower(amountOfPower))
-                        {
-                            if(tileToChange.getPowerProvider().outputPower() && tileCallingMeathod.getPowerProvider().recievePower()){
-
-                                if(tileCallingMeathod.getPowerProvider().gainPower(amountOfPower, direction)) {
-
-                                    tileToChange.getPowerProvider().usePower(amountOfPower, UtilDirection.translateDirectionToOpposite(direction));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 

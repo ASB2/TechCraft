@@ -15,8 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockGenorator extends TechCraftContainers {
 
-    private TileGenorator tile;
-
     private Icon frontLit;
     private Icon frontUnlit;
     private Icon side;
@@ -51,20 +49,12 @@ public class BlockGenorator extends TechCraftContainers {
 
             case 1: {
 
-                if(tile != null) {
+                if(metadata == 2) {
 
-                    if(tile.isBurning) {
-
-                        return frontLit;
-                    }
-
-                    else{
-                        return frontUnlit;
-                    }
+                    return frontLit;
                 }
 
-                else{
-
+                else {
                     return frontUnlit;
                 }
             }
@@ -75,9 +65,9 @@ public class BlockGenorator extends TechCraftContainers {
     }
 
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random prng)
-    {
-        if(tile != null && tile.isBurning) {
+    public void randomDisplayTick(World world, int x, int y, int z, Random prng) {
+
+        if(world.getBlockMetadata(x, y, z) == 2) {
 
             double yMod = (prng.nextDouble());            
 
@@ -91,7 +81,6 @@ public class BlockGenorator extends TechCraftContainers {
     @Override
     public TileEntity createNewTileEntity(World world) {
 
-        tile = new TileGenorator();
-        return tile;
+        return new TileGenorator();
     }
 }

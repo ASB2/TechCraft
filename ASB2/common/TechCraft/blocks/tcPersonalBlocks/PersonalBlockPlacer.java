@@ -32,6 +32,8 @@ public class PersonalBlockPlacer extends TehCraftItemBlock {
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, java.util.List info, boolean var1) {
        super.addInformation(itemStack, player, info, var1);
-        info.add("Source: Thaumcraft");
+        info.add("Source: Thaumcraft.");
+        info.add("Can't be blown up.");
+        info.add("Only breakable by the person who placed it.");
     }
 }

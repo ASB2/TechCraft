@@ -5,60 +5,74 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergySphere;
+import TechCraft.models.ModelFlat;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRenderer{
 
-    private ModelEnergySphere modelTutBox = new ModelEnergySphere();
+    private ModelEnergySphere modelSphere = new ModelEnergySphere();
+    private ModelFlat modelFlat = new ModelFlat();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
     {
-        //GL11.glEnable(GL11.GL_BLEND);
-        
-        renderByOrientation(x,y,z,((TileTCEnergySphere) tileEntity).getColor());
+        if(tileEntity instanceof TechCraftTile) {
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+            GL11.glPushMatrix();
 
-        modelTutBox.render((TileTCEnergySphere)tileEntity, x, y, z);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+            modelSphere.render((TileTCEnergySphere)tileEntity, x, y, z);
+
+            renderByOrientation(x, y, z, tileEntity.getBlockMetadata());
+            modelFlat.renderAll();
+
+            GL11.glPopMatrix();
+        }
     }   
 
-    private void renderByOrientation(double x, double y, double z, int color) {
+    private void renderByOrientation(double x, double y, double z, int metadata) {
 
-        switch (color) {
+        GL11.glScalef(1.0F, 1.0F, 1.0F);
+
+        switch (metadata) {
 
             case 0: {//Down
-                GL11.glColor3f(0f, 0f, 0f);
-                break;
+                GL11.glTranslatef((float) x + 0.5F, (float) y + -.5F, (float) z + .5F);
+                return;
             }            
             case 1: {//Up
-                GL11.glColor3f(1.0f, 1.0f, 0.0f);
-                break;
+                GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + .5F);
+                GL11.glRotatef(180F, 1F, 0F, 0F);
+                return;
             }
 
             case 2: {//South
-                GL11.glColor3f(0, 1, 0); 
-                break;
+                GL11.glTranslatef((float) x + 0.5F, (float) y + .5F, (float) z - 0.5F);
+                GL11.glRotatef(90F, 1F, 0F, 0F);
+                return;
             }
             case 3: {//North
-                GL11.glColor3f(1, 0, 0); 
-                break;
-
+                GL11.glTranslatef((float) x + 0.5F, (float) y + .5F, (float) z + 1.5F);
+                GL11.glRotatef(-90F, 1F, 0F, 0F);
+                return;
+            }
+            case 5: {//West
+                GL11.glTranslatef((float) x + 1.5F, (float) y + .5F, (float) z + .5F);
+                GL11.glRotatef(90F, 0F, 0F, 1F);
+                return;
             }
             case 4: {//East
-                GL11.glColor3f(0, 0, 1); 
-                break;
-
+                GL11.glTranslatef((float) x - .5F, (float) y + .5F, (float) z + .5F);
+                GL11.glRotatef(-90F, 0F, 0F, 1F);
+                return;
             }
             default: {//Other
-                GL11.glColor3f(0F, 0F, 0F); 
                 return;
             }
         }
     }
-
 }
 

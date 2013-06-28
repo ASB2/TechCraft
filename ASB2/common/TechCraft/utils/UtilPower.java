@@ -5,9 +5,13 @@ import net.minecraft.world.World;
 import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.IConduitConductor;
 import TechCraft.power.IPowerMisc;
+import TechCraft.power.TransferMode;
 
 public class UtilPower {
 
+    public static int LOW_POWER = 1;
+    public static int MID_POWER = 10;
+    public static int HIGH_POWER = 100;
     /**
      * The amount of ticks under a condution to gain power a power gen block will gain power    
      */
@@ -28,7 +32,7 @@ public class UtilPower {
 
                         if(((IPowerMisc)tilesAround[i]).getPowerProvider() != null) {
 
-                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().outputPower()) {
+                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().getTransferMode() == TransferMode.SOURCE) {
 
                                 return tile;
                             }
@@ -38,7 +42,7 @@ public class UtilPower {
                     if(tilesAround[i] instanceof IConduitConductor) {
 
                         if(((IConduitConductor)tilesAround[i]).getConductorType() == EnumContuitType.TCU) {
-                            
+
                             return UtilPower.getNearestPowerSource(world, tilesAround[i]);
                         }
                     }
@@ -47,7 +51,7 @@ public class UtilPower {
         }
         return null;
     }
-    
+
     public static TileEntity getNearestPowerSink(World world, TileEntity tile) {
 
         if(UtilDirection.getArrayTilesAround(world, tile).length > 0) {
@@ -63,7 +67,7 @@ public class UtilPower {
 
                         if(((IPowerMisc)tilesAround[i]).getPowerProvider() != null) {
 
-                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().recievePower()) {
+                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().getTransferMode() == TransferMode.SINK) {
 
                                 return tile;
                             }
@@ -73,7 +77,7 @@ public class UtilPower {
                     if(tilesAround[i] instanceof IConduitConductor) {
 
                         if(((IConduitConductor)tilesAround[i]).getConductorType() == EnumContuitType.TCU) {
-                            
+
                             return UtilPower.getNearestPowerSource(world, tilesAround[i]);
                         }
                     }
@@ -81,5 +85,35 @@ public class UtilPower {
             }
         }
         return null;
+    }
+
+    public static boolean transferPower(IPowerMisc powerSource, IPowerMisc powerSink) {
+
+        int amountOfPower = 0;
+
+        switch(powerSource.getPowerProvider().getPowerClass()) {
+
+            case LOW: amountOfPower = LOW_POWER; break;
+            case MID: amountOfPower = MID_POWER; break;
+            case HIGH: amountOfPower = HIGH_POWER; break;
+            default: amountOfPower = 1;
+        }
+
+        if (powerSink.getPowerProvider() != null && powerSource.getPowerProvider() != null) {
+
+            if(powerSink.getPowerProvider().canGainPower(amountOfPower)) {
+
+                if(powerSource.getPowerProvider().canUsePower(amountOfPower)) {
+                    
+                    if(powerSink.getPowerProvider().gainPower(amountOfPower, UtilDirection.translateDirectionToOpposite(powerSource.getOrientation()))) {
+
+                        powerSource.getPowerProvider().usePower(amountOfPower, powerSource.getOrientation());
+
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

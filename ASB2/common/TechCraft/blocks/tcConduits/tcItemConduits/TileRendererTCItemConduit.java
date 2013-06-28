@@ -12,6 +12,7 @@ import TechCraft.conduit.IConduitNetwork;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelPowerConduit;
 import TechCraft.power.IPowerMisc;
+import TechCraft.power.TransferMode;
 import TechCraft.utils.UtilDirection;
 import cpw.mods.fml.client.FMLClientHandler;
 
@@ -109,7 +110,7 @@ public class TileRendererTCItemConduit extends TileEntitySpecialRenderer {
 
                 if(((IPowerMisc)tile).getPowerProvider() != null) {
                     
-                    if(((IPowerMisc)tile).getPowerProvider().outputPower() || ((IPowerMisc)tile).getPowerProvider().recievePower()) {
+                    if(((IPowerMisc)tile).getPowerProvider().getTransferMode() == TransferMode.SOURCE || ((IPowerMisc)tile).getPowerProvider().getTransferMode() == TransferMode.SINK) {
 
                         return ((IPowerMisc)tile).renderByDirection(direction);
                     }
