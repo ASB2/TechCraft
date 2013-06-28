@@ -24,31 +24,23 @@ import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.ContainerWirelessEnergyManager;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.items.gui.ContainerEnchancedDestructionCatalyst;
-import TechCraft.vector.Vector3;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy implements IGuiHandler {
 
-    public void registerServerTickHandler(){
+    public void registerServerTickHandler() {
+        
         TickRegistry.registerTickHandler(new TechCraftTickHandlerServer(), Side.SERVER);
     }
-
-    // Client stuff
+    
     public void register() {
-
-        // Nothing here as this is the server side proxy
     }
 
     public static int addArmor(String string) {
-        // TODO Auto-generated method stub
+
         return 0;
-    }
-
-    public void renderBeam(World world, Vector3 position, Vector3 target, float red, float green, float blue, int age)
-    {
-
     }
     
     @Override
@@ -60,7 +52,8 @@ public class CommonProxy implements IGuiHandler {
 
             if(tileEntity != null) {
 
-                switch(ID){
+                switch(ID) {
+                    
                     case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
                     case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
                     case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            

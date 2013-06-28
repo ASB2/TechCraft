@@ -90,7 +90,7 @@ public class ItemTradeStick extends TechCraftItems {
                         ItemStack blockToSet = new ItemStack(blockToBreak, 1, blockmeta);
 
                         if(player.inventory.hasItemStack(blockToSet)) {
-                            
+
                             player.inventory.getCurrentItem().damageItem(1, player);
                             world.playAuxSFX(2001, x, y, z, id + (meta << 12));
 
@@ -101,10 +101,11 @@ public class ItemTradeStick extends TechCraftItems {
                             for(int i = 0; i < player.inventory.getSizeInventory(); i++) {
 
                                 if(player.inventory.getStackInSlot(i) != null) {
-                                    
+
                                     if(player.inventory.getStackInSlot(i).isItemEqual(blockToSet)) {
 
-                                        player.inventory.decrStackSize(i, 1);
+                                        if(!player.capabilities.isCreativeMode)
+                                            player.inventory.decrStackSize(i, 1);
                                         break;
                                     }
                                 }

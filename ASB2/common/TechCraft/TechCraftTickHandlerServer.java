@@ -28,6 +28,6 @@ public class TechCraftTickHandlerServer implements ITickHandler {
     @Override
     public String getLabel() {
 
-        return "TechCraft Server Ticks";
+        return "TechCraft Server Tick Handler";
     }
 }

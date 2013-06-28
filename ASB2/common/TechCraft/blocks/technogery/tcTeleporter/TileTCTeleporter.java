@@ -1,5 +1,7 @@
 package TechCraft.blocks.technogery.tcTeleporter;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,8 +49,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
         super.managePowerAll(this, false);
         super.updateEntity();
 
-        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-
             if(tileItemStacks[0] == null) {
                 teleporterSet = false;
                 coordsSet = false;
@@ -68,32 +68,30 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerSink, IInve
 
                 if(teleporter.isCoodsSet(tileItemStacks[0])) {
 
-                    x = (int)teleporter.getXCoord(tileItemStacks[0]);
-                    y = (int)teleporter.getYCoord(tileItemStacks[0]);
-                    z = (int)teleporter.getZCoord(tileItemStacks[0]);
+                    x = teleporter.getXCoord(tileItemStacks[0]);
+                    y = teleporter.getYCoord(tileItemStacks[0]);
+                    z = teleporter.getZCoord(tileItemStacks[0]);
                     dimentionID = (int)teleporter.getDimentionIDCoord(tileItemStacks[0]);   
 
-                    x = x + .5;
-                    z = z + .5;
+                    y = y + 1;
 
                     coordsSet = true;
                 }
             }
-        }
 
         if(teleporterSet) {
 
-            if(worldObj.blockExists((int)x,(int) y,(int) z)) {
-
-                beam = new FXBeam(worldObj, new Vector3(this.xCoord + .5, this.yCoord +.5, this.zCoord +.5), new Vector3(x, y, z),0, 1, 0 ,20);
+                Random rand  = new Random();
+                int color  = rand.nextInt();
+                
+                beam = new FXBeam(worldObj, new Vector3(this.xCoord + .5, this.yCoord +.5, this.zCoord +.5), new Vector3(x, y, z), color, color, color, 20, 20F);
                 Minecraft.getMinecraft().effectRenderer.addEffect(beam);
             }
-        }
     }
 
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 
-        if(worldObj.getBlockPowerInput(x, y, z) > 0) {
+        if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
             if(teleporterSet && coordsSet && this.getPowerProvider().getPowerStored() >= powerForProcess) {
 

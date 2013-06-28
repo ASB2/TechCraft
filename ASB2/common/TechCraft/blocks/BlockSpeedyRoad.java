@@ -41,7 +41,7 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
     }
 
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
-
+        
         if(!world.isBlockIndirectlyGettingPowered(x, y, z)) {
             
             if(entity instanceof EntityLiving) {
