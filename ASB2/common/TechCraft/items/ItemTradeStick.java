@@ -14,6 +14,7 @@ public class ItemTradeStick extends TechCraftItems {
     public ItemTradeStick(int par1) {
         super(par1);
         this.setMaxDamage(150);
+        this.setMaxStackSize(1);
     }
 
     int length = 1;

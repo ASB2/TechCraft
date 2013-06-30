@@ -26,9 +26,6 @@ import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.BlockItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
 import TechCraft.blocks.tcPersonalBlocks.PersonalBlockPlacer;
-import TechCraft.blocks.tcRunes.BlockBasicRune;
-import TechCraft.blocks.tcRunes.BlockRuneBase;
-import TechCraft.blocks.tcToolManager.BlockToolManager;
 import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
 import TechCraft.blocks.technogery.BlockTestBlock;
@@ -69,13 +66,10 @@ public class BlockRegistry {
     public static TechCraftContainers BlockGenorator;
     public static TechCraftContainers BlockMultiBlockCore;
     public static TechCraftContainers BlockTCFurnace;
-    public static TechCraftContainers BlockTCChargeBench;    
-
-    public static BlockRuneBase BlockBasicRune;
+    public static TechCraftContainers BlockTCChargeBench; 
     
     public static TechCraftContainers BlockTCInfuser;
     public static TechCraftContainers BlockTCTeleporter;
-    public static TechCraftContainers BlockToolManager;
     public static TechCraftContainers BlockTCEnergyConstructor;  
     public static TechCraftContainers BlockItemExtractor;
     
@@ -224,12 +218,6 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCChargeBench, TehCraftItemBlock.class, "ASB2_BlockTCChargeBench");
         LanguageRegistry.addName(BlockTCChargeBench, "Charge Bench");
         MinecraftForge.setBlockHarvestLevel(BlockTCChargeBench, "pickaxe", 2);
-
-        BlockBasicRune = new BlockBasicRune(config.getBlock("BlockBasicRune",  BlockRegistry.getNextBaseID()).getInt(),Material.rock);
-        BlockBasicRune.setUnlocalizedName("ASB2_BlockBasicRune");
-        GameRegistry.registerBlock(BlockBasicRune, TehCraftItemBlock.class, "ASB2_BlockBasicRune");
-        LanguageRegistry.addName(BlockBasicRune, "Basic Rune");
-        MinecraftForge.setBlockHarvestLevel(BlockBasicRune, "pickaxe", 2);
         
         BlockTCInfuser = new BlockTCInfuser(config.getBlock("BlockTCInfuser",  BlockRegistry.getNextBaseID()).getInt(),Material.rock);
         BlockTCInfuser.setUnlocalizedName("ASB2_BlockTCInfuser");
@@ -242,12 +230,6 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCTeleporter, TehCraftItemBlock.class, "ASB2_BlockTCTeleporter");
         LanguageRegistry.addName(BlockTCTeleporter, "Teleporter Base");
         MinecraftForge.setBlockHarvestLevel(BlockTCTeleporter, "pickaxe", 2);
-        
-        BlockToolManager = new BlockToolManager(config.getBlock("BlockToolManager",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
-        BlockToolManager.setUnlocalizedName("ASB2_BlockToolManager");
-        GameRegistry.registerBlock(BlockToolManager, TehCraftItemBlock.class, "ASB2_BlockToolManager");
-        LanguageRegistry.addName(BlockToolManager, "Tool Manager");
-        MinecraftForge.setBlockHarvestLevel(BlockToolManager, "pickaxe", 2);
         
         BlockTCEnergyConstructor = new BlockTCEnergyConstructor(config.getBlock("BlockTCEnergyConstructor",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
         BlockTCEnergyConstructor.setUnlocalizedName("ASB2_BlockTCEnergyConstructor");
@@ -277,7 +259,7 @@ public class BlockRegistry {
         BlockCrystallineTreeLeaves.setUnlocalizedName("ASB2_BlockCrystallineTreeLeaves");
         GameRegistry.registerBlock(BlockCrystallineTreeLeaves, TehCraftItemBlock.class, "ASB2_BlockCrystallineTreeLeaves");
         LanguageRegistry.addName(BlockCrystallineTreeLeaves, "Crystiline Leaves");
-        MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeLeaves, "pickaxe", 2);
+        MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeLeaves, "pickaxe", 2);        
     }
 
     public static int getNextBaseID() {        

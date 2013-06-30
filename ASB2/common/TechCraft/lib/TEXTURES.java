@@ -3,7 +3,8 @@ package TechCraft.lib;
 public class TEXTURES {
 
     public static final String BLANK = "/mods/TechCraft/textures/blocks/White.png";
-    public static final String BLACK = "/mods/TechCraft/textures/blocks/ColoredBlack";
+    public static final String BLACK = "/mods/TechCraft/textures/blocks/ColoredBlack.png";
+    public static final String TEST = "/mods/TechCraft/textures/blocks/Colored.png";
     
     public static final String CONDUIT_EXPORTING = "/mods/TechCraft/textures/blocks/ModelMagicConduitExportingv2.png";
     public static final String CONDUIT_IMPORTING = "/mods/TechCraft/textures/blocks/ModelMagicConduitImportingv2.png";

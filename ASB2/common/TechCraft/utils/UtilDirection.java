@@ -37,6 +37,35 @@ public class UtilDirection {
         return new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
     }
 
+    public static int[] translateDirectionToCoords(ForgeDirection direction, int xCoord, int yCoord, int zCoord) {
+
+        switch(direction) {
+
+            case DOWN: {
+                return new int[]{xCoord,yCoord-1,zCoord};
+            }
+            case UP: {
+                return new int[]{xCoord,yCoord+1,zCoord};
+            }
+            case NORTH: {
+                return new int[]{xCoord,yCoord,zCoord-1};
+            }
+            case SOUTH: {
+                return new int[]{xCoord,yCoord,zCoord+1};
+            }
+            case WEST: {
+                return new int[]{xCoord-1,yCoord,zCoord};
+            }
+            case EAST: {
+                return new int[]{xCoord+1,yCoord,zCoord};
+            }
+            case UNKNOWN:{
+                return new int[]{xCoord,yCoord,zCoord};
+            }
+        }
+
+        return new int[]{xCoord,yCoord,zCoord};
+    }
     public static ForgeDirection translateDirectionToOpposite(ForgeDirection direction) {
 
         switch(direction) {
@@ -157,7 +186,7 @@ public class UtilDirection {
                 return "East";
             }
             default:{
-                
+
                 return "Unknown";
             }
         }
@@ -165,32 +194,12 @@ public class UtilDirection {
 
     public static TileEntity translateDirectionToTile(TileEntity tile, World world, ForgeDirection direction) {
 
-        switch(direction) {
+        return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
+    }
 
-            case DOWN: {
-                return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case UP: {
-                return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case NORTH: {
-                return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case SOUTH: {
-                return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case WEST: {
-                return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case EAST: {
-                return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, tile)[0], UtilDirection.translateDirectionToCoords(direction, tile)[1], UtilDirection.translateDirectionToCoords(direction, tile)[2]);
-            }
-            case UNKNOWN:{
-                return null;
-            }
-        }
+    public static TileEntity translateDirectionToTile(World world, ForgeDirection direction, int xCoord, int yCoord, int zCoord) {
 
-        return null;
+        return world.getBlockTileEntity(UtilDirection.translateDirectionToCoords(direction, xCoord, yCoord, zCoord)[0], UtilDirection.translateDirectionToCoords(direction, xCoord, yCoord, zCoord)[1], UtilDirection.translateDirectionToCoords(direction, xCoord, yCoord, zCoord)[2]);
     }
 
     public static TileEntity[] getArrayTilesAround(World world, TileEntity tile) {
@@ -203,7 +212,18 @@ public class UtilDirection {
                 UtilDirection.translateDirectionToTile(tile, world, ForgeDirection.WEST),
                 UtilDirection.translateDirectionToTile(tile, world, ForgeDirection.EAST)};
     }
-    
+
+    public static TileEntity[] getArrayTilesAround(World world, int x, int y, int z) {
+
+        return new TileEntity[] {
+                UtilDirection.translateDirectionToTile(world, ForgeDirection.DOWN, x, y ,x),
+                UtilDirection.translateDirectionToTile(world, ForgeDirection.UP, x, y ,x),
+                UtilDirection.translateDirectionToTile(world, ForgeDirection.NORTH, x, y ,x),
+                UtilDirection.translateDirectionToTile(world, ForgeDirection.SOUTH, x, y ,x),
+                UtilDirection.translateDirectionToTile(world, ForgeDirection.WEST, x, y ,x),
+                UtilDirection.translateDirectionToTile(world, ForgeDirection.EAST, x, y ,x)};
+    }
+
     public static int getTilesNextTo(int x, int y, int z, World worldObj) {
 
         int numberNextTo = 0;
@@ -264,6 +284,24 @@ public class UtilDirection {
         return numberNextTo;
     }
 
-    
-    
+    public static int translateDirectionToBlockId(World world, ForgeDirection direction, int xCoord, int yCoord, int zCoord) {
+
+        int[] coords = UtilDirection.translateDirectionToCoords(direction, xCoord, yCoord, zCoord);
+
+        return world.getBlockId(coords[0], coords[1], coords[2]);
+    }
+
+    public static int translateDirectionToBlockId(World world, ForgeDirection direction, TileEntity tile) {
+
+        int[] coords = UtilDirection.translateDirectionToCoords(direction, tile.xCoord, tile.yCoord, tile.zCoord);
+
+        return world.getBlockId(coords[0], coords[1], coords[2]);
+    }
+
+    public static boolean translateDirectionToIsBlockSolid(World world, ForgeDirection direction, int xCoord, int yCoord, int zCoord) {
+
+        int[] coords = UtilDirection.translateDirectionToCoords(direction, xCoord, yCoord, zCoord);
+        
+        return world.isBlockSolidOnSide(coords[0], coords[1], coords[2], direction);
+    }
 }

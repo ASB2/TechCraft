@@ -5,10 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.tcItemExtractor.ContainerItemExtractor;
 import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
-import TechCraft.blocks.tcRunes.ContainerRune;
-import TechCraft.blocks.tcRunes.TileBasicRune;
-import TechCraft.blocks.tcToolManager.ContainerToolManager;
-import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.tcChargeBench.ContainerTCChargeBench;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.ContainerTCEnergyConstructor;
@@ -31,10 +27,10 @@ import cpw.mods.fml.relauncher.Side;
 public class CommonProxy implements IGuiHandler {
 
     public void registerServerTickHandler() {
-        
+
         TickRegistry.registerTickHandler(new TechCraftTickHandlerServer(), Side.SERVER);
     }
-    
+
     public void register() {
     }
 
@@ -42,7 +38,7 @@ public class CommonProxy implements IGuiHandler {
 
         return 0;
     }
-    
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
 
@@ -53,14 +49,12 @@ public class CommonProxy implements IGuiHandler {
             if(tileEntity != null) {
 
                 switch(ID) {
-                    
+
                     case 1: return new ContainerGenorator(player.inventory, (TileGenorator) tileEntity);
                     case 2: return new ContainerTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
                     case 3: return new ContainerTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);            
-                    case 4:return new ContainerRune(player.inventory, (TileBasicRune)tileEntity); 
                     case 5:return new ContainerTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
                     case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-                    case 9:return new ContainerToolManager(player.inventory, (TileToolManager)tileEntity);
                     case 10:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
                     case 11:return new ContainerItemExtractor(player.inventory, (TileItemExtractor)tileEntity);
                     case 12:return new ContainerWirelessEnergyManager(player.inventory, (TileWirelessEnergyManager)tileEntity);

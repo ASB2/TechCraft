@@ -12,12 +12,6 @@ import TechCraft.blocks.tcItemExtractor.GuiItemExtractor;
 import TechCraft.blocks.tcItemExtractor.ItemRendererItemExtractor;
 import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
 import TechCraft.blocks.tcItemExtractor.TileRendererItemExtractor;
-import TechCraft.blocks.tcRunes.GuiRune;
-import TechCraft.blocks.tcRunes.ItemRendererTileBasicRune;
-import TechCraft.blocks.tcRunes.TileBasicRune;
-import TechCraft.blocks.tcRunes.TileEntityRendererTileBasicRune;
-import TechCraft.blocks.tcToolManager.GuiToolManager;
-import TechCraft.blocks.tcToolManager.TileToolManager;
 import TechCraft.blocks.technogery.TileEntityRendererTileTest;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.GuiTCChargeBench;
@@ -29,6 +23,8 @@ import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.GuiGenorator;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.GuiTCInfuser;
+import TechCraft.blocks.technogery.tcInfuser.ItemRendererInfuser;
+import TechCraft.blocks.technogery.tcInfuser.TileRendererInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.ItemRendererMagicEnergySphere;
 import TechCraft.blocks.technogery.tcSphere.TileEntityRendererMagicEnergySphere;
@@ -61,13 +57,12 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileTestBlock.class, new TileEntityRendererTileTest());
         //MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTestBlock.blockID, (IItemRenderer)new ItemRendererTestItem());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileBasicRune.class, new TileEntityRendererTileBasicRune());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockBasicRune.blockID, (IItemRenderer)new ItemRendererTileBasicRune()); 
-
         ClientRegistry.bindTileEntitySpecialRenderer(TileItemExtractor.class, new TileRendererItemExtractor());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockItemExtractor.blockID, (IItemRenderer)new ItemRendererItemExtractor()); 
-    }
 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileTCInfuser.class, new TileRendererInfuser());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCInfuser.blockID, (IItemRenderer)new ItemRendererInfuser()); 
+    }
 
 
     @Override
@@ -83,10 +78,8 @@ public class ClientProxy extends CommonProxy {
                     case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
                     case 2: return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
                     case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
-                    case 4: return new GuiRune(player.inventory, (TileBasicRune)tileEntity);
                     case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
                     case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-                    case 9: return new GuiToolManager(player.inventory, (TileToolManager)tileEntity);
                     case 10: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
                     case 11: return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
                     case 12: return new GuiWirelessEnergyManager(player.inventory, (TileWirelessEnergyManager)tileEntity);  

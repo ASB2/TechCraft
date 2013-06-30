@@ -38,28 +38,28 @@ public class GuiTCInfuser extends GuiContainer {
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
 
         drawTexturedModalRect(posX + 28 - 1, posY + 64 - 1, 176, 32, 18, 18);
-        
+
         drawTexturedModalRect(posX + 47 + 15 - 1, posY + 14 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 65 + 15 - 1, posY + 14 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 83 + 15 - 1, posY + 14 - 1, 176, 32, 18, 18);
-        
+
         drawTexturedModalRect(posX + 47 + 15 - 1, posY + 32 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 65 + 15 - 1, posY + 32 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 83 + 15 - 1, posY + 32 - 1, 176, 32, 18, 18);
-        
+
         drawTexturedModalRect(posX + 47 + 15 - 1, posY + 50 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 65 + 15 - 1, posY + 50 - 1, 176, 32, 18, 18);
         drawTexturedModalRect(posX + 83 + 15 - 1, posY + 50 - 1, 176, 32, 18, 18);
-        
+
         drawTexturedModalRect(posX + 83 + 60 - 1, posY + 32 - 1, 176, 32, 18, 18);
         //This renders the energy gauge. Lower the last number to increase the energy displayed
 
         drawTexturedModalRect(posX + 8, posY + 6, 178, 127, 48, 75);
 
-            int i1 = tileEntity.getPowerScaled(75);
+        int i1 = tileEntity.getPowerScaled(75);
 
-            drawTexturedModalRect(posX + 7, posY + 5, 176, 51, 18, 71);
-            drawTexturedModalRect(posX + 7, posY + 5 + 71 - i1, 194, 51, 18, i1);
+        drawTexturedModalRect(posX + 7, posY + 5, 176, 51, 18, 71);
+        drawTexturedModalRect(posX + 7, posY + 5 + 71 - i1, 194, 51, 18, i1);
     }
 
     @Override
@@ -68,10 +68,10 @@ public class GuiTCInfuser extends GuiContainer {
 
         if(isPointInRegion(8, 6, 18, 71, mouseX, mouseY)) {
 
-            drawBarTooltip("Energy:", "TCU", tileEntity.getPowerStored(), tileEntity.getPowerMax(), mouseX, mouseY);
+            drawBarTooltip("Energy:", "TCU", tileEntity.getPowerProvider().getPowerStored(), tileEntity.getPowerProvider().getPowerMax(), mouseX, mouseY);
         }
     }       
-    
+
     protected void drawBarTooltip(String name, String unit, int value, int max, int x, int y)
     {
         GL11.glPushMatrix();

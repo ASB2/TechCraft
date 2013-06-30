@@ -5,17 +5,16 @@ import java.util.Random;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-public class ModelEnergyReleaser extends ModelBase {
+public class ModelEnergyInfuser extends ModelBase {
     
     ModelRenderer Center;
     ModelRenderer Base;
     ModelRenderer Top;
   
-  public ModelEnergyReleaser() {
+  public ModelEnergyInfuser() {
       
     textureWidth = 128;
     textureHeight = 64;
@@ -65,7 +64,7 @@ public class ModelEnergyReleaser extends ModelBase {
 boolean finishProduct = false;
   
   int ticks;
-  public void renderAll(TileEntity box, double x, double y, double z) {
+  public void renderWithRotation(float x, float y, float z) {
       
       ticks++;
       
@@ -99,5 +98,23 @@ boolean finishProduct = false;
       if(ticks > 180)
           ticks = 0;
       GL11.glPopMatrix();
+  }
+
+public void renderNoRotation(float x, float y, float z) {
+      
+      ticks++;
+      
+      GL11.glPushMatrix();
+      
+      GL11.glTranslatef((float)x + 0.5f, (float)y  + 1.5f, (float)z + 0.5f);
+      
+      GL11.glRotatef(180, 180, 1, 1);
+      
+      Center.render(0.0625F);
+      Base.render(0.0625F);
+      Top.render(0.0625F);
+      
+      GL11.glPopMatrix();
+
   }
 }

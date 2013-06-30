@@ -12,6 +12,7 @@ import net.minecraftforge.common.Configuration;
 import TechCraft.items.ItemAirCrystalShard;
 import TechCraft.items.ItemBasicDestructionCatalyst;
 import TechCraft.items.ItemCrystalCasing;
+import TechCraft.items.ItemCrystillineShard;
 import TechCraft.items.ItemEarthCrystalShard;
 import TechCraft.items.ItemEnergyCrystalShard;
 import TechCraft.items.ItemEnhancedDestructionCatalyst;
@@ -28,8 +29,6 @@ import TechCraft.items.ItemTradeStick;
 import TechCraft.items.ItemWaterCrystalShard;
 import TechCraft.items.ItemZycrantianIngot;
 import TechCraft.items.TechCraftItems;
-import TechCraft.items.runes.ItemExplosionRune;
-import TechCraft.items.runes.ItemRuneTest;
 import TechCraft.items.technogery.ItemEnergyBlob;
 import TechCraft.items.tools_armor.ItemCharcoalAxe;
 import TechCraft.items.tools_armor.ItemCharcoalPickaxe;
@@ -50,7 +49,6 @@ import TechCraft.items.tools_armor.zycrantian.ItemZycrantianPickaxe;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianShovel;
 import TechCraft.items.tools_armor.zycrantian.ItemZycrantianSword;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.items.*;
 
 public class ItemRegistry {
 
@@ -90,8 +88,6 @@ public class ItemRegistry {
     public static ItemHoe ItemGarnetHoe;
 
     public static TechCraftItems ItemEnergyBlob;
-    public static TechCraftItems ItemRuneTest;    
-    public static TechCraftItems ItemExplosionRune;
     public static TechCraftItems ItemRealityDifferentiationDrive;
     public static TechCraftItems ItemLinker;
     public static TechCraftItems ItemTeleportModule;
@@ -238,14 +234,6 @@ public class ItemRegistry {
         ItemEnergyBlob = new ItemEnergyBlob(config.getItem("ItemEnergyBlob", ItemRegistry.getNextBaseID()).getInt());
         ItemEnergyBlob.setUnlocalizedName("ASB2_ItemEnergyBlob");
         LanguageRegistry.addName(ItemEnergyBlob, "TC Energy Blob");
-
-        ItemRuneTest = new ItemRuneTest(config.getItem("ItemRuneTest", ItemRegistry.getNextBaseID()).getInt());
-        ItemRuneTest.setUnlocalizedName("ASB2_ItemRuneTest");
-        LanguageRegistry.addName(ItemRuneTest, "Test Rune");
-
-        ItemExplosionRune = new ItemExplosionRune(config.getItem("ItemExplosionRune", ItemRegistry.getNextBaseID()).getInt());
-        ItemExplosionRune.setUnlocalizedName("ASB2_ItemExplosionRune");
-        LanguageRegistry.addName(ItemExplosionRune, "Explosion Rune");
 
         ItemRealityDifferentiationDrive = new TechCraftItems(config.getItem("ItemRealityDifferentiationDrive", ItemRegistry.getNextBaseID()).getInt());
         ItemRealityDifferentiationDrive.setUnlocalizedName("ASB2_ItemRealityDifferentiationDrive");

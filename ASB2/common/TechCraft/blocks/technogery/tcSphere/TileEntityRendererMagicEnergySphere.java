@@ -23,9 +23,9 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
 
             GL11.glPushMatrix();
 
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+            FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLACK);
             modelSphere.render((TileTCEnergySphere)tileEntity, x, y, z);
-
+            
             renderByOrientation(x, y, z, tileEntity.getBlockMetadata());
             modelFlat.renderAll();
 

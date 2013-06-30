@@ -7,6 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
@@ -15,16 +18,11 @@ import TechCraft.power.TCPowerProvider;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedInventory, IPowerMisc {
 
-    int powerStored = 0;
-    int powerMax = 1000;
-
     int powerForProcess = 50;
 
     private ItemStack[] tileItemStacks;
 
     boolean isBurning = false;
-
-    ItemStack currentItem;
 
     public TileTCFurnace() {
 
@@ -33,19 +31,29 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
     }
 
     public void updateEntity() {
+
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
             if(this.getPowerProvider().getPowerStored() > 0) {
 
-                isBurning = true;
+                if(!isBurning)
+                    isBurning = true;
+
+                if(!(this.getBlockMetadata() == 2)) {
+
+                    worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
+                }
             }
 
             if(this.getPowerProvider().getPowerStored() == 0) {
 
                 isBurning = false;
+                if(!(this.getBlockMetadata() == 1))
+                    worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 3);
+
             }
 
-            if (this.isBurning && this.canSmelt() && this.getPowerProvider().getPowerStored() >= this.powerForProcess) {            
+            if (this.isBurning && this.canSmelt() && this.getPowerProvider().canUsePower(powerForProcess)) {            
 
                 this.smeltItem();    
                 this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN);
@@ -53,38 +61,38 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
         }
     }
 
-    public void smeltItem()
-    {
-        if (this.canSmelt())
-        {
+    public void smeltItem() {
+
+        if (this.canSmelt()) {
+
             ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.tileItemStacks[0]);
 
-            if (this.tileItemStacks[1] == null)
-            {
+            if (this.tileItemStacks[1] == null) {
+
                 this.tileItemStacks[1] = itemstack.copy();
             }
-            else if (this.tileItemStacks[1].isItemEqual(itemstack))
-            {
+            else if (this.tileItemStacks[1].isItemEqual(itemstack)) {
+
                 tileItemStacks[1].stackSize += itemstack.stackSize;
             }
 
             --this.tileItemStacks[0].stackSize;
 
-            if (this.tileItemStacks[0].stackSize <= 0)
-            {
+            if (this.tileItemStacks[0].stackSize <= 0) {
+
                 this.tileItemStacks[0] = null;
             }
         }
     }
 
-    private boolean canSmelt()
-    {
-        if (this.tileItemStacks[0] == null)
-        {
+    private boolean canSmelt() {
+        
+        if (this.tileItemStacks[0] == null) {
+
             return false;
         }
-        else
-        {
+        else {
+
             ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.tileItemStacks[0]);
             if (itemstack == null) return false;
             if (this.tileItemStacks[1] == null) return true;
@@ -94,12 +102,18 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
         }
     }
 
-    public void setPowerStored(int power) {
+    @Override
+    public Packet getDescriptionPacket() {
 
-        if(power >= 0) {
+        NBTTagCompound ntbCompound = new NBTTagCompound();
+        this.writeToNBT(ntbCompound);
+        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 2, ntbCompound);
+    }
 
-            this.powerStored = power;       
-        }
+    @Override
+    public void onDataPacket(INetworkManager netManager, Packet132TileEntityData packet) {
+
+        readFromNBT(packet.customParam1);
     }
 
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
@@ -270,7 +284,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
     {
         ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(itemStack);
 
-        if(this.tileItemStacks[0] == null) {
+        if(this.tileItemStacks[0] == null || ((this.tileItemStacks[0].isItemEqual(itemStack) && this.tileItemStacks[0].stackSize + itemStack.stackSize <= this.getInventoryStackLimit()))) {
 
             if(itemstack != null) {
 

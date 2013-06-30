@@ -4,12 +4,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.Message;
 import TechCraft.utils.UtilDirection;
 import TechCraft.utils.UtilPower;
-import TechCraft.*;
 
 public abstract class PowerProvider {
 
+    NBTTagCompound ntbTag = new NBTTagCompound();
     TransferMode transferMode;
     PowerClass powerClass;
 
@@ -92,6 +93,7 @@ public abstract class PowerProvider {
      */
     public int getPowerStored() {
 
+        //this.readFromNBT(ntbTag);
         return powerStored;
     }
 
@@ -134,7 +136,7 @@ public abstract class PowerProvider {
 
         if(this.getPowerMax() - this.getPowerStored() >= PowerGained) {
 
-            this.powerStored = this.getPowerStored() + PowerGained;
+            this.setPower(this.getPowerStored() + PowerGained);
 
             return true;
         }
@@ -145,7 +147,7 @@ public abstract class PowerProvider {
 
         if(this.getPowerStored() >= PowerUsed) {
 
-            powerStored = this.getPowerStored() - PowerUsed;
+            this.setPower(this.getPowerStored() - PowerUsed);
 
             return true;
         }
@@ -156,7 +158,8 @@ public abstract class PowerProvider {
 
         if(newPower >= 0) {
 
-            //  this.powerStored = newPower;
+            this.powerStored = newPower;
+            //this.writeToNBT(ntbTag);
         }
     }
 
@@ -197,15 +200,10 @@ public abstract class PowerProvider {
     public void readFromNBT(NBTTagCompound tagCompound) {
 
         powerStored = tagCompound.getInteger("powerStored");
-
         powerMax = tagCompound.getInteger("powerMax");
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {
-
-        tagCompound.setInteger("x", tile.xCoord);
-        tagCompound.setInteger("y", tile.yCoord);
-        tagCompound.setInteger("z", tile.zCoord);
 
         tagCompound.setInteger("powerStored", powerStored);
         tagCompound.setInteger("powerMax", powerMax);

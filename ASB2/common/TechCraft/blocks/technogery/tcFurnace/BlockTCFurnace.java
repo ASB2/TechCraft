@@ -14,8 +14,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTCFurnace extends TechCraftContainers {
-    
-    private TileTCFurnace tile;
 
     private Icon frontLit;
     private Icon frontUnlit;
@@ -28,10 +26,11 @@ public class BlockTCFurnace extends TechCraftContainers {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
+        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        
         if(player.isSneaking())
             return false;
-
-        super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
+        
         player.openGui(TechCraft.instance, 2, world, x, y, z);
         return true;
     }
@@ -51,38 +50,28 @@ public class BlockTCFurnace extends TechCraftContainers {
 
             case 1: {
 
-                if(tile != null) {
-                    
-                    if(tile.isBurning) {
-                        
-                        return frontLit;
-                    }
-                    
-                    else {
-                        return frontUnlit;
-                    }
+                if(metadata == 2) {
+
+                    return frontLit;
                 }
-                
+
                 else {
-                    
                     return frontUnlit;
                 }
             }
-
             default: return this.side;
-        }
-
+        }        
     }
 
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random prng)
     {
-        if(tile != null && tile.isBurning) {
+        if(world.getBlockMetadata(x, y, z) == 2) {
 
             double yMod = (prng.nextDouble());            
-            
+
             yMod += 1;
-            
+
             world.spawnParticle("smoke", x + .5, y + yMod, z + .5, 0, 0, 0);
             world.spawnParticle("flame", x + .5, y + yMod, z + .5, 0, 0, 0);
         }
@@ -90,8 +79,7 @@ public class BlockTCFurnace extends TechCraftContainers {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        tile = new TileTCFurnace();
-        return tile;
+        
+        return new TileTCFurnace();
     }
-
 }

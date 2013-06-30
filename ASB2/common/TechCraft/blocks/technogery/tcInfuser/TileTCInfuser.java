@@ -16,7 +16,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
 
     int powerStored;
     int powerMax = 100;
-
+    
     ItemStack[] tileItemStacks;
 
     ItemStack[] craftingSlots;
@@ -142,16 +142,6 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     public String getName() {
 
         return "Energy Infuser";
-    }
-
-    public int getPowerStored(){
-
-        return powerStored;        
-    }
-
-    public int getPowerMax(){
-
-        return powerMax;
     }
 
     @Override

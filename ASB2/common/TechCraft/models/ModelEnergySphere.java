@@ -28,20 +28,18 @@ public class ModelEnergySphere extends ModelBase{
     int updown = 0;
 
     public void render(TileTCEnergySphere box, double x, double y, double z) {
-        Random rand = new Random();
-        
-        updown = (int) (rand.nextFloat() * 360);
         
         GL11.glPushMatrix();
+        Random rand = new Random();
+
+        updown = (int) (rand.nextFloat() * 360);
 
         GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f, (float)z + 0.5f);
 
         GL11.glScalef(0.5f, 0.5f, 0.5f);
 
         GL11.glRotatef(updown, updown, updown, updown);
-
         this.render();
-
         GL11.glPopMatrix();
     }
 

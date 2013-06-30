@@ -133,6 +133,4 @@ public class TileRendererItemExtractor extends TileEntitySpecialRenderer {
             }
         }
     }
-
-
 }

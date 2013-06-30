@@ -435,28 +435,6 @@ public class CraftRegistry {
         });
     }
 
-    public static void craftRunes() {
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockBasicRune,4), new Object[] {
-            "FRF",
-            "DED",
-            "FRF", 
-            'F', BlockRegistry.BlockFalseBlock, 
-            'R', Item.redstone ,
-            'E', ItemRegistry.ItemEnergyCrystalShard ,
-            'D', Item.diamond
-        });
-
-        GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemExplosionRune), new Object[] {
-            "ITI",
-            "TET",
-            "ITI",
-            'I', Item.ingotIron,
-            'T', Block.tnt,
-            'E', Item.redstone
-        });
-    }
-
     public static void craftSmelting() {
 
         GameRegistry.addSmelting(BlockRegistry.BlockZycrantianOre.blockID,
