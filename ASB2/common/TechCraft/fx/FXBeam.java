@@ -108,7 +108,7 @@ public class FXBeam extends EntityFX
 
         if (this.particleAge++ >= this.particleMaxAge)
         {
-            //setDead();
+            setDead();
         }
     }
 

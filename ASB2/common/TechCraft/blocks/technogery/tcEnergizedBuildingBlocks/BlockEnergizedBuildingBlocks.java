@@ -1,4 +1,4 @@
-package TechCraft.blocks.technogery;
+package TechCraft.blocks.technogery.tcEnergizedBuildingBlocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -7,9 +7,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftContainers;
 
-public class BlockMagiciansBuildingBlocks extends TechCraftContainers {
+public class BlockEnergizedBuildingBlocks extends TechCraftContainers {
 
-    public BlockMagiciansBuildingBlocks(int par1, Material par2Material) {
+    public BlockEnergizedBuildingBlocks(int par1, Material par2Material) {
         super(par1, par2Material);
     }
     
@@ -29,20 +29,9 @@ public class BlockMagiciansBuildingBlocks extends TechCraftContainers {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int sideHit, float hitX, float hitY, float hitZ, int metaData) {
-
-        return metaData;
-    }
-
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6){
-        super.breakBlock(world, x, y, z, par5, par6);
-
-    }
-
-    @Override
     public TileEntity createNewTileEntity(World world) {
-        // TODO Auto-generated method stub
-        return new TileMagiciansBuildingBlocks();
+	
+        return new TileEnergizedBuildingBlocks();
     }
 
 }

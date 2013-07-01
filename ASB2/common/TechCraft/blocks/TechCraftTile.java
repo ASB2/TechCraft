@@ -56,6 +56,10 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         return powerProvider;
     }
 
+    public int[] getPosition() {
+        
+        return new int[] {this.xCoord, this.yCoord, this.zCoord};
+    }
     public static EnumInterfaceType translateConduitTypeToInterfaceType(EnumContuitType cType){
 
         switch(cType){
@@ -305,26 +309,6 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     public String getName() {
         // TODO Auto-generated method stub
         return "Not Set";
-    }
-
-    @Override
-    public int[] getPosition() {
-
-        return new int[] {this.xCoord, this.yCoord, this.zCoord};
-    }
-
-    @Override
-    public boolean renderByDirection(ForgeDirection direction) {
-
-        switch(direction){
-            case DOWN: return true;
-            case EAST: return true;
-            case NORTH: return true;
-            case SOUTH: return true;
-            case UP: return true;
-            case WEST: return true;
-            default: return true;
-        }
     }
 
     @Override

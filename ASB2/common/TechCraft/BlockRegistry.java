@@ -26,7 +26,7 @@ import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.BlockItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
 import TechCraft.blocks.tcPersonalBlocks.PersonalBlockPlacer;
-import TechCraft.blocks.technogery.BlockMagiciansBuildingBlocks;
+import TechCraft.blocks.technogery.tcEnergizedBuildingBlocks.*;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
 import TechCraft.blocks.technogery.BlockTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
@@ -177,7 +177,7 @@ public class BlockRegistry {
         LanguageRegistry.addName(new ItemStack(BlockPersonalBlock, 1, 1), "Personal Stone");
         MinecraftForge.setBlockHarvestLevel(BlockPersonalBlock, "pickaxe", 2);
         
-        BlockMagiciansBuildingBlocks = new BlockMagiciansBuildingBlocks(config.getBlock("BlockEnergizedBuildingBlocks",  BlockRegistry.getNextBaseID()).getInt(),Material.rock);
+        BlockMagiciansBuildingBlocks = new BlockEnergizedBuildingBlocks(config.getBlock("BlockEnergizedBuildingBlocks",  BlockRegistry.getNextBaseID()).getInt(),Material.rock);
         BlockMagiciansBuildingBlocks.setUnlocalizedName("ASB2_BlockMagiciansBuildingBlocks");
         GameRegistry.registerBlock(BlockMagiciansBuildingBlocks, TehCraftItemBlock.class, "ASB2_BlockMagiciansBuildingBlocks");
         LanguageRegistry.addName(BlockMagiciansBuildingBlocks, "Energized Building Block");

@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.IConduitConductor;
 import TechCraft.power.IPowerMisc;
-import TechCraft.power.TransferMode;
+import TechCraft.power.State;
 
 public class UtilPower {
 
@@ -32,7 +32,7 @@ public class UtilPower {
 
                         if(((IPowerMisc)tilesAround[i]).getPowerProvider() != null) {
 
-                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().getTransferMode() == TransferMode.SOURCE) {
+                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().getCurrentState() == State.SOURCE) {
 
                                 return tile;
                             }
@@ -67,7 +67,7 @@ public class UtilPower {
 
                         if(((IPowerMisc)tilesAround[i]).getPowerProvider() != null) {
 
-                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().getTransferMode() == TransferMode.SINK) {
+                            if(((IPowerMisc)tilesAround[i]).getPowerProvider().getCurrentState() == State.SINK) {
 
                                 return tile;
                             }

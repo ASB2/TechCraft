@@ -6,9 +6,9 @@ import net.minecraftforge.common.MinecraftForge;
 import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.TilePersonalBlock;
-import TechCraft.blocks.technogery.TileMagiciansBuildingBlocks;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
+import TechCraft.blocks.technogery.tcEnergizedBuildingBlocks.TileEnergizedBuildingBlocks;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
@@ -40,7 +40,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -110,7 +109,7 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileTCEnergySphere.class, "TileTCEnergySphere");
 
-        GameRegistry.registerTileEntity(TileMagiciansBuildingBlocks.class, "TileMagiciansBuildingBlocks");
+        GameRegistry.registerTileEntity(TileEnergizedBuildingBlocks.class, "TileEnergizedBuildingBlocks");
 
         GameRegistry.registerTileEntity(TileTestBlock.class, "TileTestBlock");
 

@@ -195,12 +195,6 @@ public class TileItemExtractor extends TechCraftTile implements IInventory {
     }
 
     @Override
-    public boolean renderByDirection(ForgeDirection direction) {
-
-        return true;
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
 

@@ -9,6 +9,8 @@ import TechCraft.blocks.TechCraftTile;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergySphere;
 import TechCraft.models.ModelFlat;
+import TechCraft.power.IPowerMisc;
+import TechCraft.utils.UtilDirection;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRenderer{
@@ -25,9 +27,25 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
 
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLACK);
             modelSphere.render((TileTCEnergySphere)tileEntity, x, y, z);
-            
-            renderByOrientation(x, y, z, tileEntity.getBlockMetadata());
-            modelFlat.renderAll();
+
+            int coords[] = UtilDirection.translateDirectionToCoords(((TechCraftTile) tileEntity).getOrientation(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+            TileEntity tile = tileEntity.worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
+
+            if(tileEntity.getBlockMetadata() != 1) {
+                
+                if(tile != null && tile instanceof IPowerMisc) {
+
+                    if(((IPowerMisc)tile).getPowerProvider() != null) {
+
+                        renderByOrientation(x, y, z, tileEntity.getBlockMetadata());
+                        modelFlat.renderAll();
+                    }
+                }
+            }
+            else {
+                renderByOrientation(x, y, z, tileEntity.getBlockMetadata());
+                modelFlat.renderAll();
+            }
 
             GL11.glPopMatrix();
         }

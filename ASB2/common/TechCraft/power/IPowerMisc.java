@@ -17,16 +17,6 @@ public interface IPowerMisc {
     String getName();
 
     /**
-     * Get the position of the block
-     */
-    int[] getPosition();
-
-    /**
-     * Should the block render and be powered from this direction
-     */
-    boolean renderByDirection(ForgeDirection direction);
-
-    /**
      * Used for markings. Does NOT refer to the texture color of the block
      */
     EnumColor getColorEnum();
@@ -36,6 +26,7 @@ public interface IPowerMisc {
      */
     void setColor(EnumColor color);
     
+    int[] getPosition();
     /**
      * Returns power provider class of the tile
      */

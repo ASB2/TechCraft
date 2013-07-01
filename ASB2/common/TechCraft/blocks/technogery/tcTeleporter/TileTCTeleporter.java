@@ -1,8 +1,5 @@
 package TechCraft.blocks.technogery.tcTeleporter;
 
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,17 +10,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.fx.FXBeam;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
 import TechCraft.power.TCPowerProvider;
-import TechCraft.vector.Vector3;
 
 public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInventory {
-
-    int powerStored;
-    int powerMax = 1000;
 
     int powerForProcess = 50;
 
@@ -38,7 +30,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
     double z;
     int dimentionID = 0;
 
-    FXBeam beam;
+    
     
     public TileTCTeleporter() {        
 
@@ -77,15 +69,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
                     coordsSet = true;
                 }
             }
-
-        if(teleporterSet) {
-
-                Random rand  = new Random();
-                int color  = rand.nextInt();
-                
-                beam = new FXBeam(worldObj, new Vector3(this.xCoord + .5, this.yCoord +.5, this.zCoord +.5), new Vector3(x, y, z), color, color, color, 20, 20F);
-                Minecraft.getMinecraft().effectRenderer.addEffect(beam);
-            }
     }
 
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
@@ -122,18 +105,9 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
         }
     }
 
-    public void setPowerStored(int power) {
-
-        if(power >= 0) {
-
-            this.powerStored = power;       
-        }
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
-        powerStored = nbtTagCompound.getInteger("powerStored");
 
         NBTTagList nbttaglist = nbtTagCompound.getTagList("Items");
         tileItemStacks = new ItemStack[getSizeInventory()];
@@ -153,8 +127,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-
-        nbtTagCompound.setInteger("powerStored", powerStored);
 
         NBTTagList nbttaglist = new NBTTagList();
 

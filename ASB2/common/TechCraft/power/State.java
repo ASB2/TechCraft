@@ -1,9 +1,8 @@
 package TechCraft.power;
 
-public enum TransferMode {
-    
+public enum State {
+
     SINK,
     SOURCE,
     OTHER
-    
 }

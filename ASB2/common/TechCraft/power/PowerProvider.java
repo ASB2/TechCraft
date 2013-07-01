@@ -11,9 +11,13 @@ import TechCraft.utils.UtilPower;
 public abstract class PowerProvider {
 
     NBTTagCompound ntbTag = new NBTTagCompound();
-    TransferMode transferMode;
-    PowerClass powerClass;
+    
+    protected State currentState;
+    protected PowerClass powerClass;
 
+    int x;
+    int y;
+    int z;
     TileEntity tile;
 
     protected int powerStored = 0;
@@ -57,11 +61,11 @@ public abstract class PowerProvider {
 
                     if(tileToAffectCasted.getPowerProvider() != null) {
 
-                        switch(this.getTransferMode()) {
+                        switch(this.getCurrentState()) {
 
                             case SINK: {
 
-                                if(tileToAffectCasted.getPowerProvider().getTransferMode() == TransferMode.SOURCE) {
+                                if(tileToAffectCasted.getPowerProvider().getCurrentState() == State.SOURCE) {
 
                                     if(UtilPower.transferPower(tileToAffectCasted, (IPowerMisc)tile))
                                         Message.sendToClient("Im a power sink");
@@ -71,7 +75,7 @@ public abstract class PowerProvider {
 
                             case SOURCE: {
 
-                                if(tileToAffectCasted.getPowerProvider().getTransferMode() == TransferMode.SINK) {
+                                if(tileToAffectCasted.getPowerProvider().getCurrentState() == State.SINK) {
 
                                     if(UtilPower.transferPower((IPowerMisc)tile, tileToAffectCasted))
                                         Message.sendToClient("Im a power source");
@@ -110,26 +114,41 @@ public abstract class PowerProvider {
         return this.powerClass;
     }
 
-    public TransferMode getTransferMode() {
+    public State getCurrentState() {
 
-        if(transferMode == null) {
+        if(currentState == null) {
 
             if(this.outputtingPower()) {
 
-                transferMode = TransferMode.SOURCE;
+                currentState = State.SOURCE;
             }
 
             else if(this.requestingPower()) {
 
-                transferMode = TransferMode.SINK;
+                currentState = State.SINK;
             }
 
             else {
 
-                transferMode = TransferMode.OTHER;
+                currentState = State.OTHER;
             }
         }
-        return transferMode;
+        
+        if(this.outputtingPower()) {
+
+            currentState = State.SOURCE;
+        }
+
+        else if(this.requestingPower()) {
+
+            currentState = State.SINK;
+        }
+
+        else {
+
+            currentState = State.OTHER;
+        }
+        return currentState;
     }
 
     public boolean gainPower(int PowerGained, ForgeDirection direction) {
