@@ -7,9 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
@@ -54,10 +51,12 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
             }
 
-            if (this.isBurning && this.canSmelt() && this.getPowerProvider().canUsePower(powerForProcess)) {            
+            if(this.isBurning && this.canSmelt() && this.getPowerProvider().canUsePower(powerForProcess)) {            
 
-                this.smeltItem();    
-                this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN);
+                if( this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN)) {
+                    this.smeltItem();    
+                }
+                
             }
         }
     }
@@ -87,7 +86,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
     }
 
     private boolean canSmelt() {
-        
+
         if (this.tileItemStacks[0] == null) {
 
             return false;
@@ -101,20 +100,6 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
             int result = tileItemStacks[1].stackSize + itemstack.stackSize;
             return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
         }
-    }
-
-    @Override
-    public Packet getDescriptionPacket() {
-
-        NBTTagCompound ntbCompound = new NBTTagCompound();
-        this.writeToNBT(ntbCompound);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 2, ntbCompound);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager netManager, Packet132TileEntityData packet) {
-
-        readFromNBT(packet.customParam1);
     }
 
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){

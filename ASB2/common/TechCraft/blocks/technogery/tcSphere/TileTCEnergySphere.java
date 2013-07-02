@@ -1,8 +1,11 @@
 package TechCraft.blocks.technogery.tcSphere;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.fx.FXBeam;
 import TechCraft.power.IPowerMisc;
@@ -29,32 +32,32 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
         tile = findConductor(ForgeDirection.DOWN);
         if(tile != null) {
-            renderBeam(tile);
+            movePower(tile);
         }
 
         tile = findConductor(ForgeDirection.UP);
         if(tile != null) {
-            renderBeam(tile);
+            movePower(tile);
         }
 
         tile = findConductor(ForgeDirection.NORTH);
         if(tile != null) {
-            renderBeam(tile);
+            movePower(tile);
         }
 
         tile = findConductor(ForgeDirection.SOUTH);
         if(tile != null) {
-            renderBeam(tile);
+            movePower(tile);
         }
 
         tile = findConductor(ForgeDirection.EAST);
         if(tile != null) {
-            renderBeam(tile);
+            movePower(tile);
         }
 
         tile = findConductor(ForgeDirection.WEST);
         if(tile != null) {
-            renderBeam(tile);
+            movePower(tile);
         }
 
         if(getBlockMetadata() != 1) {
@@ -67,18 +70,13 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
             }
         }
     }
-
-    public void renderBeam(IPowerMisc tile) {
+    
+    public void movePower(IPowerMisc tile) {
 
         if(tile.getPowerProvider() != null) {
 
-            int coords[] = tile.getPosition();
-
-            int renderTime = 10;
-
-            beam = new FXBeam(worldObj, new Vector3(this.xCoord + .5, this.yCoord + .5, this.zCoord + .5), new Vector3(coords[0] + .5, coords[1] + .5, coords[2] + .5), 1, 1, 1, renderTime, 20F);
-            Minecraft.getMinecraft().effectRenderer.addEffect(beam);
-
+            TechCraft.instance.proxy.renderBeam(this, tile);
+            
             if(this.getPowerProvider().getCurrentState() == State.OTHER) {
 
                 if(tile.getPowerProvider().getCurrentState() == State.OTHER) {

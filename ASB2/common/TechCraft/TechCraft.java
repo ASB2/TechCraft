@@ -56,7 +56,8 @@ public class TechCraft {
     @SidedProxy(clientSide="TechCraft.ClientProxy", serverSide="TechCraft.CommonProxy")
 
     public static CommonProxy proxy;
-
+    public static ClientProxy clientProxy;
+    
     public static CreativeTabs tabTCBlocks = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Blocks", "TechCraft Blocks");
     public static CreativeTabs tabTCItems = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Items", "TechCraft Blocks");
     

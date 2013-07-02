@@ -20,12 +20,13 @@ public class GuiTCFurnace extends GuiContainer {
 
     public GuiTCFurnace(InventoryPlayer inventory,TileTCFurnace tileEntity) {        
         super(new ContainerTCFurnace(inventory, tileEntity));
-        this.tileEntity=tileEntity;
+        
+        this.tileEntity = tileEntity;
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y){
-        //final String invTitle = "TC Furnace";
-        //fontRenderer.drawString(invTitle, xSize / 2 - fontRenderer.getStringWidth(invTitle) / 2, 6, 4210752);
+        final String invTitle = "TC Furnace";
+        fontRenderer.drawString(invTitle, xSize / 2 - fontRenderer.getStringWidth(invTitle) / 2, 6, 4210752);
     }
 
     @Override

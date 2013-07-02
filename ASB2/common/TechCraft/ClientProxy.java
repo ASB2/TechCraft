@@ -1,5 +1,6 @@
 package TechCraft;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -33,8 +34,11 @@ import TechCraft.blocks.technogery.tcTeleporter.GuiTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.GuiWirelessEnergyManager;
 import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
+import TechCraft.fx.FXBeam;
 import TechCraft.items.gui.GuiEnchancedDestructionCatalyst;
 import TechCraft.keybindings.TCKeyBindingM;
+import TechCraft.power.IPowerMisc;
+import TechCraft.vector.Vector3;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -64,6 +68,15 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCInfuser.blockID, (IItemRenderer)new ItemRendererInfuser()); 
     }
 
+    public void renderBeam(TileEntity source, IPowerMisc tile) {
+        FXBeam beam;
+
+        int coords[] = tile.getPosition();
+        int renderTime = 10;
+
+        beam = new FXBeam(source.worldObj, new Vector3(source.xCoord + .5, source.yCoord + .5, source.zCoord + .5), new Vector3(coords[0] + .5, coords[1] + .5, coords[2] + .5), 1, 1, 1, renderTime, 20F);
+        Minecraft.getMinecraft().effectRenderer.addEffect(beam);        
+    }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z){
