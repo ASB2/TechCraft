@@ -4,14 +4,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import TechCraft.Message;
 import TechCraft.utils.UtilDirection;
 import TechCraft.utils.UtilPower;
 
 public abstract class PowerProvider {
 
     NBTTagCompound ntbTag = new NBTTagCompound();
-    
+
     protected State currentState;
     protected PowerClass powerClass;
 
@@ -67,8 +66,7 @@ public abstract class PowerProvider {
 
                                 if(tileToAffectCasted.getPowerProvider().getCurrentState() == State.SOURCE) {
 
-                                    if(UtilPower.transferPower(tileToAffectCasted, (IPowerMisc)tile))
-                                        Message.sendToClient("Im a power sink");
+                                    UtilPower.transferPower(tileToAffectCasted, (IPowerMisc)tile);
                                 }
                             }
                             break;
@@ -77,8 +75,7 @@ public abstract class PowerProvider {
 
                                 if(tileToAffectCasted.getPowerProvider().getCurrentState() == State.SINK) {
 
-                                    if(UtilPower.transferPower((IPowerMisc)tile, tileToAffectCasted))
-                                        Message.sendToClient("Im a power source");
+                                    UtilPower.transferPower((IPowerMisc)tile, tileToAffectCasted);
                                 }
                             }
                             break;
@@ -133,7 +130,7 @@ public abstract class PowerProvider {
                 currentState = State.OTHER;
             }
         }
-        
+
         if(this.outputtingPower()) {
 
             currentState = State.SOURCE;

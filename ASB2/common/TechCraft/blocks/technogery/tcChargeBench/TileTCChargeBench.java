@@ -10,6 +10,7 @@ import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerItems;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
+import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInventory {
@@ -22,7 +23,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
 
     public TileTCChargeBench() {
 
-        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
         tileItemStacks = new ItemStack[6];
     }
 

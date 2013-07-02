@@ -123,10 +123,10 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
                     if(tile != null && tile != this) {
 
-                        if(tile instanceof IPowerMisc) {
+                        if(tile instanceof IPowerMisc && ((IPowerMisc)tile).getPowerProvider() != null && tile != this) {
 
                             return (IPowerMisc)tile;
-                        }
+                        }  
                     }
                 }
 
@@ -136,10 +136,10 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
                     if(tile != null && tile != this) {
 
-                        if(tile instanceof IPowerMisc) {
+                        if(tile instanceof IPowerMisc && ((IPowerMisc)tile).getPowerProvider() != null && tile != this) {
 
                             return (IPowerMisc)tile;
-                        }
+                        }  
                     }
                 }
             }
@@ -152,10 +152,10 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
                     if(tile != null && tile != this) {
 
-                        if(tile instanceof IPowerMisc) {
+                        if(tile instanceof IPowerMisc && ((IPowerMisc)tile).getPowerProvider() != null && tile != this) {
 
                             return (IPowerMisc)tile;
-                        }
+                        }  
                     }
                 }
 
@@ -165,10 +165,10 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
                     if(tile != null && tile != this) {
 
-                        if(tile instanceof IPowerMisc) {
+                        if(tile instanceof IPowerMisc && ((IPowerMisc)tile).getPowerProvider() != null && tile != this) {
 
                             return (IPowerMisc)tile;
-                        }
+                        }  
                     }
                 }
             }
@@ -181,7 +181,7 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
                     if(tile != null) {
 
-                        if(tile instanceof IPowerMisc && tile != this) {
+                        if(tile instanceof IPowerMisc && ((IPowerMisc)tile).getPowerProvider() != null && tile != this) {
 
                             return (IPowerMisc)tile;
                         }   
@@ -194,7 +194,7 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
                     if(tile != null) {
 
-                        if(tile instanceof IPowerMisc && tile != this) {
+                        if(tile instanceof IPowerMisc && ((IPowerMisc)tile).getPowerProvider() != null && tile != this) {
 
                             return (IPowerMisc)tile;
                         }   

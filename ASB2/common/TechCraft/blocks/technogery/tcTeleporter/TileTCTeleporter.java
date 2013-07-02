@@ -13,6 +13,7 @@ import TechCraft.blocks.TechCraftTile;
 import TechCraft.items.ItemTeleporter;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
+import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 
 public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInventory {
@@ -34,7 +35,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
     
     public TileTCTeleporter() {        
 
-        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
         tileItemStacks = new ItemStack[1];
     }
 

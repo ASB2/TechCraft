@@ -14,6 +14,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
+import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 
 public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedInventory, IPowerMisc {
@@ -26,7 +27,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
     public TileTCFurnace() {
 
-        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
         tileItemStacks = new ItemStack[2];
     }
 

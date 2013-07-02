@@ -9,6 +9,7 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
+import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 import TechCraft.utils.UtilInventory;
 
@@ -23,7 +24,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
 
     public TileTCInfuser() {
         
-        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
         tileItemStacks = new ItemStack[11];
     }
 

@@ -11,13 +11,12 @@ import net.minecraftforge.common.ForgeDirection;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
+import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 import TechCraft.utils.UtilPower;
 
 public class TileGenorator extends TechCraftTile implements IInventory, ISidedInventory, IPowerMisc {
 
-    private int powerStored = 0;
-    private int powerMax = 1000;
     private int currentFuelID = 0;
     private int fuelBurnTime = 0;
 
@@ -27,7 +26,7 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
     public TileGenorator() {
 
-        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SOURCE);
         tileItemStacks = new ItemStack[10];
     }
 
@@ -35,10 +34,12 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
     public void updateEntity() {
 
+        ticks++;
+        moveSlots();
+        
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-            ticks++;        
 
-            if(!(powerStored == powerMax)) {
+            if(!(this.getPowerProvider().getPowerStored() == this.getPowerProvider().getPowerMax())) {
 
                 if(fuelBurnTime > 0) {
 
@@ -47,10 +48,16 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
                     fuelBurnTime--;
 
+                    if(ticks >= UtilPower.TICKSTOPOWER) {
+
+                        ticks = 0;
+                        this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);
+                    }
+                    
                     if(!(this.getBlockMetadata() == 2)) {
 
                         worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
-                    }
+                    }                    
                 }
 
                 if(fuelBurnTime == 0) {            
@@ -69,18 +76,7 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
                         decrStackSize(9,1);
                     }
                 }
-
-
-                if(fuelBurnTime > 0) {
-
-                    if(ticks >= UtilPower.TICKSTOPOWER) {
-
-                        ticks = 0;
-                        this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);
-                    }
-                }
             }
-            moveSlots();
         }
     }
 
@@ -127,12 +123,11 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
     public String getName(){
 
-        return "TechCraft Genorator";
+        return "TC Genorator";
     }
 
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
-        powerStored = par1NBTTagCompound.getInteger("powerStored");
         currentFuelID = par1NBTTagCompound.getInteger("currentFuelID");
 
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
@@ -154,7 +149,6 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
     public void writeToNBT(NBTTagCompound par1NBTTagCompound){
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("powerStored", powerStored);
         par1NBTTagCompound.setInteger("currentFuelID", currentFuelID);
         NBTTagList nbttaglist = new NBTTagList();
 

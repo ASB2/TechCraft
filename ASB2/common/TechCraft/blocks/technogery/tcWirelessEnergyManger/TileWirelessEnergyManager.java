@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.PowerClass;
+import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 
 public class TileWirelessEnergyManager extends TechCraftTile implements IInventory {
@@ -13,7 +14,7 @@ public class TileWirelessEnergyManager extends TechCraftTile implements IInvento
     
     public TileWirelessEnergyManager() {
         
-        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW);
+        this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
         tileItemStacks = new ItemStack[8];
     }
     
