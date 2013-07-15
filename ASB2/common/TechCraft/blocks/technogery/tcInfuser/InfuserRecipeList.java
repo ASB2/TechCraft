@@ -8,6 +8,7 @@ import TechCraft.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import TechCraft.*;
 
 public class InfuserRecipeList {
 
@@ -52,6 +53,12 @@ public class InfuserRecipeList {
             new ItemStack(Item.diamond),new ItemStack(Item.emerald),new ItemStack(Item.emerald),
             null,new ItemStack(Item.stick),new ItemStack(Item.emerald),
             new ItemStack(Item.stick), null, new ItemStack(Item.diamond)},
+            standardPowerCost));
+        
+        this.addRecipe(new InfuserRecipieBase(new ItemStack(BlockRegistry.BlockTCEnergySphere,4), new ItemStack[] {
+            new ItemStack(ItemRegistry.ItemEnergyCrystalShard),new ItemStack(Block.glass),new ItemStack(ItemRegistry.ItemEnergyCrystalShard),
+            new ItemStack(Block.glass),new ItemStack(Item.diamond),new ItemStack(Block.glass),
+            new ItemStack(ItemRegistry.ItemEnergyCrystalShard), new ItemStack(Block.glass), new ItemStack(ItemRegistry.ItemEnergyCrystalShard)},
             standardPowerCost));
     }
 

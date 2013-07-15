@@ -135,17 +135,15 @@ public class TileItemExtractor extends TechCraftTile implements IInventory {
     }
 
     @Override
-    public void setInventorySlotContents(int slot, ItemStack stack) {
-        tileItemStack[slot] = stack;
-        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-            stack.stackSize = getInventoryStackLimit();
-        }               
+    public void setInventorySlotContents(int slot, ItemStack itemStack) {
+
+        tileItemStack[slot] = itemStack;
     }
 
     @Override
     public String getInvName() {
 
-        return "Basic Item Interface";
+        return "Item Extractor";
     }
 
     @Override

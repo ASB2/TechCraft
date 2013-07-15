@@ -328,20 +328,20 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
         super.readFromNBT(tag);
 
         if(color == EnumColor.NONE || color == null)
-            color = TechCraftTile.translateNumberToColor(tag.getInteger("Color"));
+            color = TechCraftTile.translateNumberToColor(tag.getInteger("color"));
 
         if(this.getPowerProvider() != null)
-            this.getPowerProvider().setPower(tag.getInteger("power"));
+            this.getPowerProvider().setPower(tag.getInteger("powerStored"));
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag){
         super.writeToNBT(tag); 
 
-        if(color != EnumColor.NONE)
-            tag.setInteger("Color", TechCraftTile.translateColorToNumber(this.getColorEnum()));
+        if(this.getColorEnum() != EnumColor.NONE)
+            tag.setInteger("color", TechCraftTile.translateColorToNumber(this.getColorEnum()));
 
         if(this.getPowerProvider() != null)
-            tag.setInteger("power", this.getPowerProvider().getPowerStored());
+            tag.setInteger("powerStored", this.getPowerProvider().getPowerStored());
     }
 }

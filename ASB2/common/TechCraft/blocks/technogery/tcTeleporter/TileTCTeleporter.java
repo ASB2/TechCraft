@@ -29,9 +29,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
     double x;
     double y;
     double z;
-    int dimentionID = 0;
-
-    
+    int dimentionID = 0;    
     
     public TileTCTeleporter() {        
 
@@ -198,10 +196,6 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
         tileItemStacks[slot] = itemStack;
-
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-            itemStack.stackSize = getInventoryStackLimit();
-        }
     }
 
     @Override

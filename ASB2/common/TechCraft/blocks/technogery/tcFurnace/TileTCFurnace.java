@@ -56,7 +56,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
                 if( this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN)) {
                     this.smeltItem();    
                 }
-                
+
             }
         }
     }
@@ -157,13 +157,9 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
     }
 
     @Override
-    public void setInventorySlotContents(int slot, ItemStack stack) {
+    public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
-        tileItemStacks[slot] = stack;
-        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-
-            stack.stackSize = getInventoryStackLimit();
-        }               
+        tileItemStacks[slot] = itemStack;
     }
 
     @Override
@@ -215,7 +211,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
     {
         ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(itemStack);
 
-        if(slot != 1) {
+        if(slot == 0) {
 
             if(itemstack != null) {
 
@@ -266,23 +262,20 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
     }
     @Override
-    public boolean isStackValidForSlot(int slot, ItemStack itemStack)
-    {
-        ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(itemStack);
+    public boolean isStackValidForSlot(int slot, ItemStack itemStack) {
 
-        if(this.tileItemStacks[0] == null || ((this.tileItemStacks[0].isItemEqual(itemStack) && this.tileItemStacks[0].stackSize + itemStack.stackSize <= this.getInventoryStackLimit()))) {
-
-            if(itemstack != null) {
+        if(slot == 0) {
+            
+            if(tileItemStacks[0] == null && itemStack != null) {
 
                 return true;
-            }     
+            }
+
+            else if(this.tileItemStacks[0].equals(itemStack)) {
+
+                return true;
+            }
         }
-
-        else if(this.tileItemStacks[0].equals(itemStack)) {
-
-            return true;
-        }
-
         return false;
     }
 }

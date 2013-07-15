@@ -17,8 +17,6 @@ import TechCraft.blocks.technogery.tcInfuser.ContainerTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcTeleporter.ContainerTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
-import TechCraft.blocks.technogery.tcWirelessEnergyManger.ContainerWirelessEnergyManager;
-import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.items.gui.ContainerEnchancedDestructionCatalyst;
 import TechCraft.power.IPowerMisc;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -40,10 +38,10 @@ public class CommonProxy implements IGuiHandler {
         return 0;
     }
 
-    public void renderBeam(TileEntity source, IPowerMisc tile) {
-        
+    public void renderBeam(TileEntity source, IPowerMisc tile, int renderTime) {
+
     }
-    
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
 
@@ -62,7 +60,6 @@ public class CommonProxy implements IGuiHandler {
                     case 6:return new ContainerTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
                     case 10:return new ContainerTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);
                     case 11:return new ContainerItemExtractor(player.inventory, (TileItemExtractor)tileEntity);
-                    case 12:return new ContainerWirelessEnergyManager(player.inventory, (TileWirelessEnergyManager)tileEntity);
                 }
             }
         }

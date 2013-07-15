@@ -5,10 +5,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import TechCraft.power.IPowerMisc;
+import TechCraft.utils.IBlockCycle;
 import TechCraft.utils.UtilDirection;
+import TechCraft.utils.UtilPlayers;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import TechCraft.utils.*;
 
 public class ItemTestItem extends TechCraftItems implements IBlockCycle {
 
@@ -27,18 +28,14 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
 
     int length = 5;
 
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityplayer)
     {
-        if(player.isSneaking()){
-
-            if(world.isRemote)
-                length = length - 1;
-
-            if(!world.isRemote)
-                player.sendChatToPlayer("Length = " + length);
-
-            return itemStack;
+        if(!entityplayer.isSneaking()){
+            double[] coords = UtilPlayers.getPlayerCursorCoords(world, entityplayer);
+            entityplayer.setPosition(coords[0], coords[1] + 1, coords[2]);
         }
+
+
         return itemStack;
     }
 
@@ -47,7 +44,7 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
         int power = 10;
         boolean addPower = false;
 
-        UtilBlock.cycle3DBlock(player, world, x, y, z, UtilDirection.translateNumberToDirection(side), 20, 100, this);
+        //UtilBlock.cycle3DBlock(player, world, x, y, z, UtilDirection.translateNumberToDirection(side), 20, 100, this);
 
         if(world.getBlockTileEntity(x,y,z) instanceof IPowerMisc){
 
@@ -75,6 +72,6 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
 
         if(world.blockExists(x, y, z)) 
             world.setBlockToAir(x, y, z); return true;
-        
+
     }
 }

@@ -15,15 +15,12 @@ import TechCraft.utils.UtilInventory;
 
 public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInventory {
 
-    int powerStored;
-    int powerMax = 100;
-    
     ItemStack[] tileItemStacks;
 
     ItemStack[] craftingSlots;
 
     public TileTCInfuser() {
-        
+
         this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
         tileItemStacks = new ItemStack[11];
     }
@@ -31,7 +28,11 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     public void updateEntity() {
         ticks++;
 
-        this.craftItem();
+        if(ticks >= 200) {
+            
+            ticks = 0;
+            this.craftItem();
+        }
     }
 
     public void craftItem() {
@@ -40,34 +41,37 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
 
             ItemStack outPut = InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getOutput();
             int cost = InfuserRecipeList.getInstance().getRecipeClass(getCraftingSlots()).getPowerCost();
-                    
-                    if(this.getPowerProvider().usePower(cost, ForgeDirection.UNKNOWN)) {
 
-                        if(this.getOutputSlot() == null) {
+            if(this.getPowerProvider().usePower(cost, ForgeDirection.UNKNOWN)) {
+
+                if(this.getOutputSlot() == null) {
+
+                    if(this.decreaseCraftingSlots()) {
+
+                        this.setInventorySlotContents(10, outPut);
+                        return;
+                    }
+                }
+                
+                else if(this.getOutputSlot().stackSize < this.getInventoryStackLimit()) {
+
+                    ItemStack temp = tileItemStacks[10].copy();
+
+                    if(temp.isItemEqual(outPut)) {
+
+                        temp.stackSize =+ outPut.stackSize;
+
+                        if(temp.stackSize <= this.getInventoryStackLimit()) {
 
                             if(this.decreaseCraftingSlots()) {
 
-                                this.setInventorySlotContents(10, outPut);
+                                this.setInventorySlotContents(10, temp);
                                 return;
                             }
                         }
-
-                        if(this.getOutputSlot().stackSize < this.getInventoryStackLimit()) {
-
-                            if(this.decreaseCraftingSlots()) {
-
-                                ItemStack temp = tileItemStacks[10];
-                                
-                                temp.stackSize = temp.stackSize + outPut.stackSize;
-
-                                if(temp.stackSize <= this.getInventoryStackLimit()) {
-
-                                    this.setInventorySlotContents(10, temp);
-                                    return;
-                                }
-                            }
-                        }
                     }
+                }
+            }
         }
     }
 
@@ -100,7 +104,6 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
-        powerStored = nbtTagCompound.getInteger("powerStored");
 
         NBTTagList nbttaglist = nbtTagCompound.getTagList("Items");
         tileItemStacks = new ItemStack[getSizeInventory()];
@@ -120,8 +123,6 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-
-        nbtTagCompound.setInteger("powerStored", powerStored);
 
         NBTTagList nbttaglist = new NBTTagList();
 
@@ -180,22 +181,13 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
 
-        ItemStack itemStack = getStackInSlot(slot);
-
-        if (itemStack != null) {
-            setInventorySlotContents(slot, null);
-        }
-        return itemStack;
+        return tileItemStacks[slot];
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
         tileItemStacks[slot] = itemStack;
-
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-            itemStack.stackSize = getInventoryStackLimit();
-        }
     }
 
     @Override
@@ -235,7 +227,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return true;
     }

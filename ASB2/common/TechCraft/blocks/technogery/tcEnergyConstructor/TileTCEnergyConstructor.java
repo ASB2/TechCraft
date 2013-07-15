@@ -16,9 +16,6 @@ import TechCraft.utils.UtilPower;
 
 public class TileTCEnergyConstructor extends TechCraftTile implements IPowerMisc, IInventory{
 
-    int powerStored;
-    int powerMax = 1000;
-
     boolean targetFuelSet = false;
     ItemStack targetFuel;
 
@@ -142,8 +139,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerMisc
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
 
-        this.powerStored = nbtTagCompound.getInteger("powerStored");
-
         NBTTagList nbttaglist = nbtTagCompound.getTagList("Items");
         tileItemStacks = new ItemStack[getSizeInventory()];
 
@@ -162,8 +157,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerMisc
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-
-        nbtTagCompound.setInteger("powerStored", powerStored);
 
         NBTTagList nbttaglist = new NBTTagList();
 
@@ -228,10 +221,6 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerMisc
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
         tileItemStacks[slot] = itemStack;
-
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-            itemStack.stackSize = getInventoryStackLimit();
-        }
     }
 
     @Override

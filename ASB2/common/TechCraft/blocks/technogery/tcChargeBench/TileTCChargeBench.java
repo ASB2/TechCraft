@@ -14,9 +14,7 @@ import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 
 public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInventory {
-
-    int powerStored;
-    int powerMax = 1000;
+    
     int powerToMove = 1;
 
     ItemStack[] tileItemStacks;
@@ -141,7 +139,6 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {        
         super.readFromNBT(nbtTagCompound);
-        powerStored = nbtTagCompound.getInteger("powerStored");
 
         NBTTagList nbttaglist = nbtTagCompound.getTagList("Items");
         tileItemStacks = new ItemStack[getSizeInventory()];
@@ -161,8 +158,6 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-
-        nbtTagCompound.setInteger("powerStored", powerStored);
 
         NBTTagList nbttaglist = new NBTTagList();
 
@@ -227,10 +222,6 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
         tileItemStacks[slot] = itemStack;
-
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-            itemStack.stackSize = getInventoryStackLimit();
-        }
     }
 
     @Override
@@ -254,7 +245,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
@@ -270,6 +261,6 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
     @Override
     public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 }

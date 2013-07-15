@@ -32,8 +32,6 @@ import TechCraft.blocks.technogery.tcSphere.TileEntityRendererMagicEnergySphere;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.GuiTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
-import TechCraft.blocks.technogery.tcWirelessEnergyManger.GuiWirelessEnergyManager;
-import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.fx.FXBeam;
 import TechCraft.items.gui.GuiEnchancedDestructionCatalyst;
 import TechCraft.keybindings.TCKeyBindingM;
@@ -43,6 +41,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import TechCraft.blocks.technogery.tcEnergySender.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -66,13 +65,16 @@ public class ClientProxy extends CommonProxy {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCInfuser.class, new TileRendererInfuser());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCInfuser.blockID, (IItemRenderer)new ItemRendererInfuser()); 
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEnergySender.class, new TileRendererEnergySender());
+        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockEnergySender.blockID, (IItemRenderer)new ItemRendererEnergySender()); 
+
     }
 
-    public void renderBeam(TileEntity source, IPowerMisc tile) {
+    public void renderBeam(TileEntity source, IPowerMisc tile, int renderTime) {
         FXBeam beam;
 
         int coords[] = tile.getPosition();
-        int renderTime = 10;
 
         beam = new FXBeam(source.worldObj, new Vector3(source.xCoord + .5, source.yCoord + .5, source.zCoord + .5), new Vector3(coords[0] + .5, coords[1] + .5, coords[2] + .5), 1, 1, 1, renderTime, 20F);
         Minecraft.getMinecraft().effectRenderer.addEffect(beam);        
@@ -88,6 +90,7 @@ public class ClientProxy extends CommonProxy {
             if(tileEntity != null) {
 
                 switch(ID) {
+                    
                     case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
                     case 2: return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
                     case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
@@ -95,7 +98,6 @@ public class ClientProxy extends CommonProxy {
                     case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
                     case 10: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
                     case 11: return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
-                    case 12: return new GuiWirelessEnergyManager(player.inventory, (TileWirelessEnergyManager)tileEntity);  
                 }
             }
         }

@@ -19,6 +19,7 @@ public class ModelTCEnergyFocus extends ModelBase
     ModelRenderer NinthLevel;
 
     public ModelTCEnergyFocus() {
+        
         textureWidth = 128;
         textureHeight = 64;
 

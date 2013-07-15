@@ -65,11 +65,11 @@ public class BlockGenorator extends TechCraftContainers {
     }
 
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random prng) {
+    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 
         if(world.getBlockMetadata(x, y, z) == 2) {
 
-            double yMod = (prng.nextDouble());            
+            double yMod = (rand.nextDouble());            
 
             yMod += 1;
 

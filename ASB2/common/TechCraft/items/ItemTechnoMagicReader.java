@@ -23,10 +23,10 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
             IPowerMisc mTile = (IPowerMisc) world.getBlockTileEntity(x, y, z);
 
-            player.sendChatToPlayer(mTile.getName()+" has "+mTile.getPowerProvider().getPowerStored()+" out of "+mTile.getPowerProvider().getPowerMax() + " TCU Stored");
-
             if(player.isSneaking())
                 mTile.getPowerProvider().gainPower(10, UtilDirection.translateNumberToDirection(side));
+            
+            player.sendChatToPlayer(mTile.getName()+" has "+mTile.getPowerProvider().getPowerStored()+" out of "+mTile.getPowerProvider().getPowerMax() + " TCU Stored");
         }
 
         if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile){
@@ -34,8 +34,8 @@ public class ItemTechnoMagicReader extends TechCraftItems{
             TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
 
             player.sendChatToPlayer(mTile.getName()+ " is at orientation: " + UtilDirection.translateDirectionToString(mTile.getOrientation()));
-            player.sendChatToPlayer(mTile.getName()+ " has metadata: "+world.getBlockMetadata(x, y, z));
-            player.sendChatToPlayer(mTile.getName()+ " state: "+mTile.getPowerProvider().getCurrentState()); 
+            player.sendChatToPlayer(mTile.getName()+ " has metadata: " + world.getBlockMetadata(x, y, z));
+            player.sendChatToPlayer(mTile.getName()+ " State: " + mTile.getPowerProvider().getCurrentState()); 
         }    
         else {
             player.sendChatToPlayer("Block has metadata " + world.getBlockMetadata(x, y, z));
@@ -61,11 +61,12 @@ public class ItemTechnoMagicReader extends TechCraftItems{
         }    
 
         if(world.getBlockTileEntity(x,y,z) instanceof TechCraftTile) {
+
             TechCraftTile mTile = (TechCraftTile) world.getBlockTileEntity(x, y, z);
             mTile.toggleDirection();
             player.sendChatToPlayer(mTile.getName()+ " is now at orientation: " + UtilDirection.translateDirectionToString(mTile.getOrientation()));
-
         }
+
         player.sendChatToPlayer("--------");
         return true;        
 

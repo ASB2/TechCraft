@@ -12,9 +12,7 @@ public class UtilPower {
     public static int LOW_POWER = 1;
     public static int MID_POWER = 10;
     public static int HIGH_POWER = 100;
-    /**
-     * The amount of ticks under a condution to gain power a power gen block will gain power    
-     */
+    
     public static int TICKSTOPOWER = 10;
 
     public static TileEntity getNearestPowerSource(World world, TileEntity tile) {

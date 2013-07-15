@@ -15,7 +15,6 @@ import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
-import TechCraft.blocks.technogery.tcWirelessEnergyManger.TileWirelessEnergyManager;
 import TechCraft.packets.TechCraftPacketBase;
 import TechCraft.packets.TechCraftPacketHandler;
 import TechCraft.worldGen.WorldGenBlockAirCrystalOre;
@@ -40,6 +39,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import TechCraft.blocks.technogery.tcEnergySender.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -132,7 +132,7 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TilePersonalBlock.class, "TilePersonalBlock");
 
-        GameRegistry.registerTileEntity(TileWirelessEnergyManager.class, "TileWirelessEnergyManager");
+        GameRegistry.registerTileEntity(TileEnergySender.class, "TileEnergySender");
         
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 

@@ -26,19 +26,19 @@ import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.BlockItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
 import TechCraft.blocks.tcPersonalBlocks.PersonalBlockPlacer;
-import TechCraft.blocks.technogery.tcEnergizedBuildingBlocks.*;
 import TechCraft.blocks.technogery.BlockMultiBlockCore;
 import TechCraft.blocks.technogery.BlockTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
+import TechCraft.blocks.technogery.tcEnergizedBuildingBlocks.BlockEnergizedBuildingBlocks;
 import TechCraft.blocks.technogery.tcEnergyConstructor.BlockTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.BlockGenorator;
 import TechCraft.blocks.technogery.tcInfuser.BlockTCInfuser;
 import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
-import TechCraft.blocks.technogery.tcWirelessEnergyManger.BlockWirelessEnergyManager;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.blocks.technogery.tcEnergySender.*;
 
 public class BlockRegistry {
 
@@ -76,11 +76,12 @@ public class BlockRegistry {
     public static TechCraftBlocks BlockSpeedyRoad;
     
     public static TechCraftContainers BlockPersonalBlock;
-    public static TechCraftContainers BlockWirelessEnergyManager;
     
     public static TechCraftBlocks BlockCrystallineTreeSapling;
     public static TechCraftBlocks BlockCrystallineTreeLog;
     public static TechCraftBlocks BlockCrystallineTreeLeaves;
+    
+    public static TechCraftContainers BlockEnergySender;
     
     private static int id = 500;
     
@@ -236,12 +237,6 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCEnergyConstructor, TehCraftItemBlock.class, "ASB2_BlockTCEnergyConstructor");
         LanguageRegistry.addName(BlockTCEnergyConstructor, "Energy Constructor");
         MinecraftForge.setBlockHarvestLevel(BlockTCEnergyConstructor, "pickaxe", 2);
-        
-        BlockWirelessEnergyManager = new BlockWirelessEnergyManager(config.getBlock("BlockWirelessEnergyManager",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
-        BlockWirelessEnergyManager.setUnlocalizedName("ASB2_BlockWirelessEnergyManager");
-        GameRegistry.registerBlock(BlockWirelessEnergyManager, TehCraftItemBlock.class, "ASB2_BlockWirelessEnergyManager");
-        LanguageRegistry.addName(BlockWirelessEnergyManager, "Wireless Energy Manager");
-        MinecraftForge.setBlockHarvestLevel(BlockWirelessEnergyManager, "pickaxe", 2);
     
         BlockCrystallineTreeSapling = new BlockCrystallineTreeSapling(config.getBlock("BlockCrystallineTreeSapling",  BlockRegistry.getNextBaseID()).getInt(), Material.plants);
         BlockCrystallineTreeSapling.setUnlocalizedName("ASB2_BlockCrystallineTreeSapling");
@@ -259,7 +254,13 @@ public class BlockRegistry {
         BlockCrystallineTreeLeaves.setUnlocalizedName("ASB2_BlockCrystallineTreeLeaves");
         GameRegistry.registerBlock(BlockCrystallineTreeLeaves, TehCraftItemBlock.class, "ASB2_BlockCrystallineTreeLeaves");
         LanguageRegistry.addName(BlockCrystallineTreeLeaves, "Crystiline Leaves");
-        MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeLeaves, "pickaxe", 2);        
+        MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeLeaves, "pickaxe", 2);       
+        
+        BlockEnergySender = new BlockEnergySender(config.getBlock("BlockEnergySender",  BlockRegistry.getNextBaseID()).getInt(), Material.plants);
+        BlockEnergySender.setUnlocalizedName("BlockEnergySender");
+        GameRegistry.registerBlock(BlockEnergySender, TehCraftItemBlock.class, "ASB2_BlockEnergySender");
+        LanguageRegistry.addName(BlockEnergySender, "Energy Sender");
+        MinecraftForge.setBlockHarvestLevel(BlockEnergySender, "pickaxe", 2);  
     }
 
     public static int getNextBaseID() {        

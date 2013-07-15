@@ -30,21 +30,18 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
         tileItemStacks = new ItemStack[10];
     }
 
-    int ticks = 0;
-
     public void updateEntity() {
 
         ticks++;
         moveSlots();
-        
+
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
             if(!(this.getPowerProvider().getPowerStored() == this.getPowerProvider().getPowerMax())) {
 
                 if(fuelBurnTime > 0) {
 
-                    if(!isBurning)
-                        isBurning = true;
+                    isBurning = true;
 
                     fuelBurnTime--;
 
@@ -53,14 +50,12 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
                         ticks = 0;
                         this.getPowerProvider().gainPower(1, ForgeDirection.UNKNOWN);
                     }
-                    
-                    if(!(this.getBlockMetadata() == 2)) {
 
-                        worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);
-                    }                    
+                    if(!(this.getBlockMetadata() == 2)) 
+                        worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 2, 3);                 
                 }
 
-                if(fuelBurnTime == 0) {            
+                if(fuelBurnTime == 0) {        
 
                     isBurning = false;
                     currentFuelID = 0;
@@ -128,8 +123,10 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
     public void readFromNBT(NBTTagCompound par1NBTTagCompound){
         super.readFromNBT(par1NBTTagCompound);
+        
         currentFuelID = par1NBTTagCompound.getInteger("currentFuelID");
-
+        fuelBurnTime = par1NBTTagCompound.getInteger("fuelBurnTime");
+        
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
 
         tileItemStacks = new ItemStack[getSizeInventory()];
@@ -147,9 +144,12 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
 
     }
 
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound){
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
+        
         par1NBTTagCompound.setInteger("currentFuelID", currentFuelID);
+        par1NBTTagCompound.setInteger("fuelBurnTime", fuelBurnTime);
+        
         NBTTagList nbttaglist = new NBTTagList();
 
         for (int i = 0; i < tileItemStacks.length; i++)
@@ -204,11 +204,9 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
     }
 
     @Override
-    public void setInventorySlotContents(int slot, ItemStack stack) {
-        tileItemStacks[slot] = stack;
-        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-            stack.stackSize = getInventoryStackLimit();
-        }               
+    public void setInventorySlotContents(int slot, ItemStack itemStack) {
+
+        tileItemStacks[slot] = itemStack;
     }
 
     @Override
