@@ -68,6 +68,7 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
 
             if(forceRenderBeam) {
 
+                if(tile.getPowerProvider().getCurrentState() == State.SINK || tile.getPowerProvider().getCurrentState() == State.OTHER)
                 TechCraft.proxy.renderBeam(this, tile, 10);
             }
         }
