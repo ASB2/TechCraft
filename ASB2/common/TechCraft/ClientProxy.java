@@ -6,9 +6,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import TechCraft.blocks.tcConduits.tcItemConduits.ItemRendererTCItemConduit;
-import TechCraft.blocks.tcConduits.tcItemConduits.TileRendererTCItemConduit;
-import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.GuiItemExtractor;
 import TechCraft.blocks.tcItemExtractor.ItemRendererItemExtractor;
 import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
@@ -19,6 +16,9 @@ import TechCraft.blocks.technogery.tcChargeBench.GuiTCChargeBench;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergyConstructor.GuiTCEnergyConstructor;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcEnergySender.ItemRendererEnergySender;
+import TechCraft.blocks.technogery.tcEnergySender.TileEnergySender;
+import TechCraft.blocks.technogery.tcEnergySender.TileRendererEnergySender;
 import TechCraft.blocks.technogery.tcFurnace.GuiTCFurnace;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.GuiGenorator;
@@ -41,7 +41,6 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import TechCraft.blocks.technogery.tcEnergySender.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -50,10 +49,7 @@ public class ClientProxy extends CommonProxy {
 
         KeyBindingRegistry.registerKeyBinding(new TCKeyBindingM());
         TickRegistry.registerTickHandler(new TechCraftTickHandlerClient(), Side.CLIENT);
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileTCItemConduit.class, new TileRendererTCItemConduit());
-        MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCItemConduit.blockID, (IItemRenderer)new ItemRendererTCItemConduit());
-
+        
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCEnergySphere.class, new TileEntityRendererMagicEnergySphere());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCEnergySphere.blockID, (IItemRenderer)new ItemRendererMagicEnergySphere());
 

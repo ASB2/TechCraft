@@ -7,9 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TechCraft.items.NBTCompoundHelper;
 import TechCraft.items.TechCraftItems;
 import TechCraft.power.IPowerItems;
+import TechCraft.utils.UtilItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -50,7 +50,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     @Override
     public int getPowerStored(ItemStack item) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         if(nbtTagCompound != null)
 
             return nbtTagCompound.getInteger("powerStored");
@@ -92,7 +92,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     private void setPowerStored(ItemStack item,int power) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setInteger("powerStored", power);
 
         this.powerStored = power;

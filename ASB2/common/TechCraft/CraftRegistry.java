@@ -38,16 +38,7 @@ public class CraftRegistry {
             'R', Item.redstone,
             'Z', ItemRegistry.ItemZycrantianIngot,
             'P', Item.enderPearl
-        });
-
-        GameRegistry.addRecipe(new ItemStack(BlockRegistry.BlockTCItemConduit), new Object[] {
-            "GAG",
-            "GZG",
-            "GAG",
-            'G', Block.glass,
-            'Z', ItemRegistry.ItemZycrantianIngot,
-            'A', ItemRegistry.ItemAirCrystalShard
-        });        
+        });       
 
         GameRegistry.addRecipe(new ItemStack(ItemRegistry.ItemTechnoMagicReader), new Object[] {
             "RZC",

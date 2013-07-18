@@ -57,7 +57,7 @@ public class GuiEnchancedDestructionCatalyst extends GuiContainer {
 
             ItemEnhancedDestructionCatalyst item = (ItemEnhancedDestructionCatalyst)player.inventory.getCurrentItem().getItem();
 
-            item.setLenght(player.inventory.getCurrentItem(), item.getLength(player.inventory.getCurrentItem()) - 1);
+            item.decrementLength(player);
         }
     }
 
@@ -67,7 +67,7 @@ public class GuiEnchancedDestructionCatalyst extends GuiContainer {
 
             ItemEnhancedDestructionCatalyst item = (ItemEnhancedDestructionCatalyst)player.inventory.getCurrentItem().getItem();
 
-            item.setLenght(player.inventory.getCurrentItem(), item.getLength(player.inventory.getCurrentItem()) + 1);
+            item.incrementLength(player);
         }
     }
 

@@ -22,7 +22,6 @@ import TechCraft.blocks.TechCraftFlower;
 import TechCraft.blocks.plants.crystallineTree.BlockCrystallineTreeLeaves;
 import TechCraft.blocks.plants.crystallineTree.BlockCrystallineTreeLog;
 import TechCraft.blocks.plants.crystallineTree.BlockCrystallineTreeSapling;
-import TechCraft.blocks.tcConduits.tcItemConduits.BlockTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.BlockItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.BlockPersonalBlock;
 import TechCraft.blocks.tcPersonalBlocks.PersonalBlockPlacer;
@@ -31,6 +30,7 @@ import TechCraft.blocks.technogery.BlockTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.BlockTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergizedBuildingBlocks.BlockEnergizedBuildingBlocks;
 import TechCraft.blocks.technogery.tcEnergyConstructor.BlockTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcEnergySender.BlockEnergySender;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.BlockGenorator;
 import TechCraft.blocks.technogery.tcInfuser.BlockTCInfuser;
@@ -38,7 +38,6 @@ import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.blocks.technogery.tcEnergySender.*;
 
 public class BlockRegistry {
 
@@ -58,8 +57,6 @@ public class BlockRegistry {
 
     public static TechCraftContainers BlockTestBlock;
     public static TechCraftContainers BlockTCEnergySphere;
-    
-    public static TechCraftContainers BlockTCItemConduit;
     
     public static TechCraftContainers BlockMagiciansBuildingBlocks;
     
@@ -189,12 +186,6 @@ public class BlockRegistry {
         GameRegistry.registerBlock(BlockTCEnergySphere, TehCraftItemBlock.class, "ASB2_BlockTCEnergySphere");
         LanguageRegistry.addName(BlockTCEnergySphere, "Energy Sphere");
         MinecraftForge.setBlockHarvestLevel(BlockTCEnergySphere, "pickaxe", 2);
-
-        BlockTCItemConduit = new BlockTCItemConduit(config.getBlock("BlockTCItemConduit",  BlockRegistry.getNextBaseID()).getInt(),Material.rock);
-        BlockTCItemConduit.setUnlocalizedName("ASB2_BlockTCItemConduit");
-        GameRegistry.registerBlock(BlockTCItemConduit, TehCraftItemBlock.class, "ASB2_BlockTCItemConduitt");
-        LanguageRegistry.addName(BlockTCItemConduit, "Item Conduit");
-        MinecraftForge.setBlockHarvestLevel(BlockTCItemConduit, "pickaxe", 2);
         
         BlockGenorator = new BlockGenorator(config.getBlock("BlockGenorator",  BlockRegistry.getNextBaseID()).getInt(),Material.rock);
         BlockGenorator.setUnlocalizedName("ASB2_BlockGenorator");

@@ -4,20 +4,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.fx.FXBeam;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
 import TechCraft.power.State;
-import TechCraft.power.TCPowerProvider;
-import TechCraft.utils.IBlockCycle;
-import TechCraft.utils.UtilBlock;
 import TechCraft.utils.UtilDirection;
 import TechCraft.utils.UtilPower;
+import TechCraft.power.*;
 
-public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBlockCycle {
+public class TileEnergySender extends TechCraftTile implements IPowerMisc {
 
     int distance = 50;
     FXBeam beam;
@@ -31,11 +28,6 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
     public void updateEntity() {
 
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-
-            if(getOrientation() == ForgeDirection.DOWN) {
-
-                UtilBlock.cycle3DBlock(null, worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, 10, this);
-            }
 
             IPowerMisc tile;
             tile = UtilDirection.findConductor(UtilDirection.translateDirectionToOpposite(this.getOrientation()), worldObj, distance, xCoord, yCoord, zCoord);
@@ -71,19 +63,6 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
                 TechCraft.proxy.renderBeam(this, tile, 10);
             }
         }
-    }
-
-    @Override
-    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
-
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
-
-        if(tile != null && tile instanceof IPowerMisc) {
-
-            movePower((IPowerMisc)tile);
-            return true;
-        }
-        return false;
     }
 
     public void triggerBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z, int side ) {

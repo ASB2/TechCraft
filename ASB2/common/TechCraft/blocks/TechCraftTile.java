@@ -28,7 +28,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     public TechCraftTile() {
 
         if(color == null)
-            color = EnumColor.NONE;
+            color = EnumColor.WHITE;
 
         if(orientation == null)
             orientation = ForgeDirection.DOWN;
@@ -57,7 +57,7 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     }
 
     public int[] getPosition() {
-        
+
         return new int[] {this.xCoord, this.yCoord, this.zCoord};
     }
     public static EnumInterfaceType translateConduitTypeToInterfaceType(EnumContuitType cType){
@@ -235,44 +235,49 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
     public void toggleDirection() {
 
-        switch(getOrientation()) {
+        switch(this.getOrientation()) {
 
             case DOWN: {
 
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.UP), 3);
-                return;
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.EAST), 3);
+                break;
             }
 
             case UP: {
 
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.NORTH), 3);
-                return;
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.DOWN), 3);
+                break;  
             }
 
             case NORTH: {
 
-                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.SOUTH), 3);
-                return;
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.UP), 3);
+                break;
             }
 
             case SOUTH: {
-                this.setOrientation(ForgeDirection.WEST);
-                return;
+
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.NORTH), 3);
+                break;
             }
 
             case WEST: {
-                this.setOrientation(ForgeDirection.EAST);
+
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.SOUTH), 3);
                 break;
             }
 
             case EAST: {
-                this.setOrientation(ForgeDirection.DOWN);
+
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.WEST), 3);
                 break;
             }
 
-            default: //this.setOrientation(ForgeDirection.DOWN);
-                break;
+            case UNKNOWN: {
 
+                worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, UtilDirection.translateDirectionToNumber(ForgeDirection.EAST), 3);
+                break;
+            }
         }
     }
 

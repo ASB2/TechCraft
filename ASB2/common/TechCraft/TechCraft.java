@@ -3,13 +3,13 @@ package TechCraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import TechCraft.blocks.tcConduits.tcItemConduits.TileTCItemConduit;
 import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
 import TechCraft.blocks.tcPersonalBlocks.TilePersonalBlock;
 import TechCraft.blocks.technogery.TileTestBlock;
 import TechCraft.blocks.technogery.tcChargeBench.TileTCChargeBench;
 import TechCraft.blocks.technogery.tcEnergizedBuildingBlocks.TileEnergizedBuildingBlocks;
 import TechCraft.blocks.technogery.tcEnergyConstructor.TileTCEnergyConstructor;
+import TechCraft.blocks.technogery.tcEnergySender.TileEnergySender;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
@@ -39,7 +39,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import TechCraft.blocks.technogery.tcEnergySender.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -78,7 +77,7 @@ public class TechCraft {
         BlockRegistry.init(config);
         
         modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "A few little things to show you care. Nothing game changing. Will have no affect on any one but us.").getBoolean(true);
-        crystilineTreeHight = config.get("Misc", "crystilineTreeHight", 10, "Play with the value. Its fun. Can get over/under powered if you set the value too high/low").getInt(10);
+        crystilineTreeHight = config.get("Misc", "crystilineTreeHight", 10, "Play with the value. Its fun. It can get a little rediculus").getInt(10);
         config.save();
     }
 
@@ -127,8 +126,6 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TileTCEnergyConstructor.class, "TileTCEnergyConstructor");
 
         GameRegistry.registerTileEntity(TileItemExtractor.class, "TileItemExtractor");
-
-        GameRegistry.registerTileEntity(TileTCItemConduit.class, "TileTCItemConduit");
 
         GameRegistry.registerTileEntity(TilePersonalBlock.class, "TilePersonalBlock");
 

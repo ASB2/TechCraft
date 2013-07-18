@@ -1,5 +1,6 @@
 package TechCraft.utils;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -23,6 +24,7 @@ public class UtilBlock {
                 world.setBlockToAir(x, y, z);
                 return true;
             }
+
             else {
 
                 world.setBlockMetadataWithNotify(x, y, z, blockId, metaData);
@@ -32,44 +34,147 @@ public class UtilBlock {
         return false;
     }
 
+    public static void breakBlock(World world, int x, int y, int z) {
+
+        if(world.getBlockId(x,y,z) != 0) {       
+
+            world.playAuxSFX(2001, x, y, z, world.getBlockId(x,y,z) + (world.getBlockMetadata(x, y, z) << 12));
+            Block.blocksList[world.getBlockId(x,y,z)].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+            world.setBlockToAir(x, y, z);
+        }
+    }
+
     public static boolean cycle2DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, IBlockCycle cycle)
     {
-        x += (side.offsetX == 0 ? radius / 2 : 0);
-        y += (side.offsetY == 0 ? radius / 2 : 0);
-        z += (side.offsetZ == 0 ? radius / 2 : 0);
 
         boolean isSuccessful = false;
 
-        for (int r = 0; r < radius; r++) {
 
-            for (int c = 0; c < radius; c++) {
+        if(side.offsetX != 0) {
 
-                int i = side.offsetX == 0 ? r : 0;
-                int j = side.offsetY == 0 ? c : side.offsetX != 0 ? r : 0;
-                int k = side.offsetZ == 0 ? c : 0;
+            for(int i = -radius; i <= radius; i++){
 
-                if ((cycle.execute(player, world, x - i, y - j, z - k, side)) && (!isSuccessful)) {
+                for(int n = -radius; n <= radius; n++) {
 
-                    isSuccessful = true;
+                    if(cycle.execute(player, world, x , y + i, z + n, side))
+                        isSuccessful = true;
                 }
+            }
+        }
+
+        if(side.offsetY != 0) {
+
+            for(int i = -radius; i <= radius; i++){
+
+                for(int n = -radius; n <= radius; n++) {
+
+                    if(cycle.execute(player, world,  x + i, y, z + n, side))
+                        isSuccessful = true;
+                }
+            }
+        }
+
+        if(side.offsetZ != 0) {
+
+            for(int i = -radius; i <= radius; i++) {
+
+                for(int n = -radius; n <= radius; n++) {
+
+                    if(cycle.execute(player, world,  x + i, y + n, z, side))
+                        isSuccessful = true;
+                }
+            }
+        }
+
+        return isSuccessful;
+    }
+
+    /*
+     * Sends the coordinates of every block within a certain radius
+     */
+
+    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, IBlockCycle cycle)
+    {
+        boolean isSuccessful = false;
+
+        if(side.offsetX != 0) {
+
+            for(int i = -radius; i <= radius; i++) {
+
+                if(UtilBlock.cycle2DBlock(player, world, x + i, y, z, side, radius, cycle))
+                    isSuccessful = true;
+            }
+        }
+
+        if(side.offsetY != 0) {
+
+            for(int i = -radius; i <= radius; i++) {
+
+                if(UtilBlock.cycle2DBlock(player, world, x , y + i, z, side, radius, cycle))
+                    isSuccessful = true;
+            }
+        }
+
+        if(side.offsetZ != 0) {
+
+            for(int i = -radius; i <= radius; i++) {
+
+                if(UtilBlock.cycle2DBlock(player, world, x , y, z + 1, side, radius, cycle))
+                    isSuccessful = true;
             }
         }
         return isSuccessful;
     }
 
-    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int distance, int radius, IBlockCycle cycle)
+    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, int distance, IBlockCycle cycle)
     {
         boolean isSuccessful = false;
 
-        for (int h = 0; h < distance; h++) {
+        for(int i = 0; i < distance; i++) {
 
-            int i = side.offsetX * h;
-            int j = side.offsetY * h;
-            int k = side.offsetZ * h;
+            if(side.offsetX != 0) {
 
-            if ((cycle2DBlock(player, world, x - i, y - j, z - k, side, radius, cycle)) && (!isSuccessful)) {
+                if(side.offsetX > 0) {
 
-                isSuccessful = true;
+                    if(UtilBlock.cycle2DBlock(player, world, x + i, y, z, side, radius, cycle))
+                        isSuccessful = true;
+                }
+                
+                if(side.offsetX < 0) {
+
+                    if(UtilBlock.cycle2DBlock(player, world, x - i, y, z, side, radius, cycle))
+                        isSuccessful = true;
+                }
+            }
+            
+            if(side.offsetY != 0) {
+
+                if(side.offsetY > 0) {
+
+                    if(UtilBlock.cycle2DBlock(player, world, x, y - i, z, side, radius, cycle))
+                        isSuccessful = true;
+                }
+                
+                if(side.offsetY < 0) {
+
+                    if(UtilBlock.cycle2DBlock(player, world, x, y + i, z, side, radius, cycle))
+                        isSuccessful = true;
+                }
+            }
+            
+            if(side.offsetZ != 0) {
+
+                if(side.offsetZ > 0) {
+
+                    if(UtilBlock.cycle2DBlock(player, world, x, y, z - i, side, radius, cycle))
+                        isSuccessful = true;
+                }
+                
+                if(side.offsetZ < 0) {
+
+                    if(UtilBlock.cycle2DBlock(player, world, x, y, z + i, side, radius, cycle))
+                        isSuccessful = true;
+                }
             }
         }
         return isSuccessful;

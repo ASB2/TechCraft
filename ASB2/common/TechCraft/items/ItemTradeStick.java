@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import TechCraft.utils.*;
 
 public class ItemTradeStick extends TechCraftItems {
 
@@ -41,14 +42,14 @@ public class ItemTradeStick extends TechCraftItems {
 
     public void setBlockIDAndMeta(ItemStack item, int id, int meta) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setInteger("id", id);
         nbtTagCompound.setInteger("meta", meta);
     }
 
     public int[] getBlockID(ItemStack item) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
 
         return new int[] {nbtTagCompound.getInteger("id"), nbtTagCompound.getInteger("meta")};
     }

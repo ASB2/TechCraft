@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TechCraft.utils.*;
 
 public class ItemTeleporter extends TechCraftItems {
 
@@ -95,7 +96,7 @@ public class ItemTeleporter extends TechCraftItems {
 
 
     public int getDimentionIDCoord(ItemStack item) {
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         if (nbtTagCompound != null){
             return nbtTagCompound.getInteger("dimentionID");
         }
@@ -104,13 +105,13 @@ public class ItemTeleporter extends TechCraftItems {
 
     public void setDimentionIDCoord(ItemStack item, int x) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setInteger("dimentionID", x);
     }
 
     public boolean isCoodsSet(ItemStack item) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         if (nbtTagCompound != null){
             return nbtTagCompound.getBoolean("coodsSet");
         }
@@ -118,12 +119,12 @@ public class ItemTeleporter extends TechCraftItems {
     }
 
     public void setCoodsSet(ItemStack item,boolean coodsSet) {
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setBoolean("coodsSet", coodsSet);        
     }
 
     public double getXCoord(ItemStack item) {
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         if (nbtTagCompound != null){
             return nbtTagCompound.getDouble("X");
         }
@@ -132,12 +133,12 @@ public class ItemTeleporter extends TechCraftItems {
 
     public void setXCoord(ItemStack item, double x) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setDouble("X", x);
     }
 
     public double getYCoord(ItemStack item) {
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         if (nbtTagCompound != null){
             return nbtTagCompound.getDouble("Y");
         }
@@ -146,12 +147,12 @@ public class ItemTeleporter extends TechCraftItems {
 
     public void setYCoord(ItemStack item, double y) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setDouble("Y", y);
     }
 
     public double getZCoord(ItemStack item) {
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         if (nbtTagCompound != null){
             return nbtTagCompound.getDouble("Z");
         }
@@ -160,7 +161,7 @@ public class ItemTeleporter extends TechCraftItems {
 
     public void setZCoord(ItemStack item, double z) {
 
-        NBTTagCompound nbtTagCompound = NBTCompoundHelper.getTAGfromItemstack(item);
+        NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setDouble("Z", z);
     }
 }

@@ -43,7 +43,7 @@ public class TileItemExtractor extends TechCraftTile implements IInventory {
         }
     }
     /**
-     * Moves an item from the epecified direction into the tile
+     * Moves an item from the specified direction into the tile
      * @param ForgeDirection
      */
     public void moveFromAjacentInventory(ForgeDirection direction) {
