@@ -15,11 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
-    int powerStored;
-    int powerMax = 100;
-
-    int powerToMove = 5;
-
     public ItemEnergyBlob(int par1) {
         super(par1);
         setMaxStackSize(1);        
@@ -32,16 +27,17 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
-    {
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        
         if(!world.isRemote) {
+            
             player.sendChatToPlayer("Power stored: " + this.getPowerStored(itemStack) +" / " + this.getPowerMax(itemStack));
         }
         return itemStack;
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+    public boolean onItemUseFirst(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
     {
 
         return false;
@@ -51,11 +47,11 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     public int getPowerStored(ItemStack item) {
 
         NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
+        
         if(nbtTagCompound != null)
-
             return nbtTagCompound.getInteger("powerStored");
 
-        return powerStored;
+        return 0;
     }
 
     @Override
@@ -65,7 +61,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
         //if(nbtTagCompound != null)
         //return nbtTagCompound.getInteger("powerMax");
 
-        return powerMax;
+        return 100;
     }
 
     @Override
@@ -94,8 +90,6 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
         NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
         nbtTagCompound.setInteger("powerStored", power);
-
-        this.powerStored = power;
     }
 
     @Override

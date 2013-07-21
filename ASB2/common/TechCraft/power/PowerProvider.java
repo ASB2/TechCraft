@@ -170,13 +170,9 @@ public abstract class PowerProvider {
         return false;
     }
 
-    public void setPower(int newPower) {
+    public void setPower(int newPower) {        
 
-        if(newPower >= 0) {
-
-            this.powerStored = newPower;
-            //this.writeToNBT(ntbTag);
-        }
+        this.powerStored = newPower;
     }
 
     public boolean requestingPower() {

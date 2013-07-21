@@ -1,25 +1,23 @@
 package TechCraft.blocks.technogery.tcEnergizedBuildingBlocks;
 
+import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.IPowerMisc;
 import TechCraft.power.*;
 
 public class TileEnergizedBuildingBlocks extends TechCraftTile implements IPowerMisc {
-    
+
     public TileEnergizedBuildingBlocks() {
-    
-        this.powerProvider = new PowerProviderEnergizedBuildingBlocks(this, 25, PowerClass.LOW);
+
+        this.powerProvider = new TCPowerProvider(this, 25, PowerClass.LOW, State.SOURCE);
     }
-    
+
     @Override
     public void updateEntity() {
-        
-        this.getPowerProvider().setPower(this.getPowerProvider().getPowerMax());
-    }
 
-    public TechCraft.power.PowerProvider getPowerProvider() {
+        if(TechCraft.testingMode) {
 
-        return powerProvider;
+            this.getPowerProvider().setPower(this.getPowerProvider().getPowerMax());
+        } 
     }
 
     @Override
@@ -27,5 +25,5 @@ public class TileEnergizedBuildingBlocks extends TechCraftTile implements IPower
 
         return "Energized Building Block";
     }
-    
+
 }

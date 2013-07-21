@@ -56,17 +56,18 @@ public class TechCraft {
 
     public static CommonProxy proxy;
     public static ClientProxy clientProxy;
-    
+
     public static CreativeTabs tabTCBlocks = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Blocks", "TechCraft Blocks");
-    public static CreativeTabs tabTCItems = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Items", "TechCraft Blocks");
-    
+    public static CreativeTabs tabTCItems = new TechCraftCreativeTab( CreativeTabs.getNextID(),"TechCraft Items", "TechCraft Blocks");
+
     public static boolean includePowerRecipies = false;
     public static boolean includeArmorRecipies = true;
     public static boolean includeRuneRecipies = false;
     public static boolean modCreatorAndHelperPerks = true;
+    public static boolean testingMode = true;;
 
     public static int crystilineTreeHight = 10;
-    
+
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
@@ -75,7 +76,7 @@ public class TechCraft {
 
         ItemRegistry.init(config);
         BlockRegistry.init(config);
-        
+
         modCreatorAndHelperPerks = config.get("Misc", "modCreatorAndHelperPerks", true, "A few little things to show you care. Nothing game changing. Will have no affect on any one but us.").getBoolean(true);
         crystilineTreeHight = config.get("Misc", "crystilineTreeHight", 10, "Play with the value. Its fun. It can get a little rediculus").getInt(10);
         config.save();
@@ -130,7 +131,7 @@ public class TechCraft {
         GameRegistry.registerTileEntity(TilePersonalBlock.class, "TilePersonalBlock");
 
         GameRegistry.registerTileEntity(TileEnergySender.class, "TileEnergySender");
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }
@@ -141,7 +142,7 @@ public class TechCraft {
         CraftRegistry.init();
         CraftRegistry.placeHolderRecipes();
         CraftRegistry.teiredCrafting();
-        
+
         CraftRegistry.craftSmelting();
 
         if(includePowerRecipies)

@@ -29,7 +29,7 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
     }
 
     public void updateEntity() {
-
+        
         if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 
             if(getOrientation() == ForgeDirection.DOWN) {
@@ -69,12 +69,11 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
             if(forceRenderBeam) {
 
                 if(tile.getPowerProvider().getCurrentState() == State.SINK || tile.getPowerProvider().getCurrentState() == State.OTHER)
-                TechCraft.proxy.renderBeam(this, tile, 10);
+                    TechCraft.proxy.renderBeam(this, tile, 10);
             }
         }
     }
 
-    @Override
     public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
 
         TileEntity tile = world.getBlockTileEntity(x, y, z);

@@ -114,4 +114,24 @@ public class UtilPower {
         }
         return false;
     }
+    
+    public static boolean transferPower(IPowerMisc powerSource, IPowerMisc powerSink, int amountOfPower) {
+
+        if (powerSink.getPowerProvider() != null && powerSource.getPowerProvider() != null) {
+
+            if(powerSink.getPowerProvider().canGainPower(amountOfPower)) {
+
+                if(powerSource.getPowerProvider().canUsePower(amountOfPower)) {
+                    
+                    if(powerSink.getPowerProvider().gainPower(amountOfPower, UtilDirection.translateDirectionToOpposite(powerSource.getOrientation()))) {
+
+                        powerSource.getPowerProvider().usePower(amountOfPower, powerSource.getOrientation());
+
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

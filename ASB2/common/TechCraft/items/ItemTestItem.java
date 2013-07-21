@@ -31,17 +31,19 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if(!player.isSneaking()) {
+        if(!world.isRemote) {
 
-            player.capabilities.setFlySpeed(1);
-            player.capabilities.setPlayerWalkSpeed(1);
+            if(!player.isSneaking()) {
+
+                player.capabilities.setFlySpeed(1);
+                player.capabilities.setPlayerWalkSpeed(1);
+            }
+            else {
+
+                player.capabilities.setFlySpeed(0.05F);
+                player.capabilities.setPlayerWalkSpeed(0.1F);
+            }
         }
-        else {
-
-            player.capabilities.setFlySpeed(0.05F);
-            player.capabilities.setPlayerWalkSpeed(0.1F);
-        }
-
 
         return itemStack;
     }
@@ -51,12 +53,12 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
         TileEntity tile = world.getBlockTileEntity(x, y, z);
         if(tile != null) {
             if(tile instanceof TechCraftTile) {
-                
+
                 ((TechCraftTile)tile).toggleDirection();
                 return true;
             }
         }
-        UtilBlock.cycle3DBlock(player, world, x, y, z, UtilDirection.translateNumberToDirection(side), 1, 100, this);
+        UtilBlock.cycle3DBlock(player, world, x, y, z, UtilDirection.translateNumberToDirection(side), 10, 100, this);
         return true;        
     }
 
@@ -64,6 +66,7 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
     public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
 
         if(world.blockExists(x, y, z))
-            world.setBlockToAir(x, y, z); return true;
+            world.setBlockToAir(x, y, z);
+        return true;
     }
 }

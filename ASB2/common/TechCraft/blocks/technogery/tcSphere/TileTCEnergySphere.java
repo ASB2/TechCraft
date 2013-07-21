@@ -3,7 +3,7 @@ package TechCraft.blocks.technogery.tcSphere;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
-
+import TechCraft.TechCraft;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
@@ -14,7 +14,11 @@ public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 
     public void updateEntity() {
 
-    }    
+        if(TechCraft.testingMode) {
+
+            this.getPowerProvider().setPower(0);
+        }    
+    }
 
     @Override
     public String getName() {

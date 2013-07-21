@@ -14,5 +14,4 @@ public interface IPowerItems {
     boolean canGainPower(int PowerGained, ItemStack item);
     
     String getName();
-
 }
