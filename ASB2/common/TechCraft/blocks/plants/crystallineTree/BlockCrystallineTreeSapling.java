@@ -98,11 +98,11 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
 
             UtilBlock.placeBlockInAir(world, x, y + i, z, idLog, 0);
         }
-        UtilBlock.cycle3DBlock(null, world, x, y + TechCraft.crystilineTreeHight, z, ForgeDirection.DOWN, 2, this);
+        UtilBlock.cycle3DBlock(null, world, x, y + TechCraft.crystilineTreeHight, z, ForgeDirection.DOWN, 2, this, 0);
     }
 
     @Override
-    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
+    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int id) {
 
         int idLeaves = BlockRegistry.BlockCrystallineTreeLeaves.blockID;
         return UtilBlock.placeBlockInAir(world, x, y , z , idLeaves,0);

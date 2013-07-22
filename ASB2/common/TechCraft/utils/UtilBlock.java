@@ -29,8 +29,8 @@ public class UtilBlock {
 
             else {
 
-                world.setBlockMetadataWithNotify(x, y, z, blockId, metaData);
-                return true;
+                
+                return world.setBlockMetadataWithNotify(x, y, z, blockId, metaData);
             }
         }
         return false;
@@ -46,7 +46,7 @@ public class UtilBlock {
         }
     }
 
-    public static boolean cycle2DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, IBlockCycle cycle)
+    public static boolean cycle2DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, IBlockCycle cycle, int id)
     {
 
         boolean isSuccessful = false;
@@ -58,7 +58,7 @@ public class UtilBlock {
 
                 for(int n = -radius; n <= radius; n++) {
 
-                    if(cycle.execute(player, world, x , y + i, z + n, side))
+                    if(cycle.execute(player, world, x , y + i, z + n, side, id))
                         isSuccessful = true;
                 }
             }
@@ -70,7 +70,7 @@ public class UtilBlock {
 
                 for(int n = -radius; n <= radius; n++) {
 
-                    if(cycle.execute(player, world,  x + i, y, z + n, side))
+                    if(cycle.execute(player, world,  x + i, y, z + n, side, id))
                         isSuccessful = true;
                 }
             }
@@ -82,7 +82,7 @@ public class UtilBlock {
 
                 for(int n = -radius; n <= radius; n++) {
 
-                    if(cycle.execute(player, world,  x + i, y + n, z, side))
+                    if(cycle.execute(player, world,  x + i, y + n, z, side, id))
                         isSuccessful = true;
                 }
             }
@@ -95,7 +95,7 @@ public class UtilBlock {
      * Sends the coordinates of every block within a certain radius
      */
 
-    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, IBlockCycle cycle)
+    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, IBlockCycle cycle, int id)
     {
         boolean isSuccessful = false;
 
@@ -103,7 +103,7 @@ public class UtilBlock {
 
             for(int i = -radius; i <= radius; i++) {
 
-                if(UtilBlock.cycle2DBlock(player, world, x + i, y, z, side, radius, cycle))
+                if(UtilBlock.cycle2DBlock(player, world, x + i, y, z, side, radius, cycle, id))
                     isSuccessful = true;
             }
         }
@@ -112,7 +112,7 @@ public class UtilBlock {
 
             for(int i = -radius; i <= radius; i++) {
 
-                if(UtilBlock.cycle2DBlock(player, world, x , y + i, z, side, radius, cycle))
+                if(UtilBlock.cycle2DBlock(player, world, x , y + i, z, side, radius, cycle, id))
                     isSuccessful = true;
             }
         }
@@ -121,14 +121,14 @@ public class UtilBlock {
 
             for(int i = -radius; i <= radius; i++) {
 
-                if(UtilBlock.cycle2DBlock(player, world, x , y, z + 1, side, radius, cycle))
+                if(UtilBlock.cycle2DBlock(player, world, x , y, z + 1, side, radius, cycle, id))
                     isSuccessful = true;
             }
         }
         return isSuccessful;
     }
 
-    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, int distance, IBlockCycle cycle)
+    public static boolean cycle3DBlock(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int radius, int distance, IBlockCycle cycle, int id)
     {
         boolean isSuccessful = false;
 
@@ -138,13 +138,13 @@ public class UtilBlock {
 
                 if(side.offsetX > 0) {
 
-                    if(UtilBlock.cycle2DBlock(player, world, x + i, y, z, side, radius, cycle))
+                    if(UtilBlock.cycle2DBlock(player, world, x + i, y, z, side, radius, cycle, id))
                         isSuccessful = true;
                 }
                 
                 if(side.offsetX < 0) {
 
-                    if(UtilBlock.cycle2DBlock(player, world, x - i, y, z, side, radius, cycle))
+                    if(UtilBlock.cycle2DBlock(player, world, x - i, y, z, side, radius, cycle, id))
                         isSuccessful = true;
                 }
             }
@@ -153,13 +153,13 @@ public class UtilBlock {
 
                 if(side.offsetY > 0) {
 
-                    if(UtilBlock.cycle2DBlock(player, world, x, y - i, z, side, radius, cycle))
+                    if(UtilBlock.cycle2DBlock(player, world, x, y - i, z, side, radius, cycle, id))
                         isSuccessful = true;
                 }
                 
                 if(side.offsetY < 0) {
 
-                    if(UtilBlock.cycle2DBlock(player, world, x, y + i, z, side, radius, cycle))
+                    if(UtilBlock.cycle2DBlock(player, world, x, y + i, z, side, radius, cycle, id))
                         isSuccessful = true;
                 }
             }
@@ -168,13 +168,13 @@ public class UtilBlock {
 
                 if(side.offsetZ > 0) {
 
-                    if(UtilBlock.cycle2DBlock(player, world, x, y, z - i, side, radius, cycle))
+                    if(UtilBlock.cycle2DBlock(player, world, x, y, z - i, side, radius, cycle, id))
                         isSuccessful = true;
                 }
                 
                 if(side.offsetZ < 0) {
 
-                    if(UtilBlock.cycle2DBlock(player, world, x, y, z + i, side, radius, cycle))
+                    if(UtilBlock.cycle2DBlock(player, world, x, y, z + i, side, radius, cycle, id))
                         isSuccessful = true;
                 }
             }

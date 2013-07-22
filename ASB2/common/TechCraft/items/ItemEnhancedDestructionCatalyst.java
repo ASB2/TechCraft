@@ -48,7 +48,7 @@ public class ItemEnhancedDestructionCatalyst extends TechCraftItems implements I
 
         UtilItemStack.setNBTTagInt(itemStack, "id", world.getBlockId(x, y, z));
 
-        boolean isSucesful = UtilBlock.cycle3DBlock(player, world, x, y, z, sideF, 1,UtilItemStack.getNBTTagInt(itemStack, "length"), this);
+        boolean isSucesful = UtilBlock.cycle3DBlock(player, world, x, y, z, sideF, 1,UtilItemStack.getNBTTagInt(itemStack, "length"), this, 0);
 
         UtilItemStack.setNBTTagInt(itemStack, "id", 0);  
         return isSucesful;        
@@ -89,7 +89,7 @@ public class ItemEnhancedDestructionCatalyst extends TechCraftItems implements I
     }
 
     @Override
-    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
+    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int mid) {
 
         int blockToBreak = UtilItemStack.getNBTTagInt(player.inventory.getCurrentItem(), "id");
 

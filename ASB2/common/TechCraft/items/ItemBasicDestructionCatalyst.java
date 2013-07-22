@@ -47,13 +47,13 @@ public class ItemBasicDestructionCatalyst extends TechCraftItems implements IBlo
         ForgeDirection sideF = UtilDirection.translateNumberToDirection(side);
         
         UtilItemStack.setNBTTagInt(itemStack, "id", world.getBlockId(x, y, z));        
-        UtilBlock.cycle2DBlock(player, world, x, y, z, sideF, 1, this); 
+        UtilBlock.cycle2DBlock(player, world, x, y, z, sideF, 1, this, 0); 
         
         return true;        
     }
 
     @Override
-    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
+    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int mid) {
       
         int blockToBreak = UtilItemStack.getNBTTagInt(player.inventory.getCurrentItem(), "id");
         

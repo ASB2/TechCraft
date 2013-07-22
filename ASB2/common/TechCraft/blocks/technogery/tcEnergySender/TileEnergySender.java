@@ -34,7 +34,7 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
 
             if(getOrientation() == ForgeDirection.DOWN) {
 
-                UtilBlock.cycle3DBlock(null, worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, 10, this);
+                UtilBlock.cycle3DBlock(null, worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, 10, this, 0);
             }
 
             IPowerMisc tile;
@@ -74,7 +74,7 @@ public class TileEnergySender extends TechCraftTile implements IPowerMisc, IBloc
         }
     }
 
-    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
+    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int id) {
 
         TileEntity tile = world.getBlockTileEntity(x, y, z);
 

@@ -59,12 +59,12 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
                 return true;
             }
         }
-        UtilBlock.cycle3DBlock(player, world, x, y, z, UtilDirection.translateNumberToDirection(side), 10, 100, this);
+        UtilBlock.cycle3DBlock(player, world, x, y, z, UtilDirection.translateNumberToDirection(side), 10, 100, this, 0);
         return true;        
     }
 
     @Override
-    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
+    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int id) {
 
         if(world.blockExists(x, y, z))
             world.setBlockToAir(x, y, z);
