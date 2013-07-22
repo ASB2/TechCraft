@@ -7,12 +7,14 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class UtilBlock {
 
-    public static void placeBlockInAir(World world, int x, int y, int z, int blockId, int metaData) {
+    public static boolean placeBlockInAir(World world, int x, int y, int z, int blockId, int metaData) {
 
-        if(world.getBlockId( x, y , z)  == 0) {
+        if(world.getBlockId( x, y , z) == 0) {
 
-            world.setBlock(x, y, z, blockId, metaData, 3);
+            
+            return world.setBlock(x, y, z, blockId, metaData, 3);
         }
+        return false;
     }
 
     public static boolean setBlock(World world, int x, int y, int z, int blockId, int metaData) {

@@ -12,23 +12,20 @@ public class ContainerGenorator extends TechCraftContainer {
 
     public ContainerGenorator(InventoryPlayer inventoryPlayer, TileGenorator tileEntity) {
         super(inventoryPlayer, tileEntity);
-    }
     
-    public void finishConstructing(TechCraftGui gui) {
-
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 0, 30, 17)));      
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 1, 48, 17)));    
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 2, 66, 17)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 30, 17)));      
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 1, 48, 17)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 2, 66, 17)));    
         
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 3, 30, 35)));    
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 4, 48, 35)));    
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 5, 66, 35)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 3, 30, 35)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 4, 48, 35)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 5, 66, 35)));    
         
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 6, 30, 53)));    
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 7, 48, 53)));    
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 8, 66, 53)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 6, 30, 53)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 7, 48, 53)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 8, 66, 53)));    
         
-        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 9, 145, 60)));    
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 9, 145, 60)));  
     }
     
     @Override

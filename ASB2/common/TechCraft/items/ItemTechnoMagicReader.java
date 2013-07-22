@@ -2,6 +2,7 @@ package TechCraft.items;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -64,6 +65,15 @@ public class ItemTechnoMagicReader extends TechCraftItems{
 
                     player.sendChatToPlayer("Object has no network");
                 }
+            }
+            
+            if(tile instanceof IInventory) {
+                
+                IInventory mTile = (IInventory)tile;
+                
+                player.sendChatToPlayer("Inventory name is: " + mTile.getInvName());
+                player.sendChatToPlayer("Size of inventory is: " + mTile.getSizeInventory());
+                player.sendChatToPlayer("Inventory stack limit is: " + mTile.getInventoryStackLimit());
             }
         }
         player.sendChatToPlayer("Block" + " has metadata: " + world.getBlockMetadata(x, y, z));

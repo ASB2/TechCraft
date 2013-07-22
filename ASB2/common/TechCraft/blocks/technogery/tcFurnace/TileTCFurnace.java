@@ -56,7 +56,6 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
                 if( this.getPowerProvider().usePower(powerForProcess, ForgeDirection.UNKNOWN)) {
                     this.smeltItem();    
                 }
-
             }
         }
     }
@@ -208,7 +207,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
     @Override
     public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-        
+
         ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(itemStack);
 
         if(slot == 0) {
@@ -226,7 +225,7 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
     @Override
     public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-        
+
         if(slot != 0) {
 
             if(this.tileItemStacks[slot] != null) {
@@ -241,41 +240,44 @@ public class TileTCFurnace extends TechCraftTile implements IInventory, ISidedIn
 
         return this.getName();
     }
-    
+
     @Override
     public boolean isInvNameLocalized() {
 
         return true;
     }
-    
+
     @Override
     public int getInventoryStackLimit() {
 
         return 64;
     }
-    
+
     @Override
     public void openChest() {
         // TODO Auto-generated method stub
 
     }
-    
+
     @Override
     public void closeChest() {
         // TODO Auto-generated method stub
 
     }
-    
+
     @Override
     public boolean isStackValidForSlot(int slot, ItemStack itemStack) {
 
         if(slot == 0) {
 
-            if(tileItemStacks[0] == null && itemStack != null) {
+            if(tileItemStacks[0] == null) {
 
-                return true;
+                if(itemStack != null) {
+
+                    return true;
+                }
             }
-
+            
             else if(this.tileItemStacks[0].equals(itemStack)) {
 
                 return true;

@@ -1,12 +1,9 @@
 package TechCraft;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -16,8 +13,7 @@ import TechCraft.power.IPowerMisc;
 
 public abstract class TechCraftGui extends GuiContainer {
 
-    Container container;
-    List<Slot> slotList = new ArrayList<Slot>();
+    TechCraftContainer container;
 
     public final int xSizeOfTexture = 176;
     public final int ySizeOfTexture = 166;
@@ -25,15 +21,12 @@ public abstract class TechCraftGui extends GuiContainer {
     protected int posX = (width - xSizeOfTexture) / 2;
     protected int posY = (height - ySizeOfTexture) / 2;
 
-    public TechCraftGui(Container container) {
+    public TechCraftGui(TechCraftContainer container) {
         super(container);
 
         this.container = container;
 
-        if(container instanceof TechCraftContainer) {
-
-            ((TechCraftContainer)container).finishConstructing(this);
-        }
+        container.finishConstructing(this);
     }
 
     protected void drawGuiContainerForegroundLayer(int x, int y) {
@@ -52,9 +45,9 @@ public abstract class TechCraftGui extends GuiContainer {
 
     public void renderSlotsInContainer() {
 
-        for(int i = 0; i < slotList.size(); i++) {
+        for(int i = 0; i < container.slotList.size(); i++) {
 
-            addSlot(posX + slotList.get(i).xDisplayPosition - 1, posY + slotList.get(i).yDisplayPosition - 1);
+            addSlot(posX + container.slotList.get(i).xDisplayPosition - 1, posY + container.slotList.get(i).yDisplayPosition - 1);
         }
     }
     public void addSlot(int x, int y) {
@@ -86,7 +79,7 @@ public abstract class TechCraftGui extends GuiContainer {
 
         drawTexturedModalRect(x, y + 14 - scale, 176, 0 , 14, scale);
     }
-    
+
     public void addTank(int x, int y) {
 
         drawTexturedModalRect(x, y, 176, 123, 18, 71);

@@ -7,21 +7,22 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 import TechCraft.BlockRegistry;
 import TechCraft.Message;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftFlower;
-import TechCraft.utils.UtilBlock;
+import TechCraft.utils.*;
 
-public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPlantable {
+public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPlantable, IBlockCycle {
 
     public BlockCrystallineTreeSapling(int par1, Material par2Material) {
         super(par1, par2Material);
     }
-    
+
     public void registerIcons(IconRegister par1IconRegister) {
-        
+
         this.blockIcon = par1IconRegister.registerIcon("TechCraft:BlockCrystillineSapling");
     }
 
@@ -46,17 +47,21 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) 
     {        
-        if(player.isSneaking()) {
+        if(TechCraft.testingMode) {
 
-            this.updateTick(world, x, y, z, new Random());
-            
-            if(!world.isRemote)
-                Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
+            if(player.isSneaking()) {
+
+                this.updateTick(world, x, y, z, new Random());
+
+                if(!world.isRemote)
+                    Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
+                return true;
+            }
+
+            this.growTree(world, x, y, z);
             return true;
         }
-
-        this.growTree(world, x, y, z);
-        return true;
+        return false;
     }
 
     @Override
@@ -86,7 +91,6 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
     public void growTree(World world , int x, int y, int z) {
 
         int idLog = BlockRegistry.BlockCrystallineTreeLog.blockID;
-        int idLeaves = BlockRegistry.BlockCrystallineTreeLeaves.blockID;
 
         world.setBlock(x, y, z, idLog);
 
@@ -94,42 +98,13 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
 
             UtilBlock.placeBlockInAir(world, x, y + i, z, idLog, 0);
         }
+        UtilBlock.cycle3DBlock(null, world, x, y + TechCraft.crystilineTreeHight, z, ForgeDirection.DOWN, 2, this);
+    }
 
-        for(int i = 0; i < 10; i++) {
+    @Override
+    public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side) {
 
-            if( i >= 4) {
-
-                for(int a = -5; a <= 5   ; a++) {
-
-                    for (int m = -1; m <= 1; m++) {
-
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + m, idLeaves,0);
-
-                        UtilBlock.placeBlockInAir(world, x + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + m, y + i, z + a + m, idLeaves,0);
-
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x + a + m, y + i, z + a + m, idLeaves,0);
-
-                        UtilBlock.placeBlockInAir(world, x - a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x - a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x - a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x - a + m, y + i, z + a + m, idLeaves,0);
-                        UtilBlock.placeBlockInAir(world, x - a + m, y + i, z + a + m, idLeaves,0);
-
-                    }
-                }
-            }
-        }
+        int idLeaves = BlockRegistry.BlockCrystallineTreeLeaves.blockID;
+        return UtilBlock.placeBlockInAir(world, x, y , z , idLeaves,0);
     }
 }
