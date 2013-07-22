@@ -32,8 +32,8 @@ public class ContainerGenorator extends TechCraftContainer {
     }
     
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber) {
+        
         ItemStack itemstack = null;
         Slot slot = (Slot)inventorySlots.get(slotnumber);
 
