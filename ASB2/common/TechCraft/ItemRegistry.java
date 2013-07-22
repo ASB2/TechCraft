@@ -21,6 +21,7 @@ import TechCraft.items.ItemGarnet;
 import TechCraft.items.ItemLifeStealingBludgeoningStick;
 import TechCraft.items.ItemLinker;
 import TechCraft.items.ItemOmniTool;
+import TechCraft.items.ItemRainBGone;
 import TechCraft.items.ItemTCMultiTool;
 import TechCraft.items.ItemTechnoMagicReader;
 import TechCraft.items.ItemTeleporter;
@@ -100,6 +101,8 @@ public class ItemRegistry {
     public static TechCraftItems ItemDataCircuit;
     public static TechCraftItems ItemCrystalCasing;
     public static TechCraftItems ItemCrystillineShard;
+    public static TechCraftItems ItemRainBGone;
+    
 
     private static int id = 5000;
 
@@ -270,10 +273,14 @@ public class ItemRegistry {
         ItemCrystalCasing = new ItemCrystalCasing(config.getItem("ItemCrystalCasing", ItemRegistry.getNextBaseID()).getInt());
         ItemCrystalCasing.setUnlocalizedName("ASB2_ItemCrystalCasing");
         LanguageRegistry.addName(ItemCrystalCasing, "Crystal Casing");
-        
+
         ItemCrystillineShard = new ItemCrystillineShard(config.getItem("ItemCrystillineShard", ItemRegistry.getNextBaseID()).getInt());
         ItemCrystillineShard.setUnlocalizedName("ASB2_ItemCrystillineShard");
         LanguageRegistry.addName(ItemCrystillineShard, "Crystilline Shard");
+        
+        ItemRainBGone = new ItemRainBGone(config.getItem("ItemRainBGone", ItemRegistry.getNextBaseID()).getInt());
+        ItemRainBGone.setUnlocalizedName("ASB2_ItemRainBGone");
+        LanguageRegistry.addName(ItemRainBGone, "Rain B Gone");
     }
 
     public static int getNextBaseID() {

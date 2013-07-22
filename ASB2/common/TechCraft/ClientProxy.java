@@ -41,6 +41,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import TechCraft.blocks.technogery.tcPlanter.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -49,7 +50,7 @@ public class ClientProxy extends CommonProxy {
 
         KeyBindingRegistry.registerKeyBinding(new TCKeyBindingM());
         TickRegistry.registerTickHandler(new TechCraftTickHandlerClient(), Side.CLIENT);
-        
+
         ClientRegistry.bindTileEntitySpecialRenderer(TileTCEnergySphere.class, new TileEntityRendererMagicEnergySphere());
         MinecraftForgeClient.registerItemRenderer(BlockRegistry.BlockTCEnergySphere.blockID, (IItemRenderer)new ItemRendererMagicEnergySphere());
 
@@ -85,15 +86,44 @@ public class ClientProxy extends CommonProxy {
 
             if(tileEntity != null) {
 
-                switch(ID) {
-                    
-                    case 1: return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
-                    case 2: return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
-                    case 3: return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
-                    case 5: return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
-                    case 6: return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
-                    case 10: return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);             
-                    case 11: return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
+                if(tileEntity instanceof TileGenorator) {
+
+                    return new GuiGenorator(player.inventory, (TileGenorator) tileEntity);
+                }
+
+                if(tileEntity instanceof TileTCFurnace) {
+
+                    return new GuiTCFurnace(player.inventory, (TileTCFurnace)tileEntity);
+                }
+
+                if(tileEntity instanceof TileTCChargeBench) {
+
+                    return new GuiTCChargeBench(player.inventory, (TileTCChargeBench)tileEntity);
+                }
+
+                if(tileEntity instanceof TileTCInfuser) {
+
+                    return new GuiTCInfuser(player.inventory, (TileTCInfuser)tileEntity);
+                }
+
+                if(tileEntity instanceof TileTCTeleporter) {
+
+                    return new GuiTCTeleporter(player.inventory, (TileTCTeleporter)tileEntity);
+                }
+
+                if(tileEntity instanceof TileTCEnergyConstructor) {
+
+                    return new GuiTCEnergyConstructor(player.inventory, (TileTCEnergyConstructor)tileEntity);        
+                }
+
+                if(tileEntity instanceof TileItemExtractor) {
+
+                    return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
+                }
+            
+                if(tileEntity instanceof TilePlanter) {
+
+                    return new GuiPlanter(player.inventory, (TilePlanter)tileEntity);  
                 }
             }
         }

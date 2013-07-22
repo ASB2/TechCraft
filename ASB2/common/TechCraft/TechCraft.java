@@ -39,6 +39,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import TechCraft.blocks.technogery.tcPlanter.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -132,6 +133,8 @@ public class TechCraft {
 
         GameRegistry.registerTileEntity(TileEnergySender.class, "TileEnergySender");
 
+        GameRegistry.registerTileEntity(TilePlanter.class, "TilePlanter");
+        
         NetworkRegistry.instance().registerGuiHandler(this, TechCraft.proxy);
 
     }

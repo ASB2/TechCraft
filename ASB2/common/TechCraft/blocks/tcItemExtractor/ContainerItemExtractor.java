@@ -1,49 +1,30 @@
 package TechCraft.blocks.tcItemExtractor;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import TechCraft.TechCraftContainer;
+import TechCraft.TechCraftGui;
 
-public class ContainerItemExtractor extends Container {
+public class ContainerItemExtractor extends TechCraftContainer {
 
-    public ContainerItemExtractor(InventoryPlayer par1InventoryPlayer, TileItemExtractor tileEntity) {
+    public ContainerItemExtractor(InventoryPlayer inventoryPlayer, TileItemExtractor tileEntity) {
+        super(inventoryPlayer, tileEntity);
 
-        this.addSlotToContainer(new Slot(tileEntity, 0, 49, 32));        
-        this.addSlotToContainer(new Slot(tileEntity, 1, 67, 32));        
-        this.addSlotToContainer(new Slot(tileEntity, 2, 85, 32));        
-        this.addSlotToContainer(new Slot(tileEntity, 3, 103, 32));
-        
-        this.addSlotToContainer(new Slot(tileEntity, 4, 49, 50));        
-        this.addSlotToContainer(new Slot(tileEntity, 5, 67, 50));
-        this.addSlotToContainer(new Slot(tileEntity, 6, 85, 50));        
-        this.addSlotToContainer(new Slot(tileEntity, 7, 103, 50));
-        
-        for (int i = 0; i < 3; i++)
-        {
-            for (int k = 0; k < 9; k++)
-            {
-                addSlotToContainer(new Slot(par1InventoryPlayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-            }
-        }
-
-        for (int j = 0; j < 9; j++)
-        {
-            addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + j * 18, 142));
-        }
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer entityplayer) {
+    public void finishConstructing(TechCraftGui gui) {
+        super.finishConstructing(gui);
 
-        return true;
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 0, 49, 32)));  
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 1, 67, 32)));  
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 2, 85, 32)));  
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 3, 103, 32)));  
+
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 4, 49, 50)));  
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 5, 67, 50)));  
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 6, 85, 50)));  
+        this.addSlotToContainer(this.addSlotToList(gui, new Slot((IInventory)tileEntity, 7, 103, 50)));
     }
-
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slotnumber)
-    {
-        return null;
-    }
-
 }

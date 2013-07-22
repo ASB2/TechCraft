@@ -38,6 +38,7 @@ import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import TechCraft.blocks.technogery.tcPlanter.*;
 
 public class BlockRegistry {
 
@@ -79,6 +80,7 @@ public class BlockRegistry {
     public static TechCraftBlocks BlockCrystallineTreeLeaves;
     
     public static TechCraftContainers BlockEnergySender;
+    public static TechCraftContainers BlockPlanter;
     
     private static int id = 500;
     
@@ -247,11 +249,17 @@ public class BlockRegistry {
         LanguageRegistry.addName(BlockCrystallineTreeLeaves, "Crystiline Leaves");
         MinecraftForge.setBlockHarvestLevel(BlockCrystallineTreeLeaves, "pickaxe", 2);       
         
-        BlockEnergySender = new BlockEnergySender(config.getBlock("BlockEnergySender",  BlockRegistry.getNextBaseID()).getInt(), Material.plants);
+        BlockEnergySender = new BlockEnergySender(config.getBlock("BlockEnergySender",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
         BlockEnergySender.setUnlocalizedName("BlockEnergySender");
         GameRegistry.registerBlock(BlockEnergySender, TehCraftItemBlock.class, "ASB2_BlockEnergySender");
         LanguageRegistry.addName(BlockEnergySender, "Energy Sender");
         MinecraftForge.setBlockHarvestLevel(BlockEnergySender, "pickaxe", 2);  
+        
+        BlockPlanter = new BlockPlanter(config.getBlock("BlockPlanter",  BlockRegistry.getNextBaseID()).getInt(), Material.rock);
+        BlockPlanter.setUnlocalizedName("BlockPlanter");
+        GameRegistry.registerBlock(BlockPlanter, TehCraftItemBlock.class, "ASB2_BlockPlanter");
+        LanguageRegistry.addName(BlockPlanter, "TC Planter");
+        MinecraftForge.setBlockHarvestLevel(BlockPlanter, "pickaxe", 2);  
     }
 
     public static int getNextBaseID() {        

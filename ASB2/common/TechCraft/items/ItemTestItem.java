@@ -51,6 +51,7 @@ public class ItemTestItem extends TechCraftItems implements IBlockCycle {
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
 
         TileEntity tile = world.getBlockTileEntity(x, y, z);
+        
         if(tile != null) {
             if(tile instanceof TechCraftTile) {
 
