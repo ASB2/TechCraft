@@ -10,10 +10,10 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 import TechCraft.BlockRegistry;
-import TechCraft.Message;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftFlower;
-import TechCraft.utils.*;
+import TechCraft.utils.IBlockCycle;
+import TechCraft.utils.UtilBlock;
 
 public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPlantable, IBlockCycle {
 
@@ -41,7 +41,7 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
     @Override
     public int getPlantMetadata(World world, int x, int y, int z) {
 
-        return world.getBlockMetadata(x, y, z);
+        return 0;
     }
 
     @Override
@@ -52,16 +52,14 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
             if(player.isSneaking()) {
 
                 this.updateTick(world, x, y, z, new Random());
+            }
+            else {
 
-                if(!world.isRemote)
-                    Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
-                return true;
+                this.growTree(world, x, y, z); 
             }
 
-            this.growTree(world, x, y, z);
-            return true;
         }
-        return false;
+        return TechCraft.testingMode;
     }
 
     @Override
@@ -72,11 +70,7 @@ public class BlockCrystallineTreeSapling extends TechCraftFlower implements IPla
 
     public void managGrowth(World world, int x, int y, int z, Random random) {
 
-        Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
-
         if(world.getBlockMetadata(x, y, z) >= 5) {
-
-            Message.sendToClient(world.getBlockMetadata(x, y, z) + "");
 
             this.growTree(world, x, y, z);
             return;

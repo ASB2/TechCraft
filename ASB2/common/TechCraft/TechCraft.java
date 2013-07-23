@@ -65,7 +65,7 @@ public class TechCraft {
     public static boolean includeArmorRecipies = true;
     public static boolean includeRuneRecipies = false;
     public static boolean modCreatorAndHelperPerks = true;
-    public static boolean testingMode = true;;
+    public static boolean testingMode = true;
 
     public static int crystilineTreeHight = 10;
 

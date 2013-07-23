@@ -1,6 +1,9 @@
 package TechCraft.blocks.technogery.tcPlanter;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -23,7 +26,7 @@ import TechCraft.utils.UtilBlock;
 public class TilePlanter extends TechCraftTile implements IPowerMisc, IInventory, IBlockCycle {
 
     int powerForProcess = 50;
-    int farmSize = 10;
+    int farmSize = 100;
     ItemStack[] tileItemStacks;
 
     public TilePlanter() {        
@@ -87,12 +90,20 @@ public class TilePlanter extends TechCraftTile implements IPowerMisc, IInventory
 
         if(id == 2) {
 
-            world.scheduleBlockUpdate(x, y, z, 3, 1);
+            if(Block.blocksList[world.getBlockId(x,y,z)] != null) {
+                
+                Block.blocksList[world.getBlockId(x,y,z)].updateTick(worldObj, x, y, z, new Random());
+                world.scheduleBlockUpdate(x, y, z, 3, 1);
+            }
         }
 
         if(id == 3) {
 
+            int blockId = world.getBlockId(x,y,z);
 
+            if(Block.blocksList[blockId] instanceof BlockCrops) {
+
+            }
         }
         return false;
     }
