@@ -3,6 +3,7 @@ package TechCraft.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TechCraft.*;
 
 public class ItemRainBGone extends TechCraftItems {
 
@@ -19,8 +20,8 @@ public class ItemRainBGone extends TechCraftItems {
 
             world.toggleRain();
             itemStack.damageItem(1, player);
-            if(!world.isRemote)
-                player.sendChatToPlayer("The rain will soon be dispursed");
+
+            TechCraft.proxy.sendChatToPlayer(player, "The rain will soon be dispursed");
         }
         return itemStack;
     }

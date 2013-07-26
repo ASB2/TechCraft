@@ -5,13 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergySphere;
 import TechCraft.models.ModelFlat;
 import TechCraft.power.IPowerMisc;
 import TechCraft.utils.UtilDirection;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRenderer{
 
@@ -25,7 +25,8 @@ public class TileEntityRendererMagicEnergySphere extends TileEntitySpecialRender
 
             GL11.glPushMatrix();
 
-            FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLACK);
+            TechCraft.proxy.renderTexture(TEXTURES.BLACK);
+            
             modelSphere.render((TileTCEnergySphere)tileEntity, x, y, z);
 
             int coords[] = UtilDirection.translateDirectionToCoords(((TechCraftTile) tileEntity).getOrientation(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);

@@ -1,17 +1,15 @@
 package TechCraft.blocks.tcItemExtractor;
 
-import java.util.Random;
-
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
+import TechCraft.TechCraftTileRenderer;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelConduitInterface;
-import cpw.mods.fml.client.FMLClientHandler;
 
-public class TileRendererItemExtractor extends TileEntitySpecialRenderer {
+public class TileRendererItemExtractor extends TechCraftTileRenderer {
 
     private ModelConduitInterface model;
 
@@ -35,45 +33,45 @@ public class TileRendererItemExtractor extends TileEntitySpecialRenderer {
 
         GL11.glPushMatrix();
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
+        TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
         
         renderByOrientation(x, y, z, tile.getBlockMetadata());
 
         switch(tile.getColorEnum()) {            
             
-            case WHITE: FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_WHITE);
+            case WHITE: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_WHITE);
                 break;
-            case ORANGE: FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_ORANGE);
+            case ORANGE: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_ORANGE);
                 break;
-            case MAGENTA:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_MAGENTA);
+            case MAGENTA: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_MAGENTA);
                 break;
-            case LIGHT_BLUE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_LIGHT_BLUE);
+            case LIGHT_BLUE: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_LIGHT_BLUE);
                 break;
-            case YELLOW:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_YELLOW);
+            case YELLOW: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_YELLOW);
                 break;
-            case LIME:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_LIME);
+            case LIME: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_LIME);
                 break;
-            case PINK:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_PINK);
+            case PINK: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_PINK);
                 break;
-            case GRAY:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_GRAY);
+            case GRAY: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_GRAY);
                 break;
-            case LIGHT_GREY:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_LIGHT_GREY);
+            case LIGHT_GREY: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_LIGHT_GREY);
                 break;
-            case CYAN:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_CYAN);
+            case CYAN: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_CYAN);
                 break;
-            case PURPLE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_PURPLE);
+            case PURPLE: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_PURPLE);
                 break;
-            case BLUE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_BLUE);
+            case BLUE: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_BLUE);
                 break;
-            case BROWN:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_BROWN);
+            case BROWN: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_BROWN);
                 break;
-            case GREEN:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_GREEN);
+            case GREEN: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_GREEN);
                 break;
-            case RED:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_RED);
+            case RED: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_RED);
                 break;
-            case BLACK:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_INTERFACE_BLACK);
+            case BLACK: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_BLACK);
                 break;
-            case NONE:FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
+            case NONE: TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
                 break;                
         }
         
@@ -84,53 +82,5 @@ public class TileRendererItemExtractor extends TileEntitySpecialRenderer {
 
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_LIGHTING);
-    }
-
-    public float changeColor() {
-        
-        Random rand = new Random();
-        return rand.nextFloat();
-    }
-
-    private void renderByOrientation(double x, double y, double z, int metadata) {
-
-        GL11.glScalef(1.0F, 1.0F, 1.0F);
-
-        switch (metadata) {
-
-            case 0: {//Down
-                GL11.glTranslatef((float) x + 0.5F, (float) y + -.5F, (float) z + .5F);
-                return;
-            }            
-            case 1: {//Up
-                GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + .5F);
-                GL11.glRotatef(180F, 1F, 0F, 0F);
-                return;
-            }
-
-            case 2: {//South
-                GL11.glTranslatef((float) x + 0.5F, (float) y + .5F, (float) z - 0.5F);
-                GL11.glRotatef(90F, 1F, 0F, 0F);
-                return;
-            }
-            case 3: {//North
-                GL11.glTranslatef((float) x + 0.5F, (float) y + .5F, (float) z + 1.5F);
-                GL11.glRotatef(-90F, 1F, 0F, 0F);
-                return;
-            }
-            case 5: {//West
-                GL11.glTranslatef((float) x + 1.5F, (float) y + .5F, (float) z + .5F);
-                GL11.glRotatef(90F, 0F, 0F, 1F);
-                return;
-            }
-            case 4: {//East
-                GL11.glTranslatef((float) x - .5F, (float) y + .5F, (float) z + .5F);
-                GL11.glRotatef(-90F, 0F, 0F, 1F);
-                return;
-            }
-            default: {//Other
-                return;
-            }
-        }
     }
 }

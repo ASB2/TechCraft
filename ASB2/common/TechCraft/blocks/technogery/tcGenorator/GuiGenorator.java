@@ -4,6 +4,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import TechCraft.TechCraftGui;
 import TechCraft.lib.GUI;
+import TechCraft.*;
 
 public class GuiGenorator extends TechCraftGui {
 
@@ -33,7 +34,7 @@ public class GuiGenorator extends TechCraftGui {
         this.renderFlame(posX + 146, posY + 41);
         this.scaleBurningFlame(posX+146, posY+41, tileEntity.getBurnTimeScaled(12));
         
-        this.mc.renderEngine.bindTexture(GUI.TC_GENORATOR);
+        TechCraft.proxy.renderTexture(GUI.TC_GENORATOR);
         drawTexturedModalRect(posX + 98, posY + 6, 0, 0, 71, 32);
         
         int i3 = tileEntity.getPowerScaled(71);

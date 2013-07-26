@@ -3,8 +3,6 @@ package TechCraft.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelPowerConduitImportingv2 extends ModelBase {
     
@@ -283,7 +281,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderTop() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+
         Ten_Top.render(0.0625F);
         TwoTop.render(0.0625F);
         FourTop.render(0.0625F);
@@ -292,7 +290,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderBottom() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+        
         Ten_Bottom.render(0.0625F);
         Eight_Bottom.render(0.0625F);
         SixBottom.render(0.0625F);
@@ -301,7 +299,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderLeft() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+
         TwoLeft.render(0.0625F);
         FourLeft.render(0.0625F);
         SixLeft.render(0.0625F);
@@ -310,7 +308,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderRight() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+
         TwoRight.render(0.0625F);
         FourRight.render(0.0625F);
         SixRight.render(0.0625F);
@@ -319,7 +317,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderFront() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+
         TwoFront.render(0.0625F);
         FourFront.render(0.0625F);
         SixFront.render(0.0625F);
@@ -328,7 +326,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderBack() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+
         TwoBack.render(0.0625F);
         FourBack.render(0.0625F);
         SixBack.render(0.0625F);
@@ -337,7 +335,7 @@ public class ModelPowerConduitImportingv2 extends ModelBase {
     }
 
     public void renderAll(){
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_IMPORTING);
+
         Center_Square.render(0.0625F);
     }
 

@@ -258,7 +258,7 @@ public class TileTCEnergyConstructor extends TechCraftTile implements IPowerMisc
     }
 
     @Override
-    public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
 
         if(TileEntityFurnace.getItemBurnTime(itemstack) > 0) {
 

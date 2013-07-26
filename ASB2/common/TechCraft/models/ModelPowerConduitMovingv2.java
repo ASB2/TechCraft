@@ -3,8 +3,6 @@ package TechCraft.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelPowerConduitMovingv2 extends ModelBase {
     
@@ -91,37 +89,37 @@ public class ModelPowerConduitMovingv2 extends ModelBase {
     }
 
     public void renderTop() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         WireTop.render(0.0625F);
     }
 
     public void renderBottom() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         WireBottom.render(0.0625F);
     }
 
     public void renderLeft() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         WireLeft.render(0.0625F);
     }
 
     public void renderRight() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         WireRight.render(0.0625F);
     }
 
     public void renderFront() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         WireFront.render(0.0625F);
     }
 
     public void renderBack() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         WireBack.render(0.0625F);
     }
     
     public void renderAll() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_MOVING);
+
         Center_Square.render(0.0625F);
     }
 

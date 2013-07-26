@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -60,11 +59,6 @@ public abstract class TechCraftContainers extends BlockContainer {
 
         this.dropItems(world, x, y, z);
         super.onBlockDestroyedByPlayer(world, x, y, z, metaData);
-    }
-
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack) {
-        super.onBlockPlacedBy(world, x, y, z, entityLiving, itemStack);
     }
 
     @Override

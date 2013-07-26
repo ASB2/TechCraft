@@ -6,12 +6,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import TechCraft.*;
+import TechCraft.TechCraftContainer;
 
 public class ContainerGenorator extends TechCraftContainer {
 
     public ContainerGenorator(InventoryPlayer inventoryPlayer, TileGenorator tileEntity) {
-        super(inventoryPlayer, tileEntity);
+        super(inventoryPlayer);
     
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 30, 17)));      
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 1, 48, 17)));    

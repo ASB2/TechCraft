@@ -1,6 +1,8 @@
 package TechCraft.lib;
 
+import net.minecraft.util.ResourceLocation;
+
 public final class PARTICLES {
 
-    public static final String BEAM_FX = "/mods/TechCraft/textures/particles/TestParticle.png";
+    public static final ResourceLocation BEAM_FX = new ResourceLocation("TechCraft", "particles/TestParticle.png");
 }

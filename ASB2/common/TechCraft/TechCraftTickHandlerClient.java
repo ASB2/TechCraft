@@ -3,7 +3,6 @@ package TechCraft;
 import java.util.EnumSet;
 
 import TechCraft.power.PowerManager;
-
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 

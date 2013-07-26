@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import TechCraft.EnumColor;
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftContainers;
-import TechCraft.blocks.*;
+import TechCraft.blocks.TechCraftTile;
 
 public class BlockItemExtractor extends TechCraftContainers {
 

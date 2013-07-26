@@ -4,7 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TechCraft.utils.*;
+import TechCraft.utils.UtilItemStack;
+import TechCraft.*;
 
 public class ItemLinker extends TechCraftItems {
 
@@ -26,7 +27,7 @@ public class ItemLinker extends TechCraftItems {
             this.setCoodsSet(itemStack, true);
 
             if(!world.isRemote)
-                player.sendChatToPlayer("Coordinates set to X: "+ x +" Y: "+ y +" Z: " + z);
+                TechCraft.proxy.sendChatToPlayer(player, "Coordinates set to X: "+ x +" Y: "+ y +" Z: " + z);
         }
 
         return !this.isCoodsSet(itemStack);

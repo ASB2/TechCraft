@@ -6,9 +6,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TechCraft.TechCraft;
+import TechCraft.utils.UtilItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import TechCraft.utils.*;
 
 public class ItemTradeStick extends TechCraftItems {
 
@@ -58,7 +59,7 @@ public class ItemTradeStick extends TechCraftItems {
 
         if(player.isSneaking()) {
 
-            player.sendChatToPlayer("Block ID set to: " + world.getBlockId(x,y,z));
+            TechCraft.proxy.sendChatToPlayer(player, "Block ID set to: " + world.getBlockId(x,y,z));
             this.setBlockIDAndMeta(itemStack, world.getBlockId(x,y,z), world.getBlockMetadata(x, y, z));
 
             return true;

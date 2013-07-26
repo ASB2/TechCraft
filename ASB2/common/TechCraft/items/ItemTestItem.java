@@ -5,12 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.blocks.TechCraftTile;
 import TechCraft.utils.IBlockCycle;
 import TechCraft.utils.UtilBlock;
 import TechCraft.utils.UtilDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import TechCraft.blocks.*;
 
 public class ItemTestItem extends TechCraftItems implements IBlockCycle {
 

@@ -9,7 +9,7 @@ public class ContainerTCChargeBench extends TechCraftContainer {
 
 
     public ContainerTCChargeBench(InventoryPlayer inventoryPlayer, TileTCChargeBench tileEntity){
-        super(inventoryPlayer, tileEntity);
+        super(inventoryPlayer);
 
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 102, 11)));  
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 1, 120, 11)));  

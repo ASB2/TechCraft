@@ -5,9 +5,9 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergySphere;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererMagicEnergySphere implements IItemRenderer
 {
@@ -62,8 +62,8 @@ public class ItemRendererMagicEnergySphere implements IItemRenderer
         GL11.glTranslatef(x,  y,  z);
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 0f);
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        
+        TechCraft.proxy.renderTexture(TEXTURES.BLANK);
         
         modelTutBox.render();
 

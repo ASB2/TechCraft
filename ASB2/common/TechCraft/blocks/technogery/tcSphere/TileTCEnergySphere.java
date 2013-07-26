@@ -1,9 +1,9 @@
 package TechCraft.blocks.technogery.tcSphere;
 
+import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
-import TechCraft.TechCraft;
 
 public class TileTCEnergySphere extends TechCraftTile implements IPowerMisc {
 

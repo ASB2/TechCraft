@@ -3,6 +3,7 @@ package TechCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -27,6 +28,8 @@ import TechCraft.blocks.technogery.tcInfuser.GuiTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.ItemRendererInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileRendererInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
+import TechCraft.blocks.technogery.tcPlanter.GuiPlanter;
+import TechCraft.blocks.technogery.tcPlanter.TilePlanter;
 import TechCraft.blocks.technogery.tcSphere.ItemRendererMagicEnergySphere;
 import TechCraft.blocks.technogery.tcSphere.TileEntityRendererMagicEnergySphere;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
@@ -37,11 +40,11 @@ import TechCraft.items.gui.GuiEnchancedDestructionCatalyst;
 import TechCraft.keybindings.TCKeyBindingM;
 import TechCraft.power.IPowerMisc;
 import TechCraft.vector.Vector3;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import TechCraft.blocks.technogery.tcPlanter.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -75,6 +78,23 @@ public class ClientProxy extends CommonProxy {
 
         beam = new FXBeam(source.worldObj, new Vector3(source.xCoord + .5, source.yCoord + .5, source.zCoord + .5), new Vector3(coords[0] + .5, coords[1] + .5, coords[2] + .5), 1, 1, 1, renderTime, 20F);
         Minecraft.getMinecraft().effectRenderer.addEffect(beam);        
+    }
+
+    public void sendChatMessage(String message) {
+        
+        FMLClientHandler.instance().getClient();
+        this.sendChatToPlayer(Minecraft.getMinecraft().thePlayer, message);
+    }
+    
+    public void sendChatToPlayer(EntityPlayer player, String message) {
+
+        if(!player.worldObj.isRemote)
+            player.addChatMessage(message);
+    }
+
+    public void renderTexture(ResourceLocation texture) {
+
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
     }
 
     @Override
@@ -120,7 +140,7 @@ public class ClientProxy extends CommonProxy {
 
                     return new GuiItemExtractor(player.inventory, (TileItemExtractor)tileEntity);  
                 }
-            
+
                 if(tileEntity instanceof TilePlanter) {
 
                     return new GuiPlanter(player.inventory, (TilePlanter)tileEntity);  

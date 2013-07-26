@@ -1,7 +1,7 @@
 package TechCraft.power;
 
-import TechCraft.EnumColor;
 import net.minecraftforge.common.ForgeDirection;
+import TechCraft.EnumColor;
 
 public interface IPowerMisc {
 

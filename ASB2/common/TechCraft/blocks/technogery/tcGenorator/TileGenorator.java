@@ -246,7 +246,7 @@ public class TileGenorator extends TechCraftTile implements IInventory, ISidedIn
     }
 
     @Override
-    public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
 
         return TileEntityFurnace.isItemFuel(itemstack);
     }

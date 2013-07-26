@@ -2,7 +2,10 @@ package TechCraft.blocks.technogery.tcEnergizedBuildingBlocks;
 
 import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
-import TechCraft.power.*;
+import TechCraft.power.IPowerMisc;
+import TechCraft.power.PowerClass;
+import TechCraft.power.State;
+import TechCraft.power.TCPowerProvider;
 
 public class TileEnergizedBuildingBlocks extends TechCraftTile implements IPowerMisc {
 

@@ -1,6 +1,7 @@
 package TechCraft.enchantments;
 
-import net.minecraft.enchantment.*;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
 
 public abstract class TechCraftEnchantmentBase extends Enchantment {
 

@@ -3,16 +3,17 @@ package TechCraft.fx;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
-import TechCraft.lib.*;
 
+import TechCraft.lib.PARTICLES;
 import TechCraft.vector.Vector3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import TechCraft.*;
 
 /**
  * Based off Thaumcraft's Beam Renderer.
@@ -68,16 +69,16 @@ public class FXBeam extends EntityFX
         /**
          * Sets the particle age based on distance.
          */
-        EntityLiving renderentity = Minecraft.getMinecraft().renderViewEntity;
+        EntityLivingBase renderentity = Minecraft.getMinecraft().renderViewEntity;
         int visibleDistance = 50;
 
         if (!Minecraft.getMinecraft().gameSettings.fancyGraphics)
         {
             visibleDistance = 25;
         }
-        
+
         if(renderentity != null) {
-            
+
             if (renderentity.getDistance(this.posX, this.posY, this.posZ) > visibleDistance)
             {
                 this.particleMaxAge = 0;
@@ -142,7 +143,7 @@ public class FXBeam extends EntityFX
             op = 0.5F - (4 - (this.particleMaxAge - this.particleAge)) * 0.1F;
         }
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(PARTICLES.BEAM_FX);
+        TechCraft.proxy.renderTexture(PARTICLES.BEAM_FX);
 
         GL11.glTexParameterf(3553, 10242, 10497.0F);
         GL11.glTexParameterf(3553, 10243, 10497.0F);
@@ -204,6 +205,6 @@ public class FXBeam extends EntityFX
         tessellator.startDrawingQuads();
         this.prevSize = size;
 
-        Minecraft.getMinecraft().renderEngine.bindTexture("/particles.png");
+        //Minecraft.getMinecraft().renderEngine.bindTexture("/particles.png");
     }
 }

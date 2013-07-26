@@ -12,6 +12,7 @@ import TechCraft.power.IPowerItems;
 import TechCraft.utils.UtilItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import TechCraft.*;
 
 public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
@@ -28,11 +29,9 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        
-        if(!world.isRemote) {
-            
-            player.sendChatToPlayer("Power stored: " + this.getPowerStored(itemStack) +" / " + this.getPowerMax(itemStack));
-        }
+
+        TechCraft.proxy.sendChatToPlayer(player, "Power stored: " + this.getPowerStored(itemStack) +" / " + this.getPowerMax(itemStack));
+
         return itemStack;
     }
 
@@ -47,7 +46,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
     public int getPowerStored(ItemStack item) {
 
         NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
-        
+
         if(nbtTagCompound != null)
             return nbtTagCompound.getInteger("powerStored");
 
@@ -66,7 +65,7 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     @Override
     public boolean usePower(int PowerUsed, ItemStack item) {
-        
+
         if(this.getPowerStored(item) >= PowerUsed) {
 
             this.setPowerStored(item, this.getPowerStored(item) - PowerUsed);
@@ -86,9 +85,10 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
         return false;
     }
 
-    private void setPowerStored(ItemStack item,int power) {
+    private void setPowerStored(ItemStack item, int power) {
 
         NBTTagCompound nbtTagCompound = UtilItemStack.getTAGfromItemstack(item);
+        
         nbtTagCompound.setInteger("powerStored", power);
     }
 
@@ -108,9 +108,9 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     @Override
     public boolean canUsePower(int PowerUsed, ItemStack item) {
-        
+
         if(this.getPowerStored(item) > PowerUsed) {
-            
+
             return true;
         }
         return false;
@@ -118,9 +118,9 @@ public class ItemEnergyBlob extends TechCraftItems implements IPowerItems {
 
     @Override
     public boolean canGainPower(int PowerGained, ItemStack item) {
-        
+
         if(this.getPowerMax(item) - this.getPowerStored(item) >= PowerGained) {
-            
+
             return true;
         }
         return false;

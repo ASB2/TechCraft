@@ -8,7 +8,7 @@ import TechCraft.TechCraftContainer;
 public class ContainerTCFurnace extends TechCraftContainer{
 
     public ContainerTCFurnace(InventoryPlayer inventoryPlayer, TileTCFurnace tileEntity){ 
-        super(inventoryPlayer, tileEntity);
+        super(inventoryPlayer);
 
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 56, 32)));        
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 1, 116, 32)));   

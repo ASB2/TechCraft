@@ -1,14 +1,12 @@
 package TechCraft.lib;
 
+import net.minecraft.util.ResourceLocation;
+
 public class GUI {
 
-    public static final String GUI_SMALL_BLANK = "/mods/TechCraft/textures/blank/guiblank.png";
-    public static final String GUI_DEFAULT = "/mods/TechCraft/textures/blank/defaultGui.png";
+    public static final ResourceLocation GUI_SMALL_BLANK = new ResourceLocation("TechCraft:textures/blank/guiblank.png");
+    public static final ResourceLocation GUI_DEFAULT = new ResourceLocation("TechCraft", "blank/defaultGui.png");
 
-    public static final String BASIC_FARM = "/mods/TechCraft/textures/gui/TechCraftFarms.png";
-    public static final String CHARGE_BENCH = "/mods/TechCraft/textures/gui/TCChargeBench.png";
-    public static final String TC_FURNACE = "/mods/TechCraft/textures/gui/MagicFurnace.png";
-    public static final String TC_GENORATOR = "/mods/TechCraft/textures/gui/GuiGenoatorAddition.png";
-    public static final String TC_INFUSER = "/mods/TechCraft/textures/gui/TCInfuser.png";
+    public static final ResourceLocation TC_GENORATOR = new ResourceLocation("TechCraft", "gui/GuiGenoatorAddition.png");
 
 }

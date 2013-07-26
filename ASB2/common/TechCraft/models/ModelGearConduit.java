@@ -8,8 +8,6 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.lib.MODELS;
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelGearConduit extends ModelBase{
 
@@ -55,8 +53,6 @@ public class ModelGearConduit extends ModelBase{
     }
 
     public void renderDown(double x, double y, double z) {
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
         
         GL11.glScalef(0.02f, 0.02f, 0.02f);
 

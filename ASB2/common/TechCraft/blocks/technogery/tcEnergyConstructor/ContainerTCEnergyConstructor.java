@@ -9,7 +9,7 @@ public class ContainerTCEnergyConstructor extends TechCraftContainer{
 
 
     public ContainerTCEnergyConstructor(InventoryPlayer inventoryPlayer, TileTCEnergyConstructor tileEntity){
-        super(inventoryPlayer, tileEntity);
+        super(inventoryPlayer);
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 102, 16)));  
 
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 1, 78, 38)));  

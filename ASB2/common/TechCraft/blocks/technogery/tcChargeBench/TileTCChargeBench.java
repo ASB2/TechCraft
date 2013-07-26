@@ -256,7 +256,7 @@ public class TileTCChargeBench extends TechCraftTile implements IPowerMisc, IInv
     }
 
     @Override
-    public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return true;
     }

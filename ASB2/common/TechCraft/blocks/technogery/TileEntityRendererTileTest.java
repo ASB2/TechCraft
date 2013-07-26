@@ -5,9 +5,9 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelTest;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class TileEntityRendererTileTest extends TileEntitySpecialRenderer{
 
@@ -19,7 +19,7 @@ public class TileEntityRendererTileTest extends TileEntitySpecialRenderer{
     
     public void renderAModelAt(TileEntity tile, double x, double y, double z, float frame) {
 
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        TechCraft.proxy.renderTexture(TEXTURES.BLANK);
         
         GL11.glPushMatrix();
         GL11.glTranslated(x + 0.5D, y + 0.5D, z + 0.5D);

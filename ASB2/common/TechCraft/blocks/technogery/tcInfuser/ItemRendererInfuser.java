@@ -5,16 +5,16 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergyInfuser;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererInfuser implements IItemRenderer {
-    
+
     private ModelEnergyInfuser modelInfuser = new ModelEnergyInfuser();
 
     public ItemRendererInfuser(){
-        
+
     }
 
     @Override
@@ -61,8 +61,8 @@ public class ItemRendererInfuser implements IItemRenderer {
         GL11.glTranslatef(x,  y - 1,  z);
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 0f);
-        
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.ENERGY_RELEASER);
+
+        TechCraft.proxy.renderTexture(TEXTURES.ENERGY_RELEASER);
 
         modelInfuser.renderWithRotation(x,y,z);
 

@@ -1,17 +1,20 @@
 package TechCraft.blocks.tcPersonalBlocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TechCraft.blocks.TechCraftTile;
+import TechCraft.utils.UtilBlock;
 
 public class TilePersonalBlock extends TechCraftTile {
 
     boolean playerSet;
     String playerName = "";
 
+    public TilePersonalBlock() {
+    }
+    
     public TilePersonalBlock(String player) {
 
         if(player.length() > 0) {
@@ -27,11 +30,9 @@ public class TilePersonalBlock extends TechCraftTile {
 
         if(world.getBlockId(x,y,z) != 0) {       
 
-            if(player.username.equalsIgnoreCase(playerName)) {
+            if(player.username.equalsIgnoreCase(playerName) || !playerSet) {
 
-                world.playAuxSFX(2001, x, y, z, world.getBlockId(x,y,z) + (world.getBlockMetadata(x, y, z) << 12));
-                Block.blocksList[world.getBlockId(x,y,z)].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-
+                UtilBlock.breakBlock(world, x, y, z);
                 return true;
             }
         }
@@ -43,7 +44,7 @@ public class TilePersonalBlock extends TechCraftTile {
         super.readFromNBT(tag);
 
         playerName = tag.getString("playerName");
-
+        playerSet = tag.getBoolean("playerSet");
     }
 
     @Override
@@ -51,5 +52,6 @@ public class TilePersonalBlock extends TechCraftTile {
         super.writeToNBT(tag); 
 
         tag.setString("playerName", playerName);
+        tag.setBoolean("playerSet", playerSet);
     }
 }

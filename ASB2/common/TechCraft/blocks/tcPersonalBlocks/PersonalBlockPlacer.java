@@ -1,8 +1,8 @@
 package TechCraft.blocks.tcPersonalBlocks;
 
-import TechCraft.TehCraftItemBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import TechCraft.TehCraftItemBlock;
 
 public class PersonalBlockPlacer extends TehCraftItemBlock {
 

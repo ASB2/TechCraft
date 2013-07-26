@@ -88,6 +88,14 @@ public abstract class PowerProvider {
         }
     }
 
+    public boolean getShouldWork() {
+        
+        if(tile != null && tile.worldObj != null) {
+            
+            return !tile.worldObj.isBlockIndirectlyGettingPowered(tile.xCoord, tile.yCoord, tile.zCoord);
+        }
+        return false;
+    }
     /**
      * Get the amount of power stored in the block
      * @return Amount of power stored

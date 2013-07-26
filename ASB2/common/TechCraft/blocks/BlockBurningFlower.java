@@ -1,5 +1,6 @@
 package TechCraft.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -20,6 +21,11 @@ public class BlockBurningFlower extends TechCraftFlower {
         this.blockIcon = par1IconRegister.registerIcon("TechCraft:BlockBurningFlower");
     }	
 
+    public boolean canBlockStay(World world, int x, int y, int z) {
+
+        return world.getBlockId(x, y - 1, z) == Block.grass.blockID || world.getBlockId(x, y - 1, z) == Block.dirt.blockID;
+    }
+    
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity entity) {
 
         if(entity instanceof EntityPlayer) {

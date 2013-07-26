@@ -8,19 +8,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
 public abstract class TechCraftContainer extends Container {
 
     protected TechCraftGui gui;
-    protected TileEntity tileEntity;
+
     InventoryPlayer inventory;
     List<Slot> slotList = new ArrayList<Slot>();
     
-    public TechCraftContainer(InventoryPlayer inventory, TileEntity tileEntity) {
+    public TechCraftContainer(InventoryPlayer inventory) {
 
         this.inventory = inventory;
-        this.tileEntity = tileEntity;
+
         
         this.addInventorySlots();
     }

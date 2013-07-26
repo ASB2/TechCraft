@@ -7,7 +7,7 @@ import TechCraft.TechCraftContainer;
 public class ContainerTCInfuser extends TechCraftContainer {
 
     public ContainerTCInfuser(InventoryPlayer inventoryPlayer, TileTCInfuser tileEntity) {
-        super(inventoryPlayer, tileEntity);
+        super(inventoryPlayer);
         
         this.addSlotToContainer(addSlotToList(new Slot(tileEntity, 0, 28, 64)));
         

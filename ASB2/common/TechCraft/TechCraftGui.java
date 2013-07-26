@@ -4,11 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import TechCraft.lib.GUI;
+import cpw.mods.fml.client.FMLClientHandler;
+
+import TechCraft.lib.*;
 import TechCraft.power.IPowerMisc;
 
 public abstract class TechCraftGui extends GuiContainer {
@@ -25,7 +28,6 @@ public abstract class TechCraftGui extends GuiContainer {
         super(container);
 
         this.container = container;
-
         container.finishConstructing(this);
     }
 
@@ -37,7 +39,9 @@ public abstract class TechCraftGui extends GuiContainer {
         posX = (width - xSizeOfTexture) / 2;
         posY = (height - ySizeOfTexture) / 2;
 
-        this.mc.renderEngine.bindTexture(GUI.GUI_DEFAULT);
+        //TechCraft.proxy.renderTexture();
+        this.mc.renderEngine.func_110577_a(new ResourceLocation("TechCraft", "blank/defaultGui.png"));
+        this.mc.renderEngine.func_110577_a(new ResourceLocation("TechCraft: textures/blank/defaultGui.png"));
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
 
         this.renderSlotsInContainer();

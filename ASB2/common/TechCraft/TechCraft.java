@@ -13,6 +13,7 @@ import TechCraft.blocks.technogery.tcEnergySender.TileEnergySender;
 import TechCraft.blocks.technogery.tcFurnace.TileTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
+import TechCraft.blocks.technogery.tcPlanter.TilePlanter;
 import TechCraft.blocks.technogery.tcSphere.TileTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.packets.TechCraftPacketBase;
@@ -28,10 +29,8 @@ import TechCraft.worldGen.WorldGenBlockGarnetOre;
 import TechCraft.worldGen.WorldGenBlockWaterCrystalOre;
 import TechCraft.worldGen.WorldGenBlockZycrantianOre;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -39,7 +38,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import TechCraft.blocks.technogery.tcPlanter.*;
 
 @Mod(modid = TechCraft.modid, name = "ASB2's TechCraft", version = "Not a Full Release Yet")
 
@@ -55,11 +53,10 @@ public class TechCraft {
 
     @SidedProxy(clientSide="TechCraft.ClientProxy", serverSide="TechCraft.CommonProxy")
 
-    public static CommonProxy proxy;
-    public static ClientProxy clientProxy;
+    public static CommonProxy proxy;    
 
-    public static CreativeTabs tabTCBlocks = new TechCraftCreativeTab(CreativeTabs.getNextID(),"TechCraft Blocks", "TechCraft Blocks");
-    public static CreativeTabs tabTCItems = new TechCraftCreativeTab( CreativeTabs.getNextID(),"TechCraft Items", "TechCraft Blocks");
+    public static CreativeTabs tabTCBlocks = new TechCraftCreativeTab(CreativeTabs.getNextID(), "TechCraft Blocks");
+    public static CreativeTabs tabTCItems = new TechCraftCreativeTab( CreativeTabs.getNextID(), "TechCraft Items");
 
     public static boolean includePowerRecipies = false;
     public static boolean includeArmorRecipies = true;
@@ -69,7 +66,7 @@ public class TechCraft {
 
     public static int crystilineTreeHight = 10;
 
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -83,8 +80,8 @@ public class TechCraft {
         config.save();
     }
 
-    @Init
-    public void load(FMLInitializationEvent event) {
+    @EventHandler
+    public void standardInit(FMLInitializationEvent event) {
 
         proxy.register();
         instance = this;
@@ -139,7 +136,7 @@ public class TechCraft {
 
     }
 
-    @PostInit
+    @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
         CraftRegistry.init();

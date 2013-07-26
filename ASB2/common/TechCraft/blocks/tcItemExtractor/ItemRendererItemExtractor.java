@@ -5,9 +5,9 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelConduitInterface;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemRendererItemExtractor implements IItemRenderer {
 
@@ -69,8 +69,8 @@ public class ItemRendererItemExtractor implements IItemRenderer {
         GL11.glTranslatef(x + 0.5F, y + 2.5F, z + .5F);
         GL11.glRotatef(180F, 1F, 0F, 0F);
         
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
-
+        TechCraft.proxy.renderTexture(TEXTURES.CONDUIT_ITEM_INTERFACE_NONE);
+        
         model.renderAll();
 
         GL11.glEnable(GL11.GL_LIGHTING);

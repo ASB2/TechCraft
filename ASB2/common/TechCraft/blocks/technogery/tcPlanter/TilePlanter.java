@@ -6,15 +6,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 import TechCraft.BlockRegistry;
+import TechCraft.TechCraft;
 import TechCraft.blocks.TechCraftTile;
 import TechCraft.power.IPowerMisc;
 import TechCraft.power.PowerClass;
@@ -22,87 +25,174 @@ import TechCraft.power.State;
 import TechCraft.power.TCPowerProvider;
 import TechCraft.utils.IBlockCycle;
 import TechCraft.utils.UtilBlock;
+import TechCraft.utils.UtilDirection;
+import TechCraft.utils.UtilInventory;
 
 public class TilePlanter extends TechCraftTile implements IPowerMisc, IInventory, IBlockCycle {
 
-    int powerForProcess = 50;
-    int farmSize = 100;
+    int powerForTill = 10;
+    int powerForPlant = 20;
+    int powerForHarvest = 10;
+
+    int farmSize = 10;
     ItemStack[] tileItemStacks;
 
     public TilePlanter() {        
 
         this.powerProvider = new TCPowerProvider(this, 1000, PowerClass.LOW, State.SINK);
-        tileItemStacks = new ItemStack[9];
+        tileItemStacks = new ItemStack[10];
     }
 
     public void updateEntity() {
-        //Tills the earth
-        UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, farmSize, this, 0);
 
-        //Plants stuff
-        UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord + 1, zCoord, ForgeDirection.DOWN, farmSize, this, 1);
+        if(this.getPowerProvider().getShouldWork() && this.getPowerProvider().getPowerStored() > 0) {
 
-        //Fertilizes stuff
-        UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord + 1, zCoord, ForgeDirection.DOWN, farmSize, this, 2);
+            if(TechCraft.testingMode) {
 
-        //Breaks stuff
-        UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord + 1, zCoord, ForgeDirection.DOWN, farmSize, this, 3);
+                this.getPowerProvider().setPower(this.getPowerProvider().getPowerMax());
+                //Tills the earth
+                UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, farmSize, this, 0);
+
+                //Plants stuff
+                UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord + 1, zCoord, ForgeDirection.DOWN, farmSize, this, 1);
+
+                //Fertilizes stuff
+                UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord + 1, zCoord, ForgeDirection.DOWN, farmSize, this, 2);
+
+                //Breaks stuff
+                UtilBlock.cycle2DBlock(null, worldObj, xCoord, yCoord + 1, zCoord, ForgeDirection.DOWN, farmSize, this, 3);
+            }
+        }
+
+        this.moveToAdjacentInventories(ForgeDirection.DOWN);
+        this.moveToAdjacentInventories(ForgeDirection.UP);
+
+        this.moveToAdjacentInventories(ForgeDirection.NORTH);
+        this.moveToAdjacentInventories(ForgeDirection.SOUTH);
+
+        this.moveToAdjacentInventories(ForgeDirection.WEST);
+        this.moveToAdjacentInventories(ForgeDirection.EAST);
     }
 
+    public void moveToAdjacentInventories(ForgeDirection direction) {
+
+        TileEntity tileInventory = UtilDirection.translateDirectionToTile(this, worldObj, direction);
+
+        if(tileInventory != null) {
+
+            if(tileInventory instanceof ISidedInventory) { 
+                
+                for(int i = 0; i < this.getSizeInventory(); i++) {
+
+                    if(i != 9) {
+
+                        for(int z = 0; z < ((ISidedInventory)tileInventory).getSizeInventory(); z++) {
+
+                            UtilInventory.moveToAllISidedSlots(this, UtilDirection.translateDirectionToNumber(UtilDirection.translateDirectionToOpposite(direction)), (ISidedInventory)tileInventory);
+                        }
+                    }
+                }
+            }
+            
+            if(tileInventory instanceof IInventory) { 
+
+                for(int i = 0; i < this.getSizeInventory(); i++) {
+
+                    if(i != 9) {
+
+                        for(int z = 0; z < ((IInventory)tileInventory).getSizeInventory(); z++) {
+
+                            UtilInventory.moveIInventorySlot(this, i, (IInventory)tileInventory, z);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public boolean execute(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, int id) {
 
         if(id == 0) {
 
-            int currentBlockId = world.getBlockId(x, y, z);
-            int currentBlockMetadata = world.getBlockMetadata(x, y, z);
+            if(this.getPowerProvider().canUsePower(powerForTill)) {
 
-            if(currentBlockId != BlockRegistry.BlockPlanter.blockID) {
+                int currentBlockId = world.getBlockId(x, y, z);
+                int currentBlockMetadata = world.getBlockMetadata(x, y, z);
 
-                if(currentBlockId == Block.grass.blockID || currentBlockId == Block.dirt.blockID || (currentBlockId == Block.tilledField.blockID && currentBlockMetadata != 1)) {
+                if(currentBlockId != BlockRegistry.BlockPlanter.blockID) {
 
-                    world.setBlock(x, y, z, Block.tilledField.blockID);
-                    world.setBlockMetadataWithNotify(x,y,z,1,3);
+                    if(currentBlockId == Block.grass.blockID || currentBlockId == Block.dirt.blockID || (currentBlockId == Block.tilledField.blockID && currentBlockMetadata != 1)) {
 
-                    return true;
+                        if(this.getPowerProvider().usePower(powerForTill, ForgeDirection.UNKNOWN)) {
+
+                            world.setBlock(x, y, z, Block.tilledField.blockID);
+                            world.setBlockMetadataWithNotify(x,y,z,1,3);
+                        }
+                        return true;
+                    }
                 }
             }
         }
 
         if(id == 1) {
 
-            if(tileItemStacks[0] != null) {
+            if(this.getPowerProvider().canUsePower(powerForPlant)) {
 
-                Item item = tileItemStacks[0].getItem();
+                for(int i = 0; i < this.getSizeInventory(); i++) {
 
-                if(item instanceof IPlantable) {
+                    ItemStack stackInSlot = this.getStackInSlot(i);
 
-                    if(((IPlantable)item).getPlantType(world, x, y, z) == EnumPlantType.Crop && world.getBlockId(x,y - 1,z) == Block.tilledField.blockID) {
+                    if(stackInSlot != null) {
 
-                        UtilBlock.placeBlockInAir(worldObj, x, y, z, ((IPlantable)item).getPlantID(world, x, y, z), 0);
+                        Item item = stackInSlot.getItem();
+
+                        if(item instanceof IPlantable) {
+
+                            if(((IPlantable)item).getPlantType(world, x, y, z) == EnumPlantType.Crop && world.getBlockId(x,y - 1,z) == Block.tilledField.blockID) {
+
+                                if(UtilInventory.decreaseSlotContents(this, i, 1)) {
+
+                                    if(this.getPowerProvider().usePower(powerForPlant, ForgeDirection.UNKNOWN)) {
+
+                                        UtilBlock.placeBlockInAir(worldObj, x, y, z, ((IPlantable)item).getPlantID(world, x, y, z), 0);
+                                    }
+                                }
+                            }
+                        }
                     }
-
-
                 }
             }            
         }
 
+
         if(id == 2) {
 
             if(Block.blocksList[world.getBlockId(x,y,z)] != null) {
-                
+
                 Block.blocksList[world.getBlockId(x,y,z)].updateTick(worldObj, x, y, z, new Random());
-                world.scheduleBlockUpdate(x, y, z, 3, 1);
             }
         }
 
         if(id == 3) {
 
-            int blockId = world.getBlockId(x,y,z);
+            if(this.getPowerProvider().canUsePower(powerForHarvest)) {
 
-            if(Block.blocksList[blockId] instanceof BlockCrops) {
+                int blockId = world.getBlockId(x,y,z);
 
+                if(blockId == Block.crops.blockID && world.getBlockMetadata(x,y,z) > 3) { 
+
+                    if(this.getPowerProvider().usePower(powerForHarvest, ForgeDirection.UNKNOWN)) {
+
+                        UtilInventory.addItemStackToInventory(this, new ItemStack(Item.seeds,2,0));
+                        UtilInventory.addItemStackToInventory(this, new ItemStack(Item.wheat,2,0));
+                    }
+                }
+
+                if(Block.blocksList[blockId] instanceof BlockCrops) {
+
+
+                }
             }
         }
         return false;
@@ -217,7 +307,7 @@ public class TilePlanter extends TechCraftTile implements IPowerMisc, IInventory
     @Override
     public int getInventoryStackLimit() {
 
-        return 1;
+        return 64;
     }
 
     @Override
@@ -239,7 +329,7 @@ public class TilePlanter extends TechCraftTile implements IPowerMisc, IInventory
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return true;
     }

@@ -8,8 +8,6 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import TechCraft.lib.MODELS;
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelGear extends ModelBase{
 
@@ -55,9 +53,7 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderDown(double x, double y, double z) {
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
-
+        
         GL11.glScalef(0.03f, 0.03f, 0.03f);
 
         GL11.glTranslatef((float) x + 0F, (float) y + 45F, (float) z + 0F); 
@@ -66,9 +62,7 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderUp(double x, double y, double z) {
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
-
+        
         GL11.glScalef(0.03f, 0.03f, 0.03f);
 
         GL11.glTranslatef((float) x + 0F, (float) y + 45F, (float) z + 0F); 
@@ -78,7 +72,6 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderWest(double x, double y, double z) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
         GL11.glScalef(0.03f, 0.03f, 0.03f);
 
@@ -91,7 +84,6 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderEast(double x, double y, double z) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
         GL11.glScalef(0.03f, 0.03f, 0.03f);
 
@@ -103,7 +95,6 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderSouth(double x, double y, double z) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
         GL11.glScalef(0.03f, 0.03f, 0.03f);
 
@@ -116,7 +107,6 @@ public class ModelGear extends ModelBase{
     }
 
     public void renderNorth(double x, double y, double z) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
 
         GL11.glScalef(0.03f, 0.03f, 0.03f);
 

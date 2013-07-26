@@ -4,11 +4,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.potion.*;
 
 public class BlockSpeedyRoad extends TechCraftBlocks {
 
@@ -52,12 +53,6 @@ public class BlockSpeedyRoad extends TechCraftBlocks {
                 if(((EntityLiving)entity).isBurning()) {
 
                     ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.fireResistance.id, 10, 4));
-                }
-
-                if(((EntityLiving)entity).isBlocking()) {
-
-                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 100, 4));
-                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.resistance.id, 100, 4));
                 }
 
                 if(((EntityLiving)entity).isInWater()) {

@@ -34,11 +34,11 @@ import TechCraft.blocks.technogery.tcEnergySender.BlockEnergySender;
 import TechCraft.blocks.technogery.tcFurnace.BlockTCFurnace;
 import TechCraft.blocks.technogery.tcGenorator.BlockGenorator;
 import TechCraft.blocks.technogery.tcInfuser.BlockTCInfuser;
+import TechCraft.blocks.technogery.tcPlanter.BlockPlanter;
 import TechCraft.blocks.technogery.tcSphere.BlockTCEnergySphere;
 import TechCraft.blocks.technogery.tcTeleporter.BlockTCTeleporter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import TechCraft.blocks.technogery.tcPlanter.*;
 
 public class BlockRegistry {
 

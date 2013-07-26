@@ -2,6 +2,7 @@ package TechCraft;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import TechCraft.blocks.tcItemExtractor.ContainerItemExtractor;
 import TechCraft.blocks.tcItemExtractor.TileItemExtractor;
@@ -15,6 +16,8 @@ import TechCraft.blocks.technogery.tcGenorator.ContainerGenorator;
 import TechCraft.blocks.technogery.tcGenorator.TileGenorator;
 import TechCraft.blocks.technogery.tcInfuser.ContainerTCInfuser;
 import TechCraft.blocks.technogery.tcInfuser.TileTCInfuser;
+import TechCraft.blocks.technogery.tcPlanter.ContainerPlanter;
+import TechCraft.blocks.technogery.tcPlanter.TilePlanter;
 import TechCraft.blocks.technogery.tcTeleporter.ContainerTCTeleporter;
 import TechCraft.blocks.technogery.tcTeleporter.TileTCTeleporter;
 import TechCraft.items.gui.ContainerEnchancedDestructionCatalyst;
@@ -22,7 +25,6 @@ import TechCraft.power.IPowerMisc;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import TechCraft.blocks.technogery.tcPlanter.*;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -43,6 +45,18 @@ public class CommonProxy implements IGuiHandler {
 
     }
 
+    public void sendChatMessage(String message) {
+
+    }
+
+    public void sendChatToPlayer(EntityPlayer player, String message) {
+        
+    }
+    
+    public void renderTexture(ResourceLocation texture) {
+        
+    }
+    
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
 
@@ -86,7 +100,7 @@ public class CommonProxy implements IGuiHandler {
 
                     return new ContainerItemExtractor(player.inventory, (TileItemExtractor)tileEntity);
                 }
-                
+
                 if(tileEntity instanceof TilePlanter) {
 
                     return new ContainerPlanter(player.inventory, (TilePlanter)tileEntity);

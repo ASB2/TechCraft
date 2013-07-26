@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.items.ItemEnhancedDestructionCatalyst;
 import TechCraft.lib.GUI;
 
@@ -25,7 +26,7 @@ public class GuiEnchancedDestructionCatalyst extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 
-        this.mc.renderEngine.bindTexture(GUI.GUI_SMALL_BLANK);
+        TechCraft.proxy.renderTexture(GUI.GUI_SMALL_BLANK);
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 

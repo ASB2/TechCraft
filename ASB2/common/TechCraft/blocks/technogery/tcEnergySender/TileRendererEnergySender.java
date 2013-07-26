@@ -5,21 +5,22 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
+import TechCraft.TechCraft;
 import TechCraft.lib.TEXTURES;
 import TechCraft.models.ModelEnergySender;
 
 public class TileRendererEnergySender extends TileEntitySpecialRenderer{
 
+    
     private ModelEnergySender modelSender = new ModelEnergySender();
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick) {
 
         GL11.glPushMatrix();
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);
+        
+        TechCraft.proxy.renderTexture(TEXTURES.BLANK);
+        
         this.renderByOrientation(x, y,z,tileEntity.getBlockMetadata());
         modelSender.renderAll();
 

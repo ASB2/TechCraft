@@ -3,8 +3,6 @@ package TechCraft.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelTCEnergyFocus extends ModelBase 
 {
@@ -107,7 +105,6 @@ public class ModelTCEnergyFocus extends ModelBase
     }
 
     public void renderAll() {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.ENERGY_FOCUS);
 
         Bottom.render(0.0625F);
         SecondLevel.render(0.0625F);

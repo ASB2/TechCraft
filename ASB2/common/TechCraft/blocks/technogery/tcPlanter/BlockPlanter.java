@@ -12,20 +12,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPlanter extends TechCraftContainers {
-    
-    private Icon top;
-    private Icon side;
-    
+
+    //private Icon top;
+    //private Icon side;
+
     public BlockPlanter(int par1, Material par2Material) {
         super(par1, par2Material);        
     }
-    
+
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
         if(player.isSneaking())
             return false;
-        
+
         super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
         player.openGui(TechCraft.instance, 0, world, x, y, z);
         return true;
@@ -35,8 +35,8 @@ public class BlockPlanter extends TechCraftContainers {
     public void registerIcons(IconRegister par1IconRegister) {
 
         super.registerIcons(par1IconRegister);
-        top = par1IconRegister.registerIcon("TechCraft:BlockTeleporterTop");  
-        side = par1IconRegister.registerIcon("TechCraft:ColoredBlack");
+        //top = par1IconRegister.registerIcon("TechCraft:BlockTeleporterTop");  
+        //side = par1IconRegister.registerIcon("TechCraft:ColoredBlack");
     }
 
     @Override
@@ -44,10 +44,10 @@ public class BlockPlanter extends TechCraftContainers {
 
         return super.getIcon(side, metadata);
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world) {
-        
+
         return new TilePlanter();
     }
 

@@ -5,9 +5,9 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import TechCraft.TechCraft;
 import TechCraft.lib.TEXTURES;
-import cpw.mods.fml.client.FMLClientHandler;
-import TechCraft.models.*;
+import TechCraft.models.ModelEnergySender;
 
 public class ItemRendererEnergySender implements IItemRenderer {
     
@@ -60,8 +60,9 @@ public class ItemRendererEnergySender implements IItemRenderer {
         GL11.glTranslatef(x,  y + .9F,  z);
         GL11.glScalef(scale, scale, scale);
         GL11.glRotatef(180f, 0f, 1f, 180f);
-
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURES.BLANK);        
+       
+        TechCraft.proxy.renderTexture(TEXTURES.BLANK);
+        
         modelEnergySender.renderAll();
 
         GL11.glEnable(GL11.GL_LIGHTING);

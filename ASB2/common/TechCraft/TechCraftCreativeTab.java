@@ -7,8 +7,8 @@ public class TechCraftCreativeTab extends net.minecraft.creativetab.CreativeTabs
     
     String name;
     
-    public TechCraftCreativeTab(int par1, String par2Str, String name) {
-        super(par1, par2Str);
+    public TechCraftCreativeTab(int par1, String name) {
+        super(par1, name);
         this.name = name;
     }
     

@@ -12,6 +12,7 @@ import TechCraft.utils.UtilDirection;
 import TechCraft.utils.UtilItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import TechCraft.*;
 
 public class ItemEnhancedDestructionCatalyst extends TechCraftItems implements IBlockCycle {
 
@@ -21,28 +22,25 @@ public class ItemEnhancedDestructionCatalyst extends TechCraftItems implements I
         this.setMaxStackSize(1);
     }
 
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
-    {
-        if(!world.isRemote) {
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
 
-            if(player.isSneaking()) {
+        if(player.isSneaking()) {
 
-                this.decrementLength(player);
+            this.decrementLength(player);
 
-                player.sendChatToPlayer("Debth of tunnel == " + UtilItemStack.getNBTTagInt(itemStack, "length"));
+            TechCraft.proxy.sendChatToPlayer(player, "Debth of tunnel == " + UtilItemStack.getNBTTagInt(itemStack, "length"));
 
-                return itemStack;
-                //player.openGui(TechCraft.instance, -1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
-            }
-
-            this.incrementLength(player);
-            player.sendChatToPlayer("Debth of tunnel == " + UtilItemStack.getNBTTagInt(itemStack, "length"));
+            return itemStack;
+            //player.openGui(TechCraft.instance, -1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
         }
+
+        this.incrementLength(player);
+        TechCraft.proxy.sendChatToPlayer(player, "Debth of tunnel == " + UtilItemStack.getNBTTagInt(itemStack, "length"));
+
         return itemStack;
     }
 
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz){
-
 
         ForgeDirection sideF = UtilDirection.translateNumberToDirection(side);
 
@@ -95,7 +93,7 @@ public class ItemEnhancedDestructionCatalyst extends TechCraftItems implements I
 
         if(world.blockExists(x, y, z)) {
 
-            if(blockToBreak != Block.bedrock.blockID) { 
+            if(!(Block.blocksList[blockToBreak].getBlockHardness(world, x, y, z) == -1)) {
 
                 if(world.getBlockTileEntity(x, y,  z) == null) {
 

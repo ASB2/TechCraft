@@ -8,7 +8,7 @@ import TechCraft.TechCraftContainer;
 public class ContainerPlanter extends TechCraftContainer {
 
     public ContainerPlanter(InventoryPlayer par1InventoryPlayer, TilePlanter tileEntity) {
-        super(par1InventoryPlayer, tileEntity);
+        super(par1InventoryPlayer);
         
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 79, 37)));  
         
@@ -22,6 +22,8 @@ public class ContainerPlanter extends TechCraftContainer {
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 6, 79 + 18, 37 - 18)));  
         
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 7, 79 - 18, 37 - 18)));
-        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 8, 79 - 18, 37 + 18)));          
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 8, 79 - 18, 37 + 18)));    
+        
+        this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 9, 79 - 18 - 18 - 9, 37)));    
     }
 }

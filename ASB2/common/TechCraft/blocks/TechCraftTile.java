@@ -2,8 +2,6 @@ package TechCraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -14,8 +12,8 @@ import TechCraft.IWrenchable;
 import TechCraft.conduit.EnumContuitType;
 import TechCraft.conduit.EnumInterfaceType;
 import TechCraft.power.IPowerMisc;
-import TechCraft.power.*;
-import TechCraft.utils.*;
+import TechCraft.power.PowerProvider;
+import TechCraft.utils.UtilDirection;
 
 public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IWrenchable {
 
@@ -23,17 +21,20 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
     protected ForgeDirection orientation;    
     protected EnumColor color;
 
+    protected boolean shouldWork;
+
     protected int ticks = 0;
 
     public TechCraftTile() {
-
+        
         if(color == null)
             color = EnumColor.WHITE;
 
         if(orientation == null)
             orientation = ForgeDirection.DOWN;
+        
     }
-
+    
     public boolean breakBlock(World world, EntityPlayer player, ItemStack itemStack, int x, int y, int z,int side) {
 
         if(world.getBlockId(x,y,z) != 0) {       
@@ -201,36 +202,8 @@ public abstract class TechCraftTile extends TileEntity implements IPowerMisc, IW
 
     public static EnumColor getItemColorValue(ItemStack item) {
 
-        if(item != null){
 
-            if(item.getItem() != null) {
-
-                Item itemI = item.getItem();
-
-                if(itemI instanceof ItemDye){
-
-                    switch(item.getItemDamage()) {
-
-                        case 1: return EnumColor.RED;
-                        case 2: return EnumColor.GREEN;
-                        case 3: return EnumColor.BROWN;
-                        case 4: return EnumColor.BLUE;
-                        case 5: return EnumColor.PURPLE;
-                        case 6: return EnumColor.CYAN;
-                        case 7: return EnumColor.LIGHT_GREY;
-                        case 8: return EnumColor.GRAY;
-                        case 9: return EnumColor.PINK;
-                        case 10: return EnumColor.LIME;
-                        case 11: return EnumColor.YELLOW;
-                        case 12: return EnumColor.LIGHT_BLUE;
-                        case 13: return EnumColor.MAGENTA;
-                        case 14: return EnumColor.ORANGE;
-                        case 15: return EnumColor.WHITE;
-                    }
-                }
-            }
-        }
-        return EnumColor.NONE;        
+        return EnumColor.getItemColorValue(item);
     }
 
     public void toggleDirection() {

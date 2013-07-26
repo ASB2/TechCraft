@@ -227,7 +227,7 @@ public class TileTCInfuser extends TechCraftTile implements IPowerMisc, IInvento
     }
 
     @Override
-    public boolean isStackValidForSlot(int slot, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return true;
     }

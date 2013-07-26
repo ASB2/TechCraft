@@ -8,7 +8,7 @@ import TechCraft.TechCraftContainer;
 public class ContainerItemExtractor extends TechCraftContainer {
 
     public ContainerItemExtractor(InventoryPlayer inventoryPlayer, TileItemExtractor tileEntity) {
-        super(inventoryPlayer, tileEntity);
+        super(inventoryPlayer);
         
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 0, 49, 32)));  
         this.addSlotToContainer(this.addSlotToList(new Slot((IInventory)tileEntity, 1, 67, 32)));  

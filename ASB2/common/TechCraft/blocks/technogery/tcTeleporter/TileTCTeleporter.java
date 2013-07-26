@@ -235,7 +235,7 @@ public class TileTCTeleporter extends TechCraftTile implements IPowerMisc, IInve
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         // TODO Auto-generated method stub
         return true;
     }

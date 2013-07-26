@@ -8,7 +8,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TechCraft.utils.*;
+import TechCraft.utils.UtilItemStack;
+import TechCraft.*;
 
 public class ItemTeleporter extends TechCraftItems {
 
@@ -30,7 +31,7 @@ public class ItemTeleporter extends TechCraftItems {
     }
 
     public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-        
+
         this.setXCoord(par1ItemStack,player.posX);
         this.setYCoord(par1ItemStack,player.posY);
         this.setZCoord(par1ItemStack,player.posZ);        
@@ -47,13 +48,13 @@ public class ItemTeleporter extends TechCraftItems {
                 for(int i = 0; i < 2; i++) {
 
                     if (player.dimension != this.getDimentionIDCoord(par1ItemStack)) {
-                        
+
                         par1ItemStack.damageItem(1, player);
                         player.travelToDimension(this.getDimentionIDCoord(par1ItemStack));
                     }
 
                     else {
-                        
+
                         par1ItemStack.damageItem(1, player);
                         player.setPositionAndUpdate(this.getXCoord(par1ItemStack), this.getYCoord(par1ItemStack), this.getZCoord(par1ItemStack));
                     }
@@ -69,8 +70,7 @@ public class ItemTeleporter extends TechCraftItems {
             this.setDimentionIDCoord(par1ItemStack,player.dimension);
             setCoodsSet(par1ItemStack, true);
 
-            if(!par2World.isRemote)
-                player.sendChatToPlayer("Link Set");
+            TechCraft.proxy.sendChatToPlayer(player, "Link Set");
         }
 
         return par1ItemStack;
@@ -80,15 +80,15 @@ public class ItemTeleporter extends TechCraftItems {
     @SuppressWarnings("unchecked")
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer player,@SuppressWarnings("rawtypes") List info, boolean b){
-        
+
         if(isCoodsSet(par1ItemStack)) {
-            
+
             info.add("Destination X: " + (int)this.getXCoord(par1ItemStack)+" Y: " + (int)this.getYCoord(par1ItemStack) + " Z: " + (int)this.getZCoord(par1ItemStack));
             info.add("Dimention ID: " + this.getDimentionIDCoord(par1ItemStack));
         }
-        
+
         if(!isCoodsSet(par1ItemStack)) {
-            
+
             info.add("Link not set.");
         }
     }

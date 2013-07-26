@@ -6,6 +6,66 @@ import net.minecraft.item.ItemStack;
 
 public class UtilInventory {
 
+    public static boolean addItemStackToInventory(IInventory destination, ItemStack itemStack) {
+
+        if(itemStack != null) {
+
+            for(int i = 0; i < destination.getSizeInventory(); i++) {
+
+                return UtilInventory.increaseSlotContents(destination, itemStack, i, itemStack.stackSize);
+            }
+        }
+        return false;
+    }
+
+    public static boolean inventoryHasStack(IInventory inventory, ItemStack stack) {
+
+        if(stack != null) {
+
+            for(int i =0; i < inventory.getInventoryStackLimit(); i++) {
+
+                if(inventory.getStackInSlot(i) != null){
+
+                    if((inventory.getStackInSlot(i).isItemEqual(stack))) {
+
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean removeItemStackToInventory(IInventory destination, ItemStack itemStack) {
+
+        if(itemStack != null) {
+
+            for(int i = 0; i < destination.getSizeInventory(); i++) {
+
+                ItemStack slotStack = destination.getStackInSlot(i);
+
+                if(slotStack == null) {
+
+                    destination.setInventorySlotContents(i, itemStack);
+                    return true;
+                }
+                else {
+
+                    if(slotStack.isItemEqual(itemStack)) {
+                        ItemStack temp = slotStack.copy();
+                        temp.stackSize += itemStack.stackSize;
+
+                        if(temp.stackSize <= destination.getInventoryStackLimit()) {
+
+                            destination.setInventorySlotContents(i, temp);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     public static void moveAllInventorySlots(IInventory tileToTakeFrom, IInventory tileToMoveTo) {
 
         for(int i = 0; i < tileToTakeFrom.getSizeInventory(); i++) {
@@ -80,17 +140,17 @@ public class UtilInventory {
         }
     }
 
-    public static void moveToAllISidedSlots(ISidedInventory inventoryToTakeFrom, int side, IInventory inventoryToMoveTo) {
+    public static void moveToAllISidedSlots(IInventory inventoryToTakeFrom, int side, ISidedInventory inventoryToMoveTo) {
 
-        for(int i = 0; i < inventoryToTakeFrom.getAccessibleSlotsFromSide(side).length; i++) {
+        for(int i = 0; i < inventoryToMoveTo.getAccessibleSlotsFromSide(side).length; i++) {
 
-            for(int z = 0; z < inventoryToMoveTo.getSizeInventory(); z++) {
+            for(int z = 0; z < inventoryToTakeFrom.getSizeInventory(); z++) {
 
-                if(inventoryToTakeFrom.getStackInSlot(i) != null) {
+                if(inventoryToMoveTo.getStackInSlot(i) != null) {
 
-                    if(inventoryToTakeFrom.canInsertItem(i, inventoryToTakeFrom.getStackInSlot(i), side)) {
+                    if(inventoryToMoveTo.canInsertItem(i, inventoryToMoveTo.getStackInSlot(i), side)) {
 
-                        UtilInventory.moveIInventorySlot(inventoryToMoveTo, z, inventoryToTakeFrom, inventoryToTakeFrom.getAccessibleSlotsFromSide(side)[i]);
+                        UtilInventory.moveIInventorySlot(inventoryToMoveTo, z, inventoryToMoveTo, inventoryToMoveTo.getAccessibleSlotsFromSide(side)[i]);
                     }
                 }
             }
@@ -112,13 +172,12 @@ public class UtilInventory {
 
                 itemStack.stackSize = itemStack.stackSize - amount;
 
-                inventory.setInventorySlotContents(slotToChange, itemStack);
+                if(!(itemStack.stackSize < 0)) {
 
-                return true;
+                    inventory.setInventorySlotContents(slotToChange, itemStack);
+                    return true;
+                }
             }
-        }
-        else {
-            return true;
         }
         return false;
     }
