@@ -5,6 +5,10 @@ A resulting cross of technology and magic
 
 This source code is part of the unreleased TechnoCraft Mod. 
 
+Gear Utilities is the new version of this mod a link to it is here.
+https://github.com/ASB2/GearUtilities/
+
+
 	Examples
 	
 		-The Furnace uses more fuel but smelts items instantly.
